@@ -105,7 +105,7 @@ const webpackConfig = {
 const modules = fs.readdirSync(path.join(__dirname, 'modules'));
 
 for (const module of modules) {
-    webpackConfig.entry[module] = path.resolve(__dirname, 'modules', module, 'src', 'backend.js');
+    webpackConfig.entry[module] = path.resolve(__dirname, 'modules', module, 'src', 'backend.jsx');
     webpackConfig.plugins.push(new HtmlWebpackPlugin({
         filename: path.resolve(__dirname, 'static', 'admin', module, 'index.html'),
         chunks: [module, 'styles', 'vendors'],
