@@ -33,7 +33,6 @@
     "jimp": "^0.6.4",
     "moment": "^2.24.0",
     "mongodb": "^3.2.5",
-    "perfect-scrollbar": "^1.4.0",
     "pino": "^5.12.5",
     "query-string": "^6.5.0",
     "react": "^16.8.6",

@@ -37532,6 +37532,8 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _admin_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin.css */ "./shared/components/admin.css");
+/* harmony import */ var _admin_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_admin_css__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37550,6 +37552,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var AdminPanel =
 /*#__PURE__*/
 function (_Component) {
@@ -37562,8 +37565,105 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AdminPanel).call(this, props));
 
+    _defineProperty(_assertThisInitialized(_this), "resizeNav", function () {
+      document.getElementById('z2a_nav_wrap').style.height = "".concat(window.innerHeight - 64, "px");
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      window.onresize = _this.resizeNav;
+
+      _this.resizeNav();
+    });
+
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, "OK Computer", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, _this.props.children));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "uk-navbar-container uk-dark",
+        "uk-navbar": "true",
+        "uk-sticky": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-navbar-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-navbar-item uk-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Zoia"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-navbar-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "uk-navbar-nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-navbar-dropdown",
+        "uk-dropdown": "mode:click;offset:-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "uk-nav uk-navbar-dropdown-nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Log Out")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-grid-collapse uk-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-width-small z2a-navleft-column-wrap"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "z2a_nav_wrap"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "z2a-navleft"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "uk-nav uk-nav-default"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Item")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "uk-icon": "search"
+      }), "\xA0Another Item 1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 2")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 4")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 7")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 8")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 10")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 11")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 12")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 13")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 14")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 15")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 16")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 17")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 18")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 19")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 20")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 21")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 22")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: ""
+      }, "Another Item 23"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uk-width-expand"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "z2a-content-wrap"
+      }, _this.props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Only one class will come to effect, depending on the style you are using. For example, when using a style with a light background, you can only apply the .uk-light class to optimize content on dark backgrounds, as text will already be displayed in a dark color on light backgrounds \u2014 and vice versa."))))));
     });
 
     return _this;
@@ -37573,6 +37673,17 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (AdminPanel);
+
+/***/ }),
+
+/***/ "./shared/components/admin.css":
+/*!*************************************!*\
+  !*** ./shared/components/admin.css ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by extract-css-chunks-webpack-plugin
 
 /***/ }),
 
@@ -37588,4 +37699,4 @@ function (_Component) {
 /***/ })
 
 }]);
-//# sourceMappingURL=vendors_b10e675650aa2fd46b88.js.map
+//# sourceMappingURL=vendors_9eec06cffeea46baaabe.js.map

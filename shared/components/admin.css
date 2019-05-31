@@ -1,0 +1,28 @@
+.z2a-navleft-column-wrap {
+    min-width: 200px;
+}
+
+#z2a_nav_wrap {
+    position: fixed;
+    width: 200px;
+    overflow-y: auto;
+}
+
+.z2a-navleft {
+    margin: 20px;
+}
+
+.z2a-content-wrap {
+    padding: 20px;
+}
+
+.uk-navbar {
+    background: #32323a !important;
+    height: 64px;
+    padding: 0 !important;
+}
+
+.uk-navbar-left,
+.uk-navbar-right {
+    flex-wrap: unset !important;
+}
