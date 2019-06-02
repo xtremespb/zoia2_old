@@ -97,7 +97,7 @@ const webpackConfig = {
         }),
         new CleanWebpackPlugin({
             verbose: true,
-            cleanOnceBeforeBuildPatterns: ['**/*']
+            cleanOnceBeforeBuildPatterns: ['admin/*']
         })
     ]
 };

@@ -21,7 +21,7 @@ class AdminPanel extends Component {
             <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                 <div className="uk-navbar-left">
                     <div className="uk-navbar-item uk-logo">
-                        <a href="">Zoia</a>
+                        <a href=""><img src="/zoia/logo.png" width="83" height="27" alt="" /></a>
                     </div>
                 </div>
                 <div className="uk-navbar-right">
