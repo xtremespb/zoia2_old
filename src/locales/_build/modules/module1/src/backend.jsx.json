@@ -1,0 +1,10 @@
+{
+  "Hello world from Module 1": {
+    "origin": [
+      [
+        "modules/module1/src/backend.jsx",
+        19
+      ]
+    ]
+  }
+}

@@ -12,7 +12,7 @@ const webpackConfig = {
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, 'static', 'admin'),
-        publicPath: '/admin',
+        publicPath: '/admin/',
         filename: '[name]_[chunkhash].js'
     },
     optimization: {
@@ -67,7 +67,11 @@ const webpackConfig = {
                         {
                             plugins: [
                                 '@babel/plugin-proposal-class-properties',
-                                '@babel/plugin-syntax-dynamic-import'
+                                '@babel/plugin-syntax-dynamic-import',
+                                'macros',
+                                ['@babel/transform-runtime', {
+                                    regenerator: true
+                                }]
                             ]
                         }
                     ]
@@ -97,12 +101,21 @@ const webpackConfig = {
         }),
         new CleanWebpackPlugin({
             verbose: true,
-            cleanOnceBeforeBuildPatterns: ['admin/*']
+            cleanOnceBeforeBuildPatterns: ['admin']
         })
     ]
 };
 
 const modules = fs.readdirSync(path.join(__dirname, 'modules'));
+
+const modulesInfo = {};
+
+for (const module of modules) {
+    const meta = require(path.join(__dirname, 'modules', module, 'module.json'));
+    modulesInfo[module] = meta;
+}
+
+fs.writeJSONSync(path.join(__dirname, 'etc', 'modules.json'), modulesInfo);
 
 for (const module of modules) {
     webpackConfig.entry[module] = path.resolve(__dirname, 'modules', module, 'src', 'backend.jsx');

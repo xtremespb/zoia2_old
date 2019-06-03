@@ -15,7 +15,7 @@ class Module extends Component {
 
     render = () => (<>
         <AdminPanel>
-            Hello world
+            Hello world from Module 2
         </AdminPanel>
     </>);
 }
