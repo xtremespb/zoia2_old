@@ -95,13 +95,15 @@ const webpackConfig = {
     plugins: [
         new FixStyleOnlyEntriesPlugin(),
         new ExtractCssChunks({
-            filename: '[name].css',
-            chunkFilename: '[name].css',
+            filename: '[name]_[chunkhash].css',
+            chunkFilename: '[name]_[chunkhash].css',
             orderWarning: true
         }),
         new CleanWebpackPlugin({
             verbose: true,
-            cleanOnceBeforeBuildPatterns: ['admin']
+            cleanStaleWebpackAssets: true,
+            protectWebpackAssets: true,
+            cleanOnceBeforeBuildPatterns: ['**/*', '!images/*']
         })
     ]
 };

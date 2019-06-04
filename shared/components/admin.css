@@ -26,3 +26,17 @@
 .uk-navbar-right {
     flex-wrap: unset !important;
 }
+
+div.uk-navbar-right>ul>li>a,
+div.uk-navbar-left>div>span>a>svg {
+    color: #ccc;
+}
+
+div.uk-navbar-right>ul>li>a:focus,
+div.uk-navbar-right>ul>li>a:active,
+div.uk-navbar-right>ul>li>a:hover,
+div.uk-navbar-left>div>span>a:focus>svg,
+div.uk-navbar-left>div>span>a:active>svg
+div.uk-navbar-left>div>span>a:hover>svg {
+    color: #eee;
+}

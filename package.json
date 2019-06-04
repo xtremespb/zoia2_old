@@ -45,6 +45,7 @@
         "react-redux": "^7.0.3",
         "react-router-dom": "^5.0.0",
         "redux": "^4.0.1",
+        "redux-persist": "^5.10.0",
         "redux-thunk": "^2.3.0",
         "uikit": "^3.1.5",
         "zoia-captcha": "^1.0.4"

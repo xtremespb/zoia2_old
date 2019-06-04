@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { I18nProvider } from '@lingui/react';
-import { Trans, t } from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import { setupI18n } from '@lingui/core';
+import { connect } from 'react-redux';
+
+import appDataSetLanguage from '../actions/appDataSetLanguage';
 
 import './admin.css';
 import modulesData from '../../etc/modules.json';
@@ -9,30 +12,33 @@ import modulesData from '../../etc/modules.json';
 class AdminPanel extends Component {
 
     state = {
-        lang: 'en',
+        language: this.props.appData.language,
         catalogs: {}
     }
 
     constructor(props) {
         super(props);
-        this.loadCatalog(this.state.lang).then(() => (this.i18n = setupI18n({
-            language: this.state.lang,
-            catalogs: this.state.catalogs
-        })));
+        this.loadCatalog(this.state.language);
     }
 
     loadCatalog = async (language) => {
-        console.log(`Loading ${language}`);
         const catalog = await import(
             /* webpackMode: "lazy", webpackChunkName: "i18n_[index]" */
             `../../src/locales/${language}/messages.js`);
-        console.log('Done');
-        this.setState(state => ({
-            catalogs: {
+        this.setState(state => {
+            const catalogs = {
                 ...state.catalogs,
                 [language]: catalog
-            }
-        }));
+            };
+            this.i18n = setupI18n({
+                language,
+                catalogs
+            });
+            return {
+                language,
+                catalogs
+            };
+        });
     }
 
     resizeNav = () => document.getElementById('z2a_nav_wrap') ? document.getElementById('z2a_nav_wrap').style.height = `${window.innerHeight - 64}px` : null;
@@ -40,35 +46,50 @@ class AdminPanel extends Component {
     componentDidMount = () => {
         window.onresize = this.resizeNav;
         this.resizeNav();
-        this.loadCatalog(this.state.lang);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const { catalogs, lang } = nextState;
-        if (lang !== this.props.lang && !catalogs[lang]) {
-            this.loadCatalog(lang);
-            return false;
+        const { catalogs, language } = nextState;
+        if (language !== this.state.language) {
+            if (!catalogs[language]) {
+                this.loadCatalog(language);
+                return false;
+            }
+            this.i18n = setupI18n({
+                language,
+                catalogs
+            });
         }
         return true;
     }
 
-    getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><a href={`/admin/${id}/index.html`}>{this.i18n._(t(id))}</a></li>)) : null;
+    getModulesList = prefix => {
+        return this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><a href={`/admin/${id}/index.html`}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</a></li>)) : null;
+    }
 
     render = () => {
-        const { catalogs, lang } = this.state;
-        if (!catalogs[lang]) {
+        const { catalogs, language } = this.state;
+        if (!catalogs[language]) {
             return null;
         }
-        return (<I18nProvider language={this.state.lang} catalogs={this.state.catalogs}>
+        return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <div>
                 <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left">
                         <div className="uk-navbar-item uk-logo">
-                            <span className="uk-hidden@m"><a href="" className="uk-icon-link" uk-icon="icon:menu;ratio:1.2" uk-toggle="target: #offcanvas-nav" />&nbsp;</span><a href=""><img src="/zoia/logo.png" width="83" height="27" alt="" /></a>
+                            <span className="uk-hidden@m uk-margin-small-right"><a href="" className="uk-icon-link" uk-icon="icon:menu;ratio:1.5" uk-toggle="target: #offcanvas-nav" />&nbsp;</span><a href=""><img src="/zoia/logo.png" width="86" height="30" alt="" /></a>
                         </div>
                     </div>
                     <div className="uk-navbar-right">
                         <ul className="uk-navbar-nav">
+                            <li>
+                                <a href="#">Language</a>
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-10">
+                                    <ul className="uk-nav uk-navbar-dropdown-nav">
+                                        <li><a href=""><Trans>Log Out</Trans></a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li>
                                 <a href="#">username</a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-10">
@@ -95,8 +116,6 @@ class AdminPanel extends Component {
                     <div className="uk-width-expand">
                         <div className="z2a-content-wrap">
                             {this.props.children}
-                            <button onClick={() => this.setState({ lang: 'ru' })}>Ru!</button>
-                            <button onClick={() => this.setState({ lang: 'en' })}>En!</button>
                         </div>
                     </div>
                 </div>
@@ -104,7 +123,7 @@ class AdminPanel extends Component {
             <div id="offcanvas-nav" uk-offcanvas="overlay:true">
                 <div className="uk-offcanvas-bar">
                     <ul className="uk-nav uk-nav-default">
-                        <li><a href="">Item</a></li>
+                        {this.getModulesList('mobile')}
                     </ul>
                 </div>
             </div>
@@ -112,4 +131,10 @@ class AdminPanel extends Component {
     };
 }
 
-export default AdminPanel;
+export default connect(store => ({
+    appData: store.appData
+}),
+    dispatch => ({
+        appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language))
+    })
+)(AdminPanel);
