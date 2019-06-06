@@ -33,6 +33,7 @@
         "fastify-mongodb": "^1.0.1",
         "fastify-static": "^2.4.0",
         "fastify-url-data": "^2.3.0",
+        "flag-icon-css": "^3.3.0",
         "fs-extra": "^8.0.1",
         "history": "^4.9.0",
         "jimp": "^0.6.4",

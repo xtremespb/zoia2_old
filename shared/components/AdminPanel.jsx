@@ -8,11 +8,12 @@ import appDataSetLanguage from '../actions/appDataSetLanguage';
 
 import './admin.css';
 import modulesData from '../../etc/modules.json';
+import config from '../../etc/config.json';
 
 class AdminPanel extends Component {
 
     state = {
-        language: this.props.appData.language,
+        language: this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0],
         catalogs: {}
     }
 
@@ -63,16 +64,22 @@ class AdminPanel extends Component {
         return true;
     }
 
-    getModulesList = prefix => {
-        return this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><a href={`/admin/${id}/index.html`}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</a></li>)) : null;
+    getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><a href={`/admin/${id}/index.html`}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</a></li>)) : null;
+
+    onLanguageClick = e => {
+        e.preventDefault();
+        this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
+        console.log(`Lang set: ${e.currentTarget.dataset.lang}`);
     }
+
+    getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
 
     render = () => {
         const { catalogs, language } = this.state;
         if (!catalogs[language]) {
             return null;
         }
-        return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
+        return (<I18nProvider language={this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0]} catalogs={this.state.catalogs}>
             <div>
                 <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left">
@@ -83,16 +90,16 @@ class AdminPanel extends Component {
                     <div className="uk-navbar-right">
                         <ul className="uk-navbar-nav">
                             <li>
-                                <a href="#">Language</a>
-                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-10">
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0]} flag-icon-switch`} /></a>
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href=""><Trans>Log Out</Trans></a></li>
+                                        {this.getLanguagesList('desktop')}
                                     </ul>
                                 </div>
                             </li>
                             <li>
                                 <a href="#">username</a>
-                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-10">
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         <li><a href=""><Trans>Log Out</Trans></a></li>
                                     </ul>
