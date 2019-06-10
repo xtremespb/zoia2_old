@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { Trans } from '@lingui/macro';
-import { Provider as ReduxProvider } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import AdminPanel from '../../../shared/components/AdminPanel.jsx';
-import configureStore from '../../../shared/store/configureStore';
 
+import configureStore from '../../../shared/store/configureStore';
 import '../../../shared/uikit.scss';
 UIkit.use(Icons);
 
@@ -24,8 +24,8 @@ class Module extends Component {
 }
 
 ReactDOM.render(
-    (<ReduxProvider store={configureStore()}>
-        <Module />
-    </ReduxProvider>),
+    (<Provider store={configureStore()}>
+      <Module />
+    </Provider>),
     document.getElementById('app')
 );

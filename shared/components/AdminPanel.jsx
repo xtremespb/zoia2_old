@@ -13,7 +13,7 @@ import config from '../../etc/config.json';
 class AdminPanel extends Component {
 
     state = {
-        language: this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0],
+        language: this.props.appData.language,
         catalogs: {}
     }
 
@@ -31,14 +31,12 @@ class AdminPanel extends Component {
                 ...state.catalogs,
                 [language]: catalog
             };
-            this.i18n = setupI18n({
-                language,
-                catalogs
-            });
-            return {
+            const newData = {
                 language,
                 catalogs
             };
+            this.i18n = setupI18n(newData);
+            return newData;
         });
     }
 
@@ -51,7 +49,7 @@ class AdminPanel extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         const { catalogs, language } = nextState;
-        if (language !== this.state.language) {
+        if (language !== this.props.appData.language) {
             if (!catalogs[language]) {
                 this.loadCatalog(language);
                 return false;
@@ -68,8 +66,10 @@ class AdminPanel extends Component {
 
     onLanguageClick = e => {
         e.preventDefault();
+        this.setState({
+            language: e.currentTarget.dataset.lang
+        });
         this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
-        console.log(`Lang set: ${e.currentTarget.dataset.lang}`);
     }
 
     getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
@@ -79,7 +79,7 @@ class AdminPanel extends Component {
         if (!catalogs[language]) {
             return null;
         }
-        return (<I18nProvider language={this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0]} catalogs={this.state.catalogs}>
+        return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <div>
                 <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left">
@@ -90,7 +90,7 @@ class AdminPanel extends Component {
                     <div className="uk-navbar-right">
                         <ul className="uk-navbar-nav">
                             <li>
-                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData && this.props.appData ? this.props.appData.language : Object.keys(config.languages)[0]} flag-icon-switch`} /></a>
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         {this.getLanguagesList('desktop')}
