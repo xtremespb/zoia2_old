@@ -13,7 +13,7 @@ import config from '../../etc/config.json';
 class AdminPanel extends Component {
 
     state = {
-        language: this.props.appData.language,
+        language: this.props.appData ? this.props.appData.language : 'en',
         catalogs: {}
     }
 
@@ -49,7 +49,7 @@ class AdminPanel extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         const { catalogs, language } = nextState;
-        if (language !== this.props.appData.language) {
+        if (language !== this.props.appData && this.props.appData.language ? this.props.appData.language : 'en') {
             if (!catalogs[language]) {
                 this.loadCatalog(language);
                 return false;
@@ -79,7 +79,7 @@ class AdminPanel extends Component {
         if (!catalogs[language]) {
             return null;
         }
-        return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
+        return (<I18nProvider language={this.props.appData ? this.props.appData.language : 'en'} catalogs={this.state.catalogs}>
             <div>
                 <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left">
@@ -90,7 +90,7 @@ class AdminPanel extends Component {
                     <div className="uk-navbar-right">
                         <ul className="uk-navbar-nav">
                             <li>
-                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData ? this.props.appData.language : 'en'} flag-icon-switch`} /></a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         {this.getLanguagesList('desktop')}
