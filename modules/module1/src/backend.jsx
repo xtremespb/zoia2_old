@@ -1,31 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
-import { Trans } from '@lingui/macro';
 import { Provider } from 'react-redux';
-
-import AdminPanel from '../../../shared/components/AdminPanel.jsx';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import configureStore from '../../../shared/store/configureStore';
-import '../../../shared/uikit.scss';
-UIkit.use(Icons);
+import Backend from './components/backend/Backend.jsx';
 
-class Module extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render = () => (<>
-        <AdminPanel>
-            <Trans>Hello world from Module 1</Trans>
-        </AdminPanel>
-    </>);
-}
+const { store, persistor } = configureStore();
 
 ReactDOM.render(
-    (<Provider store={configureStore()}>
-      <Module />
+    (<Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <Backend />
+        </PersistGate>
     </Provider>),
     document.getElementById('app')
 );

@@ -3,12 +3,17 @@ import { I18nProvider } from '@lingui/react';
 import { Trans } from '@lingui/macro';
 import { setupI18n } from '@lingui/core';
 import { connect } from 'react-redux';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 
 import appDataSetLanguage from '../actions/appDataSetLanguage';
 
 import './admin.css';
 import modulesData from '../../etc/modules.json';
 import config from '../../etc/config.json';
+import '../uikit.scss';
+
+UIkit.use(Icons);
 
 class AdminPanel extends Component {
 
@@ -65,14 +70,13 @@ class AdminPanel extends Component {
     getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><a href={`/admin/${id}/index.html`}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</a></li>)) : null;
 
     onLanguageClick = e => {
-        e.preventDefault();
         this.setState({
             language: e.currentTarget.dataset.lang
         });
         this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
     }
 
-    getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
+    getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
 
     render = () => {
         const { catalogs, language } = this.state;

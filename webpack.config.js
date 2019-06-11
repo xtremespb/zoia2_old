@@ -103,7 +103,7 @@ const webpackConfig = {
             verbose: true,
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: true,
-            cleanOnceBeforeBuildPatterns: ['**/*', '!images/*']
+            cleanOnceBeforeBuildPatterns: ['**/*', '!favicon.ico', '!zoia/*', '!fonts/*']
         })
     ]
 };

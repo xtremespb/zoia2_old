@@ -51,7 +51,7 @@ div.uk-navbar-left>div>span>a:active>svg div.uk-navbar-left>div>span>a:hover>svg
 }
 
 .flag-icon-switch {
-    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
 }
 
 .flag-icon:before {
