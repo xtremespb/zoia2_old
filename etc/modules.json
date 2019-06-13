@@ -1,1 +1,1 @@
-{"module1":{"id":"module1","title":{"en":"Module 1","ru":"Модуль 1"},"icon":"users"}}
+{"module1":{"id":"module1","icon":"users","root":true},"user":{"id":"user","icon":"user"}}

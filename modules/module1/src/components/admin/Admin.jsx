@@ -3,7 +3,7 @@ import AdminPanel from '../../../../../shared/components/AdminPanel.jsx';
 import { Trans } from '@lingui/macro';
 import { connect } from 'react-redux';
 
-class Backend extends Component {
+class Admin extends Component {
     constructor(props) {
         super(props);
     }
@@ -22,4 +22,4 @@ export default connect(store => ({
     // dispatch => ({
     //     appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language))
     // })
-)(Backend);
+)(Admin);

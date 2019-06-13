@@ -19,12 +19,4 @@ msgstr "Привет, мир из модуля 1"
 
 #: shared/components/AdminPanel.jsx:76
 msgid "Log Out"
-msgstr "Выйти нафиг"
-
-#: shared/components/AdminPanel.jsx:55
-#~ msgid "module1"
-#~ msgstr "Модуль 1"
-
-#: shared/components/AdminPanel.jsx:55
-#~ msgid "module2"
-#~ msgstr "Модуль 2"
+msgstr "Выйти из системы"

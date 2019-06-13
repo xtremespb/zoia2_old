@@ -20,11 +20,3 @@ msgstr ""
 #: shared/components/AdminPanel.jsx:76
 msgid "Log Out"
 msgstr ""
-
-#: shared/components/AdminPanel.jsx:55
-#~ msgid "module1"
-#~ msgstr "Module 1"
-
-#: shared/components/AdminPanel.jsx:55
-#~ msgid "module2"
-#~ msgstr "Module 2"

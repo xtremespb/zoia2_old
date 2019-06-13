@@ -7,5 +7,6 @@
     "languages": {
         "en": "English",
         "ru": "Русский"
-    }
+    },
+    "development": true
 }

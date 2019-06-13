@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import configureStore from '../../../shared/store/configureStore';
-import Backend from './components/backend/Backend.jsx';
+import Backend from './components/admin/Admin.jsx';
 
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
     (<Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <Backend />
+            <Admin />
         </PersistGate>
     </Provider>),
     document.getElementById('app')

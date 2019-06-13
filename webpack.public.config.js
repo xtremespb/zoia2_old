@@ -2,7 +2,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
@@ -11,8 +10,8 @@ const webpackConfig = {
     entry: {},
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, 'static', 'admin'),
-        publicPath: '/admin/',
+        path: path.resolve(__dirname, 'static', 'data'),
+        publicPath: '/data',
         filename: '[name]_[chunkhash].js'
     },
     optimization: {
@@ -98,12 +97,6 @@ const webpackConfig = {
             filename: '[name]_[chunkhash].css',
             chunkFilename: '[name]_[chunkhash].css',
             orderWarning: true
-        }),
-        new CleanWebpackPlugin({
-            verbose: true,
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: true,
-            cleanOnceBeforeBuildPatterns: ['**/*', '!favicon.ico', '!zoia/*', '!fonts/*']
         })
     ]
 };
@@ -116,24 +109,35 @@ for (const module of modules) {
     const meta = require(path.join(__dirname, 'modules', module, 'module.json'));
     modulesInfo[module] = meta;
 }
-
 fs.writeJSONSync(path.join(__dirname, 'etc', 'modules.json'), modulesInfo);
-
+console.log('Cleaning up and building module list...');
+const dataDir = path.resolve(__dirname, 'static', 'data');
+console.log(`Deleting ${dataDir}...`);
+fs.removeSync(dataDir);
 for (const module of modules) {
-    webpackConfig.entry[module] = path.resolve(__dirname, 'modules', module, 'src', 'backend.jsx');
-    webpackConfig.plugins.push(new HtmlWebpackPlugin({
-        filename: path.resolve(__dirname, 'static', 'admin', module, 'index.html'),
-        chunks: [module, 'styles', 'vendors'],
-        template: path.resolve(__dirname, 'src', 'backend.html')
-        // minify: {
-        //     collapseWhitespace: true,
-        //     removeComments: true,
-        //     removeRedundantAttributes: true,
-        //     removeScriptTypeAttributes: true,
-        //     removeStyleLinkTypeAttributes: true,
-        //     useShortDoctype: true
-        // }
-    }));
+    const file = path.resolve(__dirname, 'modules', module, 'src', 'public.jsx');
+    try {
+        fs.accessSync(file, fs.constants.F_OK);
+        const moduleDir = modulesInfo[module].root ? path.resolve(__dirname, 'static', 'index.html') : path.resolve(__dirname, 'static', module);
+        console.log(`Deleting ${moduleDir}...`);
+        fs.removeSync(moduleDir);
+        webpackConfig.entry[module] = path.resolve(__dirname, 'modules', module, 'src', 'public.jsx');
+        webpackConfig.plugins.push(new HtmlWebpackPlugin({
+            filename: modulesInfo[module].root ? path.resolve(__dirname, 'static', 'index.html') : path.resolve(__dirname, 'static', module, 'index.html'),
+            chunks: [module, 'styles', 'vendors'],
+            template: path.resolve(__dirname, 'src', 'public.html')
+            // minify: {
+            //     collapseWhitespace: true,
+            //     removeComments: true,
+            //     removeRedundantAttributes: true,
+            //     removeScriptTypeAttributes: true,
+            //     removeStyleLinkTypeAttributes: true,
+            //     useShortDoctype: true
+            // }
+        }));
+    } catch (e) {
+        console.log(`Info: no public module for ${module}`);
+    }
 }
 
 module.exports = webpackConfig;

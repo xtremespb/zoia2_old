@@ -1,8 +1,5 @@
 {
 	"id": "module1",
-	"title": {
-		"en": "Module 1",
-		"ru": "Модуль 1"
-	},
-	"icon": "users"
+	"icon": "users",
+	"root": true
 }
