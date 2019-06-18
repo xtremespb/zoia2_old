@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
 const UserAuth = lazy(() => import(/* webpackChunkName: "AdminPanel" */ './components/UserAuth.jsx'));
+const UserLogout = lazy(() => import(/* webpackChunkName: "AdminPanel" */ './components/UserLogout.jsx'));
 const UsersList = lazy(() => import(/* webpackChunkName: "UsersList" */ './components/UsersList.jsx'));
 
 const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle" style={{ height: '100%' }}><span uk-spinner="ratio:2" /></div>);
@@ -9,6 +10,12 @@ const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle
 const getAuth = () => ((
     <Suspense fallback={getSuspense()}>
         <UserAuth />
+    </Suspense>
+));
+
+const getLogout = () => ((
+    <Suspense fallback={getSuspense()}>
+        <UserLogout />
     </Suspense>
 ));
 
@@ -23,6 +30,11 @@ export default [
         key="usersAuth"
         path="/users/auth"
         component={getAuth}
+    />),
+    (<Route
+        key="usersLogout"
+        path="/users/logout"
+        component={getLogout}
     />),
     (<Route
         key="usersList"

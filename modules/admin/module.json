@@ -1,0 +1,6 @@
+{
+	"id": "admin",
+	"icon": "",
+	"admin": false,
+	"adminRoute": "/admin/users"
+}

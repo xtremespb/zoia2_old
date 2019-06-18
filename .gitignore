@@ -24,4 +24,5 @@ typings/
 .yarn-integrity
 .env
 node_modules/
-static/admin/**
+static/data/**
+static/index.html

@@ -14,6 +14,7 @@ import { history } from '../../../../shared/store/configureStore';
 import FormBuilder from '../../../../shared/components/FormBuilder/index.jsx';
 import appDataSetLanguage from '../../../../shared/actions/appDataSetLanguage';
 import appDataSetToken from '../../../../shared/actions/appDataSetToken';
+import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 
 import(/* webpackChunkName: "UserAuth" */ './UserAuth.css');
@@ -36,10 +37,10 @@ class UserAuth extends Component {
     }
 
     componentDidMount = () => {
-        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle');
-        const query = queryString.parse(window.location.search);
+        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
+        this.query = queryString.parse(window.location.search);
         if (this.props.appData.token) {
-            history.push(query.redirect || '/');
+            history.push(this.query.redirect || '/');
         }
         this.mounted = true;
     }
@@ -85,6 +86,9 @@ class UserAuth extends Component {
     onSaveSuccessHandler = response => {
         if (response.data.statusCode === 200 && response.data.token) {
             this.props.appDataSetTokenAction(response.data.token);
+            this.props.appDataSetUserAction(response.data.user);
+            document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
+            history.push(this.query.redirect || '/');
         }
     }
 
@@ -169,5 +173,6 @@ export default connect(store => ({
     dispatch => ({
         appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language)),
         appDataSetTokenAction: token => dispatch(appDataSetToken(token)),
+        appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
     }))(UserAuth);

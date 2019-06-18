@@ -69,7 +69,7 @@ class AdminPanel extends Component {
         return true;
     }
 
-    getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => (<li key={`${prefix}_${id}`}><Link to={modulesData[id].defaultAdminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</Link></li>)) : null;
+    getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => modulesData[id].admin ? (<li key={`${prefix}_${id}`}><Link to={modulesData[id].adminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</Link></li>) : null) : null;
 
     onLanguageClick = e => {
         this.setState({
@@ -96,18 +96,18 @@ class AdminPanel extends Component {
                     <div className="uk-navbar-right">
                         <ul className="uk-navbar-nav">
                             <li>
-                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
+                                <a href="#">{this.props.appData.user.username}&nbsp;<span uk-icon="triangle-down" /></a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        {this.getLanguagesList('desktop')}
+                                        <li><Link to="/users/logout"><Trans>Log Out</Trans></Link></li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="#">username</a>
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href=""><Trans>Log Out</Trans></a></li>
+                                        {this.getLanguagesList('desktop')}
                                     </ul>
                                 </div>
                             </li>

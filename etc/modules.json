@@ -1,1 +1,1 @@
-{"users":{"id":"users","icon":"users","defaultAdminRoute":"/admin/users"}}
+{"admin":{"id":"admin","icon":"","admin":false,"adminRoute":"/admin/users"},"users":{"id":"users","icon":"users","admin":true,"adminRoute":"/admin/users"}}
