@@ -1,6 +1,6 @@
 // 1. Custom variables and variable overwrites.
-$global-primary-background: #393f74 !default; 
-$global-link-color: #393f74 !default;
+$global-primary-background: #35525f !default; 
+$global-link-color: #35525f !default;
 $global-font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";

@@ -24,7 +24,8 @@ export const history = createBrowserHistory();
 
 const persistConfig = {
     key: `${config.siteId}_root`,
-    storage
+    storage,
+    whitelist: ['appData']
 };
 const middlewares = [thunk, routerMiddleware(history)];
 if (config.development) {

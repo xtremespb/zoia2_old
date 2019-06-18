@@ -1,4 +1,4 @@
 export default v => ({
-    type: 'APP_SET_LANGUAGE',
+    type: 'APP_DATA_SET_LANGUAGE',
     payload: v
 });

@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2019-06-03 13:20+0200\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ru\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: modules/users/src/components/UserAuth.jsx:103
+msgid "Authorize"
+msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:124
+#~ msgid "Cancel"
+#~ msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:120
+#~ msgid "Could not load data from server"
+#~ msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:121
+#~ msgid "Could not save data"
+#~ msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:128
+msgid "Create Account"
+msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:118
+#~ msgid "Field is required"
+#~ msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:130
+msgid "Forgot Password"
+msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:119
+#~ msgid "Invalid format"
+#~ msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:109
+msgid "Log Out"
+msgstr "Выйти из системы"
+
+#: modules/users/src/components/UserAuth.jsx:92
+msgid "Password:"
+msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:85
+msgid "Username:"
+msgstr ""
+
+#: modules/users/src/components/UserAuth.jsx:123
+#~ msgid "Yes"
+#~ msgstr ""
+
+# Users module title
+#~ msgid "users"
+#~ msgstr "Пользователи"
+
+#: modules/users/src/components/UserAuth.jsx:122
+#~ msgid "will be deleted. Are you sure?"
+#~ msgstr ""

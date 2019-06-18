@@ -1,0 +1,42 @@
+{
+  "Username:": {
+    "origin": [
+      [
+        "modules/users/src/components/UserAuth.jsx",
+        85
+      ]
+    ]
+  },
+  "Password:": {
+    "origin": [
+      [
+        "modules/users/src/components/UserAuth.jsx",
+        92
+      ]
+    ]
+  },
+  "Authorize": {
+    "origin": [
+      [
+        "modules/users/src/components/UserAuth.jsx",
+        103
+      ]
+    ]
+  },
+  "Create Account": {
+    "origin": [
+      [
+        "modules/users/src/components/UserAuth.jsx",
+        128
+      ]
+    ]
+  },
+  "Forgot Password": {
+    "origin": [
+      [
+        "modules/users/src/components/UserAuth.jsx",
+        130
+      ]
+    ]
+  }
+}

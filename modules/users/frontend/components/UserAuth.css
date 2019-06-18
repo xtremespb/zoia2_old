@@ -1,0 +1,12 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #ecf0f1;
+}
+
+#authForm {
+    min-width: 250px;
+}
