@@ -1,6 +1,5 @@
 const initialState = {
     language: 'en',
-    token: null,
     user: {}
 };
 
@@ -10,11 +9,6 @@ export default ((state = initialState, action) => {
         return {
             ...state,
             language: action.payload
-        };
-    case 'APP_DATA_SET_TOKEN':
-        return {
-            ...state,
-            token: action.payload
         };
     case 'APP_DATA_SET_USER':
         return {

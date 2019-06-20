@@ -1,4 +1,4 @@
 export default v => ({
-    type: 'APP_DATA_SET_TOKEN',
+    type: 'APP_DATA_RUNTIME_SET_TOKEN',
     payload: v
 });

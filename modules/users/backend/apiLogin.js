@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const uuid = require('uuid/v1');
 const config = require('../../../etc/config.json');
 
 module.exports = fastify => ({
@@ -47,18 +48,32 @@ module.exports = fastify => ({
                         message: 'User not found or invalid password'
                     }));
             }
-            // Send response
+            // Prepare token
+            const sessionId = uuid();
+            const userId = String(user._id);
             const token = fastify.jwt.sign({
-                id: user._id
+                userId,
+                sessionId
             }, {
                 expiresIn: config.authTokenExpiresIn
             });
-            delete user.password;
+            // Update database and set session ID
+            await this.mongo.db.collection('users').updateOne({
+                _id: user._id
+            }, {
+                $set: {
+                    sessionId
+                }
+            });
+            // Send response
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
                     token,
-                    user
+                    user: {
+                        username: user.username,
+                        id: String(user._id)
+                    }
                 }));
         } catch (e) {
             req.log.error({

@@ -2,6 +2,13 @@
     "siteId": "zoia2",
     "secret": "oqqjgTX8Qb6qhBybD2D5Lknp97V336KJ7TgC8x85o8T8Zcx4t9jhmusS45VmjP3y",
     "authTokenExpiresIn": "7 days",
+    "cookieOptions": {
+        "expires": 14,
+        "path": "/",
+        "domain": "",
+        "secure": false,
+        "sameSite": "strict"
+    },
     "httpServer": {
         "ip": "127.0.0.1",
         "port": 3000
@@ -16,5 +23,6 @@
     },
     "development": false,
     "loglevel": "info",
-    "originCORS": "*"
+    "originCORS": "*",
+    "commonItemsLimit": 5
 }

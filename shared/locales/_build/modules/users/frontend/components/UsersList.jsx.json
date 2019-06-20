@@ -1,0 +1,58 @@
+{
+  "Username": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        33
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        50
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        51
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        52
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        53
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        54
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        55
+      ]
+    ]
+  }
+}

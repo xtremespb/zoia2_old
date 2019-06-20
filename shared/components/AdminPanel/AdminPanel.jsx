@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import React, { Component } from 'react';
-import { I18nProvider } from '@lingui/react';
+import { I18nProvider, I18n } from '@lingui/react';
 import { Trans } from '@lingui/macro';
-import { setupI18n } from '@lingui/core';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -25,8 +24,6 @@ class AdminPanel extends Component {
         super(props);
         if (!this.state.catalogs[this.state.language]) {
             this.loadCatalog(this.state.language);
-        } else {
-            this.i18n = setupI18n({ language: this.state.language, catalogs: this.state.catalogs });
         }
     }
 
@@ -37,13 +34,11 @@ class AdminPanel extends Component {
                 ...state.catalogs,
                 [language]: catalog
             };
-            const newData = {
+            this.props.appLinguiSetCatalogAction(language, catalog);
+            return {
                 language,
                 catalogs
             };
-            this.i18n = setupI18n(newData);
-            this.props.appLinguiSetCatalogAction(language, catalog);
-            return newData;
         });
     }
 
@@ -56,20 +51,18 @@ class AdminPanel extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         const { catalogs, language } = nextState;
-        if (language !== this.props.appData.language) {
-            if (!catalogs[language]) {
-                this.loadCatalog(language);
-                return false;
-            }
-            this.i18n = setupI18n({
-                language,
-                catalogs
-            });
+        if (language !== this.props.appData.language && !catalogs[language]) {
+            this.loadCatalog(language);
+            return false;
         }
         return true;
     }
 
-    getModulesList = prefix => this.i18n ? Object.keys(modulesData).map(id => modulesData[id].admin ? (<li key={`${prefix}_${id}`}><Link to={modulesData[id].adminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{this.i18n._(id)}</Link></li>) : null) : null;
+    getModulesList = prefix => (
+        <I18n>
+            {({ i18n }) => (Object.keys(modulesData).map(id => modulesData[id].admin ? (<li key={`${prefix}_${id}`}><Link to={modulesData[id].adminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{i18n._(id)}</Link></li>) : null))}
+        </I18n>
+    );
 
     onLanguageClick = e => {
         this.setState({

@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/src/components/UserAuth.jsx:103
+#: modules/users/frontend/components/UserAuth.jsx:133
 msgid "Authorize"
 msgstr ""
 
@@ -21,39 +21,55 @@ msgstr ""
 #~ msgid "Cancel"
 #~ msgstr ""
 
+#: modules/users/frontend/components/UsersList.jsx:52
+msgid "Could not load data"
+msgstr ""
+
 #: modules/users/src/components/UserAuth.jsx:120
 #~ msgid "Could not load data from server"
 #~ msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:121
-#~ msgid "Could not save data"
-#~ msgstr ""
+#: modules/users/frontend/components/UsersList.jsx:53
+msgid "Could not save data"
+msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:128
+#: modules/users/frontend/components/UserAuth.jsx:163
 msgid "Create Account"
 msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:118
-#~ msgid "Field is required"
-#~ msgstr "Field is required"
+#: modules/users/frontend/components/UsersList.jsx:54
+msgid "Field is required"
+msgstr "Field is required"
 
-#: modules/users/src/components/UserAuth.jsx:130
+#: modules/users/frontend/components/UserAuth.jsx:165
 msgid "Forgot Password"
 msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:119
-#~ msgid "Invalid format"
-#~ msgstr ""
+#: modules/users/frontend/components/UsersList.jsx:55
+msgid "Invalid format"
+msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:109
+#: modules/users/frontend/components/UsersList.jsx:50
+msgid "Loading data, please wait…"
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:102
 msgid "Log Out"
 msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:92
+#: modules/users/frontend/components/UsersList.jsx:51
+msgid "No records to display"
+msgstr ""
+
+#: modules/users/frontend/components/UserAuth.jsx:122
 msgid "Password:"
 msgstr ""
 
-#: modules/users/src/components/UserAuth.jsx:85
+#: modules/users/frontend/components/UsersList.jsx:33
+msgid "Username"
+msgstr ""
+
+#: modules/users/frontend/components/UserAuth.jsx:115
 msgid "Username:"
 msgstr ""
 

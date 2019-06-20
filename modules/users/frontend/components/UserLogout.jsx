@@ -2,15 +2,18 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { remove as removeCookie } from 'es-cookie';
 
 import { history } from '../../../../shared/store/configureStore';
-import appDataSetToken from '../../../../shared/actions/appDataSetToken';
+import config from '../../../../etc/config.json';
+import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 
 class UserLogout extends Component {
     componentDidMount = () => {
-        this.props.appDataSetTokenAction(null);
+        this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
+        removeCookie(`${config.siteId}_auth`);
         history.push('/');
     }
 
@@ -19,6 +22,6 @@ class UserLogout extends Component {
 
 export default connect(() => ({}),
     dispatch => ({
-        appDataSetTokenAction: token => dispatch(appDataSetToken(token)),
+        appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user))
     }))(UserLogout);

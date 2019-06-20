@@ -3,6 +3,7 @@ import {
 } from 'connected-react-router';
 
 import appData from './appData';
+import appDataRuntime from './appDataRuntime';
 import appLingui from './appLingui';
 import modules from '../../etc/modules.json';
 
@@ -14,5 +15,6 @@ export default history => ({
     ...moduleReducers,
     router: connectRouter(history),
     appData,
+    appDataRuntime,
     appLingui
 });
