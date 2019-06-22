@@ -3,35 +3,11 @@
     "origin": [
       [
         "modules/users/frontend/components/UsersList.jsx",
-        33
+        49
       ]
     ]
   },
-  "Loading data, please wait…": {
-    "origin": [
-      [
-        "modules/users/frontend/components/UsersList.jsx",
-        50
-      ]
-    ]
-  },
-  "No records to display": {
-    "origin": [
-      [
-        "modules/users/frontend/components/UsersList.jsx",
-        51
-      ]
-    ]
-  },
-  "Could not load data": {
-    "origin": [
-      [
-        "modules/users/frontend/components/UsersList.jsx",
-        52
-      ]
-    ]
-  },
-  "Could not save data": {
+  "Status": {
     "origin": [
       [
         "modules/users/frontend/components/UsersList.jsx",
@@ -39,11 +15,67 @@
       ]
     ]
   },
+  "Active": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        56
+      ]
+    ]
+  },
+  "Inactive": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        56
+      ]
+    ]
+  },
+  "Actions": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        59
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        73
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        74
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        75
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UsersList.jsx",
+        76
+      ]
+    ]
+  },
   "Field is required": {
     "origin": [
       [
         "modules/users/frontend/components/UsersList.jsx",
-        54
+        77
       ]
     ]
   },
@@ -51,7 +83,7 @@
     "origin": [
       [
         "modules/users/frontend/components/UsersList.jsx",
-        55
+        78
       ]
     ]
   }

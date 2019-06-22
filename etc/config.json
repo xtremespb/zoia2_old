@@ -13,6 +13,7 @@
         "ip": "127.0.0.1",
         "port": 3000
     },
+    "apiURL": "http://127.0.0.1:3000",
     "mongo": {
         "url": "mongodb://localhost:27017",
         "dbName": "zoia2"

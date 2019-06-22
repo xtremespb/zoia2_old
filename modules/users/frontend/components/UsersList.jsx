@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { lazy, Component } from 'react';
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import UIkit from 'uikit';
@@ -61,7 +61,7 @@ class UserList extends Component {
                         }]}
                         itemsPerPage={config.commonItemsLimit}
                         source={{
-                            url: 'http://127.0.0.1:3000/api/users/list',
+                            url: `${config.apiURL}/api/users/list`,
                             method: 'POST',
                             extras: {
                                 token: this.props.appDataRuntime.token

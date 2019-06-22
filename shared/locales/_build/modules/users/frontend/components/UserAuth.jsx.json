@@ -1,17 +1,17 @@
 {
-  "Username:": {
+  "Username": {
     "origin": [
       [
         "modules/users/frontend/components/UserAuth.jsx",
-        115
+        106
       ]
     ]
   },
-  "Password:": {
+  "Password": {
     "origin": [
       [
         "modules/users/frontend/components/UserAuth.jsx",
-        122
+        113
       ]
     ]
   },
@@ -19,7 +19,63 @@
     "origin": [
       [
         "modules/users/frontend/components/UserAuth.jsx",
-        133
+        124
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        139
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        140
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        141
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        142
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        143
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        144
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/users/frontend/components/UserAuth.jsx",
+        145
       ]
     ]
   },
@@ -27,7 +83,7 @@
     "origin": [
       [
         "modules/users/frontend/components/UserAuth.jsx",
-        163
+        154
       ]
     ]
   },
@@ -35,7 +91,7 @@
     "origin": [
       [
         "modules/users/frontend/components/UserAuth.jsx",
-        165
+        156
       ]
     ]
   }

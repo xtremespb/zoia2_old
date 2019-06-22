@@ -145,7 +145,7 @@ class UserAuth extends Component {
                             CANCEL: i18n._(t`Cancel`)
                         }}
                         save={{
-                            url: 'http://127.0.0.1:3000/api/users/login',
+                            url: `${config.apiURL}/api/users/login`,
                             method: 'POST'
                         }}
                         onSaveSuccess={response => this.onSaveSuccessHandler(response)}
