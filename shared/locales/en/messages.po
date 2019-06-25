@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/frontend/components/UsersList.jsx:59
+#: modules/users/frontend/components/UsersList.jsx:100
 msgid "Actions"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:56
+#: modules/users/frontend/components/UsersList.jsx:96
 msgid "Active"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:75
+#: modules/users/frontend/components/UsersList.jsx:124
 msgid "Could not load data"
 msgstr ""
 
@@ -38,7 +38,9 @@ msgid "Could not load data from server"
 msgstr ""
 
 #: modules/users/frontend/components/UserAuth.jsx:142
-#: modules/users/frontend/components/UsersList.jsx:76
+#: modules/users/frontend/components/UsersList.jsx:52
+#: modules/users/frontend/components/UsersList.jsx:55
+#: modules/users/frontend/components/UsersList.jsx:125
 msgid "Could not save data"
 msgstr ""
 
@@ -46,8 +48,20 @@ msgstr ""
 msgid "Create Account"
 msgstr ""
 
+#: modules/users/frontend/components/UsersList.jsx:102
+msgid "Delete"
+msgstr ""
+
+#: modules/users/frontend/components/UsersList.jsx:79
+msgid "E-mail"
+msgstr ""
+
+#: modules/users/frontend/components/UsersList.jsx:102
+msgid "Edit"
+msgstr ""
+
 #: modules/users/frontend/components/UserAuth.jsx:139
-#: modules/users/frontend/components/UsersList.jsx:77
+#: modules/users/frontend/components/UsersList.jsx:126
 msgid "Field is required"
 msgstr ""
 
@@ -55,16 +69,17 @@ msgstr ""
 msgid "Forgot Password"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:56
+#: modules/users/frontend/components/UsersList.jsx:95
 msgid "Inactive"
 msgstr ""
 
 #: modules/users/frontend/components/UserAuth.jsx:140
-#: modules/users/frontend/components/UsersList.jsx:78
+#: modules/users/frontend/components/UsersList.jsx:49
+#: modules/users/frontend/components/UsersList.jsx:127
 msgid "Invalid format"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:73
+#: modules/users/frontend/components/UsersList.jsx:122
 msgid "Loading data, please wait…"
 msgstr ""
 
@@ -72,7 +87,7 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:74
+#: modules/users/frontend/components/UsersList.jsx:123
 msgid "No records to display"
 msgstr ""
 
@@ -80,12 +95,16 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: modules/users/frontend/components/UsersList.jsx:53
+#: modules/users/frontend/components/UsersList.jsx:46
+msgid "Record with the entered value already exists"
+msgstr ""
+
+#: modules/users/frontend/components/UsersList.jsx:89
 msgid "Status"
 msgstr ""
 
 #: modules/users/frontend/components/UserAuth.jsx:106
-#: modules/users/frontend/components/UsersList.jsx:49
+#: modules/users/frontend/components/UsersList.jsx:69
 msgid "Username"
 msgstr ""
 

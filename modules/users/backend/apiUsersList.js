@@ -1,7 +1,8 @@
 const config = require('../../../etc/config.json');
 const auth = require('../../../core/auth');
 
-const sortColumns = ['username', 'active'];
+const sortColumns = ['username', 'email', 'active'];
+const searchColumns = ['username', 'email'];
 
 module.exports = fastify => ({
     schema: {
@@ -22,9 +23,7 @@ module.exports = fastify => ({
                 },
                 sortColumn: {
                     type: 'string',
-                    pattern: `^(${sortColumns.join('|')})+$`,
-                    minLength: 1,
-                    maxLength: 64
+                    pattern: `^(${sortColumns.join('|')})$`
                 },
                 sortDirection: {
                     type: 'string',
@@ -69,12 +68,14 @@ module.exports = fastify => ({
             };
             const query = {};
             if (req.body.search) {
-                query.$or = [{
-                    username: {
+                query.$or = searchColumns.map(c => {
+                    const sr = {};
+                    sr[c] = {
                         $regex: req.body.search,
                         $options: 'i'
-                    }
-                }];
+                    };
+                    return sr;
+                });
             }
             const count = await this.mongo.db.collection('users').find(query, options).count();
             options.limit = config.commonItemsLimit;
@@ -82,6 +83,7 @@ module.exports = fastify => ({
             options.projection = {
                 _id: 1,
                 username: 1,
+                email: 1,
                 active: 1
             };
             options.sort[req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;

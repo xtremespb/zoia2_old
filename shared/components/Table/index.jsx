@@ -36,14 +36,16 @@ export default class ZTable extends Component {
         lang: PropTypes.objectOf(PropTypes.string),
         itemsPerPage: PropTypes.number.isRequired,
         source: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-        save: PropTypes.objectOf(PropTypes.string),
+        save: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         data: PropTypes.arrayOf(PropTypes.object),
         sortColumn: PropTypes.string,
         sortDirection: PropTypes.string,
         hideColumnID: PropTypes.bool,
         UIkit: PropTypes.func.isRequired,
         axios: PropTypes.func.isRequired,
-        onLoadError: PropTypes.func
+        onLoadError: PropTypes.func,
+        onSaveError: PropTypes.func,
+        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
     }
 
     static defaultProps = {
@@ -61,7 +63,8 @@ export default class ZTable extends Component {
             ERR_VMANDATORY: 'Field is required',
             ERR_VFORMAT: 'Invalid format'
         },
-        onLoadError: null
+        onLoadError: null,
+        onSaveError: null
     }
 
     constructor(props) {
@@ -167,6 +170,7 @@ export default class ZTable extends Component {
 
     saveData(_columnId, _recordId, _value) {
         const paramsData = {
+            ...this.props.source.extras,
             columnId: _columnId,
             recordId: _recordId,
             value: _value
@@ -179,7 +183,11 @@ export default class ZTable extends Component {
             params: this.props.save.method.match(/get/i) ? paramsData : null
         }).then(response => {
             if (response.data.statusCode !== 200) {
-                this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERROR_SAVE, { status: 'danger' });
+                if (this.props.onSaveError && typeof this.props.onSaveError === 'function') {
+                    this.props.onSaveError(response.data);
+                } else {
+                    this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERROR_SAVE, { status: 'danger' });
+                }
                 this.setState({
                     editMode: {
                         columnId: null,
@@ -201,8 +209,12 @@ export default class ZTable extends Component {
                 },
                 values: valuesNew
             });
-        }).catch(() => {
-            this.props.UIkit.notification(this.props.lang.ERROR_SAVE, { status: 'danger' });
+        }).catch(e => {
+            if (this.props.onSaveError && typeof this.props.onSaveError === 'function') {
+                this.props.onSaveError(null, e);
+            } else {
+                this.props.UIkit.notification(this.props.lang.ERROR_SAVE, { status: 'danger' });
+            }
             this.setState({
                 editMode: {
                     columnId: null,
@@ -332,14 +344,14 @@ export default class ZTable extends Component {
     getEditableFields = (col, item) => {
         switch (col.editable) {
             case 'select':
-                return (<select onKeyPress={this.onEditModeSelectKeypress} onChange={this.onEditModeSelectChange} value={this.state.values[col.id][item._id]} onBlur={this.onEditModeInputBlur} className="uk-select ztable-editmode-select uk-width-1-1" ref={input => { this[`editField_${col.id}_${item._id}`] = input; }}>{Object.keys(col.options).map(key => (<option key={`editSelectOption_${col.id}_${item._id}_${key}`} value={key}>{col.options[key]}</option>))}</select>);
+                return (<select onKeyPress={this.onEditModeSelectKeypress} onChange={this.onEditModeSelectChange} value={this.state.values[col.id][item._id]} onBlur={this.onEditModeInputBlur} className="uk-select ztable-editmode-select uk-width-1-1" ref={input => { this[`editField_${col.id}_${item._id}`] = input; }}>{Object.keys(col.options).map(key => (<option key={`editSelectOption_${col.id}_${item._id}_${key}`} value={key}>{this.props.i18n._(col.options[key])}</option>))}</select>);
             default:
                 return (<><input ref={input => { this[`editField_${col.id}_${item._id}`] = input; }} type="text" className={`uk-input ztable-editmode-input uk-width-1-1${this.state.validationError !== ERR_NONE ? ' uk-form-danger' : null}`} onChange={this.onEditModeInputChange} value={this.state.editMode.value} onKeyPress={e => this.onEditModeInputKeypress(e, col)} onBlur={this.onEditModeInputBlur} />{this.getEditableFieldsErrorMessage(this.state.validationError)}</>);
         }
     }
 
     getCell = (col, item, val) => {
-        const value = col.editable ? (col.editable === 'select' ? col.options[this.state.values[col.id][item._id]] : this.state.values[col.id][item._id]) : val;
+        const value = col.editable ? (col.editable === 'select' ? this.props.i18n._(col.options[this.state.values[col.id] ? this.state.values[col.id][item._id] : '']) : this.state.values[col.id] ? this.state.values[col.id][item._id] : '') : val;
         return (<>{this.state.editMode.loading && this.state.editMode.columnId === col.id && this.state.editMode.recordId === item._id ? <div uk-spinner="ratio:0.5" /> : <div className="ztable-cell" tabIndex={col.editable ? 0 : null} onClick={e => this.onCellValueClick(e, this.state.values[col.id] ? this.state.values[col.id][item._id] : null)} data-col={JSON.stringify(col)} data-item={JSON.stringify(item)} role={col.editable ? 'button' : null}>{value || ' '}</div>}</>); // eslint-disable-line jsx-a11y/no-noninteractive-tabindex, jsx-a11y/no-static-element-interactions
     }
 
@@ -491,7 +503,7 @@ export default class ZTable extends Component {
                 <thead>
                     <tr>
                         {this.props.hideColumnID ? null : <th className="uk-table-shrink"><label><input type="checkbox" className="uk-checkbox" checked={this.state.checkboxAllChecked} onChange={this.checkboxChangeAllHandler} /></label></th>}
-                        {this.state.columns.map(item => (<ZTh key={item.id} prefix={this.props.prefix} css={item.cssHeader} thid={item.id} title={item.title} sortable={item.sortable} sort={item.sort} thOnClickHandler={this.thOnClickHandler} />))}
+                        {this.state.columns.map(item => (<ZTh key={item.id} prefix={this.props.prefix} css={item.cssHeader} thid={item.id} title={this.props.i18n._(item.title)} sortable={item.sortable} sort={item.sort} thOnClickHandler={this.thOnClickHandler} />))}
                     </tr>
                 </thead>
                 <tbody>

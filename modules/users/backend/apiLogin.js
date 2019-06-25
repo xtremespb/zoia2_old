@@ -49,7 +49,7 @@ module.exports = fastify => ({
                     }));
             }
             // Prepare token
-            const sessionId = uuid();
+            const sessionId = user.sessionId || uuid();
             const userId = String(user._id);
             const token = fastify.jwt.sign({
                 userId,

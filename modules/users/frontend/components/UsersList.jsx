@@ -36,32 +36,82 @@ class UserList extends Component {
         }
     }
 
+    onUsersTableSaveError = (data, i18n) => {
+        if (data) {
+            if (data.statusCode === 403) {
+                this.deauthorize();
+            }
+            switch (data.errorCode) {
+                case 1:
+                    UIkit.notification(i18n._(t`Record with the entered value already exists`), { status: 'danger' });
+                    break;
+                case 2:
+                    UIkit.notification(i18n._(t`Invalid format`), { status: 'danger' });
+                    break;
+                default:
+                    UIkit.notification(i18n._(t`Could not save data`), { status: 'danger' });
+            }
+        } else {
+            UIkit.notification(i18n._(t`Could not save data`), { status: 'danger' });
+        }
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => (
                     <Table
                         prefix="usersListTable"
+                        i18n={i18n}
                         UIkit={UIkit}
                         axios={axios}
                         columns={[{
                             id: 'username',
-                            title: i18n._(t`Username`),
+                            title: 'Username',
                             sortable: true,
+                            editable: 'text',
+                            cssHeader: 'uk-width-1-6@m uk-text-nowrap',
+                            validation: {
+                                mandatory: true,
+                                regexp: '^[A-Za-z0-9_-]{4,32}$'
+                            }
+                        }, {
+                            id: 'email',
+                            title: 'E-mail',
+                            sortable: true,
+                            process: item => item || '',
+                            editable: 'text',
+                            validation: {
+                                mandatory: true,
+                                regexp: '^(?:[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$'
+                            }
                         }, {
                             id: 'active',
-                            title: i18n._(t`Status`),
-                            cssRow: 'uk-table-shrink uk-text-nowrap',
+                            title: 'Status',
+                            cssRow: 'uk-width-small uk-text-nowrap',
                             sortable: true,
-                            process: item => item ? i18n._(t`Active`) : i18n._(t`Inactive`)
+                            process: item => item ? 1 : 0,
+                            editable: 'select',
+                            options: {
+                                0: 'Inactive',
+                                1: 'Active'
+                            }
                         }, {
                             id: 'actions',
-                            title: i18n._(t`Actions`),
-                            cssRow: 'uk-table-shrink uk-text-nowrap'
+                            title: 'Actions',
+                            cssRow: 'uk-table-shrink uk-text-nowrap',
+                            process: item => (<><a href="" className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
                         }]}
                         itemsPerPage={config.commonItemsLimit}
                         source={{
                             url: `${config.apiURL}/api/users/list`,
+                            method: 'POST',
+                            extras: {
+                                token: this.props.appDataRuntime.token
+                            }
+                        }}
+                        save={{
+                            url: `${config.apiURL}/api/users/saveField`,
                             method: 'POST',
                             extras: {
                                 token: this.props.appDataRuntime.token
@@ -78,6 +128,7 @@ class UserList extends Component {
                             ERR_VFORMAT: i18n._(t`Invalid format`)
                         }}
                         onLoadError={this.onUsersTableLoadError}
+                        onSaveError={data => this.onUsersTableSaveError(data, i18n)}
                     />
                 )}
             </I18n>

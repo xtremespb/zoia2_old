@@ -33,7 +33,7 @@
         "array-callback-return": "off",
         "react/sort-comp": "off",
         "guard-for-in": "off",
-        "import/extensions": ["js", "jsx"],
+        "import/extensions": "off",
         "max-len": "off",
         "no-confusing-arrow": "off",
         "react/jsx-closing-tag-location": "off",
