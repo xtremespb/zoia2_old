@@ -7,11 +7,13 @@ import { connect } from 'react-redux';
 import UIkit from 'uikit';
 import axios from 'axios';
 import { remove as removeCookie } from 'es-cookie';
+import { Link } from 'react-router-dom';
 import { history } from '../../../../shared/store/configureStore';
 
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 import config from '../../../../etc/config.json';
+import usersListTableSetState from '../actions/usersListTableSetState';
 
 const AdminPanel = lazy(() => import(/* webpackChunkName: "UsersList" */ '../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackChunkName: "Table" */ '../../../../shared/components/Table/index.jsx'));
@@ -56,15 +58,20 @@ class UserList extends Component {
         }
     }
 
+    onTableStateUpdated = state => this.props.usersListTableSetStateAction(state);
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => (
                     <Table
                         prefix="usersListTable"
+                        initialState={this.props.usersList.usersTableState}
+                        onStateUpdated={this.onTableStateUpdated}
                         i18n={i18n}
                         UIkit={UIkit}
                         axios={axios}
+                        topButtons={<><button type="button" className="uk-icon-button uk-button-primary" uk-icon="search" /></>}
                         columns={[{
                             id: 'username',
                             title: 'Username',
@@ -100,7 +107,7 @@ class UserList extends Component {
                             id: 'actions',
                             title: 'Actions',
                             cssRow: 'uk-table-shrink uk-text-nowrap',
-                            process: item => (<><a href="" className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
+                            process: item => (<><Link to="/admin/users/edit" className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
                         }]}
                         itemsPerPage={config.commonItemsLimit}
                         source={{
@@ -139,9 +146,11 @@ class UserList extends Component {
 export default connect(store => ({
     appData: store.appData,
     appDataRuntime: store.appDataRuntime,
-    appLingui: store.appLingui
+    appLingui: store.appLingui,
+    usersList: store.usersList
 }),
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
-        appDataSetUserAction: user => dispatch(appDataSetUser(user))
+        appDataSetUserAction: user => dispatch(appDataSetUser(user)),
+        usersListTableSetStateAction: state => dispatch(usersListTableSetState(state))
     }))(UserList);

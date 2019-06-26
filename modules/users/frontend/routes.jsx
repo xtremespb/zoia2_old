@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 const UserAuth = lazy(() => import(/* webpackChunkName: "UserAuth" */ './components/UserAuth.jsx'));
 const UserLogout = lazy(() => import(/* webpackChunkName: "UserLogout" */ './components/UserLogout.jsx'));
 const UsersList = lazy(() => import(/* webpackChunkName: "UsersList" */ './components/UsersList.jsx'));
+const UsersEdit = lazy(() => import(/* webpackChunkName: "UsersEdit" */ './components/UsersEdit.jsx'));
 
 const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle" style={{ height: '100%' }}><span uk-spinner="ratio:2" /></div>);
 
@@ -25,6 +26,12 @@ const getUsersList = () => ((
     </Suspense>
 ));
 
+const getUsersEdit = () => ((
+    <Suspense fallback={getSuspense()}>
+        <UsersEdit />
+    </Suspense>
+));
+
 export default [
     (<Route
         key="usersAuth"
@@ -35,10 +42,17 @@ export default [
         key="usersLogout"
         path="/users/logout"
         component={getLogout}
+        exact
     />),
     (<Route
         key="usersList"
         path="/admin/users"
         component={getUsersList}
+        exact
+    />),
+    (<Route
+        key="usersEdit"
+        path="/admin/users/edit"
+        component={getUsersEdit}
     />)
 ];

@@ -27,6 +27,7 @@ export default class ZTable extends Component {
             loading: false
         },
         values: {},
+        currentSearchInputValue: '',
         validationError: ERR_NONE
     }
 
@@ -45,7 +46,9 @@ export default class ZTable extends Component {
         axios: PropTypes.func.isRequired,
         onLoadError: PropTypes.func,
         onSaveError: PropTypes.func,
-        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
+        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired,
+        initialState: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        onStateUpdated: PropTypes.func
     }
 
     static defaultProps = {
@@ -64,32 +67,47 @@ export default class ZTable extends Component {
             ERR_VFORMAT: 'Invalid format'
         },
         onLoadError: null,
-        onSaveError: null
+        onSaveError: null,
+        initialState: null,
+        onStateUpdated: null
     }
 
     constructor(props) {
         super(props);
-        this.props.columns.map(c => {
-            const cn = c;
-            cn.sort = this.props.sortColumn === cn.id ? this.props.sortDirection : null;
-            this.state.values[c.id] = {};
-        });
-        if (props.source.url) {
-            this.fetchURL(true);
-        } else {
-            this.state.data = props.data;
-            this.state.total = props.data.length;
-            const currentColumn = this.state.columns.find(element => !!element.sort);
-            if (currentColumn) {
-                const dataSorted = this.state.data.slice(0);
-                dataSorted.sort((a, b) => (a[currentColumn.id] > b[currentColumn.id]) ? (currentColumn.sort === 'desc' ? -1 : 1) : ((b[currentColumn.id] > a[currentColumn.id]) ? (currentColumn.sort === 'desc' ? 1 : -1) : 0));
+        this.usersTableSearchField = React.createRef();
+        if (!this.props.initialState) {
+            this.props.columns.map(c => {
+                const cn = c;
+                cn.sort = this.props.sortColumn === cn.id ? this.props.sortDirection : null;
+                this.state.values[c.id] = {};
+            });
+            if (props.source.url) {
+                this.fetchURL(true);
+            } else {
+                this.state.data = props.data;
+                this.state.total = props.data.length;
+                const currentColumn = this.state.columns.find(element => !!element.sort);
+                if (currentColumn) {
+                    const dataSorted = this.state.data.slice(0);
+                    dataSorted.sort((a, b) => (a[currentColumn.id] > b[currentColumn.id]) ? (currentColumn.sort === 'desc' ? -1 : 1) : ((b[currentColumn.id] > a[currentColumn.id]) ? (currentColumn.sort === 'desc' ? 1 : -1) : 0));
+                }
+                this.setValuesFromData(this.state.data, true);
             }
-            this.setValuesFromData(this.state.data, true);
         }
     }
 
     componentDidMount = () => {
         document.addEventListener('keydown', this.onEditModeEscapeBinding);
+        if (this.props.initialState) {
+            this.setState(this.props.initialState);
+            this.usersTableSearchField.current.setValue(this.props.initialState.searchText);
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevState !== this.state && this.props.onStateUpdated && typeof this.props.onStateUpdated === 'function') {
+            this.props.onStateUpdated(this.state);
+        }
     }
 
     setValuesFromData = (data, callFromConstructor) => {
@@ -460,6 +478,7 @@ export default class ZTable extends Component {
         if (this.props.source.url) {
             this.setState({
                 searchText: value.trim(),
+                currentSearchInputValue: value.trim(),
                 data: [],
                 loadingText: true,
                 page: 1
@@ -473,6 +492,7 @@ export default class ZTable extends Component {
             }) : this.props.data.slice(0);
             this.setState({
                 searchText: value.trim(),
+                currentSearchInputValue: value.trim(),
                 data: dataFiltered,
                 total: dataFiltered.length,
                 page: 1
@@ -492,12 +512,13 @@ export default class ZTable extends Component {
     render = () => (<div className="ztable-wrap">
         <div uk-grid="true">
             <div className="uk-width-expand@s">
-                <ZTablePagination page={this.state.page} totalPages={Math.ceil(this.state.total / this.props.itemsPerPage)} pageClickHandler={this.pageClickHandler} />
+                {this.props.topButtons || null}                
             </div>
             <div className="uk-width-auto@s">
-                <ZSearch currentSearchInputValue={this.state.currentSearchInputValue} onValueChanged={this.onSearchValueChanged} />
+                <ZSearch ref={this.usersTableSearchField} currentSearchInputValue={this.state.currentSearchInputValue} onValueChanged={this.onSearchValueChanged} />
             </div>
         </div>
+        <ZTablePagination page={this.state.page} totalPages={Math.ceil(this.state.total / this.props.itemsPerPage)} pageClickHandler={this.pageClickHandler} />
         <div className="uk-overflow-auto">
             <table className="uk-table uk-table-middle uk-table-small uk-table-striped uk-table-hover">
                 <thead>

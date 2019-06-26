@@ -7,9 +7,15 @@ import appDataRuntime from './appDataRuntime';
 import appLingui from './appLingui';
 import modules from '../../etc/modules.json';
 
-const moduleReducers = {};
+let moduleReducers = {};
 // eslint-disable-next-line global-require
-Object.keys(modules).map(m => moduleReducers[m] = require(`../../modules/${m}/frontend/reducers/index.js`).default());
+Object.keys(modules).map(m => {
+    const reducers = require(`../../modules/${m}/frontend/reducers/index.js`).default();
+    moduleReducers = {
+        ...moduleReducers,
+        ...reducers
+    };
+});
 
 export default history => ({
     ...moduleReducers,

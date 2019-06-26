@@ -18,6 +18,8 @@ export default class ZSearch extends Component {
         this.props.onValueChanged && typeof this.props.onValueChanged === 'function' ? this.onValueChangedDebounced(value) : null;
     }
 
+    setValue = value => this.setState({ value });
+
     render() {
         return (<div className="uk-margin">
             <form className="uk-search uk-search-default">
