@@ -26,9 +26,11 @@ const getUsersList = () => ((
     </Suspense>
 ));
 
-const getUsersEdit = () => ((
+const getUsersEdit = props => ((
     <Suspense fallback={getSuspense()}>
-        <UsersEdit />
+        <UsersEdit
+            {...props}
+        />
     </Suspense>
 ));
 
@@ -51,8 +53,15 @@ export default [
         exact
     />),
     (<Route
+        key="usersCreate"
+        path="/admin/users/add"
+        exact
+        component={getUsersEdit}
+    />),
+    (<Route
         key="usersEdit"
-        path="/admin/users/edit"
+        path="/admin/users/edit/:id"
+        exact
         component={getUsersEdit}
     />)
 ];

@@ -8,7 +8,7 @@ import modules from '../../../../etc/modules.json';
 
 class AdminStub extends Component {
     componentDidMount = () => {
-        history.push(modules.admin.defaultAdminRoute);
+        history.push(modules.admin.adminRoute);
     }
 
     render = () => (<></>)

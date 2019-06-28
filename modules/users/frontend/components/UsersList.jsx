@@ -71,7 +71,7 @@ class UserList extends Component {
                         i18n={i18n}
                         UIkit={UIkit}
                         axios={axios}
-                        topButtons={<><button type="button" className="uk-icon-button uk-button-primary" uk-icon="search" /></>}
+                        topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} /></>}
                         columns={[{
                             id: 'username',
                             title: 'Username',
@@ -107,7 +107,7 @@ class UserList extends Component {
                             id: 'actions',
                             title: 'Actions',
                             cssRow: 'uk-table-shrink uk-text-nowrap',
-                            process: item => (<><Link to="/admin/users/edit" className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
+                            process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
                         }]}
                         itemsPerPage={config.commonItemsLimit}
                         source={{

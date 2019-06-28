@@ -31,7 +31,7 @@ export default class ZCheckbox extends Component {
 
     render = () => (<div className={this.props.cname}>
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
-        <div className="uk-form-controls" ref={field => { this.field = field; }}>
+        <div className="uk-form-controls uk-margin-small-top" ref={field => { this.field = field; }}>
             {this.getCheckboxes()}
         </div>
         {this.props.error && this.props.errorMessage ? <div><span className="uk-label uk-label-danger">{this.props.errorMessage}</span></div> : null}

@@ -22,6 +22,7 @@ import './style.css';
 const ERR_NONE = 0;
 const ERR_VMANDATORY = 1;
 const ERR_VFORMAT = 2;
+const ERR_VNOMATCH = 3;
 
 export default class ZFormBuilder extends Component {
     state = {
@@ -44,10 +45,11 @@ export default class ZFormBuilder extends Component {
         commonFields: PropTypes.arrayOf(PropTypes.string),
         validation: PropTypes.objectOf(PropTypes.object),
         lang: PropTypes.objectOf(PropTypes.string),
-        save: PropTypes.objectOf(PropTypes.string),
-        load: PropTypes.objectOf(PropTypes.string),
+        save: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+        load: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         UIkit: PropTypes.func.isRequired,
         onLoadError: PropTypes.func,
+        onLoadSuccess: PropTypes.func,
         onSaveError: PropTypes.func,
         onSaveSuccess: PropTypes.func,
         axios: PropTypes.func.isRequired,
@@ -64,6 +66,7 @@ export default class ZFormBuilder extends Component {
         lang: {
             ERR_VMANDATORY: 'Field is required',
             ERR_VFORMAT: 'Invalid format',
+            ERR_VNOMATCH: 'Fields do not match',
             ERR_LOAD: 'Could not load data from server',
             ERR_SAVE: 'Could not save data',
             WILL_BE_DELETED: 'will be deleted. Are you sure?',
@@ -78,6 +81,7 @@ export default class ZFormBuilder extends Component {
             method: 'GET'
         },
         onLoadError: null,
+        onLoadSuccess: null,
         onSaveError: null,
         onSaveSuccess: null,
         simple: false
@@ -168,6 +172,9 @@ export default class ZFormBuilder extends Component {
         this.props.UIkit.util.on(this.tabDivDropdown, 'hidden', () => {
             this.props.UIkit.tab(this.tabDiv).show(this.state.tabs.indexOf(this.state.tab));
         });
+        if (this.props.load) {
+            this.loadData();
+        }
     }
 
     onGenericFieldValueChanged = (id, value) => {
@@ -483,20 +490,29 @@ export default class ZFormBuilder extends Component {
                 method: this.props.load.method,
                 url: this.props.load.url,
                 responseType: 'json',
-                data: {}
+                data: { ...this.props.load.extras }
             }).then(response => {
                 this.setState({ loading: false });
-                if (response.data.status !== 1) {
-                    this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERR_LOAD, { status: 'danger' });
+                if (response.data.statusCode !== 200) {
                     if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
-                        this.props.onLoadError(response.data.errorMessage || this.props.lang.ERR_LOAD);
+                        this.props.onLoadError(response.data);
+                    } else {
+                        this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERR_LOAD, { status: 'danger' });
                     }
                     return;
                 }
                 this.deserializeData(response.data.data);
-            }).catch(() => {
+                this.props.onLoadSuccess(response.data);
+                this.setFocusOnFields();
+            }).catch(e => {
+                // eslint-disable-next-line no-console
+                console.error(e);
                 this.setState({ loading: false });
-                this.props.UIkit.notification(this.props.lang.ERR_LOAD, { status: 'danger' });
+                if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
+                    this.props.onLoadError();
+                } else {
+                    this.props.UIkit.notification(this.props.lang.ERR_LOAD, { status: 'danger' });
+                }
             });
         });
     }
@@ -632,7 +648,7 @@ export default class ZFormBuilder extends Component {
         });
     }
 
-    validateItem = (id, _value) => {
+    validateItem = (id, _value, data) => {
         if (!this.props.validation || !this.props.validation[id]) {
             return ERR_NONE;
         }
@@ -641,6 +657,19 @@ export default class ZFormBuilder extends Component {
         if (validation.mandatory && !value) {
             return ERR_VMANDATORY;
         }
+        if (validation.mandatory && !value) {
+            return ERR_VMANDATORY;
+        }
+        if (validation.shouldMatch) {
+            const fieldToMatch = data.find(i => i.id === validation.shouldMatch);
+            if (fieldToMatch && value !== fieldToMatch.value) {
+                return ERR_VNOMATCH;
+            }
+        }
+        data.find(i => i.id === 'password');
+        // if (validation.shouldMatch && value !== ) {
+        //     return ERR_VMANDATORY;
+        // }
         if (value && validation.regexp && typeof value === 'string') {
             const rex = new RegExp(validation.regexp);
             if (!rex.test(value)) {
@@ -669,7 +698,7 @@ export default class ZFormBuilder extends Component {
             }
         });
         const vdata = data.map(item => {
-            const res = this.validateItem(item.id, item.value);
+            const res = this.validateItem(item.id, item.value, data);
             return {
                 id: item.id,
                 tab: item.tab || null,
@@ -696,6 +725,9 @@ export default class ZFormBuilder extends Component {
                         break;
                     case ERR_VFORMAT:
                         errorMessagesNew[item.tab][item.id] = this.props.lang.ERR_VFORMAT; // eslint-disable-line react/prop-types
+                        break;
+                    case ERR_VNOMATCH:
+                        errorMessagesNew[item.tab][item.id] = this.props.lang.ERR_VNOMATCH; // eslint-disable-line react/prop-types
                         break;
                     default:
                         errorMessagesNew[item.tab][item.id] = '';
@@ -758,7 +790,7 @@ export default class ZFormBuilder extends Component {
                 this.setState({ loading: true, saving: true }, () => {
                     this.props.axios.post(this.props.save.url, this.props.simple ? data.default : formData, { headers: { 'content-type': this.props.simple ? 'application/json' : 'multipart/form-data' } }).then(response => {
                         this.setState({ loading: false, saving: false });
-                        if (response.data.status !== 1) {
+                        if (response.data.statusCode !== 200) {
                             this.refreshCaptchaFields();
                             if (this.props.onSaveError && typeof this.props.onSaveError === 'function') {
                                 this.props.onSaveError(response.data.errorMessage || this.props.lang.ERR_SAVE);
