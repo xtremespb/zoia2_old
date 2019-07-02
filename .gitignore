@@ -25,4 +25,4 @@ typings/
 .env
 node_modules/
 static/data/**
-static/index.html
+./static/index.html

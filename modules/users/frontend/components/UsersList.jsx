@@ -19,6 +19,11 @@ const AdminPanel = lazy(() => import(/* webpackChunkName: "UsersList" */ '../../
 const Table = lazy(() => import(/* webpackChunkName: "Table" */ '../../../../shared/components/Table/index.jsx'));
 
 class UserList extends Component {
+    constructor(props) {
+        super(props);
+        this.usersListTable = React.createRef();
+    }
+
     componentDidMount = () => {
         if (!this.props.appDataRuntime.token) {
             history.push('/users/auth?redirect=/admin/users');
@@ -32,9 +37,10 @@ class UserList extends Component {
         history.push(`/users/auth?redirect=/admin/users`);
     }
 
-    onUsersTableLoadError = data => {
-        if (data && data.statusCode === 403) {
+    onUsersTableLoadError = res => {
+        if (res && res.status === 403) {
             this.deauthorize();
+            this.props.usersListTableSetStateAction({});
         }
     }
 
@@ -66,6 +72,7 @@ class UserList extends Component {
                 {({ i18n }) => (
                     <Table
                         prefix="usersListTable"
+                        ref={this.usersListTable}
                         initialState={this.props.usersList.usersTableState}
                         onStateUpdated={this.onTableStateUpdated}
                         i18n={i18n}

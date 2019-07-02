@@ -13,7 +13,7 @@ import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSet
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 import config from '../../../../etc/config.json';
 
-const AdminPanel = lazy(() => import(/* webpackChunkName: 'UsersList" */ '../../../../shared/components/AdminPanel/AdminPanel.jsx'));
+const AdminPanel = lazy(() => import(/* webpackChunkName: 'UsersEdit" */ '../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 
 class UsersEdit extends Component {
     constructor(props) {
@@ -109,7 +109,7 @@ class UsersEdit extends Component {
                     {
                         id: 'btnCancel',
                         type: 'button',
-                        buttonType: 'submit',
+                        buttonType: 'button',
                         css: 'uk-button-default uk-margin-small-right',
                         label: i18n._(t`Cancel`)
                     }, {

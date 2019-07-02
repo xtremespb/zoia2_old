@@ -28,7 +28,8 @@ export default class ZTable extends Component {
         },
         values: {},
         currentSearchInputValue: '',
-        validationError: ERR_NONE
+        validationError: ERR_NONE,
+        mounted: false
     }
 
     static propTypes = {
@@ -75,7 +76,7 @@ export default class ZTable extends Component {
     constructor(props) {
         super(props);
         this.usersTableSearchField = React.createRef();
-        if (!this.props.initialState) {
+        if (!this.props.initialState || !Object.keys(this.props.initialState).length) {
             this.props.columns.map(c => {
                 const cn = c;
                 cn.sort = this.props.sortColumn === cn.id ? this.props.sortDirection : null;
@@ -98,14 +99,22 @@ export default class ZTable extends Component {
 
     componentDidMount = () => {
         document.addEventListener('keydown', this.onEditModeEscapeBinding);
-        if (this.props.initialState) {
-            this.setState(this.props.initialState);
-            this.usersTableSearchField.current.setValue(this.props.initialState.searchText);
+        if (this.props.initialState && Object.keys(this.props.initialState).length) {
+            this.setState({ ...this.props.initialState, mounted: true });
+            if (this.props.initialState.searchText) {
+                this.usersTableSearchField.current.setValue(this.props.initialState.searchText);
+            }
+        } else {
+            this.setState({ mounted: true });
         }
     }
 
+    componentWillUnmount = () => {
+        this.setState({ mounted: false });
+    }
+
     componentDidUpdate = (prevProps, prevState) => {
-        if (prevState !== this.state && this.props.onStateUpdated && typeof this.props.onStateUpdated === 'function') {
+        if (this.state.mounted && prevState !== this.state && this.props.onStateUpdated && typeof this.props.onStateUpdated === 'function') {
             this.props.onStateUpdated(this.state);
         }
     }
@@ -125,7 +134,7 @@ export default class ZTable extends Component {
         });
         if (callFromConstructor) {
             this.state.values = valuesSet;
-        } else {
+        } else if (this.state.mounted) {
             this.setState({
                 values: valuesSet
             });
@@ -136,7 +145,7 @@ export default class ZTable extends Component {
         if (init) {
             this.state.loading = true;
             this.state.loadingText = true;
-        } else {
+        } else if (this.state.mounted) {
             this.setState({
                 loading: true
             });
@@ -156,33 +165,38 @@ export default class ZTable extends Component {
             data: paramsData,
             params: this.props.source.method.match(/get/i) ? paramsData : null
         }).then(response => {
-            if (response.data.statusCode !== 200) {
+            if (response.data.statusCode !== 200 && this.state.mounted) {
                 this.setState({
                     error: true,
                     loading: false,
                     loadingText: false,
                     data: []
+                }, () => {
+                    if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
+                        this.props.onLoadError(response.data);
+                    }
                 });
-                if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
-                    this.props.onLoadError(response.data);
-                }
                 return;
             }
-            this.setState({
-                data: response.data.items,
-                total: response.data.total,
-                loading: false,
-                loadingText: false,
-                error: false
-            });
+            if (this.state.mounted) {
+                this.setState({
+                    data: response.data.items,
+                    total: response.data.total,
+                    loading: false,
+                    loadingText: false,
+                    error: false
+                });
+            }
             this.setValuesFromData(response.data.items);
-        }).catch(() => {
-            this.setState({
-                error: true,
-                loading: false,
-                loadingText: false,
-                data: []
-            });
+        }).catch(e => {
+            if (this.state.mounted) {
+                this.setState({
+                    error: true,
+                    loading: false,
+                    loadingText: false,
+                    data: []
+                }, () => this.props.onLoadError(e && e.response ? e.response : {}));
+            }
         });
     }
 
@@ -206,27 +220,31 @@ export default class ZTable extends Component {
                 } else {
                     this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERROR_SAVE, { status: 'danger' });
                 }
+                if (this.state.mounted) {
+                    this.setState({
+                        editMode: {
+                            columnId: null,
+                            recordId: null,
+                            value: null,
+                            loading: false
+                        }
+                    });
+                }
+                return;
+            }
+            const valuesNew = JSON.parse(JSON.stringify(this.state.values));
+            valuesNew[this.state.editMode.columnId][this.state.editMode.recordId] = response.data.value;
+            if (this.state.mounted) {
                 this.setState({
                     editMode: {
                         columnId: null,
                         recordId: null,
                         value: null,
                         loading: false
-                    }
+                    },
+                    values: valuesNew
                 });
-                return;
             }
-            const valuesNew = JSON.parse(JSON.stringify(this.state.values));
-            valuesNew[this.state.editMode.columnId][this.state.editMode.recordId] = response.data.value;
-            this.setState({
-                editMode: {
-                    columnId: null,
-                    recordId: null,
-                    value: null,
-                    loading: false
-                },
-                values: valuesNew
-            });
         }).catch(e => {
             if (this.props.onSaveError && typeof this.props.onSaveError === 'function') {
                 this.props.onSaveError(null, e);
@@ -250,26 +268,30 @@ export default class ZTable extends Component {
             return;
         }
         const item = JSON.parse(event.currentTarget.dataset.item);
-        this.setState({
-            editMode: {
-                columnId: col.id,
-                recordId: item._id,
-                value: val,
-                loading: false
-            },
-            validationError: ERR_NONE
-        }, () => {
-            this[`editField_${col.id}_${item._id}`].focus();
-        });
+        if (this.state.mounted) {
+            this.setState({
+                editMode: {
+                    columnId: col.id,
+                    recordId: item._id,
+                    value: val,
+                    loading: false
+                },
+                validationError: ERR_NONE
+            }, () => {
+                this[`editField_${col.id}_${item._id}`].focus();
+            });
+        }
     }
 
     onEditModeInputBlur = () => {
-        this.setState({
-            editMode: {
-                columnId: null,
-                recordId: null
-            }
-        });
+        if (this.state.mounted) {
+            this.setState({
+                editMode: {
+                    columnId: null,
+                    recordId: null
+                }
+            });
+        }
     }
 
     onEditModeInputKeypress = (event, col) => {
@@ -285,18 +307,49 @@ export default class ZTable extends Component {
                 if (col.validation.regexp && this.state.editMode.value) {
                     const rex = new RegExp(col.validation.regexp);
                     if (!rex.test(this.state.editMode.value)) {
-                        this.setState({
-                            validationError: ERR_VFORMAT
-                        });
+                        if (this.state.mounted) {
+                            this.setState({
+                                validationError: ERR_VFORMAT
+                            });
+                        }
                         return;
                     }
                 }
             }
+            if (this.state.mounted) {
+                this.setState({
+                    editMode: {
+                        columnId: this.state.editMode.columnId,
+                        recordId: this.state.editMode.recordId,
+                        value: this.state.editMode.value,
+                        loading: true
+                    }
+                }, () => {
+                    this.saveData(this.state.editMode.columnId, this.state.editMode.recordId, this.state.editMode.value);
+                });
+            }
+        }
+    }
+
+    onEditModeInputChange = event => {
+        const { value } = event.target;
+        const editModeNew = JSON.parse(JSON.stringify(this.state.editMode));
+        editModeNew.value = value;
+        if (this.state.mounted) {
+            this.setState({
+                editMode: editModeNew
+            });
+        }
+    }
+
+    onEditModeSelectChange = event => {
+        const { value } = event.target;
+        if (this.state.mounted) {
             this.setState({
                 editMode: {
                     columnId: this.state.editMode.columnId,
                     recordId: this.state.editMode.recordId,
-                    value: this.state.editMode.value,
+                    value: value, // eslint-disable-line object-shorthand
                     loading: true
                 }
             }, () => {
@@ -305,31 +358,8 @@ export default class ZTable extends Component {
         }
     }
 
-    onEditModeInputChange = event => {
-        const { value } = event.target;
-        const editModeNew = JSON.parse(JSON.stringify(this.state.editMode));
-        editModeNew.value = value;
-        this.setState({
-            editMode: editModeNew
-        });
-    }
-
-    onEditModeSelectChange = event => {
-        const { value } = event.target;
-        this.setState({
-            editMode: {
-                columnId: this.state.editMode.columnId,
-                recordId: this.state.editMode.recordId,
-                value: value, // eslint-disable-line object-shorthand
-                loading: true
-            }
-        }, () => {
-            this.saveData(this.state.editMode.columnId, this.state.editMode.recordId, this.state.editMode.value);
-        });
-    }
-
     onEditModeEscapeBinding = event => {
-        if (event.key === 'Escape' && this.state.editMode.columnId) {
+        if (this.state.mounted && event.key === 'Escape' && this.state.editMode.columnId) {
             this.setState({
                 editMode: {
                     columnId: null,
@@ -395,9 +425,11 @@ export default class ZTable extends Component {
                 delete checkboxes[key];
             }
         });
-        this.setState({
-            checkboxes: checkboxes // eslint-disable-line object-shorthand
-        });
+        if (this.state.mounted) {
+            this.setState({
+                checkboxes: checkboxes // eslint-disable-line object-shorthand
+            });
+        }
         this.getCheckboxData();
     }
 
@@ -409,10 +441,12 @@ export default class ZTable extends Component {
                 delete checkboxesNew[key];
             }
         });
-        this.setState({
-            checkboxes: checkboxesNew,
-            checkboxAllChecked: event.currentTarget.checked
-        });
+        if (this.state.mounted) {
+            this.setState({
+                checkboxes: checkboxesNew,
+                checkboxAllChecked: event.currentTarget.checked
+            });
+        }
         this.getCheckboxData();
     }
 
@@ -427,15 +461,17 @@ export default class ZTable extends Component {
     }
 
     pageClickHandler = pageNew => {
-        this.setState({
-            page: pageNew,
-            checkboxes: {},
-            checkboxAllChecked: false
-        }, () => {
-            if (this.props.source.url) {
-                this.fetchURL(false);
-            }
-        });
+        if (this.state.mounted) {
+            this.setState({
+                page: pageNew,
+                checkboxes: {},
+                checkboxAllChecked: false
+            }, () => {
+                if (this.props.source.url) {
+                    this.fetchURL(false);
+                }
+            });
+        }
     }
 
     thOnClickHandler = event => {
@@ -457,7 +493,7 @@ export default class ZTable extends Component {
             sortDirectionNew = sortDirectionNew || item.sort;
             return item;
         });
-        if (this.props.source.url) {
+        if (this.state.mounted && this.props.source.url) {
             this.setState({
                 sortColumn: id,
                 sortDirection: sortDirectionNew
@@ -467,15 +503,17 @@ export default class ZTable extends Component {
         } else {
             const dataSorted = this.state.data.slice(0);
             dataSorted.sort((a, b) => (a[clickedColumn.id] > b[clickedColumn.id]) ? (sortDirectionNew === 'desc' ? -1 : 1) : ((b[clickedColumn.id] > a[clickedColumn.id]) ? (sortDirectionNew === 'desc' ? 1 : -1) : 0));
-            this.setState({
-                columns: columnsNew,
-                data: dataSorted
-            });
+            if (this.state.mounted) {
+                this.setState({
+                    columns: columnsNew,
+                    data: dataSorted
+                });
+            }
         }
     }
 
     onSearchValueChanged = value => {
-        if (this.props.source.url) {
+        if (this.state.mounted && this.props.source.url) {
             this.setState({
                 searchText: value.trim(),
                 currentSearchInputValue: value.trim(),
@@ -490,29 +528,33 @@ export default class ZTable extends Component {
                 const values = Object.values(item);
                 return values.find(val => String(val).match(new RegExp(value, 'gim')));
             }) : this.props.data.slice(0);
-            this.setState({
-                searchText: value.trim(),
-                currentSearchInputValue: value.trim(),
-                data: dataFiltered,
-                total: dataFiltered.length,
-                page: 1
-            });
+            if (this.state.mounted) {
+                this.setState({
+                    searchText: value.trim(),
+                    currentSearchInputValue: value.trim(),
+                    data: dataFiltered,
+                    total: dataFiltered.length,
+                    page: 1
+                });
+            }
         }
     }
 
     onClickRefreshHandler = e => {
         e.preventDefault();
-        this.setState({
-            error: false,
-            loadingText: true
-        });
+        if (this.state.mounted) {
+            this.setState({
+                error: false,
+                loadingText: true
+            });
+        }
         this.fetchURL(false);
     }
 
     render = () => (<div className="ztable-wrap">
         <div uk-grid="true">
             <div className="uk-width-expand@s">
-                {this.props.topButtons || null}                
+                {this.props.topButtons || null}
             </div>
             <div className="uk-width-auto@s">
                 <ZSearch ref={this.usersTableSearchField} currentSearchInputValue={this.state.currentSearchInputValue} onValueChanged={this.onSearchValueChanged} />

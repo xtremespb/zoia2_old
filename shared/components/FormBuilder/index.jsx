@@ -172,7 +172,7 @@ export default class ZFormBuilder extends Component {
         this.props.UIkit.util.on(this.tabDivDropdown, 'hidden', () => {
             this.props.UIkit.tab(this.tabDiv).show(this.state.tabs.indexOf(this.state.tab));
         });
-        if (this.props.load) {
+        if (this.props.load && this.props.load.url) {
             this.loadData();
         }
     }
@@ -781,7 +781,7 @@ export default class ZFormBuilder extends Component {
             errors: {},
             errorMessage: null
         }, () => {
-            this.setFormDataExtra({ fex_test: 'Hello world ' });
+            // this.setFormDataExtra({ fex_test: 'Hello world ' });
             const { data, formData } = this.serializeData();
             const vdata = this.validateData(data);
             if (vdata && vdata.length) {
