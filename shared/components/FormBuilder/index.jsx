@@ -74,7 +74,8 @@ export default class ZFormBuilder extends Component {
             CANCEL: 'Cancel'
         },
         save: {
-            url: null
+            url: null,
+            method: 'GET'
         },
         load: {
             url: null,
@@ -524,7 +525,7 @@ export default class ZFormBuilder extends Component {
 
     serializeData = () => {
         const data = cloneDeep(this.state.dataStorage);
-        const formData = new FormData();
+        const formData = new FormData();        
         const fields = Object.keys(data[this.state.tabs[0]]);
         Object.keys(data).filter(tab => this.state.tabs.indexOf(tab) > -1).map(tab => {
             fields.map(field => {
@@ -538,7 +539,7 @@ export default class ZFormBuilder extends Component {
                         break;
                     case 'radio':
                     case 'select':
-                        data[tab][field] = data[tab][field] || Object.keys(this.types[field].values)[0];
+                        data[tab][field] = String(data[tab][field]) || String(Object.keys(this.types[field].values)[0]);
                         break;
                     default:
                         data[tab][field] = data[tab][field] || '';
@@ -661,8 +662,8 @@ export default class ZFormBuilder extends Component {
             return ERR_VMANDATORY;
         }
         if (validation.shouldMatch) {
-            const fieldToMatch = data.find(i => i.id === validation.shouldMatch);
-            if (fieldToMatch && value !== fieldToMatch.value) {
+            const fieldToMatch = data.find(i => i.id === validation.shouldMatch) || { value: '' };
+            if (value !== fieldToMatch.value) {
                 return ERR_VNOMATCH;
             }
         }
@@ -781,7 +782,7 @@ export default class ZFormBuilder extends Component {
             errors: {},
             errorMessage: null
         }, () => {
-            // this.setFormDataExtra({ fex_test: 'Hello world ' });
+            this.setFormDataExtra(this.props.save.extras || {});
             const { data, formData } = this.serializeData();
             const vdata = this.validateData(data);
             if (vdata && vdata.length) {

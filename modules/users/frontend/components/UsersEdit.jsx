@@ -44,10 +44,13 @@ class UsersEdit extends Component {
         }
     }
 
+    onSaveSuccessHandler = res => {
+        console.log(res);
+    }
+
     getEditForm = i18n => (<FormBuilder
         ref={this.editUserForm}
-        prefix="editUserForm"
-        simple={true}
+        prefix="editUserForm"        
         UIkit={UIkit}
         axios={axios}
         data={
@@ -126,12 +129,15 @@ class UsersEdit extends Component {
             {
                 username: {
                     mandatory: true,
-                    regexp: /^[a-zA-Z0-9_-]+$/
+                    regexp: /^[a-zA-Z0-9_-]{4,32}$/
                 },
                 email: {
                     mandatory: true,
                     // eslint-disable-next-line no-control-regex
                     regexp: /^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\u0000-\u007F])(?:(?:[a-zA-Z0-9-]|[^\u0000-\u007F]){0,61}(?:[a-zA-Z0-9]|[^\u0000-\u007F]))?(?:\.(?:[a-zA-Z0-9]|[^\u0000-\u007F])(?:(?:[a-zA-Z0-9-]|[^\u0000-\u007F]){0,61}(?:[a-zA-Z0-9]|[^\u0000-\u007F]))?)*$/
+                },
+                password: {
+                    shouldMatch: 'password2'
                 },
                 password2: {
                     shouldMatch: 'password'
@@ -149,8 +155,12 @@ class UsersEdit extends Component {
             CANCEL: i18n._(t`Cancel`)
         }}
         save={{
-            url: `${config.apiURL}/api/`,
-            method: 'POST'
+            url: `${config.apiURL}/api/users/saveUser`,
+            method: 'POST',
+            extras: {
+                id: this.props.match.params.id,
+                token: this.props.appDataRuntime.token
+            }
         }}
         load={this.props.match.params.id ? {
             url: `${config.apiURL}/api/users/loadUser`,
@@ -175,7 +185,7 @@ class UsersEdit extends Component {
             <I18n>
                 {({ i18n }) => (
                     <>
-                        <h1><Trans>Edit User</Trans></h1>
+                        <h1>{this.props.match.params.id ? <Trans>Edit User</Trans> : <Trans>Create User</Trans>}</h1>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}

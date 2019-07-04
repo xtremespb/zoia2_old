@@ -1,5 +1,4 @@
 const ObjectId = require('mongodb').ObjectID;
-const config = require('../../../etc/config.json');
 const auth = require('../../../core/auth');
 
 module.exports = fastify => ({
@@ -68,8 +67,8 @@ module.exports = fastify => ({
                         default: {
                             username: userRecord.username,
                             email: userRecord.email,
-                            active: userRecord.active,
-                            admin: userRecord.admin
+                            active: userRecord.active ? '1' : '0',
+                            admin: userRecord.admin ? '1' : '0'
                         }
                     }
                 }));

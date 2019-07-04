@@ -15,6 +15,8 @@ const fastifyMongo = require('fastify-mongodb');
 const fastifyURLData = require('fastify-url-data');
 const fastifyCORS = require('fastify-cors');
 const fastifyJWT = require('fastify-jwt');
+const fastifyFormbody = require('fastify-formbody');
+const fastifyMultipart = require('fastify-multipart');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -23,6 +25,10 @@ const path = require('path');
         useNewUrlParser: true
     });
     await mongoClient.connect();
+    fastify.register(fastifyFormbody);
+    fastify.register(fastifyMultipart, {
+        addToBody: true
+    });
     fastify.register(fastifyURLData);
     fastify.register(fastifyMongo, {
         client: mongoClient,
