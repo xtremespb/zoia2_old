@@ -1,5 +1,0 @@
-{
-   "localeDir": "shared/locales/",
-   "srcPathDirs": ["modules/", "shared/components/"],
-   "format": "po"
-}

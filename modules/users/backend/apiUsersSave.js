@@ -1,4 +1,7 @@
 const Ajv = require('ajv');
+const ObjectId = require('mongodb').ObjectID;
+const crypto = require('crypto');
+const config = require('../../../etc/config.json');
 const auth = require('../../../core/auth');
 
 const ajv = new Ajv();
@@ -29,8 +32,7 @@ const formValidate = ajv.compile({
             pattern: '^[a-zA-Z0-9_-]+$'
         },
         password: {
-            type: 'string',
-            minLength: 8
+            type: 'string'
         },
         email: {
             type: 'string',
@@ -118,6 +120,90 @@ module.exports = fastify => ({
                 }));
             }
             // End of check permissions
+            const passwordUpdate = {};
+            if (formData.default.password) {
+                if (formData.default.password.length < 8) {
+                    return rep.code(200)
+                        .send(JSON.stringify({
+                            statusCode: 400,
+                            errors: {
+                                default: {
+                                    password: 'Too short'
+                                }
+                            }
+                        }));
+                }
+                passwordUpdate.password = crypto.createHmac('sha512', config.secret).update(formData.default.password).digest('hex');
+            }
+            // Check if such user exists
+            const username = await this.mongo.db.collection('users').findOne({
+                _id: new ObjectId(formData.id)
+            });
+            if (!username) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errors: {
+                            default: {
+                                username: 'User not found'
+                            }
+                        }
+                    }));
+            }
+            // Check if user with such username already exists
+            const dupeUsername = await this.mongo.db.collection('users').findOne({
+                username: formData.default.username,
+                _id: {
+                    $ne: new ObjectId(formData.id)
+                }
+            });
+            if (dupeUsername) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errors: {
+                            default: {
+                                username: 'Duplicate username'
+                            }
+                        }
+                    }));
+            }
+            // Check if user with such e-mail address already exists
+            const dupeEmail = await this.mongo.db.collection('users').findOne({
+                email: formData.default.email,
+                _id: {
+                    $ne: new ObjectId(formData.id)
+                }
+            });
+            if (dupeEmail) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errors: {
+                            default: {
+                                email: 'Duplicate e-mail'
+                            }
+                        }
+                    }));
+            }
+            const update = await this.mongo.db.collection('users').update({
+                _id: new ObjectId(formData.id)
+            }, {
+                $set: {
+                    username: formData.default.username,
+                    email: formData.default.email,
+                    active: formData.default.active,
+                    admin: formData.default.admin,
+                    ...passwordUpdate
+                }
+            });
+            if (!update || !update.result || !update.result.ok) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        error: 'Cannot update database record'
+                    }));
+            }
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200

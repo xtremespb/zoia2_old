@@ -22,13 +22,11 @@ class AdminPanel extends Component {
 
     constructor(props) {
         super(props);
-        if (!this.state.catalogs[this.state.language]) {
-            this.loadCatalog(this.state.language);
-        }
+        this.loadCatalog(this.state.language);
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_[index]" */`../../locales/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_admin_[index]" */`../../locales/admin/${language}/messages.js`);
         this.setState(state => {
             const catalogs = {
                 ...state.catalogs,
@@ -83,7 +81,7 @@ class AdminPanel extends Component {
                 <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left">
                         <div className="uk-navbar-item uk-logo">
-                            <span className="uk-hidden@m uk-margin-small-right"><a href="" className="uk-icon-link" uk-icon="icon:menu;ratio:1.5" uk-toggle="target: #offcanvas-nav" />&nbsp;</span><a href=""><img src="/zoia/logo.png" width="86" height="30" alt="" /></a>
+                            <span className="uk-hidden@m uk-margin-small-right"><a href="" className="uk-icon-link" uk-icon="icon:menu;ratio:1.5" uk-toggle="target: #offcanvas-nav" />&nbsp;</span><Link to="/admin"><img src="/zoia/logo.png" width="86" height="30" alt="" /></Link>
                         </div>
                     </div>
                     <div className="uk-navbar-right">

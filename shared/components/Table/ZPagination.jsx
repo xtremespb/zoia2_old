@@ -29,7 +29,7 @@ export default class ZTablePagination extends Component {
         return range;
     }
 
-    render = () => <ul className="uk-pagination" uk-margin="uk-margin">
+    render = () => <ul className="uk-pagination ztable-noselect" uk-margin="uk-margin">
         {this.generatePaginationRange()}
     </ul>;
 }

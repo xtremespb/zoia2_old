@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import React, { Component } from 'react';
+import React, { lazy, Component } from 'react';
 import { I18nProvider, I18n } from '@lingui/react';
 import { Trans, t } from '@lingui/macro';
 import { connect } from 'react-redux';
@@ -10,13 +10,14 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { set as setCookie } from 'es-cookie';
 
-import { history } from '../../../../shared/store/configureStore';
-import config from '../../../../etc/config.json';
-import FormBuilder from '../../../../shared/components/FormBuilder/index.jsx';
-import appDataSetLanguage from '../../../../shared/actions/appDataSetLanguage';
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
+import { history } from '../../../../../shared/store/configureStore';
+import config from '../../../../../etc/config.json';
+import appDataSetLanguage from '../../../../../shared/actions/appDataSetLanguage';
+import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
+import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
+
+const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
 import(/* webpackChunkName: "UserAuth" */ './UserAuth.css');
 
@@ -30,9 +31,7 @@ class UserAuth extends Component {
 
     constructor(props) {
         super(props);
-        if (!this.state.catalogs[this.state.language]) {
-            this.loadCatalog(this.state.language);
-        }
+        this.loadCatalog(this.state.language);
     }
 
     componentDidMount = () => {
@@ -49,7 +48,7 @@ class UserAuth extends Component {
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_[index]" */`../../../../shared/locales/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_user_[index]" */`../../../../../shared/locales/user/${language}/messages.js`);
         if (this.mounted) {
             this.setState(state => {
                 const catalogs = {
@@ -98,6 +97,7 @@ class UserAuth extends Component {
                         simple={true}
                         UIkit={UIkit}
                         axios={axios}
+                        i18n={i18n}
                         data={
                             [{
                                 id: 'username',

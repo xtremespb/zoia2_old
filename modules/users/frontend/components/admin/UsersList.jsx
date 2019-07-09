@@ -8,15 +8,16 @@ import UIkit from 'uikit';
 import axios from 'axios';
 import { remove as removeCookie } from 'es-cookie';
 import { Link } from 'react-router-dom';
-import { history } from '../../../../shared/store/configureStore';
+import { history } from '../../../../../shared/store/configureStore';
 
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import config from '../../../../etc/config.json';
-import usersListTableSetState from '../actions/usersListTableSetState';
+import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
+import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
+import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
+import config from '../../../../../etc/config.json';
+import usersListTableSetState from '../../actions/usersListTableSetState';
 
-const AdminPanel = lazy(() => import(/* webpackChunkName: "UsersList" */ '../../../../shared/components/AdminPanel/AdminPanel.jsx'));
-const Table = lazy(() => import(/* webpackChunkName: "Table" */ '../../../../shared/components/Table/index.jsx'));
+const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
+const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));
 
 class UserList extends Component {
     constructor(props) {
@@ -102,7 +103,7 @@ class UserList extends Component {
                         }, {
                             id: 'active',
                             title: 'Status',
-                            cssRow: 'uk-width-small uk-text-nowrap',
+                            cssRow: 'uk-width-small uk-text-nowrap ztable-noselect',
                             sortable: true,
                             process: item => item ? 1 : 0,
                             editable: 'select',
@@ -113,7 +114,7 @@ class UserList extends Component {
                         }, {
                             id: 'actions',
                             title: 'Actions',
-                            cssRow: 'uk-table-shrink uk-text-nowrap',
+                            cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
                             process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
                         }]}
                         itemsPerPage={config.commonItemsLimit}
@@ -159,5 +160,6 @@ export default connect(store => ({
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
-        usersListTableSetStateAction: state => dispatch(usersListTableSetState(state))
+        usersListTableSetStateAction: state => dispatch(usersListTableSetState(state)),
+        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
     }))(UserList);

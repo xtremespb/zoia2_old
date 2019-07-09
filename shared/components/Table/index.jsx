@@ -185,7 +185,8 @@ export default class ZTable extends Component {
                     loading: false,
                     loadingText: false,
                     error: false
-                });
+                    // This is a workaround to fix language switch behaviour
+                }, () => { window.scrollTo(0, 1); });
             }
             this.setValuesFromData(response.data.items);
         }).catch(e => {

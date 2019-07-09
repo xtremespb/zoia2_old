@@ -7,13 +7,13 @@ import { remove as removeCookie } from 'es-cookie';
 import UIkit from 'uikit';
 import axios from 'axios';
 import { Trans, t } from '@lingui/macro';
-import { history } from '../../../../shared/store/configureStore';
-import FormBuilder from '../../../../shared/components/FormBuilder/index.jsx';
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import config from '../../../../etc/config.json';
+import { history } from '../../../../../shared/store/configureStore';
+import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
+import config from '../../../../../etc/config.json';
 
-const AdminPanel = lazy(() => import(/* webpackChunkName: 'UsersEdit" */ '../../../../shared/components/AdminPanel/AdminPanel.jsx'));
+const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
+const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
 class UsersEdit extends Component {
     constructor(props) {
@@ -50,9 +50,10 @@ class UsersEdit extends Component {
 
     getEditForm = i18n => (<FormBuilder
         ref={this.editUserForm}
-        prefix="editUserForm"        
+        prefix="editUserForm"
         UIkit={UIkit}
         axios={axios}
+        i18n={i18n}
         data={
             [
                 [
@@ -76,6 +77,7 @@ class UsersEdit extends Component {
                         type: 'select',
                         label: `${i18n._(t`Status`)}:`,
                         css: 'uk-form-width-small',
+                        defaultValue: '1',
                         values: {
                             0: i18n._(t`Inactive`),
                             1: i18n._(t`Active`)
@@ -112,7 +114,8 @@ class UsersEdit extends Component {
                     {
                         id: 'btnCancel',
                         type: 'button',
-                        buttonType: 'button',
+                        buttonType: 'link',
+                        linkTo: '/admin/users',
                         css: 'uk-button-default uk-margin-small-right',
                         label: i18n._(t`Cancel`)
                     }, {

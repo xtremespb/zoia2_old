@@ -44,3 +44,7 @@
 .ztable-cell:focus {
     outline: 0 !important;
 }
+
+.ztable-noselect {
+    user-select: none;
+}

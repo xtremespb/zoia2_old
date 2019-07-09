@@ -8,9 +8,12 @@
     "build": "webpack --mode production --config webpack.config.js",
     "build-dev": "webpack --mode development --config webpack.config.js",
     "start": "node ./bin/server.js",
-    "add-locale": "lingui add-locale",
-    "extract": "lingui extract",
-    "compile": "lingui compile"
+    "add-locale-admin": "lingui add-locale --config .linguirc-admin",
+    "extract-admin": "lingui extract --config .linguirc-admin",
+    "compile-admin": "lingui compile --config .linguirc-admin",
+	"add-locale-user": "lingui add-locale --config .linguirc-user",
+    "extract-user": "lingui extract --config .linguirc-user",
+    "compile-user": "lingui compile --config .linguirc-user"
   },
   "keywords": [
     "zoia2",
@@ -44,6 +47,7 @@
     "fastify-url-data": "^2.3.0",
     "flag-icon-css": "^3.3.0",
     "fs-extra": "^8.0.1",
+    "gettext-parser": "^4.0.0",
     "history": "^4.9.0",
     "jimp": "^0.6.4",
     "lodash": "^4.17.11",

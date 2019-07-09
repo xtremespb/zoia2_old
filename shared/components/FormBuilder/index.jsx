@@ -23,6 +23,8 @@ const ERR_NONE = 0;
 const ERR_VMANDATORY = 1;
 const ERR_VFORMAT = 2;
 const ERR_VNOMATCH = 3;
+const ERR_VTOOSHORT = 4;
+const ERR_VTOOLONG = 5;
 
 export default class ZFormBuilder extends Component {
     state = {
@@ -53,7 +55,8 @@ export default class ZFormBuilder extends Component {
         onSaveError: PropTypes.func,
         onSaveSuccess: PropTypes.func,
         axios: PropTypes.func.isRequired,
-        simple: PropTypes.bool
+        simple: PropTypes.bool,
+        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
     }
 
     static defaultProps = {
@@ -70,6 +73,8 @@ export default class ZFormBuilder extends Component {
             ERR_LOAD: 'Could not load data from server',
             ERR_SAVE: 'Could not save data',
             WILL_BE_DELETED: 'will be deleted. Are you sure?',
+            ERR_VTOOSHORT: 'Too short',
+            ERR_VTOOLONG: 'Too long',
             YES: 'Yes',
             CANCEL: 'Cancel'
         },
@@ -100,13 +105,16 @@ export default class ZFormBuilder extends Component {
                     }
                     switch (ai.type) {
                         case 'radio':
-                            values[ai.id] = ai.values ? Object.keys(ai.values)[0] : '';
+                            values[ai.id] = ai.defaultValue || (ai.values ? Object.keys(ai.values)[0] : '');
                             break;
                         case 'checkbox':
                             values[ai.id] = {};
                             break;
+                        case 'select':
+                            values[ai.id] = ai.defaultValue || (ai.values ? Object.keys(ai.values)[0] : '');
+                            break;
                         default:
-                            values[ai.id] = '';
+                            values[ai.id] = ai.defaultValue || '';
                     }
                 });
             } else {
@@ -115,16 +123,16 @@ export default class ZFormBuilder extends Component {
                 }
                 switch (item.type) {
                     case 'radio':
-                        values[item.id] = item.values ? Object.keys(item.values)[0] : '';
+                        values[item.id] = item.defaultValue || (item.values ? Object.keys(item.values)[0] : '');
                         break;
                     case 'checkbox':
                         values[item.id] = {};
                         break;
                     case 'select':
-                        values[item.id] = item.values ? Object.keys(item.values)[0] : '';
+                        values[item.id] = item.defaultValue || (item.values ? Object.keys(item.values)[0] : '');
                         break;
                     default:
-                        values[item.id] = '';
+                        values[item.id] = item.defaultValue || '';
                 }
             }
         });
@@ -209,7 +217,7 @@ export default class ZFormBuilder extends Component {
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
                     helpText={item.helpText}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
-                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading}
@@ -310,6 +318,7 @@ export default class ZFormBuilder extends Component {
                     originalId={item.id}
                     key={`field_${this.props.prefix}_${item.id}`}
                     buttonType={item.buttonType || 'button'}
+                    linkTo={item.linkTo}
                     css={item.css}
                     label={item.label}
                     disabled={this.state.loading}
@@ -525,7 +534,7 @@ export default class ZFormBuilder extends Component {
 
     serializeData = () => {
         const data = cloneDeep(this.state.dataStorage);
-        const formData = new FormData();        
+        const formData = new FormData();
         const fields = Object.keys(data[this.state.tabs[0]]);
         Object.keys(data).filter(tab => this.state.tabs.indexOf(tab) > -1).map(tab => {
             fields.map(field => {
@@ -615,6 +624,17 @@ export default class ZFormBuilder extends Component {
                             dataStorageNew[tab][field] = data[tab][field];
                     }
                 });
+                this.props.data.map(item => {
+                    if (Array.isArray(item)) {
+                        item.map(sitem => {
+                            if (!dataStorageNew[tab][sitem.id]) {
+                                dataStorageNew[tab][sitem.id] = sitem.defaultValue || '';
+                            }
+                        });
+                    } else if (!dataStorageNew[tab][item.id]) {
+                        dataStorageNew[tab][item.id] = item.defaultValue || '';
+                    }
+                });
                 if (this.props.tabs[tab]) {
                     tabsNew.push(tab);
                 }
@@ -658,19 +678,18 @@ export default class ZFormBuilder extends Component {
         if (validation.mandatory && !value) {
             return ERR_VMANDATORY;
         }
-        if (validation.mandatory && !value) {
-            return ERR_VMANDATORY;
-        }
         if (validation.shouldMatch) {
             const fieldToMatch = data.find(i => i.id === validation.shouldMatch) || { value: '' };
             if (value !== fieldToMatch.value) {
                 return ERR_VNOMATCH;
             }
         }
-        data.find(i => i.id === 'password');
-        // if (validation.shouldMatch && value !== ) {
-        //     return ERR_VMANDATORY;
-        // }
+        if (value && validation.minLength && String(value).length < validation.minLength) {
+            return ERR_VTOOSHORT;
+        }
+        if (value && validation.maxLength && String(value).length > validation.maxLength) {
+            return ERR_VTOOLONG;
+        }
         if (value && validation.regexp && typeof value === 'string') {
             const rex = new RegExp(validation.regexp);
             if (!rex.test(value)) {
@@ -729,6 +748,12 @@ export default class ZFormBuilder extends Component {
                         break;
                     case ERR_VNOMATCH:
                         errorMessagesNew[item.tab][item.id] = this.props.lang.ERR_VNOMATCH; // eslint-disable-line react/prop-types
+                        break;
+                    case ERR_VTOOSHORT:
+                        errorMessagesNew[item.tab][item.id] = this.props.lang.ERR_VTOOSHORT; // eslint-disable-line react/prop-types
+                        break;
+                    case ERR_VTOOLONG:
+                        errorMessagesNew[item.tab][item.id] = this.props.lang.ERR_VTOOLONG; // eslint-disable-line react/prop-types
                         break;
                     default:
                         errorMessagesNew[item.tab][item.id] = '';

@@ -1,0 +1,102 @@
+{
+  "Record with the entered value already exists": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        55
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        58
+      ],
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        143
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        61
+      ],
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        64
+      ],
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        141
+      ]
+    ]
+  },
+  "Create new user": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        82
+      ]
+    ]
+  },
+  "Delete selected users": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        82
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        118
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        118
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        138
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        139
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        140
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        142
+      ]
+    ]
+  }
+}
