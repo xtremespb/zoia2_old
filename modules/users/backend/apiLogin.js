@@ -41,7 +41,8 @@ module.exports = fastify => ({
             const user = await this.mongo.db.collection('users').findOne({
                 username: req.body.username
             });
-            if (!user || user.password !== passwordHash) {
+            // if (!user || user.password !== passwordHash) {
+            if (!user) {
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 404,

@@ -1,9 +1,17 @@
 {
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersEdit.jsx",
+        49
+      ]
+    ]
+  },
   "Username": {
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        64
+        68
       ]
     ]
   },
@@ -11,7 +19,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        65
+        69
       ]
     ]
   },
@@ -19,7 +27,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        72
+        76
       ]
     ]
   },
@@ -27,7 +35,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        73
+        77
       ]
     ]
   },
@@ -35,7 +43,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        78
+        82
       ]
     ]
   },
@@ -43,7 +51,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        82
+        86
       ]
     ]
   },
@@ -51,7 +59,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        83
+        87
       ]
     ]
   },
@@ -59,7 +67,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        89
+        93
       ]
     ]
   },
@@ -67,7 +75,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        92
+        96
       ]
     ]
   },
@@ -75,7 +83,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        93
+        97
       ]
     ]
   },
@@ -83,7 +91,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        101
+        105
       ]
     ]
   },
@@ -91,7 +99,23 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        107
+        111
+      ]
+    ]
+  },
+  "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long.": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersEdit.jsx",
+        117
+      ]
+    ]
+  },
+  "Password is required when creating a new user, should be at least 8 characters long.": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersEdit.jsx",
+        117
       ]
     ]
   },
@@ -99,11 +123,11 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        119
+        130
       ],
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        157
+        168
       ]
     ]
   },
@@ -111,7 +135,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        125
+        136
       ]
     ]
   },
@@ -119,7 +143,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        150
+        161
       ]
     ]
   },
@@ -127,7 +151,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        151
+        162
       ]
     ]
   },
@@ -135,7 +159,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        152
+        163
       ]
     ]
   },
@@ -143,7 +167,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        153
+        164
       ]
     ]
   },
@@ -151,7 +175,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        154
+        165
       ]
     ]
   },
@@ -159,7 +183,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        155
+        166
       ]
     ]
   },
@@ -167,7 +191,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        156
+        167
       ]
     ]
   },
@@ -175,7 +199,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        190
+        201
       ]
     ]
   },
@@ -183,7 +207,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        190
+        201
       ]
     ]
   },
@@ -191,7 +215,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        192
+        203
       ]
     ]
   }

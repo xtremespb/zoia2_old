@@ -9,17 +9,14 @@ const ajv = new Ajv();
 const baseValidate = ajv.compile({
     type: 'object',
     properties: {
-        id: {
-            type: 'string',
-            minLength: 24,
-            maxLength: 24,
-            pattern: '^[a-f0-9]+$'
-        },
         token: {
+            type: 'string'
+        },
+        id: {
             type: 'string'
         }
     },
-    required: ['id', 'token']
+    required: ['token']
 });
 
 const formValidate = ajv.compile({
@@ -82,7 +79,7 @@ module.exports = fastify => ({
             // Start of Form Validation
             const baseDataValidation = baseValidate(formData);
             const formDataValidation = formValidate(formData.default);
-            if (!baseDataValidation || !formDataValidation) {
+            if (!baseDataValidation || !formDataValidation || (formData.id && (formData.id.length !== 24 || !formData.id.match(/^[a-f0-9]+$/)))) {
                 const errorData = {
                     base: baseDataValidation ? undefined : (baseValidate.errors || {
                         error: 'General validation error'
@@ -120,7 +117,19 @@ module.exports = fastify => ({
                 }));
             }
             // End of check permissions
+            // Password-related checks
             const passwordUpdate = {};
+            if (!formData.id && !formData.default.password) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errors: {
+                            default: {
+                                password: 'Required'
+                            }
+                        }
+                    }));
+            }
             if (formData.default.password) {
                 if (formData.default.password.length < 8) {
                     return rep.code(200)
@@ -136,27 +145,32 @@ module.exports = fastify => ({
                 passwordUpdate.password = crypto.createHmac('sha512', config.secret).update(formData.default.password).digest('hex');
             }
             // Check if such user exists
-            const username = await this.mongo.db.collection('users').findOne({
-                _id: new ObjectId(formData.id)
-            });
-            if (!username) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        errors: {
-                            default: {
-                                username: 'User not found'
+            if (formData.id) {
+                const username = await this.mongo.db.collection('users').findOne({
+                    _id: new ObjectId(formData.id)
+                });
+                if (!username) {
+                    return rep.code(200)
+                        .send(JSON.stringify({
+                            statusCode: 400,
+                            errors: {
+                                default: {
+                                    username: 'User not found'
+                                }
                             }
-                        }
-                    }));
+                        }));
+                }
             }
             // Check if user with such username already exists
-            const dupeUsername = await this.mongo.db.collection('users').findOne({
-                username: formData.default.username,
-                _id: {
+            const dupeUsernameQuery = {
+                username: formData.default.username
+            };
+            if (formData.id) {
+                dupeUsernameQuery._id = {
                     $ne: new ObjectId(formData.id)
-                }
-            });
+                };
+            }
+            const dupeUsername = await this.mongo.db.collection('users').findOne(dupeUsernameQuery);
             if (dupeUsername) {
                 return rep.code(200)
                     .send(JSON.stringify({
@@ -169,12 +183,15 @@ module.exports = fastify => ({
                     }));
             }
             // Check if user with such e-mail address already exists
-            const dupeEmail = await this.mongo.db.collection('users').findOne({
-                email: formData.default.email,
-                _id: {
+            const dupeEmailQuery = {
+                email: formData.default.email
+            };
+            if (formData.id) {
+                dupeEmailQuery._id = {
                     $ne: new ObjectId(formData.id)
-                }
-            });
+                };
+            }
+            const dupeEmail = await this.mongo.db.collection('users').findOne(dupeEmailQuery);
             if (dupeEmail) {
                 return rep.code(200)
                     .send(JSON.stringify({
@@ -186,9 +203,10 @@ module.exports = fastify => ({
                         }
                     }));
             }
-            const update = await this.mongo.db.collection('users').update({
+            // Update database
+            const update = await this.mongo.db.collection('users').updateOne(formData.id ? {
                 _id: new ObjectId(formData.id)
-            }, {
+            } : {}, {
                 $set: {
                     username: formData.default.username,
                     email: formData.default.email,
@@ -196,7 +214,10 @@ module.exports = fastify => ({
                     admin: formData.default.admin,
                     ...passwordUpdate
                 }
+            }, {
+                upsert: true
             });
+            // Check result
             if (!update || !update.result || !update.result.ok) {
                 return rep.code(200)
                     .send(JSON.stringify({

@@ -44,8 +44,12 @@ class UsersEdit extends Component {
         }
     }
 
-    onSaveSuccessHandler = res => {
-        console.log(res);
+    onSaveSuccessHandler = i18n => {
+        UIkit.notification({
+            message: i18n._('Data has been saved successfully'),
+            status: 'success'
+        });
+        history.push('/admin/users?reload=1');
     }
 
     getEditForm = i18n => (<FormBuilder
@@ -106,6 +110,12 @@ class UsersEdit extends Component {
                     css: 'uk-width-small',
                     label: `${i18n._(t`Repeat Password`)}:`,
                 }],
+                {
+                    id: 'passwordMessage',
+                    type: 'message',
+                    css: 'uk-text-small',
+                    text: this.props.match.params.id ? i18n._(t`Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long.`) : i18n._(t`Password is required when creating a new user, should be at least 8 characters long.`)
+                },
                 {
                     id: 'divider1',
                     type: 'divider'
@@ -173,7 +183,7 @@ class UsersEdit extends Component {
                 token: this.props.appDataRuntime.token
             }
         } : null}
-        onSaveSuccess={response => this.onSaveSuccessHandler(response)}
+        onSaveSuccess={() => this.onSaveSuccessHandler(i18n)}
         onLoadError={() => this.setState({ loadingError: true })}
         onLoadSuccess={() => this.setState({ loadingError: false })}
     />);

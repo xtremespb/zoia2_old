@@ -16,6 +16,7 @@ import ZCaptcha from './ZCaptcha.jsx';
 import ZDivider from './ZDivider.jsx';
 import ZWrap from './ZWrap.jsx';
 import ZLoading from './ZLoading.jsx';
+import ZMessage from './ZMessage.jsx';
 // Import styles
 import './style.css';
 
@@ -100,7 +101,7 @@ export default class ZFormBuilder extends Component {
         data.map(item => {
             if (Array.isArray(item)) {
                 item.map(ai => {
-                    if (ai.type.match(/^(button|divider)$/)) {
+                    if (ai.type.match(/^(button|divider|message)$/)) {
                         return;
                     }
                     switch (ai.type) {
@@ -118,7 +119,7 @@ export default class ZFormBuilder extends Component {
                     }
                 });
             } else {
-                if (item.type.match(/^(button|divider)$/)) {
+                if (item.type.match(/^(button|divider|message)$/)) {
                     return;
                 }
                 switch (item.type) {
@@ -395,6 +396,12 @@ export default class ZFormBuilder extends Component {
                     values={item.values || {}}
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading}
+                />);
+            case 'message':
+                return (<ZMessage
+                    key={`field_${this.props.prefix}_${this.props.prefix}_${item.id}`}
+                    css={item.css}
+                    text={item.text}
                 />);
             default:
                 return null;

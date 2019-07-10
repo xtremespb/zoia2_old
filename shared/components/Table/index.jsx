@@ -141,7 +141,16 @@ export default class ZTable extends Component {
         }
     }
 
-    fetchURL(init) {
+    reloadURL = () => {
+        this.fetchURL(false, {
+            page: this.props.initialState.page,
+            search: this.props.initialState.search,
+            sortColumn: this.props.initialState.sortColumn,
+            sortDirection: this.props.initialState.sortDirection
+        });
+    }
+
+    fetchURL(init, data = {}) {
         if (init) {
             this.state.loading = true;
             this.state.loadingText = true;
@@ -152,11 +161,11 @@ export default class ZTable extends Component {
         }
         const paramsData = {
             ...this.props.source.extras,
-            page: this.state.page,
-            search: this.state.searchText,
+            page: data.page || this.state.page,
+            search: data.searchText || this.state.searchText,
             itemsPerPage: this.props.itemsPerPage,
-            sortColumn: this.state.sortColumn || this.props.sortColumn || '',
-            sortDirection: this.state.sortDirection || this.props.sortDirection || ''
+            sortColumn: data.sortColumn || this.state.sortColumn || this.props.sortColumn || '',
+            sortDirection: data.sortDirection || this.state.sortDirection || this.props.sortDirection || ''
         };
         this.props.axios({
             method: this.props.source.method,
@@ -461,7 +470,7 @@ export default class ZTable extends Component {
         return data;
     }
 
-    pageClickHandler = pageNew => {
+    pageClickHandler = (pageNew = this.state.page) => {
         if (this.state.mounted) {
             this.setState({
                 page: pageNew,

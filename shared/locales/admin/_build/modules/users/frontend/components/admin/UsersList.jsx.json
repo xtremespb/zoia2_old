@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        55
+        61
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        58
+        64
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        143
+        149
       ]
     ]
   },
@@ -23,15 +23,15 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        61
+        67
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        64
+        70
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        141
+        147
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        82
+        88
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        82
+        88
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        118
+        124
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        118
+        124
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        138
+        144
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        139
+        145
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        140
+        146
       ]
     ]
   },
@@ -95,7 +95,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        142
+        148
       ]
     ]
   }

@@ -8,6 +8,7 @@ import UIkit from 'uikit';
 import axios from 'axios';
 import { remove as removeCookie } from 'es-cookie';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 import { history } from '../../../../../shared/store/configureStore';
 
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
@@ -28,6 +29,11 @@ class UserList extends Component {
     componentDidMount = () => {
         if (!this.props.appDataRuntime.token) {
             history.push('/users/auth?redirect=/admin/users');
+        } else {
+            const query = queryString.parse(window.location.search);
+            if (query.reload && this.usersListTable.current) {
+                this.usersListTable.current.reloadURL();
+            }
         }
     }
 
