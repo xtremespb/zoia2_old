@@ -104,7 +104,7 @@ const webpackConfig = {
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, 'static', 'index.html'),
             chunks: ['app', 'styles', 'vendors'],
-            template: path.resolve(__dirname, 'shared', 'template.html')
+            template: path.resolve(__dirname, 'shared', 'templates', 'template.html')
             // minify: {
             //     collapseWhitespace: true,
             //     removeComments: true,

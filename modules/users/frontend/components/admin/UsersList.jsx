@@ -19,11 +19,13 @@ import usersListTableSetState from '../../actions/usersListTableSetState';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));
+const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "DialogDelete" */ './DialogDelete.jsx'));
 
 class UserList extends Component {
     constructor(props) {
         super(props);
         this.usersListTable = React.createRef();
+        this.dialogDelete = React.createRef();
     }
 
     componentDidMount = () => {
@@ -73,10 +75,46 @@ class UserList extends Component {
 
     onTableStateUpdated = state => this.props.usersListTableSetStateAction(state);
 
+    onDeleteRecord = (id, e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        const ids = [];
+        const users = [];
+        if (id && e) {
+            ids.push(id);
+            const data = this.usersListTable.current.getCurrentData();
+            users.push(data.username[id]);
+        } else {
+            const data = this.usersListTable.current.getCheckboxData();
+            data.map(i => {
+                ids.push(i._id);
+                users.push(i.username);
+            });
+        }
+        this.dialogDelete.current.show(users, ids);
+    }
+
+    onDeleteButtonClick = (ids, i18n) => {
+        this.dialogDelete.current.hide();
+        this.usersListTable.current.setLoading(true);
+        axios.post(`${config.apiURL}/api/users/deleteUsers`, {
+            token: this.props.appDataRuntime.token,
+            ids
+        }, { headers: { 'content-type': 'application/json' } }).then(res => {
+            this.usersListTable.current.setLoading(false);
+            if (res.data.statusCode !== 200) {
+                return UIkit.notification(i18n._(t`Cannot delete one or more users`), { status: 'danger' });
+            }
+            this.usersListTable.current.reloadURL();
+            return UIkit.notification(i18n._(t`Operation complete`), { status: 'success' });
+        }).catch(() => this.usersListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more users`), { status: 'danger' }));
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
-                {({ i18n }) => (
+                {({ i18n }) => (<>
                     <Table
                         prefix="usersListTable"
                         ref={this.usersListTable}
@@ -85,7 +123,7 @@ class UserList extends Component {
                         i18n={i18n}
                         UIkit={UIkit}
                         axios={axios}
-                        topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} /></>}
+                        topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={this.onDeleteRecord} /></>}
                         columns={[{
                             id: 'username',
                             title: 'Username',
@@ -121,7 +159,7 @@ class UserList extends Component {
                             id: 'actions',
                             title: 'Actions',
                             cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
-                            process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} /></>)
+                            process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
                         }]}
                         itemsPerPage={config.commonItemsLimit}
                         source={{
@@ -151,7 +189,12 @@ class UserList extends Component {
                         onLoadError={this.onUsersTableLoadError}
                         onSaveError={data => this.onUsersTableSaveError(data, i18n)}
                     />
-                )}
+                    <DialogDelete
+                        ref={this.dialogDelete}
+                        i18n={i18n}
+                        onDeleteButtonClickHandler={ids => this.onDeleteButtonClick(ids, i18n)}
+                    />
+                </>)}
             </I18n>
         </AdminPanel>
     );

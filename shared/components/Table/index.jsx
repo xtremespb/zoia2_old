@@ -119,6 +119,12 @@ export default class ZTable extends Component {
         }
     }
 
+    setLoading = flag => {
+        this.setState({
+            loading: flag
+        });
+    }
+
     setValuesFromData = (data, callFromConstructor) => {
         const currentChunk = this.props.source.url && data.length > this.props.itemsPerPage ? data.slice((this.state.page - 1) * this.props.itemsPerPage, (this.state.page - 1) * this.props.itemsPerPage + parseInt(this.props.itemsPerPage, 10)) : data;
         const valuesSet = {};
@@ -144,7 +150,7 @@ export default class ZTable extends Component {
     reloadURL = () => {
         this.fetchURL(false, {
             page: this.props.initialState.page,
-            search: this.props.initialState.search,
+            searchText: this.props.initialState.searchText,
             sortColumn: this.props.initialState.sortColumn,
             sortDirection: this.props.initialState.sortDirection
         });
@@ -194,8 +200,18 @@ export default class ZTable extends Component {
                     loading: false,
                     loadingText: false,
                     error: false
-                    // This is a workaround to fix language switch behaviour
-                }, () => { window.scrollTo(0, 1); });
+                }, () => {
+                    if (response.data.items.length) {
+                        // This is a workaround to fix language switch behaviour
+                        window.scrollTo(0, 1);
+                    } else if (this.state.page !== 1) {
+                        this.setState({
+                            page: 1
+                        }, () => {
+                            this.fetchURL(false);
+                        });
+                    }
+                });
             }
             this.setValuesFromData(response.data.items);
         }).catch(e => {
@@ -469,6 +485,8 @@ export default class ZTable extends Component {
         });
         return data;
     }
+
+    getCurrentData = () => this.state.values;
 
     pageClickHandler = (pageNew = this.state.page) => {
         if (this.state.mounted) {

@@ -206,7 +206,9 @@ module.exports = fastify => ({
             // Update database
             const update = await this.mongo.db.collection('users').updateOne(formData.id ? {
                 _id: new ObjectId(formData.id)
-            } : {}, {
+            } : {
+                username: formData.default.username
+            }, {
                 $set: {
                     username: formData.default.username,
                     email: formData.default.email,

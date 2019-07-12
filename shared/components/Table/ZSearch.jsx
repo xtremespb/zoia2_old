@@ -22,7 +22,7 @@ export default class ZSearch extends Component {
 
     render() {
         return (<div className="uk-margin">
-            <form className="uk-search uk-search-default">
+            <form className="uk-search uk-search-default" onSubmit={e => e.preventDefault()}>
                 <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon:search" />
                 <input className="uk-search-input" type="search" value={this.state.value} onChange={e => this.onValueChanged(e)} />
             </form>

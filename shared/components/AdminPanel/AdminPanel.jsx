@@ -13,6 +13,7 @@ import modulesData from '../../../etc/modules.json';
 import config from '../../../etc/config.json';
 
 import './AdminPanel.css';
+import '../../styles/flags.css';
 
 class AdminPanel extends Component {
     state = {
