@@ -3,10 +3,10 @@ body {
     height: 100%;
 }
 
-.za-ua-appTheme {
+.za-users-ua-appTheme {
     background: #ecf0f1;
 }
 
-#authForm {
+#za_users_authForm {
     min-width: 250px;
 }

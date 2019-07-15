@@ -62,13 +62,13 @@ class ZoiaTemplate extends Component {
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <div className="uk-container" uk-navbar="true">
-                <div className="uk-navbar-left">
+                <div className="uk-navbar-left uk-margin-top">
                     <img src="/zoia/logo_dark.png" width="114" height="40" alt="" />
                 </div>
-                <div className="uk-navbar-right">
+                <div className="uk-navbar-right uk-margin-top">
                     <ul className="uk-navbar-nav">
                         <li>
-                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
+                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language}`} /></a>
                             <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
                                 <ul className="uk-nav uk-navbar-dropdown-nav">
                                     {this.getLanguagesList('desktop')}

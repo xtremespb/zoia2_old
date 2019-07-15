@@ -35,7 +35,7 @@ class UserAuth extends Component {
     }
 
     componentDidMount = () => {
-        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
+        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-users-ua-appTheme');
         this.query = queryString.parse(window.location.search);
         if (this.props.appDataRuntime.token) {
             history.push(this.query.redirect || '/');
@@ -93,7 +93,7 @@ class UserAuth extends Component {
             <I18n>{({ i18n }) => (
                 <div className="uk-card uk-card-default uk-card-body uk-card-small">
                     <FormBuilder
-                        prefix="authForm"
+                        prefix="za_users_authForm"
                         simple={true}
                         UIkit={UIkit}
                         axios={axios}

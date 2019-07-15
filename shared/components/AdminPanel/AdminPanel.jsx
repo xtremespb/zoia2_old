@@ -41,7 +41,7 @@ class AdminPanel extends Component {
         });
     }
 
-    resizeNav = () => document.getElementById('z2a_nav_wrap') ? document.getElementById('z2a_nav_wrap').style.height = `${window.innerHeight - 64}px` : null;
+    resizeNav = () => document.getElementById('za_admin_nav_wrap') ? document.getElementById('za_admin_nav_wrap').style.height = `${window.innerHeight - 64}px` : null;
 
     componentDidMount = () => {
         window.onresize = this.resizeNav;
@@ -79,13 +79,13 @@ class AdminPanel extends Component {
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <div>
-                <nav className="uk-navbar-container uk-dark" uk-navbar="true" uk-sticky="true">
-                    <div className="uk-navbar-left">
+                <nav className="uk-navbar-container za-admin-navbar uk-dark" uk-navbar="true" uk-sticky="true">
+                    <div className="uk-navbar-left za-admin-navbar-left">
                         <div className="uk-navbar-item uk-logo">
                             <span className="uk-hidden@m uk-margin-small-right"><a href="" className="uk-icon-link" uk-icon="icon:menu;ratio:1.5" uk-toggle="target: #offcanvas-nav" />&nbsp;</span><Link to="/admin"><img src="/zoia/logo.png" width="86" height="30" alt="" /></Link>
                         </div>
                     </div>
-                    <div className="uk-navbar-right">
+                    <div className="uk-navbar-right za-admin-navbar-right">
                         <ul className="uk-navbar-nav">
                             <li>
                                 <a href="#">{this.props.appData.user.username}&nbsp;<span uk-icon="triangle-down" /></a>
@@ -107,10 +107,10 @@ class AdminPanel extends Component {
                     </div>
                 </nav>
                 <div className="uk-grid-collapse uk-grid">
-                    <div className="uk-width-small z2a-navleft-column-wrap uk-visible@m">
+                    <div className="uk-width-small za-admin-navleft-column-wrap uk-visible@m">
                         <div>
-                            <div id="z2a_nav_wrap">
-                                <div className="z2a-navleft">
+                            <div id="za_admin_nav_wrap">
+                                <div className="za-admin-navleft">
                                     <ul className="uk-nav uk-nav-default">
                                         {this.getModulesList('desktop')}
                                     </ul>
@@ -119,7 +119,7 @@ class AdminPanel extends Component {
                         </div>
                     </div>
                     <div className="uk-width-expand">
-                        <div className="z2a-content-wrap">
+                        <div className="za-admin-content-wrap">
                             {this.props.children}
                         </div>
                     </div>
