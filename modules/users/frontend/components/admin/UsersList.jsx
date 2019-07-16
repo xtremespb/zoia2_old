@@ -16,6 +16,7 @@ import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatal
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import usersListTableSetState from '../../actions/usersListTableSetState';
+import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));
@@ -114,87 +115,90 @@ class UserList extends Component {
     render = () => (
         <AdminPanel>
             <I18n>
-                {({ i18n }) => (<>
-                    <Table
-                        prefix="usersListTable"
-                        ref={this.usersListTable}
-                        initialState={this.props.usersList.usersTableState}
-                        onStateUpdated={this.onTableStateUpdated}
-                        i18n={i18n}
-                        UIkit={UIkit}
-                        axios={axios}
-                        topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={this.onDeleteRecord} /></>}
-                        columns={[{
-                            id: 'username',
-                            title: 'Username',
-                            sortable: true,
-                            editable: 'text',
-                            cssHeader: 'uk-width-1-6@m uk-text-nowrap',
-                            validation: {
-                                mandatory: true,
-                                regexp: '^[A-Za-z0-9_-]{4,32}$'
-                            }
-                        }, {
-                            id: 'email',
-                            title: 'E-mail',
-                            sortable: true,
-                            process: item => item || '',
-                            editable: 'text',
-                            validation: {
-                                mandatory: true,
-                                regexp: '^(?:[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$'
-                            }
-                        }, {
-                            id: 'active',
-                            title: 'Status',
-                            cssRow: 'uk-width-small uk-text-nowrap ztable-noselect',
-                            sortable: true,
-                            process: item => item ? 1 : 0,
-                            editable: 'select',
-                            options: {
-                                0: 'Inactive',
-                                1: 'Active'
-                            }
-                        }, {
-                            id: 'actions',
-                            title: 'Actions',
-                            cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
-                            process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
-                        }]}
-                        itemsPerPage={config.commonItemsLimit}
-                        source={{
-                            url: `${config.apiURL}/api/users/list`,
-                            method: 'POST',
-                            extras: {
-                                token: this.props.appDataRuntime.token
-                            }
-                        }}
-                        save={{
-                            url: `${config.apiURL}/api/users/saveField`,
-                            method: 'POST',
-                            extras: {
-                                token: this.props.appDataRuntime.token
-                            }
-                        }}
-                        sortColumn="username"
-                        sortDirection="asc"
-                        lang={{
-                            LOADING: i18n._(t`Loading data, please wait…`),
-                            NO_RECORDS: i18n._(t`No records to display`),
-                            ERROR_LOAD: i18n._(t`Could not load data`),
-                            ERROR_SAVE: i18n._(t`Could not save data`),
-                            ERR_VMANDATORY: i18n._(t`Field is required`),
-                            ERR_VFORMAT: i18n._(t`Invalid format`)
-                        }}
-                        onLoadError={this.onUsersTableLoadError}
-                        onSaveError={data => this.onUsersTableSaveError(data, i18n)}
-                    />
-                    <DialogDelete
-                        ref={this.dialogDelete}
-                        i18n={i18n}
-                        onDeleteButtonClickHandler={ids => this.onDeleteButtonClick(ids, i18n)}
-                    />
-                </>)}
+                {({ i18n }) => {
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language);
+                    return (<>
+                        <Table
+                            prefix="usersListTable"
+                            ref={this.usersListTable}
+                            initialState={this.props.usersList.usersTableState}
+                            onStateUpdated={this.onTableStateUpdated}
+                            i18n={i18n}
+                            UIkit={UIkit}
+                            axios={axios}
+                            topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={this.onDeleteRecord} /></>}
+                            columns={[{
+                                id: 'username',
+                                title: 'Username',
+                                sortable: true,
+                                editable: 'text',
+                                cssHeader: 'uk-width-1-6@m uk-text-nowrap',
+                                validation: {
+                                    mandatory: true,
+                                    regexp: '^[A-Za-z0-9_-]{4,32}$'
+                                }
+                            }, {
+                                id: 'email',
+                                title: 'E-mail',
+                                sortable: true,
+                                process: item => item || '',
+                                editable: 'text',
+                                validation: {
+                                    mandatory: true,
+                                    regexp: '^(?:[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$'
+                                }
+                            }, {
+                                id: 'active',
+                                title: 'Status',
+                                cssRow: 'uk-width-small uk-text-nowrap ztable-noselect',
+                                sortable: true,
+                                process: item => item ? 1 : 0,
+                                editable: 'select',
+                                options: {
+                                    0: 'Inactive',
+                                    1: 'Active'
+                                }
+                            }, {
+                                id: 'actions',
+                                title: 'Actions',
+                                cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
+                                process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
+                            }]}
+                            itemsPerPage={config.commonItemsLimit}
+                            source={{
+                                url: `${config.apiURL}/api/users/list`,
+                                method: 'POST',
+                                extras: {
+                                    token: this.props.appDataRuntime.token
+                                }
+                            }}
+                            save={{
+                                url: `${config.apiURL}/api/users/saveField`,
+                                method: 'POST',
+                                extras: {
+                                    token: this.props.appDataRuntime.token
+                                }
+                            }}
+                            sortColumn="username"
+                            sortDirection="asc"
+                            lang={{
+                                LOADING: i18n._(t`Loading data, please wait…`),
+                                NO_RECORDS: i18n._(t`No records to display`),
+                                ERROR_LOAD: i18n._(t`Could not load data`),
+                                ERROR_SAVE: i18n._(t`Could not save data`),
+                                ERR_VMANDATORY: i18n._(t`Field is required`),
+                                ERR_VFORMAT: i18n._(t`Invalid format`)
+                            }}
+                            onLoadError={this.onUsersTableLoadError}
+                            onSaveError={data => this.onUsersTableSaveError(data, i18n)}
+                        />
+                        <DialogDelete
+                            ref={this.dialogDelete}
+                            i18n={i18n}
+                            onDeleteButtonClickHandler={ids => this.onDeleteButtonClick(ids, i18n)}
+                        />
+                    </>);
+                }}
             </I18n>
         </AdminPanel>
     );
@@ -210,5 +214,6 @@ export default connect(store => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         usersListTableSetStateAction: state => dispatch(usersListTableSetState(state)),
-        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
+        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
     }))(UserList);

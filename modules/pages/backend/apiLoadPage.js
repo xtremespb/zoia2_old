@@ -44,11 +44,13 @@ module.exports = fastify => ({
             };
             options.projection[`data.${req.body.language}`] = 1;
             const page = await this.mongo.db.collection('pages').findOne(query, options);
+            setTimeout(() => {
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
                     page
                 }));
+            }, 2000);
         } catch (e) {
             req.log.error({
                 ip: req.ip,

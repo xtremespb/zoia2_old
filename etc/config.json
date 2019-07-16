@@ -22,6 +22,10 @@
         "en": "English",
         "ru": "Русский"
     },
+    "siteTitle": {
+        "en": "Example Website",
+        "ru": "Тестовый веб-сайт"
+    },
     "development": false,
     "loglevel": "info",
     "originCORS": "*",

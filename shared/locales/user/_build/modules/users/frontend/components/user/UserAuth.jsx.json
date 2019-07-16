@@ -1,9 +1,21 @@
 {
+  "Authorize": {
+    "origin": [
+      [
+        "modules/users/frontend/components/user/UserAuth.jsx",
+        95
+      ],
+      [
+        "modules/users/frontend/components/user/UserAuth.jsx",
+        126
+      ]
+    ]
+  },
   "Username": {
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        106
+        108
       ]
     ]
   },
@@ -11,15 +23,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        113
-      ]
-    ]
-  },
-  "Authorize": {
-    "origin": [
-      [
-        "modules/users/frontend/components/user/UserAuth.jsx",
-        124
+        115
       ]
     ]
   },
@@ -27,7 +31,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        139
+        141
       ]
     ]
   },
@@ -35,7 +39,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        140
+        142
       ]
     ]
   },
@@ -43,7 +47,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        141
+        143
       ]
     ]
   },
@@ -51,7 +55,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        142
+        144
       ]
     ]
   },
@@ -59,7 +63,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        143
+        145
       ]
     ]
   },
@@ -67,7 +71,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        144
+        146
       ]
     ]
   },
@@ -75,7 +79,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        145
+        147
       ]
     ]
   },
@@ -83,7 +87,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        154
+        156
       ]
     ]
   },
@@ -91,7 +95,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        156
+        158
       ]
     ]
   }

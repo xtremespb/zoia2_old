@@ -16,6 +16,7 @@ import appDataSetLanguage from '../../../../../shared/actions/appDataSetLanguage
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
+import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
@@ -90,8 +91,9 @@ class UserAuth extends Component {
             return null;
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
-            <I18n>{({ i18n }) => (
-                <div className="uk-card uk-card-default uk-card-body uk-card-small">
+            <I18n>{({ i18n }) => {
+                this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Authorize`), this.props.appData.language);
+                return (<div className="uk-card uk-card-default uk-card-body uk-card-small">
                     <FormBuilder
                         prefix="za_users_authForm"
                         simple={true}
@@ -156,7 +158,8 @@ class UserAuth extends Component {
                         <Link to="/users/password"><Trans>Forgot Password</Trans></Link>
                     </div>
                 </div>
-            )}</I18n>
+                );
+            }}</I18n>
         </I18nProvider>);
     };
 }
@@ -170,5 +173,6 @@ export default connect(store => ({
         appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language)),
         appDataRuntimeSetToken: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
-        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
+        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
     }))(UserAuth);

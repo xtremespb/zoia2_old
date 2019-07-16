@@ -11,6 +11,7 @@ import { history } from '../../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
+import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
@@ -196,14 +197,15 @@ class UsersEdit extends Component {
     render = () => (
         <AdminPanel>
             <I18n>
-                {({ i18n }) => (
-                    <>
+                {({ i18n }) => {
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit User' : 'Create User'), this.props.appData.language);
+                    return (<>
                         <h1>{this.props.match.params.id ? <Trans>Edit User</Trans> : <Trans>Create User</Trans>}</h1>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}
-                    </>
-                )}
+                    </>);
+                }}
             </I18n>
         </AdminPanel>
     );
@@ -216,5 +218,6 @@ export default connect(store => ({
 }),
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
-        appDataSetUserAction: user => dispatch(appDataSetUser(user))
+        appDataSetUserAction: user => dispatch(appDataSetUser(user)),
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
     }))(UsersEdit);

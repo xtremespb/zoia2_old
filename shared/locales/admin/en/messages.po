@@ -13,150 +13,199 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:87
+#: modules/users/frontend/components/admin/UsersEdit.jsx:88
 msgid "Active"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:97
+#: modules/users/frontend/components/admin/UsersEdit.jsx:98
 msgid "Administrator"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:130
-#: modules/users/frontend/components/admin/UsersEdit.jsx:168
+#: modules/users/frontend/components/admin/DialogDelete.jsx:53
+#: modules/users/frontend/components/admin/UsersEdit.jsx:131
+#: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "Cancel"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:146
+#: modules/users/frontend/components/admin/UsersList.jsx:108
+#: modules/users/frontend/components/admin/UsersList.jsx:112
+msgid "Cannot delete one or more users"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:9
+msgid "Cannot update database record"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:187
 msgid "Could not load data"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:164
+#: modules/users/frontend/components/admin/UsersEdit.jsx:165
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:203
-msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
+#: modules/users/frontend/components/admin/UsersEdit.jsx:205
+msgid ""
+"Could not load data from server. Please check your URL or try to "
+"<0>reload</0> data."
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:165
-#: modules/users/frontend/components/admin/UsersList.jsx:67
+#: modules/users/frontend/components/admin/UsersEdit.jsx:166
 #: modules/users/frontend/components/admin/UsersList.jsx:70
-#: modules/users/frontend/components/admin/UsersList.jsx:147
+#: modules/users/frontend/components/admin/UsersList.jsx:73
+#: modules/users/frontend/components/admin/UsersList.jsx:188
 msgid "Could not save data"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:201
+#: modules/users/frontend/components/admin/UsersEdit.jsx:203
 msgid "Create User"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:88
+#: modules/users/frontend/components/admin/UsersList.jsx:129
 msgid "Create new user"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:49
+#: modules/users/frontend/components/admin/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:124
+#: modules/users/frontend/components/admin/DialogDelete.jsx:54
+#: modules/users/frontend/components/admin/UsersList.jsx:165
 msgid "Delete"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:88
+#: modules/users/frontend/components/admin/UsersList.jsx:129
 msgid "Delete selected users"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:76
-msgid "E-mail"
+#: modules/users/frontend/components/admin/Translations.jsx:10
+msgid "Duplicate e-mail"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:124
-msgid "Edit"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:201
-msgid "Edit User"
+#: modules/users/frontend/components/admin/Translations.jsx:11
+msgid "Duplicate username"
 msgstr ""
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:77
+msgid "E-mail"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:165
+msgid "Edit"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:203
+msgid "Edit User"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:78
 msgid "Example: username@zoiajs.org"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:161
-#: modules/users/frontend/components/admin/UsersList.jsx:148
+#: modules/users/frontend/components/admin/UsersEdit.jsx:162
+#: modules/users/frontend/components/admin/UsersList.jsx:189
 msgid "Field is required"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:86
+#: modules/users/frontend/components/admin/UsersEdit.jsx:87
 msgid "Inactive"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:162
-#: modules/users/frontend/components/admin/UsersList.jsx:64
-#: modules/users/frontend/components/admin/UsersList.jsx:149
+#: modules/users/frontend/components/admin/UsersEdit.jsx:163
+#: modules/users/frontend/components/admin/UsersList.jsx:67
+#: modules/users/frontend/components/admin/UsersList.jsx:190
 msgid "Invalid format"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:69
+#: modules/users/frontend/components/admin/UsersEdit.jsx:70
 msgid "Latin chars/_/-, length: 4-32"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:144
+#: modules/users/frontend/components/admin/UsersList.jsx:185
 msgid "Loading data, please wait…"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:93
+#: shared/components/AdminPanel/AdminPanel.jsx:94
 msgid "Log Out"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:145
+#: modules/users/frontend/components/admin/UsersList.jsx:186
 msgid "No records to display"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:96
+#: modules/users/frontend/components/admin/UsersEdit.jsx:97
 msgid "Normal User"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:117
-msgid "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long."
+#: modules/users/frontend/components/admin/UsersEdit.jsx:118
+msgid ""
+"Only enter a new password in case you wish to change it for the current "
+"user. Password should be at least 8 characters long."
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:105
+#: modules/users/frontend/components/admin/UsersList.jsx:111
+msgid "Operation complete"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:106
 msgid "Password"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:117
-msgid "Password is required when creating a new user, should be at least 8 characters long."
+#: modules/users/frontend/components/admin/UsersEdit.jsx:118
+msgid ""
+"Password is required when creating a new user, should be at least 8 "
+"characters long."
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:163
+#: modules/users/frontend/components/admin/UsersEdit.jsx:164
 msgid "Passwords do not match"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:93
+#: modules/users/frontend/components/admin/UsersEdit.jsx:94
 msgid "Permissions"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:61
+#: modules/users/frontend/components/admin/UsersList.jsx:64
 msgid "Record with the entered value already exists"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:111
+#: modules/users/frontend/components/admin/UsersEdit.jsx:112
 msgid "Repeat Password"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:136
+#: modules/users/frontend/components/admin/Translations.jsx:14
+msgid "Required"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:137
 msgid "Save"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:82
+#: modules/users/frontend/components/admin/UsersEdit.jsx:83
 msgid "Status"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:68
+#: modules/users/frontend/components/admin/DialogDelete.jsx:49
+msgid "The following user(s) will be permanently deleted:"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:13
+msgid "Too short"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:12
+msgid "User not found"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:69
 msgid "Username"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:167
+#: modules/users/frontend/components/admin/UsersList.jsx:119
+msgid "Users"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:168
 msgid "Yes"
 msgstr ""
 
@@ -164,6 +213,6 @@ msgstr ""
 msgid "users"
 msgstr "Users"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:166
+#: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "will be deleted. Are you sure?"
 msgstr ""

@@ -1,4 +1,6 @@
-import { get as getCookie } from 'es-cookie';
+import {
+    get as getCookie
+} from 'es-cookie';
 
 import config from '../../etc/config.json';
 

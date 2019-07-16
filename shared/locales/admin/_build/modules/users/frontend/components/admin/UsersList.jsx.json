@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        61
+        64
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        64
+        67
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        149
+        190
       ]
     ]
   },
@@ -23,15 +23,43 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        67
-      ],
-      [
-        "modules/users/frontend/components/admin/UsersList.jsx",
         70
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        147
+        73
+      ],
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        188
+      ]
+    ]
+  },
+  "Cannot delete one or more users": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        108
+      ],
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        112
+      ]
+    ]
+  },
+  "Operation complete": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        111
+      ]
+    ]
+  },
+  "Users": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersList.jsx",
+        119
       ]
     ]
   },
@@ -39,7 +67,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        88
+        129
       ]
     ]
   },
@@ -47,7 +75,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        88
+        129
       ]
     ]
   },
@@ -55,7 +83,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        124
+        165
       ]
     ]
   },
@@ -63,7 +91,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        124
+        165
       ]
     ]
   },
@@ -71,7 +99,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        144
+        185
       ]
     ]
   },
@@ -79,7 +107,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        145
+        186
       ]
     ]
   },
@@ -87,7 +115,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        146
+        187
       ]
     ]
   },
@@ -95,7 +123,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        148
+        189
       ]
     ]
   }

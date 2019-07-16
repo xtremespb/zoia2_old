@@ -13,54 +13,59 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:124
+#: modules/users/frontend/components/user/UserAuth.jsx:95
+#: modules/users/frontend/components/user/UserAuth.jsx:126
 msgid "Authorize"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:145
+#: modules/users/frontend/components/user/UserAuth.jsx:147
 msgid "Cancel"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:141
+#: modules/users/frontend/components/user/UserAuth.jsx:143
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:142
+#: modules/users/frontend/components/user/UserAuth.jsx:144
 msgid "Could not save data"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:154
+#: modules/users/frontend/components/user/UserAuth.jsx:156
 msgid "Create Account"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:139
+#: modules/users/frontend/components/user/UserAuth.jsx:141
 msgid "Field is required"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:156
+#: modules/users/frontend/components/user/UserAuth.jsx:158
 msgid "Forgot Password"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:140
+#: modules/users/frontend/components/user/UserAuth.jsx:142
 msgid "Invalid format"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:95
+#: modules/pages/frontend/components/user/PageView.jsx:73
+msgid "Loading data, please wait…"
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:94
 msgid "Log Out"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:113
+#: modules/users/frontend/components/user/UserAuth.jsx:115
 msgid "Password"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:106
+#: modules/users/frontend/components/user/UserAuth.jsx:108
 msgid "Username"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:144
+#: modules/users/frontend/components/user/UserAuth.jsx:146
 msgid "Yes"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:143
+#: modules/users/frontend/components/user/UserAuth.jsx:145
 msgid "will be deleted. Are you sure?"
 msgstr ""
