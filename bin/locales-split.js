@@ -17,21 +17,22 @@ const fs = require('fs-extra');
                     const refArr = reference.split(/\n/);
                     refArr.map(m => {
                         const modules = m.split(/\//);
-                        if (modules.length >= 2) {
-                            if (modules[0] === 'modules') {
-                                const area = modules[1];
-                                if (!transModules[area]) {
-                                    transModules[area] = {};
-                                }
-                                transModules[area][i] = trans[i];
-                            }
+                        const area = modules.length >= 2 && modules[0] === 'modules' ? modules[1] : '_core';
+                        if (!transModules[area]) {
+                            transModules[area] = {};
                         }
+                        transModules[area][i] = trans[i];
                     });
                 }
             }
         });
         Object.keys(transModules).map(m => {
-            fs.ensureDirSync(`../modules/${m}/locales/${t}/${locale}`);
+            if (m === '_core' && t !== 'user') {
+                return;
+            }
+            const dir = m === '_core' ? `../core/locales/${locale}` : `../modules/${m}/locales/${t}/${locale}`;
+            const filename = m === '_core' ? `../core/locales/${locale}/messages.po` : `../modules/${m}/locales/${t}/${locale}/messages.po`;
+            fs.ensureDirSync(dir);
             const data = gettextParser.po.compile({
                 charset: po.charset,
                 headers: po.headers,
@@ -39,7 +40,7 @@ const fs = require('fs-extra');
                     '': transModules[m]
                 }
             });
-            fs.writeFileSync(`../modules/${m}/locales/${t}/${locale}/messages.po`, data);
+            fs.writeFileSync(filename, data);
         });
     });
 });

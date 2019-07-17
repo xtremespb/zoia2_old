@@ -13,22 +13,6 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: shared/components/Error/Error.jsx:55
-msgid "Internal Error"
-msgstr ""
-
-#: shared/components/AdminPanel/AdminPanel.jsx:94
-msgid "Log Out"
-msgstr ""
-
-#: shared/components/Error/Error.jsx:55
-msgid "Page not Found"
-msgstr ""
-
-#: modules/pages/frontend/components/user/PageView.jsx:71
-msgid "Loading data, please wait…"
-msgstr ""
-
 #: modules/users/frontend/components/user/UserAuth.jsx:100
 #: modules/users/frontend/components/user/UserAuth.jsx:131
 msgid "Authorize"

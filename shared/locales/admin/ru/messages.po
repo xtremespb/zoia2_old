@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2019-07-09 12:37+0300\n"
+"POT-Creation-Date: 2019-07-09 12:39+0300\n"
 "Mime-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,203 +13,219 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: shared/components/Error/Error.jsx:55
+msgid "Internal Error"
+msgstr "Внутренняя ошибка"
+
+#: shared/components/AdminPanel/AdminPanel.jsx:94
+msgid "Log Out"
+msgstr "Выход"
+
+#: shared/components/Error/Error.jsx:55
+msgid "Page not Found"
+msgstr "Страница не найдена"
+
+#: modules/users/frontend/components/admin/Translations.jsx:15
+msgid "Actions"
+msgstr "Действия"
+
 #: modules/users/frontend/components/admin/UsersEdit.jsx:88
 msgid "Active"
-msgstr ""
+msgstr "Активен"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:98
 msgid "Administrator"
-msgstr ""
+msgstr "Администратор"
 
 #: modules/users/frontend/components/admin/DialogDelete.jsx:53
 #: modules/users/frontend/components/admin/UsersEdit.jsx:131
 #: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:108
-#: modules/users/frontend/components/admin/UsersList.jsx:112
+#: modules/users/frontend/components/admin/UsersList.jsx:110
+#: modules/users/frontend/components/admin/UsersList.jsx:114
 msgid "Cannot delete one or more users"
-msgstr ""
+msgstr "Ошибка во время удаления одного или нескольких пользователей"
 
 #: modules/users/frontend/components/admin/Translations.jsx:9
 msgid "Cannot update database record"
-msgstr ""
+msgstr "Ошибка во время обновления базы данных"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:187
+#: modules/users/frontend/components/admin/UsersList.jsx:189
 msgid "Could not load data"
-msgstr ""
+msgstr "Ошибка во время загрузки данных с сервера"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:165
 msgid "Could not load data from server"
-msgstr ""
+msgstr "Ошибка во время загрузки данных"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid ""
 "Could not load data from server. Please check your URL or try to "
 "<0>reload</0> data."
 msgstr ""
+"Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или "
+"попробуйте <0>обновить</0> данные."
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:166
 #: modules/users/frontend/components/admin/UsersList.jsx:70
 #: modules/users/frontend/components/admin/UsersList.jsx:73
-#: modules/users/frontend/components/admin/UsersList.jsx:188
+#: modules/users/frontend/components/admin/UsersList.jsx:190
 msgid "Could not save data"
-msgstr ""
+msgstr "Ошибка во время сохранения данных"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:203
 msgid "Create User"
-msgstr ""
+msgstr "Добавление пользователя"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:129
+#: modules/users/frontend/components/admin/UsersList.jsx:131
 msgid "Create new user"
-msgstr ""
+msgstr "Добавление пользователя"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
-msgstr ""
+msgstr "Данные успешно сохранены"
 
 #: modules/users/frontend/components/admin/DialogDelete.jsx:54
-#: modules/users/frontend/components/admin/UsersList.jsx:165
+#: modules/users/frontend/components/admin/UsersList.jsx:167
 msgid "Delete"
-msgstr ""
+msgstr "Удаление"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:129
+#: modules/users/frontend/components/admin/UsersList.jsx:131
 msgid "Delete selected users"
-msgstr ""
+msgstr "Удаление выбранных"
 
 #: modules/users/frontend/components/admin/Translations.jsx:10
 msgid "Duplicate e-mail"
-msgstr ""
+msgstr "E-mail уже существует"
 
 #: modules/users/frontend/components/admin/Translations.jsx:11
 msgid "Duplicate username"
-msgstr ""
+msgstr "Имя пользователя уже существует"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:77
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:165
+#: modules/users/frontend/components/admin/UsersList.jsx:167
 msgid "Edit"
-msgstr ""
+msgstr "Редактирование"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:203
 msgid "Edit User"
-msgstr ""
+msgstr "Редактирование пользователя"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:78
 msgid "Example: username@zoiajs.org"
-msgstr ""
+msgstr "Пример: username@zoiajs.org"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:162
-#: modules/users/frontend/components/admin/UsersList.jsx:189
+#: modules/users/frontend/components/admin/UsersList.jsx:191
 msgid "Field is required"
-msgstr ""
+msgstr "Обязательное поле"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:87
 msgid "Inactive"
-msgstr ""
+msgstr "Неактивен"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:163
 #: modules/users/frontend/components/admin/UsersList.jsx:67
-#: modules/users/frontend/components/admin/UsersList.jsx:190
+#: modules/users/frontend/components/admin/UsersList.jsx:192
 msgid "Invalid format"
-msgstr ""
+msgstr "Неверный формат"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:70
 msgid "Latin chars/_/-, length: 4-32"
-msgstr ""
+msgstr "Лат. символы/_/-, длина: 4-32"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:185
+#: modules/users/frontend/components/admin/UsersList.jsx:187
 msgid "Loading data, please wait…"
-msgstr ""
+msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: shared/components/AdminPanel/AdminPanel.jsx:94
-msgid "Log Out"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersList.jsx:186
+#: modules/users/frontend/components/admin/UsersList.jsx:188
 msgid "No records to display"
-msgstr ""
+msgstr "Нет записей для отображения"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:97
 msgid "Normal User"
-msgstr ""
+msgstr "Пользователь"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:118
 msgid ""
 "Only enter a new password in case you wish to change it for the current "
 "user. Password should be at least 8 characters long."
 msgstr ""
-"Введите пароль только в том случае, если требуется сменить его для "
-"пользователя. Длина пароля должна быть не менее 8 символов."
+"Введите новый пароль только в том случае, если вы хотите изменить его для "
+"текущего пользователя. Пароль должен содержать не менее 8 символов."
 
-#: modules/users/frontend/components/admin/UsersList.jsx:111
+#: modules/users/frontend/components/admin/UsersList.jsx:113
 msgid "Operation complete"
-msgstr ""
+msgstr "Операция выполнена"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:106
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:118
 msgid ""
 "Password is required when creating a new user, should be at least 8 "
 "characters long."
 msgstr ""
+"Пароль требуется при создании нового пользователя, должен быть не менее 8 "
+"символов."
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:164
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Пароль не совпадает"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:94
 msgid "Permissions"
-msgstr ""
+msgstr "Права"
 
 #: modules/users/frontend/components/admin/UsersList.jsx:64
 msgid "Record with the entered value already exists"
-msgstr ""
+msgstr "Запись с таким значением уже существует"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:112
 msgid "Repeat Password"
-msgstr ""
+msgstr "Повтор пароля"
 
 #: modules/users/frontend/components/admin/Translations.jsx:14
 msgid "Required"
-msgstr ""
+msgstr "Обязательное поле"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:137
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:83
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: modules/users/frontend/components/admin/DialogDelete.jsx:49
 msgid "The following user(s) will be permanently deleted:"
-msgstr ""
+msgstr "Следующие пользователи будут удалены навсегда:"
 
 #: modules/users/frontend/components/admin/Translations.jsx:13
 msgid "Too short"
-msgstr ""
+msgstr "Слишком корокий"
 
 #: modules/users/frontend/components/admin/Translations.jsx:12
 msgid "User not found"
-msgstr ""
+msgstr "Не найден"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:69
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
-#: modules/users/frontend/components/admin/UsersList.jsx:119
+#: modules/users/frontend/components/admin/UsersList.jsx:121
 msgid "Users"
-msgstr ""
+msgstr "Пользователи"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:168
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: modules/users/frontend/components/admin/Translations.jsx:8
 msgid "users"
@@ -217,4 +233,4 @@ msgstr "Пользователи"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "will be deleted. Are you sure?"
-msgstr ""
+msgstr "будут удалены. Вы уверены?"

@@ -93,7 +93,9 @@ class UserList extends Component {
                 users.push(i.username);
             });
         }
-        this.dialogDelete.current.show(users, ids);
+        if (ids.length) {
+            this.dialogDelete.current.show(users, ids);
+        }
     }
 
     onDeleteButtonClick = (ids, i18n) => {

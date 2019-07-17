@@ -7,8 +7,8 @@ import axios from 'axios';
 import parse, { domToReact } from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
-import { I18n } from '@lingui/react';
 
+import { history } from '../../../../../shared/store/configureStore';
 import Template from '../../../../../shared/templates/default.jsx';
 import config from '../../../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
@@ -47,8 +47,7 @@ class PageView extends Component {
                 } else {
                     this.setState({
                         loading: false
-                    });
-                    console.log('Error');
+                    }, () => history.push('/error/404'));
                 }
             }).catch(() => {
                 this.setState({
@@ -69,14 +68,13 @@ class PageView extends Component {
     }
 
     render = () => (<Template>
-        <I18n>
-            {this.state.loading ? (<div className="uk-text-small"><span uk-spinner="ratio:0.5" className="uk-margin-small-right" /><Trans>Loading data, please wait…</Trans></div>) : <>{this.state.content}</>}
-        </I18n>
+        {this.state.loading ? (<div className="uk-text-small"><span uk-spinner="ratio:0.5" className="uk-margin-small-right" /><Trans>Loading data, please wait…</Trans></div>) : <>{this.state.content}</>}
     </Template>);
 }
 
 export default connect(store => ({
     appData: store.appData,
+    appLingui: store.appLingui,
     appDataRuntime: store.appDataRuntime
 }),
     dispatch => ({

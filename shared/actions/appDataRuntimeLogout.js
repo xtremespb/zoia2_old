@@ -25,5 +25,6 @@ export default token => dispatch => {
         }
     }).catch(() => {
         // TODO Display an error?
+        history.push('/');
     });
 };

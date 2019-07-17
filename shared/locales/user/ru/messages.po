@@ -13,59 +13,75 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:147
-msgid "Cancel"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:143
-msgid "Could not load data from server"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:144
-msgid "Could not save data"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:141
-msgid "Field is required"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:158
-msgid "Forgot Password"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:142
-msgid "Invalid format"
-msgstr ""
-
-#: modules/pages/frontend/components/user/PageView.jsx:73
-msgid "Loading data, please wait…"
-msgstr ""
+#: shared/components/Error/Error.jsx:55
+msgid "Internal Error"
+msgstr "Внутренняя ошибка"
 
 #: shared/components/AdminPanel/AdminPanel.jsx:94
 msgid "Log Out"
-msgstr ""
+msgstr "Выход"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:115
-msgid "Password"
-msgstr ""
+#: shared/components/Error/Error.jsx:55
+msgid "Page not Found"
+msgstr "Страница не найдена"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:108
-msgid "Username"
-msgstr ""
+#: modules/pages/frontend/components/user/PageView.jsx:71
+msgid "Loading data, please wait…"
+msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:146
-msgid "Yes"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:145
-msgid "will be deleted. Are you sure?"
-msgstr ""
-
-#: modules/users/frontend/components/user/UserAuth.jsx:95
-#: modules/users/frontend/components/user/UserAuth.jsx:126
+#: modules/users/frontend/components/user/UserAuth.jsx:100
+#: modules/users/frontend/components/user/UserAuth.jsx:131
 msgid "Authorize"
 msgstr "Авторизация"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:156
+#: modules/users/frontend/components/user/UserAuth.jsx:152
+msgid "Cancel"
+msgstr "Отмена"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:90
+msgid "Could not authorize"
+msgstr "Ошибка во время авторизации"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:148
+msgid "Could not load data from server"
+msgstr "Ошибка во время загрузки данных с сервера"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:149
+msgid "Could not save data"
+msgstr "Ошибка во время сохранения данных"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:161
 msgid "Create Account"
 msgstr "Регистрация"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:146
+msgid "Field is required"
+msgstr "Обязательное поле"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:163
+msgid "Forgot Password"
+msgstr "Восстановление пароля"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:147
+msgid "Invalid format"
+msgstr "Неверный формат"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:88
+msgid "Invalid username or password"
+msgstr "Неправильное имя пользователя или пароль"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:120
+msgid "Password"
+msgstr "Пароль"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:113
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:151
+msgid "Yes"
+msgstr "Да"
+
+#: modules/users/frontend/components/user/UserAuth.jsx:150
+msgid "will be deleted. Are you sure?"
+msgstr "будут удалены. Вы уверены?"

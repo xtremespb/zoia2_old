@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: ru\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -13,75 +13,59 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: shared/components/Error/Error.jsx:55
-msgid "Internal Error"
-msgstr ""
-
-#: shared/components/AdminPanel/AdminPanel.jsx:94
-msgid "Log Out"
-msgstr ""
-
-#: shared/components/Error/Error.jsx:55
-msgid "Page not Found"
-msgstr ""
-
-#: modules/pages/frontend/components/user/PageView.jsx:71
-msgid "Loading data, please wait…"
-msgstr ""
-
 #: modules/users/frontend/components/user/UserAuth.jsx:100
 #: modules/users/frontend/components/user/UserAuth.jsx:131
 msgid "Authorize"
-msgstr ""
+msgstr "Авторизация"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:152
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:90
 msgid "Could not authorize"
-msgstr ""
+msgstr "Ошибка во время авторизации"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:148
 msgid "Could not load data from server"
-msgstr ""
+msgstr "Ошибка во время загрузки данных с сервера"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:149
 msgid "Could not save data"
-msgstr ""
+msgstr "Ошибка во время сохранения данных"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:161
 msgid "Create Account"
-msgstr ""
+msgstr "Регистрация"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:146
 msgid "Field is required"
-msgstr ""
+msgstr "Обязательное поле"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:163
 msgid "Forgot Password"
-msgstr ""
+msgstr "Восстановление пароля"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:147
 msgid "Invalid format"
-msgstr ""
+msgstr "Неверный формат"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:88
 msgid "Invalid username or password"
-msgstr ""
+msgstr "Неправильное имя пользователя или пароль"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:120
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:113
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:151
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: modules/users/frontend/components/user/UserAuth.jsx:150
 msgid "will be deleted. Are you sure?"
-msgstr ""
+msgstr "будут удалены. Вы уверены?"

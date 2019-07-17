@@ -12,5 +12,6 @@ export default () => (
         <Trans>User not found</Trans>
         <Trans>Too short</Trans>
         <Trans>Required</Trans>
+        <Trans>Actions</Trans>
     </>
 );

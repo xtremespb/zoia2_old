@@ -36,7 +36,7 @@ class UserAuth extends Component {
     }
 
     componentDidMount = () => {
-        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-users-ua-appTheme');
+        document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-users-appTheme');
         this.query = queryString.parse(window.location.search);
         if (this.props.appDataRuntime.token) {
             history.push(this.query.redirect || '/');
@@ -46,6 +46,7 @@ class UserAuth extends Component {
 
     componentWillUnmount = () => {
         this.mounted = false;
+        document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-users-appTheme');
     }
 
     loadCatalog = async (language) => {
@@ -75,14 +76,18 @@ class UserAuth extends Component {
         return true;
     }
 
-    onSaveSuccessHandler = response => {
+    onSaveSuccessHandler = (response, i18n) => {
         if (response.data.statusCode === 200 && response.data.token) {
             this.props.appDataRuntimeSetToken(response.data.token);
             this.props.appDataSetUserAction(response.data.user);
             document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
             setCookie(`${config.siteId}_auth`, response.data.token, config.cookieOptions);
-            history.push(this.query.redirect || '/');
+            return history.push(this.query.redirect || '/');
         }
+        if (response.data.statusCode === 403) {
+            return UIkit.notification(i18n._(t`Invalid username or password`), { status: 'danger' });
+        }
+        return UIkit.notification(i18n._(t`Could not authorize`), { status: 'danger' });
     }
 
     render = () => {
@@ -150,7 +155,7 @@ class UserAuth extends Component {
                             url: `${config.apiURL}/api/users/login`,
                             method: 'POST'
                         }}
-                        onSaveSuccess={response => this.onSaveSuccessHandler(response)}
+                        onSaveSuccess={response => this.onSaveSuccessHandler(response, i18n)}
                     />
                     <div className="uk-text-center uk-text-small uk-margin-top">
                         <Link to="/users/register"><Trans>Create Account</Trans></Link>

@@ -13,18 +13,6 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: shared/components/Error/Error.jsx:55
-msgid "Internal Error"
-msgstr ""
-
-#: shared/components/AdminPanel/AdminPanel.jsx:94
-msgid "Log Out"
-msgstr ""
-
-#: shared/components/Error/Error.jsx:55
-msgid "Page not Found"
-msgstr ""
-
 #: modules/users/frontend/components/admin/Translations.jsx:15
 msgid "Actions"
 msgstr ""

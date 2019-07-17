@@ -29,5 +29,5 @@
     "development": false,
     "loglevel": "info",
     "originCORS": "*",
-    "commonItemsLimit": 13
+    "commonItemsLimit": 12
 }

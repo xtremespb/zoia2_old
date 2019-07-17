@@ -1,0 +1,18 @@
+{
+  "Page not Found": {
+    "origin": [
+      [
+        "shared/components/Error/Error.jsx",
+        55
+      ]
+    ]
+  },
+  "Internal Error": {
+    "origin": [
+      [
+        "shared/components/Error/Error.jsx",
+        55
+      ]
+    ]
+  }
+}

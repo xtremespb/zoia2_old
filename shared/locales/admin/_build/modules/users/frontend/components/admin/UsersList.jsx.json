@@ -15,7 +15,7 @@
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        190
+        192
       ]
     ]
   },
@@ -31,7 +31,7 @@
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        188
+        190
       ]
     ]
   },
@@ -39,11 +39,11 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        108
+        110
       ],
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        112
+        114
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        111
+        113
       ]
     ]
   },
@@ -59,7 +59,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        119
+        121
       ]
     ]
   },
@@ -67,7 +67,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        129
+        131
       ]
     ]
   },
@@ -75,7 +75,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        129
+        131
       ]
     ]
   },
@@ -83,7 +83,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        165
+        167
       ]
     ]
   },
@@ -91,7 +91,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        165
+        167
       ]
     ]
   },
@@ -99,7 +99,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        185
+        187
       ]
     ]
   },
@@ -107,7 +107,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        186
+        188
       ]
     ]
   },
@@ -115,7 +115,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        187
+        189
       ]
     ]
   },
@@ -123,7 +123,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersList.jsx",
-        189
+        191
       ]
     ]
   }

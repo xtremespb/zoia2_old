@@ -1,13 +1,29 @@
 {
+  "Invalid username or password": {
+    "origin": [
+      [
+        "modules/users/frontend/components/user/UserAuth.jsx",
+        88
+      ]
+    ]
+  },
+  "Could not authorize": {
+    "origin": [
+      [
+        "modules/users/frontend/components/user/UserAuth.jsx",
+        90
+      ]
+    ]
+  },
   "Authorize": {
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        95
+        100
       ],
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        126
+        131
       ]
     ]
   },
@@ -15,7 +31,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        108
+        113
       ]
     ]
   },
@@ -23,7 +39,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        115
+        120
       ]
     ]
   },
@@ -31,7 +47,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        141
+        146
       ]
     ]
   },
@@ -39,7 +55,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        142
+        147
       ]
     ]
   },
@@ -47,7 +63,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        143
+        148
       ]
     ]
   },
@@ -55,7 +71,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        144
+        149
       ]
     ]
   },
@@ -63,7 +79,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        145
+        150
       ]
     ]
   },
@@ -71,7 +87,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        146
+        151
       ]
     ]
   },
@@ -79,7 +95,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        147
+        152
       ]
     ]
   },
@@ -87,7 +103,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        156
+        161
       ]
     ]
   },
@@ -95,7 +111,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        158
+        163
       ]
     ]
   }
