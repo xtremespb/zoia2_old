@@ -1,33 +1,39 @@
 {
-    "siteId": "zoia2",
-    "secret": "oqqjgTX8Qb6qhBybD2D5Lknp97V336KJ7TgC8x85o8T8Zcx4t9jhmusS45VmjP3y",
-    "authTokenExpiresIn": "7 days",
-    "cookieOptions": {
-        "expires": 14,
-        "path": "/",
-        "domain": "",
-        "secure": false,
-        "sameSite": "strict"
-    },
-    "httpServer": {
-        "ip": "127.0.0.1",
-        "port": 3000
-    },
-    "apiURL": "http://127.0.0.1:3000",
-    "mongo": {
-        "url": "mongodb://localhost:27017",
-        "dbName": "zoia2"
-    },
-    "languages": {
-        "en": "English",
-        "ru": "Русский"
-    },
-    "siteTitle": {
-        "en": "Example Website",
-        "ru": "Тестовый веб-сайт"
-    },
-    "development": false,
-    "loglevel": "info",
-    "originCORS": "*",
-    "commonItemsLimit": 12
+  "siteId": "zoia2",
+  "secret": "4134a01fa35ac0767b1fedc8729736089721e037309732842287e30f3e5b6df4",
+  "authTokenExpiresIn": "7 days",
+  "cookieOptions": {
+    "expires": 14,
+    "path": "/",
+    "domain": "",
+    "secure": false,
+    "sameSite": "strict"
+  },
+  "httpServer": {
+    "ip": "127.0.0.1",
+    "port": 3000
+  },
+  "apiURL": "http://127.0.0.1:3000",
+  "mongo": {
+    "url": "mongodb://localhost:27017",
+    "dbName": "zoia2"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "siteTitle": {
+    "en": "Example Website",
+    "ru": "Тестовый веб-сайт"
+  },
+  "development": false,
+  "loglevel": "info",
+  "originCORS": "*",
+  "commonItemsLimit": 12,
+  "entrypoints": {
+    "pages": [
+      "/",
+      "/pages"
+    ]
+  }
 }

@@ -1,10 +1,14 @@
+import {
+    APP_LINGUI_SET_CATALOG
+} from '../constants/core';
+
 const initialState = {
     catalogs: {}
 };
 
 export default ((state = initialState, action) => {
     switch (action.type) {
-    case 'APP_LINGUI_SET_CATALOG':
+    case APP_LINGUI_SET_CATALOG:
         const {
             language, catalog
         } = action.payload;

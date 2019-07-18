@@ -6,6 +6,10 @@ import {
     history
 } from '../store/configureStore';
 import config from '../../etc/config.json';
+import {
+    APP_DATA_RUNTIME_SET_TOKEN,
+    APP_DATA_SET_USER
+} from '../constants/core';
 
 export default token => dispatch => {
     axios.post(`${config.apiURL}/api/users/logout`, {
@@ -13,11 +17,11 @@ export default token => dispatch => {
     }).then(res => {
         if (res.data.statusCode === 200) {
             dispatch({
-                type: 'APP_DATA_RUNTIME_SET_TOKEN',
+                type: APP_DATA_RUNTIME_SET_TOKEN,
                 payload: null
             });
             dispatch({
-                type: 'APP_DATA_SET_USER',
+                type: APP_DATA_SET_USER,
                 payload: {}
             });
             removeCookie(`${config.siteId}_auth`);

@@ -3,6 +3,9 @@ import {
 } from 'es-cookie';
 
 import config from '../../etc/config.json';
+import {
+    APP_DATA_RUNTIME_SET_TOKEN
+} from '../constants/core';
 
 const initialState = {
     token: getCookie(`${config.siteId}_auth`) || null
@@ -10,7 +13,7 @@ const initialState = {
 
 export default ((state = initialState, action) => {
     switch (action.type) {
-    case 'APP_DATA_RUNTIME_SET_TOKEN':
+    case APP_DATA_RUNTIME_SET_TOKEN:
         return {
             ...state,
             token: action.payload

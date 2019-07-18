@@ -34,7 +34,7 @@ module.exports = () => ({
         // Processing
         try {
             const query = {
-                path: req.body.path.toLowerCase().replace(/\/$/, '')
+                path: req.body.path.toLowerCase().replace(/\/$/, '') || '/'
             };
             const options = {
                 projection: {

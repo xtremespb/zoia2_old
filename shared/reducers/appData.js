@@ -1,3 +1,8 @@
+import {
+    APP_DATA_SET_LANGUAGE,
+    APP_DATA_SET_USER
+} from '../constants/core';
+
 const initialState = {
     language: 'en',
     user: {}
@@ -5,12 +10,12 @@ const initialState = {
 
 export default ((state = initialState, action) => {
     switch (action.type) {
-    case 'APP_DATA_SET_LANGUAGE':
+    case APP_DATA_SET_LANGUAGE:
         return {
             ...state,
             language: action.payload
         };
-    case 'APP_DATA_SET_USER':
+    case APP_DATA_SET_USER:
         return {
             ...state,
             user: action.payload
