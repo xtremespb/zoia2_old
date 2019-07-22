@@ -157,11 +157,11 @@ class UserAuth extends Component {
                         }}
                         onSaveSuccess={response => this.onSaveSuccessHandler(response, i18n)}
                     />
-                    <div className="uk-text-center uk-text-small uk-margin-top">
+                    {config.allowRegistration ? (<div className="uk-text-center uk-text-small uk-margin-top">
                         <Link to="/users/register"><Trans>Create Account</Trans></Link>
                         &nbsp;|&nbsp;
                         <Link to="/users/password"><Trans>Forgot Password</Trans></Link>
-                    </div>
+                    </div>) : null}
                 </div>
                 );
             }}</I18n>

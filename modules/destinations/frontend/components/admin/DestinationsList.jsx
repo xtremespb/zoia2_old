@@ -15,27 +15,27 @@ import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntime
 import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
-import usersListTableSetState from '../../actions/usersListTableSetState';
+import destinationsListTableSetState from '../../actions/destinationsListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));
-const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "UsersDialogDelete" */ './DialogDelete.jsx'));
+const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "DestinationsDialogDelete" */ './DialogDelete.jsx'));
 
-class UserList extends Component {
+class DestinationsList extends Component {
     constructor(props) {
         super(props);
-        this.usersListTable = React.createRef();
+        this.destinationsListTable = React.createRef();
         this.dialogDelete = React.createRef();
     }
 
     componentDidMount = () => {
         if (!this.props.appDataRuntime.token) {
-            history.push('/users/auth?redirect=/admin/users');
+            history.push('/users/auth?redirect=/admin/destinations');
         } else {
             const query = queryString.parse(window.location.search);
-            if (query.reload && this.usersListTable.current) {
-                this.usersListTable.current.reloadURL();
+            if (query.reload && this.destinationsListTable.current) {
+                this.destinationsListTable.current.reloadURL();
             }
         }
     }
@@ -44,17 +44,17 @@ class UserList extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         removeCookie(`${config.siteId}_auth`);
-        history.push(`/users/auth?redirect=/admin/users`);
+        history.push(`/users/auth?redirect=/admin/destinations`);
     }
 
-    onUsersTableLoadError = res => {
+    onDestinationsTableLoadError = res => {
         if (res && res.status === 403) {
             this.deauthorize();
-            this.props.usersListTableSetStateAction({});
+            this.props.destinationsListTableSetStateAction({});
         }
     }
 
-    onUsersTableSaveError = (data, i18n) => {
+    onDestinationsTableSaveError = (data, i18n) => {
         if (data) {
             if (data.statusCode === 403) {
                 this.deauthorize();
@@ -74,114 +74,96 @@ class UserList extends Component {
         }
     }
 
-    onTableStateUpdated = state => this.props.usersListTableSetStateAction(state);
+    onTableStateUpdated = state => this.props.destinationsListTableSetStateAction(state);
 
     onDeleteRecord = (id, e) => {
         if (e) {
             e.preventDefault();
         }
         const ids = [];
-        const users = [];
+        const destinations = [];
+        const destinationsListTable = this.destinationsListTable.current;
         if (id && e) {
             ids.push(id);
-            const data = this.usersListTable.current.getCurrentData();
-            users.push(data.username[id]);
+            const data = destinationsListTable.getCurrentData();
+            destinations.push(data.name[id]);
         } else {
-            const data = this.usersListTable.current.getCheckboxData();
+            const data = destinationsListTable.getCheckboxData();
             data.map(i => {
                 ids.push(i._id);
-                users.push(i.username);
+                destinations.push(i.name);
             });
         }
         if (ids.length) {
-            this.dialogDelete.current.show(users, ids);
+            this.dialogDelete.current.show(destinations, ids);
         }
     }
 
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
-        this.usersListTable.current.setLoading(true);
-        axios.post(`${config.apiURL}/api/users/deleteUsers`, {
+        this.destinationsListTable.current.setLoading(true);
+        axios.post(`${config.apiURL}/api/destinations/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
-            this.usersListTable.current.setLoading(false);
+            this.destinationsListTable.current.setLoading(false);
             if (res.data.statusCode !== 200) {
-                return UIkit.notification(i18n._(t`Cannot delete one or more users`), { status: 'danger' });
+                return UIkit.notification(i18n._(t`Cannot delete one or more destinations`), { status: 'danger' });
             }
-            this.usersListTable.current.reloadURL();
+            this.destinationsListTable.current.reloadURL();
             return UIkit.notification(i18n._(t`Operation complete`), { status: 'success' });
-        }).catch(() => this.usersListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more users`), { status: 'danger' }));
+        }).catch(() => this.destinationsListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more destinations`), { status: 'danger' }));
     }
+
+    processActions = (val, row, i18n) => (<>
+        <Link to={`/admin/destinations/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />
+        &nbsp;
+        <a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} />
+    </>);
 
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
-                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language);
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Destinations`), this.props.appData.language);
                     return (<>
                         <Table
-                            prefix="usersListTable"
-                            ref={this.usersListTable}
-                            initialState={this.props.usersList.usersTableState}
+                            prefix="destinationsListTable"
+                            ref={this.destinationsListTable}
+                            initialState={this.props.destinationsList.destinationsTableState}
                             onStateUpdated={this.onTableStateUpdated}
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={e => this.onDeleteRecord(null, e)} /></>}
+                            topButtons={<><Link to="/admin/destinations/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new destination`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected destinations`)} onClick={this.onDeleteRecord} /></>}
                             columns={[{
-                                id: 'username',
-                                title: 'Username',
+                                id: 'name',
+                                title: 'Destination',
                                 sortable: true,
-                                editable: 'text',
-                                cssHeader: 'uk-width-1-6@m uk-text-nowrap',
-                                validation: {
-                                    mandatory: true,
-                                    regexp: '^[A-Za-z0-9_-]{4,32}$'
-                                }
-                            }, {
-                                id: 'email',
-                                title: 'E-mail',
-                                sortable: true,
-                                process: item => item || '',
-                                editable: 'text',
-                                validation: {
-                                    mandatory: true,
-                                    regexp: '^(?:[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$'
-                                }
-                            }, {
-                                id: 'active',
-                                title: 'Status',
-                                cssRow: 'uk-width-small uk-text-nowrap ztable-noselect',
-                                sortable: true,
-                                process: item => item ? 1 : 0,
-                                editable: 'select',
-                                options: {
-                                    0: 'Inactive',
-                                    1: 'Active'
-                                }
+                                cssHeader: 'uk-text-nowrap'
                             }, {
                                 id: 'actions',
                                 title: 'Actions',
                                 cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
-                                process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
+                                process: (val, row) => this.processActions(val, row, i18n)
                             }]}
                             itemsPerPage={config.commonItemsLimit}
                             source={{
-                                url: `${config.apiURL}/api/users/list`,
+                                url: `${config.apiURL}/api/destinations/list`,
                                 method: 'POST',
                                 extras: {
-                                    token: this.props.appDataRuntime.token
+                                    token: this.props.appDataRuntime.token,
+                                    language: this.props.appData.language
                                 }
                             }}
                             save={{
-                                url: `${config.apiURL}/api/users/saveField`,
+                                url: `${config.apiURL}/api/destinations/saveField`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token
                                 }
                             }}
-                            sortColumn="username"
+                            sortColumn="name"
                             sortDirection="asc"
                             lang={{
                                 LOADING: i18n._(t`Loading data, please wait…`),
@@ -191,8 +173,8 @@ class UserList extends Component {
                                 ERR_VMANDATORY: i18n._(t`Field is required`),
                                 ERR_VFORMAT: i18n._(t`Invalid format`)
                             }}
-                            onLoadError={this.onUsersTableLoadError}
-                            onSaveError={data => this.onUsersTableSaveError(data, i18n)}
+                            onLoadError={this.onDestinationsTableLoadError}
+                            onSaveError={data => this.onDestinationsTableSaveError(data, i18n)}
                         />
                         <DialogDelete
                             ref={this.dialogDelete}
@@ -210,12 +192,12 @@ export default connect(store => ({
     appData: store.appData,
     appDataRuntime: store.appDataRuntime,
     appLingui: store.appLingui,
-    usersList: store.usersList
+    destinationsList: store.destinationsList
 }),
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
-        usersListTableSetStateAction: state => dispatch(usersListTableSetState(state)),
+        destinationsListTableSetStateAction: state => dispatch(destinationsListTableSetState(state)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
-    }))(UserList);
+    }))(DestinationsList);

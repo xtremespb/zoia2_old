@@ -3,6 +3,7 @@
   "srcPathDirs": [
     "shared/components/",
     "modules/admin/frontend/components/user/",
+    "modules/destinations/frontend/components/user/",
     "modules/pages/frontend/components/user/",
     "modules/users/frontend/components/user/"
   ],

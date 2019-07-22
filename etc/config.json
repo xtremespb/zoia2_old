@@ -35,5 +35,6 @@
       "/",
       "/pages"
     ]
-  }
+  },
+  "allowRegistration": false
 }

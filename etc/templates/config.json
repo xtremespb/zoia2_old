@@ -32,5 +32,6 @@
     "commonItemsLimit": 12,
     "entrypoints": {
         "pages": ["/", "/pages"]
-    }
+    },
+    "allowRegistration": true
 }

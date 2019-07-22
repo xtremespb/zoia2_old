@@ -13,7 +13,7 @@ const ERR_VFORMAT = 2;
 export default class ZTable extends Component {
     state = {
         data: [],
-        columns: this.props.columns,
+        columns: [],
         page: 1,
         checkboxes: {},
         checkboxAllChecked: false,
@@ -77,6 +77,7 @@ export default class ZTable extends Component {
         super(props);
         this.usersTableSearchField = React.createRef();
         if (!this.props.initialState || !Object.keys(this.props.initialState).length) {
+            this.state.columns = props.columns;
             this.props.columns.map(c => {
                 const cn = c;
                 cn.sort = this.props.sortColumn === cn.id ? this.props.sortDirection : null;
@@ -100,10 +101,19 @@ export default class ZTable extends Component {
     componentDidMount = () => {
         document.addEventListener('keydown', this.onEditModeEscapeBinding);
         if (this.props.initialState && Object.keys(this.props.initialState).length) {
-            this.setState({ ...this.props.initialState, mounted: true });
-            if (this.props.initialState.searchText) {
-                this.usersTableSearchField.current.setValue(this.props.initialState.searchText);
-            }
+            this.setState({ ...this.props.initialState, mounted: true }, () => {
+                if (this.props.initialState.searchText) {
+                    this.usersTableSearchField.current.setValue(this.props.initialState.searchText);
+                }
+                const columns = this.props.initialState.columns.map((c, i) => {
+                    const column = c;
+                    column.process = this.props.columns[i].process;
+                    return column;
+                });
+                this.setState({
+                    columns
+                });
+            });
         } else {
             this.setState({ mounted: true });
         }
@@ -132,10 +142,8 @@ export default class ZTable extends Component {
             this.state.columns.map((col) => {
                 let val = item[col.id] || ' ';
                 val = col.process && typeof col.process === 'function' ? col.process(item[col.id], item) : val;
-                if (col.editable) {
-                    valuesSet[col.id] = valuesSet[col.id] || {};
-                    valuesSet[col.id][item._id] = val;
-                }
+                valuesSet[col.id] = valuesSet[col.id] || {};
+                valuesSet[col.id][item._id] = val;
             });
         });
         if (callFromConstructor) {

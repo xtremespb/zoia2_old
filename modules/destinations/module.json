@@ -1,0 +1,6 @@
+{
+	"id": "destinations",
+	"icon": "location",
+	"admin": true,
+	"adminRoute": "/admin/destinations"
+}
