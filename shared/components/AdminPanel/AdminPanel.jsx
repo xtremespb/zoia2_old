@@ -97,7 +97,7 @@ class AdminPanel extends Component {
                             </li>
                             <li>
                                 <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
-                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:left-bottom">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         {this.getLanguagesList('desktop')}
                                     </ul>

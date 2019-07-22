@@ -13,7 +13,11 @@
         "compile-admin": "lingui compile --config .linguirc-admin",
         "add-locale-user": "lingui add-locale --config .linguirc-user",
         "extract-user": "lingui extract --config .linguirc-user",
-        "compile-user": "lingui compile --config .linguirc-user"
+        "compile-user": "lingui compile --config .linguirc-user",
+        "rebuild-locales": "lingui compile --config .linguirc-admin && lingui compile --config .linguirc-user",
+        "install": "node ./bin/setup.js",
+        "split-locales": "node ./bin/setup.js -s",
+        "combine-locales": "node ./bin/setup.js -c"
     },
     "keywords": [
         "zoia2",
@@ -57,7 +61,6 @@
         "lodash": "^4.17.14",
         "moment": "^2.24.0",
         "mongodb": "^3.2.7",
-        "npm-run-script": "0.0.4",
         "pino": "^5.12.6",
         "prop-types": "^15.7.2",
         "query-string": "^6.8.1",

@@ -10,13 +10,7 @@ const gettextParser = require('gettext-parser');
 const {
     MongoClient
 } = require('mongodb');
-const runScript = require('npm-run-script');
 
-const run = (cmd, opt) => new Promise((resolve) => {
-    runScript(cmd, opt, data => {
-        resolve(data);
-    });
-});
 let db;
 const optionDefinitions = [{
     name: 'modify',
@@ -32,7 +26,7 @@ const optionDefinitions = [{
     type: Boolean
 }];
 const options = commandLineArgs(optionDefinitions);
-const config = require(options.modify && fs.existsSync('../etc/config.json') ? '../etc/config.json' : '../etc/templates/config.json');
+const config = require(options.modify && fs.existsSync(`${__dirname}/../etc/config.json`) ? '../etc/config.json' : '../etc/templates/config.json');
 const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
 const questions = [{
         type: 'confirm',
@@ -89,30 +83,16 @@ const questions = [{
         message: 'Which modules to process?',
         choices: ['All', 'None', ...modules],
         default: 'All'
-    },
-    {
-        type: 'confirm',
-        name: 'build',
-        message: 'Re-build Zoia using Webpack?',
-        default: true
-    },
-    {
-        type: 'rawlist',
-        name: 'buildMode',
-        message: 'Build mode to use?',
-        choices: ['build', 'build-dev'],
-        default: 'build',
-        when: a => a.build
     }
 ];
 
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
     ['user', 'admin'].map(t => {
-        const locales = fs.readdirSync(`../shared/locales/${t}`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
             const transModules = {};
-            const input = fs.readFileSync(`../shared/locales/${t}/${locale}/messages.po`);
+            const input = fs.readFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`);
             const po = gettextParser.po.parse(input);
             const trans = po.translations[''];
             Object.keys(trans).map(i => {
@@ -137,8 +117,8 @@ const splitLocales = () => {
                 if (m === '_core' && t !== 'user') {
                     return;
                 }
-                const dir = m === '_core' ? `../core/locales/${locale}` : `../modules/${m}/locales/${t}/${locale}`;
-                const filename = m === '_core' ? `../core/locales/${locale}/messages.po` : `../modules/${m}/locales/${t}/${locale}/messages.po`;
+                const dir = m === '_core' ? `${__dirname}/../core/locales/${locale}` : `../modules/${m}/locales/${t}/${locale}`;
+                const filename = m === '_core' ? `${__dirname}/../core/locales/${locale}/messages.po` : `../modules/${m}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
@@ -156,25 +136,23 @@ const splitLocales = () => {
 const combieLocales = () => {
     console.log(`${colors.green(' * ')} Combining locales...`);
     ['user', 'admin'].map(t => {
-        const locales = fs.readdirSync(`../core/locales`);
+        const locales = fs.readdirSync(`${__dirname}/../core/locales`);
         locales.filter(l => l !== '_build').map(locale => {
-            const messagesCore = fs.readFileSync(`../core/locales/${locale}/messages.po`);
+            const messagesCore = fs.readFileSync(`${__dirname}/../core/locales/${locale}/messages.po`);
             const messagesCorePo = gettextParser.po.parse(messagesCore);
             const messagesCoreTrans = messagesCorePo.translations[''];
             modules.map(m => {
-                try {
-                    fs.existsSync(`../modules/${m}/locales/${t}/${locale}/messages.po`);
-                    const messagesModule = fs.readFileSync(`../modules/${m}/locales/${t}/${locale}/messages.po`);
-                    const messagesModulePo = gettextParser.po.parse(messagesModule);
-                    const messagesModuleTrans = messagesModulePo.translations[''];
-                    Object.keys(messagesModuleTrans).map(mmt => {
-                        if (!messagesCoreTrans[mmt]) {
-                            messagesCoreTrans[mmt] = messagesModuleTrans[mmt];
-                        }
-                    });
-                } catch (e) {
-                    // Ignore
+                if (!fs.existsSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`)) {
+                    return;
                 }
+                const messagesModule = fs.readFileSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`);
+                const messagesModulePo = gettextParser.po.parse(messagesModule);
+                const messagesModuleTrans = messagesModulePo.translations[''];
+                Object.keys(messagesModuleTrans).map(mmt => {
+                    if (!messagesCoreTrans[mmt]) {
+                        messagesCoreTrans[mmt] = messagesModuleTrans[mmt];
+                    }
+                });
             });
             const data = gettextParser.po.compile({
                 charset: messagesCorePo.charset,
@@ -183,7 +161,7 @@ const combieLocales = () => {
                     '': messagesCoreTrans
                 }
             });
-            fs.writeFileSync(`../shared/locales/${t}/${locale}/messages.po`, data);
+            fs.writeFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`, data);
         });
     });
 };
@@ -218,68 +196,67 @@ const install = async () => {
         });
         await mongoClient.connect();
         db = mongoClient.db(config.mongo.dbName);
-        await Promise.all(modules.map(async m => {
-            console.log(`${colors.green(' * ')} Processing module: ${m}...`);
-            if (fs.existsSync(`../modules/${m}/database.json`)) {
-                const moduleDatabaseConfig = require(`../modules/${m}/database.json`);
-                const collections = Object.keys(moduleDatabaseConfig.collections);
-                if (collections.length) {
-                    await Promise.all(collections.map(async c => {
-                        console.log(`${colors.green(' * ')} Creating collection: ${c}...`);
-                        try {
-                            await db.createCollection(c);
-                        } catch (e) {
-                            console.log('');
-                            console.log(colors.red(e));
-                            process.exit(1);
-                        }
-                        const {
-                            indexesAsc,
-                            indexesDesc
-                        } = moduleDatabaseConfig.collections[c];
-                        if (indexesAsc && indexesAsc.length) {
-                            console.log(`${colors.green(' * ')} Creating ASC indexes for collection: ${c}...`);
-                            const indexes = {};
-                            indexesAsc.map(i => indexes[i] = 1);
+        if (data.install !== 'None') {
+            await Promise.all((data.install === 'All' ? modules : [data.install]).map(async m => {
+                console.log(`${colors.green(' * ')} Processing module: ${m}...`);
+                if (fs.existsSync(`${__dirname}/../modules/${m}/database.json`)) {
+                    const moduleDatabaseConfig = require(`../modules/${m}/database.json`);
+                    const collections = Object.keys(moduleDatabaseConfig.collections);
+                    if (collections.length) {
+                        await Promise.all(collections.map(async c => {
+                            console.log(`${colors.green(' * ')} Creating collection: ${c}...`);
                             try {
-                                await db.collection(c).createIndex(indexes, {
-                                    name: `${m}_asc`
-                                });
+                                await db.createCollection(c);
                             } catch (e) {
                                 console.log('');
                                 console.log(colors.red(e));
                                 process.exit(1);
                             }
-                        }
-                        if (indexesDesc && indexesDesc.length) {
-                            console.log(`${colors.green(' * ')} Creating DESC indexes for collection: ${c}...`);
-                            const indexes = {};
-                            indexesDesc.map(i => indexes[i] = 1);
-                            try {
-                                await db.collection(c).createIndex(indexes, {
-                                    name: `${m}_desc`
-                                });
-                            } catch (e) {
-                                console.log('');
-                                console.log(colors.red(e));
-                                process.exit(1);
+                            const {
+                                indexesAsc,
+                                indexesDesc
+                            } = moduleDatabaseConfig.collections[c];
+                            if (indexesAsc && indexesAsc.length) {
+                                console.log(`${colors.green(' * ')} Creating ASC indexes for collection: ${c}...`);
+                                const indexes = {};
+                                indexesAsc.map(i => indexes[i] = 1);
+                                try {
+                                    await db.collection(c).createIndex(indexes, {
+                                        name: `${m}_asc`
+                                    });
+                                } catch (e) {
+                                    console.log('');
+                                    console.log(colors.red(e));
+                                    process.exit(1);
+                                }
                             }
-                        }
-                    }));
+                            if (indexesDesc && indexesDesc.length) {
+                                console.log(`${colors.green(' * ')} Creating DESC indexes for collection: ${c}...`);
+                                const indexes = {};
+                                indexesDesc.map(i => indexes[i] = 1);
+                                try {
+                                    await db.collection(c).createIndex(indexes, {
+                                        name: `${m}_desc`
+                                    });
+                                } catch (e) {
+                                    console.log('');
+                                    console.log(colors.red(e));
+                                    process.exit(1);
+                                }
+                            }
+                        }));
+                    }
                 }
-            }
-        }));
-        if (data.build) {
-            combieLocales();
-            console.log(`${colors.green(' * ')} Compiling locales...`);
-            await run(`node ../node_modules/.bin/lingui compile --config ../.linguirc-admin`);
-            await run(`node ../node_modules/.bin/lingui compile --config ../.linguirc-user`);
-            console.log(`${colors.green(' * ')} Running build...`);
-            await run(`npm run ${data.buildMode}`, {
-                stdio: 'ignore'
-            });
+                if (fs.existsSync(`${__dirname}/../modules/${m}/install.js`)) {
+                    console.log(`${colors.green(' * ')} Running installation script for module: ${m}...`);
+                    const installScript = require(`../modules/${m}/install.js`);
+                    await installScript(db);
+                }
+            }));
         }
         console.log(`${colors.green(' * ')} Done`);
+        console.log('');
+        console.log(`${colors.yellow('Please do the following:\n\n1. Check your')} ${colors.bold('config.js')} ${colors.yellow('file and apply missing changes.\n2. Re-build locales using')} ${colors.bold('npm run rebuild-locales')} ${colors.yellow('command.\n3. Re-build Zoia using')} ${colors.bold('npm run build')} ${colors.yellow('command.')}`);
         mongoClient.close();
     } catch (e) {
         console.log('');
