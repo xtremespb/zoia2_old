@@ -1,8 +1,9 @@
 {
-  "localeDir": "shared/locales/user",
+  "localeDir": "shared/locales/combined/user",
   "srcPathDirs": [
     "shared/components/",
     "modules/admin/frontend/components/user/",
+    "modules/countries/frontend/components/user/",
     "modules/destinations/frontend/components/user/",
     "modules/pages/frontend/components/user/",
     "modules/users/frontend/components/user/"

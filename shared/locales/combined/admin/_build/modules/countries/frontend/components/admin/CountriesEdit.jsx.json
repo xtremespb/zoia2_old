@@ -1,0 +1,126 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        50
+      ]
+    ]
+  },
+  "Country": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        69
+      ]
+    ]
+  },
+  "Country (RU)": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        76
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        90
+      ],
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        128
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        96
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        121
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        122
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        123
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        124
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        125
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        126
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        127
+      ]
+    ]
+  },
+  "Edit Country": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        162
+      ]
+    ]
+  },
+  "New Country": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        162
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        164
+      ]
+    ]
+  }
+}

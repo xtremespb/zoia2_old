@@ -50,7 +50,7 @@ class UserAuth extends Component {
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_user_[index]" */`../../../../../shared/locales/user/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_user_[index]" */`../../../../../shared/locales/combined/user/${language}/messages.js`);
         if (this.mounted) {
             this.setState(state => {
                 const catalogs = {

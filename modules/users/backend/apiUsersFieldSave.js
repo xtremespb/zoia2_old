@@ -1,10 +1,12 @@
-const ObjectId = require('mongodb').ObjectID;
-const auth = require('../../../core/auth');
+import {
+    ObjectId
+} from 'mongodb';
+import auth from '../../../shared/api/auth';
 
 const editableColumns = ['username', 'email', 'active'];
 const noDupes = ['username', 'email'];
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

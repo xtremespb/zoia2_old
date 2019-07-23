@@ -3,7 +3,7 @@ import {
 } from '../constants/destinations';
 
 const initialState = {
-    usersTableState: null
+    destinationsTableState: null
 };
 
 export default ((state = initialState, action) => {

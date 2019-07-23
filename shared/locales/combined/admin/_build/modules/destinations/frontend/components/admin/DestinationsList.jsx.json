@@ -1,0 +1,130 @@
+{
+  "Record with the entered value already exists": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        64
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        67
+      ],
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        174
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        70
+      ],
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        73
+      ],
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        172
+      ]
+    ]
+  },
+  "Cannot delete one or more destinations": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        111
+      ],
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        115
+      ]
+    ]
+  },
+  "Operation complete": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        114
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        119
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        121
+      ]
+    ]
+  },
+  "Destinations": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        128
+      ]
+    ]
+  },
+  "Create new destination": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        138
+      ]
+    ]
+  },
+  "Delete selected destinations": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        138
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        169
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        170
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        171
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        173
+      ]
+    ]
+  }
+}

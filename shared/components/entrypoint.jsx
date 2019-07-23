@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 
-import '../uikit.scss';
+import '../templates/uikit.scss';
 // import config from '../../etc/config.json';
 import modules from '../../etc/modules.json';
 import configureStore, { history } from '../store/configureStore';

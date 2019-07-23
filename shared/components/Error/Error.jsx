@@ -21,7 +21,7 @@ class AdminPanel extends Component {
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_user_[index]" */`../../locales/user/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_user_[index]" */`../../locales/combined/user/${language}/messages.js`);
         this.setState(state => {
             const catalogs = {
                 ...state.catalogs,

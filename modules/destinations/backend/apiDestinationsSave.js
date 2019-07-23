@@ -1,7 +1,5 @@
-const Ajv = require('ajv');
-const crypto = require('crypto');
-const config = require('../../../etc/config.json');
-const auth = require('../../../core/auth');
+import Ajv from 'ajv';
+import auth from '../../../shared/api/auth';
 
 const ajv = new Ajv();
 
@@ -36,7 +34,7 @@ const formValidate = ajv.compile({
     required: ['name', 'name_ru']
 });
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

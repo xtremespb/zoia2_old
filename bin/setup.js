@@ -89,10 +89,12 @@ const questions = [{
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
     ['user', 'admin'].map(t => {
-        const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
+        console.log(`${colors.green(' * ')} Processing area: ${t}`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/combined/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
+            console.log(`${colors.green(' * ')} Processing locale: ${locale}`);
             const transModules = {};
-            const input = fs.readFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`);
+            const input = fs.readFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`);
             const po = gettextParser.po.parse(input);
             const trans = po.translations[''];
             Object.keys(trans).map(i => {
@@ -114,11 +116,12 @@ const splitLocales = () => {
                 }
             });
             Object.keys(transModules).map(m => {
-                if (m === '_core' && t !== 'user') {
+                if (m === '_core') {
                     return;
                 }
-                const dir = m === '_core' ? `${__dirname}/../core/locales/${locale}` : `../modules/${m}/locales/${t}/${locale}`;
-                const filename = m === '_core' ? `${__dirname}/../core/locales/${locale}/messages.po` : `../modules/${m}/locales/${t}/${locale}/messages.po`;
+                console.log(`${colors.green(' * ')} Processing module: ${m}`);
+                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
+                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
@@ -136,9 +139,9 @@ const splitLocales = () => {
 const combieLocales = () => {
     console.log(`${colors.green(' * ')} Combining locales...`);
     ['user', 'admin'].map(t => {
-        const locales = fs.readdirSync(`${__dirname}/../core/locales`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/core`);
         locales.filter(l => l !== '_build').map(locale => {
-            const messagesCore = fs.readFileSync(`${__dirname}/../core/locales/${locale}/messages.po`);
+            const messagesCore = fs.readFileSync(`${__dirname}/../shared/locales/core/${locale}/messages.po`);
             const messagesCorePo = gettextParser.po.parse(messagesCore);
             const messagesCoreTrans = messagesCorePo.translations[''];
             modules.map(m => {
@@ -161,7 +164,7 @@ const combieLocales = () => {
                     '': messagesCoreTrans
                 }
             });
-            fs.writeFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`, data);
+            fs.writeFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`, data);
         });
     });
 };

@@ -1,0 +1,130 @@
+{
+  "Record with the entered value already exists": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        64
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        67
+      ],
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        174
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        70
+      ],
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        73
+      ],
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        172
+      ]
+    ]
+  },
+  "Cannot delete one or more countries": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        111
+      ],
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        115
+      ]
+    ]
+  },
+  "Operation complete": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        114
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        119
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        121
+      ]
+    ]
+  },
+  "Countries": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        128
+      ]
+    ]
+  },
+  "Create new country": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        138
+      ]
+    ]
+  },
+  "Delete selected countries": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        138
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        169
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        170
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        171
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesList.jsx",
+        173
+      ]
+    ]
+  }
+}

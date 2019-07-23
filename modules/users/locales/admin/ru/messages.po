@@ -13,6 +13,8 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: modules/countries/frontend/components/admin/Translations.jsx:14
+#: modules/destinations/frontend/components/admin/Translations.jsx:14
 #: modules/users/frontend/components/admin/Translations.jsx:15
 msgid "Actions"
 msgstr "Действия"
@@ -25,6 +27,12 @@ msgstr "Активен"
 msgid "Administrator"
 msgstr "Администратор"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:90
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:128
+#: modules/countries/frontend/components/admin/DialogDelete.jsx:53
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:90
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:128
+#: modules/destinations/frontend/components/admin/DialogDelete.jsx:53
 #: modules/users/frontend/components/admin/DialogDelete.jsx:53
 #: modules/users/frontend/components/admin/UsersEdit.jsx:131
 #: modules/users/frontend/components/admin/UsersEdit.jsx:169
@@ -36,18 +44,26 @@ msgstr "Отмена"
 msgid "Cannot delete one or more users"
 msgstr "Ошибка во время удаления одного или нескольких пользователей"
 
+#: modules/countries/frontend/components/admin/Translations.jsx:9
+#: modules/destinations/frontend/components/admin/Translations.jsx:9
 #: modules/users/frontend/components/admin/Translations.jsx:9
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:171
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:171
 #: modules/users/frontend/components/admin/UsersList.jsx:189
 msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:124
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:124
 #: modules/users/frontend/components/admin/UsersEdit.jsx:165
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:164
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid ""
 "Could not load data from server. Please check your URL or try to "
@@ -56,6 +72,14 @@ msgstr ""
 "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или "
 "попробуйте <0>обновить</0> данные."
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:125
+#: modules/countries/frontend/components/admin/CountriesList.jsx:70
+#: modules/countries/frontend/components/admin/CountriesList.jsx:73
+#: modules/countries/frontend/components/admin/CountriesList.jsx:172
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:125
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:70
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:73
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:172
 #: modules/users/frontend/components/admin/UsersEdit.jsx:166
 #: modules/users/frontend/components/admin/UsersList.jsx:70
 #: modules/users/frontend/components/admin/UsersList.jsx:73
@@ -71,10 +95,16 @@ msgstr "Добавление пользователя"
 msgid "Create new user"
 msgstr "Добавление пользователя"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:50
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:50
 #: modules/users/frontend/components/admin/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
 msgstr "Данные успешно сохранены"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:121
+#: modules/countries/frontend/components/admin/DialogDelete.jsx:54
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:121
+#: modules/destinations/frontend/components/admin/DialogDelete.jsx:54
 #: modules/users/frontend/components/admin/DialogDelete.jsx:54
 #: modules/users/frontend/components/admin/UsersList.jsx:167
 msgid "Delete"
@@ -96,6 +126,8 @@ msgstr "Имя пользователя уже существует"
 msgid "E-mail"
 msgstr "E-mail"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:119
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:119
 #: modules/users/frontend/components/admin/UsersList.jsx:167
 msgid "Edit"
 msgstr "Редактирование"
@@ -108,6 +140,10 @@ msgstr "Редактирование пользователя"
 msgid "Example: username@zoiajs.org"
 msgstr "Пример: username@zoiajs.org"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:121
+#: modules/countries/frontend/components/admin/CountriesList.jsx:173
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:121
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:173
 #: modules/users/frontend/components/admin/UsersEdit.jsx:162
 #: modules/users/frontend/components/admin/UsersList.jsx:191
 msgid "Field is required"
@@ -117,6 +153,12 @@ msgstr "Обязательное поле"
 msgid "Inactive"
 msgstr "Неактивен"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:122
+#: modules/countries/frontend/components/admin/CountriesList.jsx:67
+#: modules/countries/frontend/components/admin/CountriesList.jsx:174
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:122
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:67
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:174
 #: modules/users/frontend/components/admin/UsersEdit.jsx:163
 #: modules/users/frontend/components/admin/UsersList.jsx:67
 #: modules/users/frontend/components/admin/UsersList.jsx:192
@@ -127,10 +169,14 @@ msgstr "Неверный формат"
 msgid "Latin chars/_/-, length: 4-32"
 msgstr "Лат. символы/_/-, длина: 4-32"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:169
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:169
 #: modules/users/frontend/components/admin/UsersList.jsx:187
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:170
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:170
 #: modules/users/frontend/components/admin/UsersList.jsx:188
 msgid "No records to display"
 msgstr "Нет записей для отображения"
@@ -147,6 +193,8 @@ msgstr ""
 "Введите новый пароль только в том случае, если вы хотите изменить его для "
 "текущего пользователя. Пароль должен содержать не менее 8 символов."
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:114
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:114
 #: modules/users/frontend/components/admin/UsersList.jsx:113
 msgid "Operation complete"
 msgstr "Операция выполнена"
@@ -163,6 +211,8 @@ msgstr ""
 "Пароль требуется при создании нового пользователя, должен быть не менее 8 "
 "символов."
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:123
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:123
 #: modules/users/frontend/components/admin/UsersEdit.jsx:164
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
@@ -171,6 +221,8 @@ msgstr "Пароль не совпадает"
 msgid "Permissions"
 msgstr "Права"
 
+#: modules/countries/frontend/components/admin/CountriesList.jsx:64
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:64
 #: modules/users/frontend/components/admin/UsersList.jsx:64
 msgid "Record with the entered value already exists"
 msgstr "Запись с таким значением уже существует"
@@ -179,10 +231,14 @@ msgstr "Запись с таким значением уже существуе�
 msgid "Repeat Password"
 msgstr "Повтор пароля"
 
+#: modules/countries/frontend/components/admin/Translations.jsx:13
+#: modules/destinations/frontend/components/admin/Translations.jsx:13
 #: modules/users/frontend/components/admin/Translations.jsx:14
 msgid "Required"
 msgstr "Обязательное поле"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:96
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:96
 #: modules/users/frontend/components/admin/UsersEdit.jsx:137
 msgid "Save"
 msgstr "Сохранить"
@@ -195,6 +251,8 @@ msgstr "Статус"
 msgid "The following user(s) will be permanently deleted:"
 msgstr "Следующие пользователи будут удалены навсегда:"
 
+#: modules/countries/frontend/components/admin/Translations.jsx:12
+#: modules/destinations/frontend/components/admin/Translations.jsx:12
 #: modules/users/frontend/components/admin/Translations.jsx:13
 msgid "Too short"
 msgstr "Слишком корокий"
@@ -211,6 +269,8 @@ msgstr "Имя пользователя"
 msgid "Users"
 msgstr "Пользователи"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:127
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:127
 #: modules/users/frontend/components/admin/UsersEdit.jsx:168
 msgid "Yes"
 msgstr "Да"
@@ -219,6 +279,8 @@ msgstr "Да"
 msgid "users"
 msgstr "Пользователи"
 
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:126
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:126
 #: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

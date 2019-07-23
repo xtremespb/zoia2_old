@@ -1,8 +1,8 @@
-const crypto = require('crypto');
-const uuid = require('uuid/v1');
-const config = require('../../../etc/config.json');
+import crypto from 'crypto';
+import uuid from 'uuid/v1';
+import config from '../../../etc/config.json';
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

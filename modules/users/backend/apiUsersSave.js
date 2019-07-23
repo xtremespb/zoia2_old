@@ -1,8 +1,10 @@
-const Ajv = require('ajv');
-const ObjectId = require('mongodb').ObjectID;
-const crypto = require('crypto');
-const config = require('../../../etc/config.json');
-const auth = require('../../../core/auth');
+import Ajv from 'ajv';
+import {
+    ObjectId
+} from 'mongodb';
+import crypto from 'crypto';
+import config from '../../../etc/config.json';
+import auth from '../../../shared/api/auth';
 
 const ajv = new Ajv();
 
@@ -49,7 +51,7 @@ const formValidate = ajv.compile({
     required: ['username', 'email', 'active', 'admin']
 });
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

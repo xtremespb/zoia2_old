@@ -1,6 +1,6 @@
-const auth = require('../../../core/auth');
+import auth from '../../../shared/api/auth';
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

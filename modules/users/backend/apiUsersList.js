@@ -1,10 +1,10 @@
-const config = require('../../../etc/config.json');
-const auth = require('../../../core/auth');
+import config from '../../../etc/config.json';
+import auth from '../../../shared/api/auth';
 
 const sortColumns = ['username', 'email', 'active'];
 const searchColumns = ['username', 'email'];
 
-module.exports = fastify => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',

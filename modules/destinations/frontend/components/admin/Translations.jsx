@@ -5,7 +5,7 @@ import { Trans } from '@lingui/macro';
 
 export default () => (
     <>
-        <Trans>Destinations</Trans>
+        <Trans>destinations</Trans>
         <Trans>Cannot update database record</Trans>
         <Trans>Duplicate destination</Trans>
         <Trans>Destination not found</Trans>

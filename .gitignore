@@ -25,4 +25,5 @@ typings/
 .env
 node_modules/
 static/data/**
-./static/index.html
+bin/server.js
+static/index.html
