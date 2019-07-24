@@ -15,27 +15,27 @@ import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntime
 import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
-import countriesListTableSetState from '../../actions/countriesListTableSetState';
+import basesListTableSetState from '../../actions/basesListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));
-const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "CountriesDialogDelete" */ './DialogDelete.jsx'));
+const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "BasesDialogDelete" */ './DialogDelete.jsx'));
 
-class CountriesList extends Component {
+class BasesList extends Component {
     constructor(props) {
         super(props);
-        this.countriesListTable = React.createRef();
+        this.basesListTable = React.createRef();
         this.dialogDelete = React.createRef();
     }
 
     componentDidMount = () => {
         if (!this.props.appDataRuntime.token) {
-            history.push('/users/auth?redirect=/admin/countries');
+            history.push('/users/auth?redirect=/admin/bases');
         } else {
             const query = queryString.parse(window.location.search);
-            if (query.reload && this.countriesListTable.current) {
-                this.countriesListTable.current.reloadURL();
+            if (query.reload && this.basesListTable.current) {
+                this.basesListTable.current.reloadURL();
             }
         }
     }
@@ -44,17 +44,17 @@ class CountriesList extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         removeCookie(`${config.siteId}_auth`);
-        history.push(`/users/auth?redirect=/admin/countries`);
+        history.push(`/users/auth?redirect=/admin/bases`);
     }
 
-    onCountriesTableLoadError = res => {
+    onBasesTableLoadError = res => {
         if (res && res.status === 403) {
             this.deauthorize();
-            this.props.countriesListTableSetStateAction({});
+            this.props.basesListTableSetStateAction({});
         }
     }
 
-    onCountriesTableSaveError = (data, i18n) => {
+    onBasesTableSaveError = (data, i18n) => {
         if (data) {
             if (data.statusCode === 403) {
                 this.deauthorize();
@@ -74,49 +74,49 @@ class CountriesList extends Component {
         }
     }
 
-    onTableStateUpdated = state => this.props.countriesListTableSetStateAction(state);
+    onTableStateUpdated = state => this.props.basesListTableSetStateAction(state);
 
     onDeleteRecord = (id, e) => {
         if (e) {
             e.preventDefault();
         }
         const ids = [];
-        const countries = [];
-        const countriesListTable = this.countriesListTable.current;
+        const bases = [];
+        const basesListTable = this.basesListTable.current;
         if (id && e) {
             ids.push(id);
-            const data = countriesListTable.getCurrentData();
-            countries.push(data.name[id]);
+            const data = basesListTable.getCurrentData();
+            bases.push(data.name[id]);
         } else {
-            const data = countriesListTable.getCheckboxData();
+            const data = basesListTable.getCheckboxData();
             data.map(i => {
                 ids.push(i._id);
-                countries.push(i.name);
+                bases.push(i.name);
             });
         }
         if (ids.length) {
-            this.dialogDelete.current.show(countries, ids);
+            this.dialogDelete.current.show(bases, ids);
         }
     }
 
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
-        this.countriesListTable.current.setLoading(true);
-        axios.post(`${config.apiURL}/api/countries/delete`, {
+        this.basesListTable.current.setLoading(true);
+        axios.post(`${config.apiURL}/api/bases/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
-            this.countriesListTable.current.setLoading(false);
+            this.basesListTable.current.setLoading(false);
             if (res.data.statusCode !== 200) {
-                return UIkit.notification(i18n._(t`Cannot delete one or more countries`), { status: 'danger' });
+                return UIkit.notification(i18n._(t`Cannot delete one or more bases`), { status: 'danger' });
             }
-            this.countriesListTable.current.reloadURL();
+            this.basesListTable.current.reloadURL();
             return UIkit.notification(i18n._(t`Operation complete`), { status: 'success' });
-        }).catch(() => this.countriesListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more countries`), { status: 'danger' }));
+        }).catch(() => this.basesListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more bases`), { status: 'danger' }));
     }
 
     processActions = (val, row, i18n) => (<>
-        <Link to={`/admin/countries/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />
+        <Link to={`/admin/bases/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />
         &nbsp;
         <a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} />
     </>);
@@ -125,21 +125,21 @@ class CountriesList extends Component {
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
-                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Countries`), this.props.appData.language);
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Bases`), this.props.appData.language);
                     return (<>
-                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Countries`)}</div>
+                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Bases`)}</div>
                         <Table
-                            prefix="countriesListTable"
-                            ref={this.countriesListTable}
-                            initialState={this.props.countriesList.countriesTableState}
+                            prefix="basesListTable"
+                            ref={this.basesListTable}
+                            initialState={this.props.basesList.basesTableState}
                             onStateUpdated={this.onTableStateUpdated}
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/countries/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new country`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected countries`)} onClick={this.onDeleteRecord} /></>}
+                            topButtons={<><Link to="/admin/bases/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new base`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected bases`)} onClick={this.onDeleteRecord} /></>}
                             columns={[{
                                 id: 'name',
-                                title: 'Country',
+                                title: 'Base',
                                 sortable: true,
                                 cssHeader: 'uk-text-nowrap'
                             }, {
@@ -150,7 +150,7 @@ class CountriesList extends Component {
                             }]}
                             itemsPerPage={config.commonItemsLimit}
                             source={{
-                                url: `${config.apiURL}/api/countries/list`,
+                                url: `${config.apiURL}/api/bases/list`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token,
@@ -158,7 +158,7 @@ class CountriesList extends Component {
                                 }
                             }}
                             save={{
-                                url: `${config.apiURL}/api/countries/saveField`,
+                                url: `${config.apiURL}/api/bases/saveField`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token
@@ -174,8 +174,8 @@ class CountriesList extends Component {
                                 ERR_VMANDATORY: i18n._(t`Field is required`),
                                 ERR_VFORMAT: i18n._(t`Invalid format`)
                             }}
-                            onLoadError={this.onCountriesTableLoadError}
-                            onSaveError={data => this.onCountriesTableSaveError(data, i18n)}
+                            onLoadError={this.onBasesTableLoadError}
+                            onSaveError={data => this.onBasesTableSaveError(data, i18n)}
                         />
                         <DialogDelete
                             ref={this.dialogDelete}
@@ -193,12 +193,12 @@ export default connect(store => ({
     appData: store.appData,
     appDataRuntime: store.appDataRuntime,
     appLingui: store.appLingui,
-    countriesList: store.countriesList
+    basesList: store.basesList
 }),
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
-        countriesListTableSetStateAction: state => dispatch(countriesListTableSetState(state)),
+        basesListTableSetStateAction: state => dispatch(basesListTableSetState(state)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
-    }))(CountriesList);
+    }))(BasesList);

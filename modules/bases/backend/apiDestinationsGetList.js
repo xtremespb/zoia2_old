@@ -8,12 +8,17 @@ export default fastify => ({
                 token: {
                     type: 'string'
                 },
-                id: {
-                    type: 'integer',
-                    minimum: 1000
+                language: {
+                    type: 'string',
+                    minLength: 2,
+                    maxLength: 2
+                },
+                destination: {
+                    type: 'string',
+                    pattern: '^[0-9]+$'
                 }
             },
-            required: ['token', 'id']
+            required: ['token', 'language']
         }
     },
     attachValidation: true,
@@ -45,28 +50,43 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            // Find user with given ID
-            const countryRecord = await this.mongo.db.collection('countries').findOne({
-                _id: req.body.id
+            // Get data
+            const query = {
+                _id: {
+                    $gte: 1000
+                }
+            };
+            const destinations = {};
+            (await this.mongo.db.collection('destinations').find(query).toArray() || []).map(d => {
+                const destination = d;
+                const [
+                    en,
+                    ru
+                ] = destination.name.split(/\|/);
+                destination.name = req.body.language === 'ru' ? ru : en;
+                destinations[destination._id] = destination.name;
             });
-            if (!countryRecord) {
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: 'Non-existent record'
-                }));
+            const countries = {};
+            if (Object.keys(destinations).length) {
+                const destination = req.body.destination ? parseInt(req.body.destination, 10) : parseInt(Object.keys(destinations)[0], 10);
+                (await this.mongo.db.collection('countries').find({
+                    destination
+                }).toArray() || []).map(d => {
+                    const country = d;
+                    const [
+                        en,
+                        ru
+                    ] = country.name.split(/\|/);
+                    country.name = req.body.language === 'ru' ? ru : en;
+                    countries[country._id] = country.name;
+                });
             }
-            const [nameEn, nameRu] = countryRecord.name.split(/\|/);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
-                    data: {
-                        default: {
-                            name: nameEn,
-                            name_ru: nameRu,
-                            destination: countryRecord.destination
-                        }
-                    }
+                    destinations,
+                    countries
                 }));
         } catch (e) {
             req.log.error({

@@ -29,6 +29,7 @@ const ERR_VTOOLONG = 5;
 
 export default class ZFormBuilder extends Component {
     state = {
+        data: {},
         dataStorage: {},
         tab: Object.keys(this.props.tabs)[0],
         tabs: this.props.defaultTabs,
@@ -55,6 +56,8 @@ export default class ZFormBuilder extends Component {
         onLoadSuccess: PropTypes.func,
         onSaveError: PropTypes.func,
         onSaveSuccess: PropTypes.func,
+        onDataDeserialized: PropTypes.func,
+        onFormBuilt: PropTypes.func,
         axios: PropTypes.func.isRequired,
         simple: PropTypes.bool,
         i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
@@ -91,12 +94,15 @@ export default class ZFormBuilder extends Component {
         onLoadSuccess: null,
         onSaveError: null,
         onSaveSuccess: null,
+        onDataDeserialized: null,
+        onFormBuilt: null,
         simple: false
     }
 
     constructor(props) {
         super(props);
         const values = {};
+        this.state.data = props.data;
         const { data } = props;
         data.map(item => {
             if (Array.isArray(item)) {
@@ -147,7 +153,7 @@ export default class ZFormBuilder extends Component {
         this.types = {};
         this.fields = {};
         this.formDataExtra = {};
-        this.props.data.map(item => {
+        this.state.data.map(item => {
             if (Array.isArray(item)) {
                 item.map(ai => {
                     this.types[ai.id] = { type: ai.type, values: ai.values };
@@ -163,7 +169,7 @@ export default class ZFormBuilder extends Component {
     }
 
     setFocusOnFields = () => {
-        this.props.data.map(item => {
+        this.state.data.map(item => {
             if (Array.isArray(item)) {
                 item.map(ai => {
                     if (ai.autofocus && !this.state.loading && this.fields[ai.id].focus) {
@@ -185,13 +191,57 @@ export default class ZFormBuilder extends Component {
         if (this.props.load && this.props.load.url) {
             this.loadData();
         }
+        if (this.props.onFormBuilt && typeof this.props.onFormBuilt === 'function') {
+            this.props.onFormBuilt();
+        }
     }
+
+    setProperty = (id, property, value) => new Promise(resolve => {
+        const data = cloneDeep(this.state.data);
+        data.map((item, i1) => {
+            if (Array.isArray(item)) {
+                item.map((ai, i2) => {
+                    if (ai.id === id) {
+                        data[i1][i2][property] = value;
+                    }
+                });
+            } else if (item.id === id) {
+                data[i1][property] = value;
+            }
+        });
+        this.setState({
+            data
+        }, () => resolve());
+    });
+
+    setValue = (property, value, tab = this.state.tab) => new Promise(resolve => {
+        const dataStorage = cloneDeep(this.state.dataStorage);
+        dataStorage[tab][property] = value;
+        this.setState({
+            dataStorage
+        }, () => resolve());
+    });
+
+    getValue = (property, tab = this.state.tab) => this.state.dataStorage[tab][property];
 
     onGenericFieldValueChanged = (id, value) => {
         const storage = cloneDeep(this.state.dataStorage);
         storage[this.state.tab][id] = value;
         this.setState({
             dataStorage: storage
+        }, () => {
+            // Call onChange if defined
+            this.state.data.map(item => {
+                if (Array.isArray(item)) {
+                    item.map(ai => {
+                        if (ai.id === id && ai.onChange && typeof ai.onChange === 'function') {
+                            ai.onChange(id, value);
+                        }
+                    });
+                } else if (item.id === id && item.onChange && typeof item.onChange === 'function') {
+                    item.onChange(id, value);
+                }
+            });
         });
     }
 
@@ -395,7 +445,7 @@ export default class ZFormBuilder extends Component {
                     value={this.state.dataStorage[this.state.tab][item.id] || Object.keys(item.values)[0]}
                     values={item.values || {}}
                     onValueChanged={this.onGenericFieldValueChanged}
-                    disabled={this.state.loading}
+                    disabled={this.state.loading || item.disabled}
                 />);
             case 'message':
                 return (<ZMessage
@@ -408,13 +458,16 @@ export default class ZFormBuilder extends Component {
         }
     }
 
-    getFormFields = () => this.props.data.map(item => {
-        if (Array.isArray(item)) {
-            const items = item.map(ai => this.getFormItem(ai, 'uk-width-auto uk-margin-small-right'));
-            return (<ZWrap key={`field_${this.props.prefix}_wrap_${item[0].id}`} items={items} />);
-        }
-        return this.getFormItem(item);
-    })
+    getFormFields = () => {
+        const data = this.state.data.map(item => {
+            if (Array.isArray(item)) {
+                const items = item.map(ai => this.getFormItem(ai, 'uk-width-auto uk-margin-small-right'));
+                return (<ZWrap key={`field_${this.props.prefix}_wrap_${item[0].id}`} items={items} />);
+            }
+            return this.getFormItem(item);
+        });
+        return data;
+    }
 
     getCommonFieldsData = id => {
         let data = this.state.dataStorage;
@@ -605,7 +658,7 @@ export default class ZFormBuilder extends Component {
         return { data, formData };
     }
 
-    deserializeData = _data => {
+    deserializeData = _data => new Promise(resolve => {
         const data = cloneDeep(_data);
         const dataStorageNew = {};
         const tabsNew = [];
@@ -631,7 +684,7 @@ export default class ZFormBuilder extends Component {
                             dataStorageNew[tab][field] = data[tab][field];
                     }
                 });
-                this.props.data.map(item => {
+                this.state.data.map(item => {
                     if (Array.isArray(item)) {
                         item.map(sitem => {
                             if (!dataStorageNew[tab][sitem.id]) {
@@ -673,8 +726,13 @@ export default class ZFormBuilder extends Component {
             tab: tabsNew[0],
             tabs: tabsNew,
             dataStorage: dataStorageNew
+        }, () => {
+            if (this.props.onDataDeserialized && typeof this.props.onDataDeserialized === 'function') {
+                this.props.onDataDeserialized(dataStorageNew, tabsNew);
+            }
+            resolve(dataStorageNew);
         });
-    }
+    });
 
     validateItem = (id, _value, data) => {
         if (!this.props.validation || !this.props.validation[id]) {

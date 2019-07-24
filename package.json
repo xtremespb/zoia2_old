@@ -4,6 +4,8 @@
     "description": "Zoia 2 CMS",
     "main": "bin/server.js",
     "scripts": {
+        "build": "webpack --mode production --config webpack-frontend.config.js && webpack --mode production --config webpack-api.config.js",
+        "build-dev": "webpack --mode development --config webpack-frontend.config.js && webpack --mode development --config webpack-api.config.js",
         "build-frontend": "webpack --mode production --config webpack-frontend.config.js",
         "build-frontend-dev": "webpack --mode development --config webpack-frontend.config.js",
         "build-api": "webpack --mode production --config webpack-api.config.js",

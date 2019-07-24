@@ -127,6 +127,7 @@ class DestinationsList extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Destinations`), this.props.appData.language);
                     return (<>
+                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Destinations`)}</div>
                         <Table
                             prefix="destinationsListTable"
                             ref={this.destinationsListTable}

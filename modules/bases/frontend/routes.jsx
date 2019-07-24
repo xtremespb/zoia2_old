@@ -1,20 +1,20 @@
 import React, { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
-const CountriesList = lazy(() => import(/* webpackChunkName: "CountriesList" */ './components/admin/CountriesList.jsx'));
-const CountriesEdit = lazy(() => import(/* webpackChunkName: "CountriesEdit" */ './components/admin/CountriesEdit.jsx'));
+const BasesList = lazy(() => import(/* webpackChunkName: "UsersList" */ './components/admin/BasesList.jsx'));
+const BasesEdit = lazy(() => import(/* webpackChunkName: "UsersEdit" */ './components/admin/BasesEdit.jsx'));
 
 const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle" style={{ height: '100%' }}><span uk-spinner="ratio:2" /></div>);
 
-const getCountriesList = () => ((
+const getBasesList = () => ((
     <Suspense fallback={getSuspense()}>
-        <CountriesList />
+        <BasesList />
     </Suspense>
 ));
 
-const getCountriesEdit = props => ((
+const getBasesEdit = props => ((
     <Suspense fallback={getSuspense()}>
-        <CountriesEdit
+        <BasesEdit
             {...props}
         />
     </Suspense>
@@ -23,20 +23,20 @@ const getCountriesEdit = props => ((
 export default [
     (<Route
         key="usersList"
-        path="/admin/countries"
-        component={getCountriesList}
+        path="/admin/bases"
+        component={getBasesList}
         exact
     />),
     (<Route
         key="usersCreate"
-        path="/admin/countries/add"
+        path="/admin/bases/add"
         exact
-        component={getCountriesEdit}
+        component={getBasesEdit}
     />),
     (<Route
         key="usersEdit"
-        path="/admin/countries/edit/:id"
+        path="/admin/bases/edit/:id"
         exact
-        component={getCountriesEdit}
+        component={getBasesEdit}
     />)
 ];

@@ -1,3 +1,4 @@
+import config from '../../../etc/config.json';
 import auth from '../../../shared/api/auth';
 
 export default fastify => ({
@@ -8,12 +9,13 @@ export default fastify => ({
                 token: {
                     type: 'string'
                 },
-                id: {
-                    type: 'integer',
-                    minimum: 1000
+                language: {
+                    type: 'string',
+                    minLength: 2,
+                    maxLength: 2
                 }
             },
-            required: ['token', 'id']
+            required: ['token', 'language']
         }
     },
     attachValidation: true,
@@ -45,28 +47,27 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            // Find user with given ID
-            const countryRecord = await this.mongo.db.collection('countries').findOne({
-                _id: req.body.id
+            // Get data
+            const query = {
+                _id: {
+                    $gte: 1000
+                }
+            };
+            const destinations = {};
+            (await this.mongo.db.collection('destinations').find(query).toArray() || []).map(d => {
+                const destination = d;
+                const [
+                    en,
+                    ru
+                ] = destination.name.split(/\|/);
+                destination.name = req.body.language === 'ru' ? ru : en;
+                destinations[destination._id] = destination.name;
             });
-            if (!countryRecord) {
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: 'Non-existent record'
-                }));
-            }
-            const [nameEn, nameRu] = countryRecord.name.split(/\|/);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
-                    data: {
-                        default: {
-                            name: nameEn,
-                            name_ru: nameRu,
-                            destination: countryRecord.destination
-                        }
-                    }
+                    destinations
                 }));
         } catch (e) {
             req.log.error({

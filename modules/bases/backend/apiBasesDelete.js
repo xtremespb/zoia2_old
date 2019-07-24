@@ -8,12 +8,16 @@ export default fastify => ({
                 token: {
                     type: 'string'
                 },
-                id: {
-                    type: 'integer',
-                    minimum: 1000
+                ids: {
+                    type: 'array',
+                    minItems: 1,
+                    contains: {
+                        type: 'integer',
+                        minimum: 1000
+                    }
                 }
             },
-            required: ['token', 'id']
+            required: ['token', 'ids']
         }
     },
     attachValidation: true,
@@ -45,28 +49,23 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            // Find user with given ID
-            const countryRecord = await this.mongo.db.collection('countries').findOne({
-                _id: req.body.id
+            const query = req.body.ids.map(_id => ({
+                _id
+            }));
+            const result = await this.mongo.db.collection('bases').deleteMany({
+                $or: query
             });
-            if (!countryRecord) {
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: 'Non-existent record'
-                }));
+            if (!result || !result.result || !result.result.ok) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        error: 'Cannot delete database record(s)'
+                    }));
             }
-            const [nameEn, nameRu] = countryRecord.name.split(/\|/);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
-                    statusCode: 200,
-                    data: {
-                        default: {
-                            name: nameEn,
-                            name_ru: nameRu,
-                            destination: countryRecord.destination
-                        }
-                    }
+                    statusCode: 200
                 }));
         } catch (e) {
             req.log.error({

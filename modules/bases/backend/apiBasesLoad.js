@@ -46,16 +46,16 @@ export default fastify => ({
         // End of check permissions
         try {
             // Find user with given ID
-            const countryRecord = await this.mongo.db.collection('countries').findOne({
+            const baseRecord = await this.mongo.db.collection('bases').findOne({
                 _id: req.body.id
             });
-            if (!countryRecord) {
+            if (!baseRecord) {
                 return rep.code(400).send(JSON.stringify({
                     statusCode: 400,
                     error: 'Non-existent record'
                 }));
             }
-            const [nameEn, nameRu] = countryRecord.name.split(/\|/);
+            const [nameEn, nameRu] = baseRecord.name.split(/\|/);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
@@ -64,7 +64,8 @@ export default fastify => ({
                         default: {
                             name: nameEn,
                             name_ru: nameRu,
-                            destination: countryRecord.destination
+                            destination: baseRecord.destination,
+                            country: baseRecord.country
                         }
                     }
                 }));

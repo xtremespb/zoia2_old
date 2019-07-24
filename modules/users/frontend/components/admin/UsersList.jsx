@@ -120,6 +120,7 @@ class UserList extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language);
                     return (<>
+                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Users`)}</div>
                         <Table
                             prefix="usersListTable"
                             ref={this.usersListTable}

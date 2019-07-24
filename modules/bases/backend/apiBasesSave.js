@@ -35,9 +35,15 @@ const formValidate = ajv.compile({
             pattern: '^[0-9]+$',
             minLength: 1,
             maxLength: 10
+        },
+        country: {
+            type: 'string',
+            pattern: '^[0-9]+$',
+            minLength: 1,
+            maxLength: 10
         }
     },
-    required: ['name', 'name_ru', 'destination']
+    required: ['name', 'name_ru', 'destination', 'country']
 });
 
 export default fastify => ({
@@ -107,18 +113,18 @@ export default fastify => ({
                 }));
             }
             // End of check permissions
-            // Check if such country exists
+            // Check if such base exists
             if (id) {
-                const country = await this.mongo.db.collection('countries').findOne({
+                const base = await this.mongo.db.collection('bases').findOne({
                     _id: id
                 });
-                if (!country) {
+                if (!base) {
                     return rep.code(200)
                         .send(JSON.stringify({
                             statusCode: 400,
                             errors: {
                                 default: {
-                                    name: 'Country not found'
+                                    name: 'Base not found'
                                 }
                             }
                         }));
@@ -127,7 +133,7 @@ export default fastify => ({
             // Get next ID if required
             if (!id) {
                 await this.mongo.db.collection('counters').update({
-                    _id: 'countries'
+                    _id: 'bases'
                 }, {
                     $setOnInsert: {
                         seq: 1000
@@ -136,7 +142,7 @@ export default fastify => ({
                     upsert: true
                 });
                 const incr = await this.mongo.db.collection('counters').findAndModify({
-                    _id: 'countries'
+                    _id: 'bases'
                 }, [], {
                     $inc: {
                         seq: 1
@@ -151,13 +157,14 @@ export default fastify => ({
                 id = incr.value.seq;
             }
             // Update database
-            const update = await this.mongo.db.collection('countries').updateOne({
+            const update = await this.mongo.db.collection('bases').updateOne({
                 _id: id
             }, {
                 $set: {
                     name: `${formData.default.name}|${formData.default.name_ru}`,
                     name_ru: formData.default.name_ru,
-                    destination: parseInt(formData.default.destination, 10)
+                    destination: parseInt(formData.default.destination, 10),
+                    country: parseInt(formData.default.country, 10)
                 }
             }, {
                 upsert: true
