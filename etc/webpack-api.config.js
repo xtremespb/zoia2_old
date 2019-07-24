@@ -7,10 +7,10 @@ const path = require('path');
 
 const webpackConfig = {
     entry: {
-        app: `${__dirname}/shared/api/server.js`
+        app: `${__dirname}/../shared/api/server.js`
     },
     output: {
-        path: `${__dirname}/bin`,
+        path: `${__dirname}/../bin`,
         filename: 'server.js'
     },
     target: 'node',
@@ -60,20 +60,20 @@ const webpackConfig = {
 };
 
 console.log('Getting modules info...');
-const modules = fs.readdirSync(path.join(__dirname, 'modules'));
+const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
 const modulesInfo = {};
-modules.map(module => modulesInfo[module] = require(path.join(__dirname, 'modules', module, 'module.json')));
-fs.writeJSONSync(path.join(__dirname, 'etc', 'modules.json'), modulesInfo);
-const linguiUser = fs.readJSONSync('./.linguirc-user');
+modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', 'modules', module, 'module.json')));
+fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
+const linguiUser = fs.readJSONSync(`${__dirname}/linguirc.user.json`);
 const linguiPathsArrUser = modules.map(module => `modules/${module}/frontend/components/user/`);
 linguiUser.srcPathDirs = ['shared/components/', ...linguiPathsArrUser];
-fs.writeJSONSync('./.linguirc-user', linguiUser, {
+fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
     spaces: 2
 });
-const linguiAdmin = fs.readJSONSync('./.linguirc-admin');
+const linguiAdmin = fs.readJSONSync(`${__dirname}/linguirc.admin.json`);
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/frontend/components/admin/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
-fs.writeJSONSync('./.linguirc-admin', linguiAdmin, {
+fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
     spaces: 2
 });
 

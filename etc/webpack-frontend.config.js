@@ -9,11 +9,11 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const webpackConfig = {
     entry: {
-        app: path.resolve(__dirname, 'shared', 'components', 'entrypoint.jsx')
+        app: path.resolve(__dirname, '..', 'shared', 'components', 'entrypoint.jsx')
     },
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, 'static', 'data'),
+        path: path.resolve(__dirname, '..', 'static', 'data'),
         publicPath: '/data/',
         filename: '[name]_[chunkhash].js'
     },
@@ -102,9 +102,9 @@ const webpackConfig = {
             orderWarning: true
         }),
         new HtmlWebpackPlugin({
-            filename: path.resolve(__dirname, 'static', 'index.html'),
+            filename: path.resolve(__dirname, '..', 'static', 'index.html'),
             chunks: ['app', 'styles', 'vendors'],
-            template: path.resolve(__dirname, 'shared', 'templates', 'template.html')
+            template: path.resolve(__dirname, '..', 'shared', 'templates', 'template.html')
             // minify: {
             //     collapseWhitespace: true,
             //     removeComments: true,
@@ -117,23 +117,23 @@ const webpackConfig = {
     ]
 };
 console.log('Cleaning up...');
-fs.removeSync(path.resolve(__dirname, 'static', 'data'));
-fs.removeSync(path.resolve(__dirname, 'static', 'index.html'));
+fs.removeSync(path.resolve(__dirname, '..', 'static', 'data'));
+fs.removeSync(path.resolve(__dirname, '..', 'static', 'index.html'));
 console.log('Getting modules info...');
-const modules = fs.readdirSync(path.join(__dirname, 'modules'));
+const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
 const modulesInfo = {};
-modules.map(module => modulesInfo[module] = require(path.join(__dirname, 'modules', module, 'module.json')));
-fs.writeJSONSync(path.join(__dirname, 'etc', 'modules.json'), modulesInfo);
-const linguiUser = fs.readJSONSync('./.linguirc-user');
+modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', 'modules', module, 'module.json')));
+fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
+const linguiUser = fs.readJSONSync(`${__dirname}/linguirc.user.json`);
 const linguiPathsArrUser = modules.map(module => `modules/${module}/frontend/components/user/`);
 linguiUser.srcPathDirs = ['shared/components/', ...linguiPathsArrUser];
-fs.writeJSONSync('./.linguirc-user', linguiUser, {
+fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
     spaces: 2
 });
-const linguiAdmin = fs.readJSONSync('./.linguirc-admin');
+const linguiAdmin = fs.readJSONSync(`${__dirname}/linguirc.admin.json`);
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/frontend/components/admin/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
-fs.writeJSONSync('./.linguirc-admin', linguiAdmin, {
+fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
     spaces: 2
 });
 console.log('Staring Webpack...');

@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
-const BasesList = lazy(() => import(/* webpackChunkName: "UsersList" */ './components/admin/BasesList.jsx'));
-const BasesEdit = lazy(() => import(/* webpackChunkName: "UsersEdit" */ './components/admin/BasesEdit.jsx'));
+const BasesList = lazy(() => import(/* webpackChunkName: "BasesList" */ './components/admin/BasesList.jsx'));
+const BasesEdit = lazy(() => import(/* webpackChunkName: "BasesEdit" */ './components/admin/BasesEdit.jsx'));
 
 const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle" style={{ height: '100%' }}><span uk-spinner="ratio:2" /></div>);
 
