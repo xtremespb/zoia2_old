@@ -7,11 +7,27 @@
       ]
     ]
   },
+  "Could not get a list of destinations": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        70
+      ]
+    ]
+  },
+  "Destination": {
+    "origin": [
+      [
+        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
+        94
+      ]
+    ]
+  },
   "Country": {
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        69
+        105
       ]
     ]
   },
@@ -19,7 +35,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        76
+        111
       ]
     ]
   },
@@ -27,11 +43,11 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        90
+        125
       ],
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        128
+        163
       ]
     ]
   },
@@ -39,7 +55,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        96
+        131
       ]
     ]
   },
@@ -47,7 +63,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        121
+        156
       ]
     ]
   },
@@ -55,7 +71,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        122
+        157
       ]
     ]
   },
@@ -63,7 +79,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        123
+        158
       ]
     ]
   },
@@ -71,7 +87,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        124
+        159
       ]
     ]
   },
@@ -79,7 +95,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        125
+        160
       ]
     ]
   },
@@ -87,7 +103,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        126
+        161
       ]
     ]
   },
@@ -95,7 +111,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        127
+        162
       ]
     ]
   },
@@ -103,7 +119,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        162
+        199
       ]
     ]
   },
@@ -111,7 +127,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        162
+        199
       ]
     ]
   },
@@ -119,7 +135,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        164
+        201
       ]
     ]
   }

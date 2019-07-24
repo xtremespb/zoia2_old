@@ -13,6 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: modules/bases/frontend/components/admin/Translations.jsx:14
 #: modules/countries/frontend/components/admin/Translations.jsx:14
 #: modules/destinations/frontend/components/admin/Translations.jsx:14
 #: modules/users/frontend/components/admin/Translations.jsx:15
@@ -27,8 +28,28 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:90
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:128
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:144
+msgid "Base"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:150
+msgid "Base (RU)"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/Translations.jsx:11
+msgid "Base not found"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesList.jsx:128
+#: modules/bases/frontend/components/admin/BasesList.jsx:130
+msgid "Bases"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:164
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:202
+#: modules/bases/frontend/components/admin/DialogDelete.jsx:53
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:125
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:163
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:53
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:90
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:128
@@ -37,6 +58,11 @@ msgstr ""
 #: modules/users/frontend/components/admin/UsersEdit.jsx:131
 #: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "Cancel"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesList.jsx:111
+#: modules/bases/frontend/components/admin/BasesList.jsx:115
+msgid "Cannot delete one or more bases"
 msgstr ""
 
 #: modules/countries/frontend/components/admin/CountriesList.jsx:111
@@ -54,54 +80,73 @@ msgstr ""
 msgid "Cannot delete one or more users"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/Translations.jsx:9
 #: modules/countries/frontend/components/admin/Translations.jsx:9
 #: modules/destinations/frontend/components/admin/Translations.jsx:9
 #: modules/users/frontend/components/admin/Translations.jsx:9
 msgid "Cannot update database record"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesList.jsx:171
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:171
-#: modules/users/frontend/components/admin/UsersList.jsx:189
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:107
+msgid "Could not get a list of countries"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:81
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:70
+msgid "Could not get a list of destinations"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/BasesList.jsx:172
+#: modules/countries/frontend/components/admin/CountriesList.jsx:172
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:172
+#: modules/users/frontend/components/admin/UsersList.jsx:190
 msgid "Could not load data"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:124
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:198
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:159
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:124
 #: modules/users/frontend/components/admin/UsersEdit.jsx:165
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:164
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:240
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:201
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:125
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:199
+#: modules/bases/frontend/components/admin/BasesList.jsx:70
+#: modules/bases/frontend/components/admin/BasesList.jsx:73
+#: modules/bases/frontend/components/admin/BasesList.jsx:173
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:160
 #: modules/countries/frontend/components/admin/CountriesList.jsx:70
 #: modules/countries/frontend/components/admin/CountriesList.jsx:73
-#: modules/countries/frontend/components/admin/CountriesList.jsx:172
+#: modules/countries/frontend/components/admin/CountriesList.jsx:173
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:125
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:70
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:73
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:172
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:173
 #: modules/users/frontend/components/admin/UsersEdit.jsx:166
 #: modules/users/frontend/components/admin/UsersList.jsx:70
 #: modules/users/frontend/components/admin/UsersList.jsx:73
-#: modules/users/frontend/components/admin/UsersList.jsx:190
+#: modules/users/frontend/components/admin/UsersList.jsx:191
 msgid "Could not save data"
 msgstr ""
 
 #: modules/countries/frontend/components/admin/CountriesList.jsx:128
+#: modules/countries/frontend/components/admin/CountriesList.jsx:130
 msgid "Countries"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:69
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:134
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:105
 msgid "Country"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:76
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:111
 msgid "Country (RU)"
 msgstr ""
 
@@ -113,45 +158,58 @@ msgstr ""
 msgid "Create User"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesList.jsx:138
+#: modules/bases/frontend/components/admin/BasesList.jsx:139
+msgid "Create new base"
+msgstr ""
+
+#: modules/countries/frontend/components/admin/CountriesList.jsx:139
 msgid "Create new country"
 msgstr ""
 
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:138
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:139
 msgid "Create new destination"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:131
+#: modules/users/frontend/components/admin/UsersList.jsx:132
 msgid "Create new user"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:50
 #: modules/countries/frontend/components/admin/CountriesEdit.jsx:50
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:50
 #: modules/users/frontend/components/admin/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesList.jsx:121
+#: modules/bases/frontend/components/admin/DialogDelete.jsx:54
 #: modules/countries/frontend/components/admin/CountriesList.jsx:121
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:54
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:121
 #: modules/destinations/frontend/components/admin/DialogDelete.jsx:54
 #: modules/users/frontend/components/admin/DialogDelete.jsx:54
-#: modules/users/frontend/components/admin/UsersList.jsx:167
+#: modules/users/frontend/components/admin/UsersList.jsx:168
 msgid "Delete"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesList.jsx:138
+#: modules/bases/frontend/components/admin/BasesList.jsx:139
+msgid "Delete selected bases"
+msgstr ""
+
+#: modules/countries/frontend/components/admin/CountriesList.jsx:139
 msgid "Delete selected countries"
 msgstr ""
 
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:138
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:139
 msgid "Delete selected destinations"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:131
+#: modules/users/frontend/components/admin/UsersList.jsx:132
 msgid "Delete selected users"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:124
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:94
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:69
 msgid "Destination"
 msgstr ""
@@ -165,7 +223,12 @@ msgid "Destination not found"
 msgstr ""
 
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:128
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:130
 msgid "Destinations"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/Translations.jsx:10
+msgid "Duplicate base"
 msgstr ""
 
 #: modules/countries/frontend/components/admin/Translations.jsx:10
@@ -188,13 +251,18 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesList.jsx:119
 #: modules/countries/frontend/components/admin/CountriesList.jsx:119
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:119
-#: modules/users/frontend/components/admin/UsersList.jsx:167
+#: modules/users/frontend/components/admin/UsersList.jsx:168
 msgid "Edit"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:162
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:238
+msgid "Edit Base"
+msgstr ""
+
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:199
 msgid "Edit Country"
 msgstr ""
 
@@ -210,12 +278,14 @@ msgstr ""
 msgid "Example: username@zoiajs.org"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:121
-#: modules/countries/frontend/components/admin/CountriesList.jsx:173
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:195
+#: modules/bases/frontend/components/admin/BasesList.jsx:174
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:156
+#: modules/countries/frontend/components/admin/CountriesList.jsx:174
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:121
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:173
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:174
 #: modules/users/frontend/components/admin/UsersEdit.jsx:162
-#: modules/users/frontend/components/admin/UsersList.jsx:191
+#: modules/users/frontend/components/admin/UsersList.jsx:192
 msgid "Field is required"
 msgstr ""
 
@@ -227,15 +297,18 @@ msgstr ""
 msgid "Internal Error"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:122
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:196
+#: modules/bases/frontend/components/admin/BasesList.jsx:67
+#: modules/bases/frontend/components/admin/BasesList.jsx:175
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:157
 #: modules/countries/frontend/components/admin/CountriesList.jsx:67
-#: modules/countries/frontend/components/admin/CountriesList.jsx:174
+#: modules/countries/frontend/components/admin/CountriesList.jsx:175
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:122
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:67
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:174
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:175
 #: modules/users/frontend/components/admin/UsersEdit.jsx:163
 #: modules/users/frontend/components/admin/UsersList.jsx:67
-#: modules/users/frontend/components/admin/UsersList.jsx:192
+#: modules/users/frontend/components/admin/UsersList.jsx:193
 msgid "Invalid format"
 msgstr ""
 
@@ -243,9 +316,10 @@ msgstr ""
 msgid "Latin chars/_/-, length: 4-32"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesList.jsx:169
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:169
-#: modules/users/frontend/components/admin/UsersList.jsx:187
+#: modules/bases/frontend/components/admin/BasesList.jsx:170
+#: modules/countries/frontend/components/admin/CountriesList.jsx:170
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:170
+#: modules/users/frontend/components/admin/UsersList.jsx:188
 msgid "Loading data, please wait…"
 msgstr ""
 
@@ -253,7 +327,11 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:162
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:238
+msgid "New Base"
+msgstr ""
+
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:199
 msgid "New Country"
 msgstr ""
 
@@ -261,9 +339,10 @@ msgstr ""
 msgid "New Destination"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesList.jsx:170
-#: modules/destinations/frontend/components/admin/DestinationsList.jsx:170
-#: modules/users/frontend/components/admin/UsersList.jsx:188
+#: modules/bases/frontend/components/admin/BasesList.jsx:171
+#: modules/countries/frontend/components/admin/CountriesList.jsx:171
+#: modules/destinations/frontend/components/admin/DestinationsList.jsx:171
+#: modules/users/frontend/components/admin/UsersList.jsx:189
 msgid "No records to display"
 msgstr ""
 
@@ -275,6 +354,7 @@ msgstr ""
 msgid "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long."
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesList.jsx:114
 #: modules/countries/frontend/components/admin/CountriesList.jsx:114
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:114
 #: modules/users/frontend/components/admin/UsersList.jsx:113
@@ -293,7 +373,8 @@ msgstr ""
 msgid "Password is required when creating a new user, should be at least 8 characters long."
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:123
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:197
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:158
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:123
 #: modules/users/frontend/components/admin/UsersEdit.jsx:164
 msgid "Passwords do not match"
@@ -303,6 +384,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/BasesList.jsx:64
 #: modules/countries/frontend/components/admin/CountriesList.jsx:64
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:64
 #: modules/users/frontend/components/admin/UsersList.jsx:64
@@ -313,13 +395,15 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/Translations.jsx:13
 #: modules/countries/frontend/components/admin/Translations.jsx:13
 #: modules/destinations/frontend/components/admin/Translations.jsx:13
 #: modules/users/frontend/components/admin/Translations.jsx:14
 msgid "Required"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:96
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:170
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:131
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:96
 #: modules/users/frontend/components/admin/UsersEdit.jsx:137
 msgid "Save"
@@ -327,6 +411,10 @@ msgstr ""
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:83
 msgid "Status"
+msgstr ""
+
+#: modules/bases/frontend/components/admin/DialogDelete.jsx:49
+msgid "The following base(s) will be permanently deleted:"
 msgstr ""
 
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:49
@@ -341,6 +429,7 @@ msgstr ""
 msgid "The following user(s) will be permanently deleted:"
 msgstr ""
 
+#: modules/bases/frontend/components/admin/Translations.jsx:12
 #: modules/countries/frontend/components/admin/Translations.jsx:12
 #: modules/destinations/frontend/components/admin/Translations.jsx:12
 #: modules/users/frontend/components/admin/Translations.jsx:13
@@ -356,14 +445,20 @@ msgid "Username"
 msgstr ""
 
 #: modules/users/frontend/components/admin/UsersList.jsx:121
+#: modules/users/frontend/components/admin/UsersList.jsx:123
 msgid "Users"
 msgstr ""
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:127
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:201
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:162
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:127
 #: modules/users/frontend/components/admin/UsersEdit.jsx:168
 msgid "Yes"
 msgstr ""
+
+#: modules/bases/frontend/components/admin/Translations.jsx:8
+msgid "bases"
+msgstr "Bases"
 
 #: modules/countries/frontend/components/admin/Translations.jsx:8
 msgid "countries"
@@ -377,7 +472,8 @@ msgstr "Destinations"
 msgid "users"
 msgstr "Users"
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:126
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:200
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:161
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:126
 #: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "will be deleted. Are you sure?"

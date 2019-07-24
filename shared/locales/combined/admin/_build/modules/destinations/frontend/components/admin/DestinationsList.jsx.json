@@ -15,7 +15,7 @@
       ],
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        174
+        175
       ]
     ]
   },
@@ -31,7 +31,7 @@
       ],
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        172
+        173
       ]
     ]
   },
@@ -76,6 +76,10 @@
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
         128
+      ],
+      [
+        "modules/destinations/frontend/components/admin/DestinationsList.jsx",
+        130
       ]
     ]
   },
@@ -83,7 +87,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        138
+        139
       ]
     ]
   },
@@ -91,7 +95,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        138
+        139
       ]
     ]
   },
@@ -99,7 +103,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        169
+        170
       ]
     ]
   },
@@ -107,7 +111,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        170
+        171
       ]
     ]
   },
@@ -115,7 +119,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        171
+        172
       ]
     ]
   },
@@ -123,7 +127,7 @@
     "origin": [
       [
         "modules/destinations/frontend/components/admin/DestinationsList.jsx",
-        173
+        174
       ]
     ]
   }

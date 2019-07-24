@@ -1,0 +1,58 @@
+{
+  "bases": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        8
+      ]
+    ]
+  },
+  "Cannot update database record": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        9
+      ]
+    ]
+  },
+  "Duplicate base": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        10
+      ]
+    ]
+  },
+  "Base not found": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        11
+      ]
+    ]
+  },
+  "Too short": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        12
+      ]
+    ]
+  },
+  "Required": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        13
+      ]
+    ]
+  },
+  "Actions": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/Translations.jsx",
+        14
+      ]
+    ]
+  }
+}

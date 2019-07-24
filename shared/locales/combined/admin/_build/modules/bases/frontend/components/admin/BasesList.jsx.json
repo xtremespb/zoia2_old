@@ -1,0 +1,134 @@
+{
+  "Record with the entered value already exists": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        64
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        67
+      ],
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        175
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        70
+      ],
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        73
+      ],
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        173
+      ]
+    ]
+  },
+  "Cannot delete one or more bases": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        111
+      ],
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        115
+      ]
+    ]
+  },
+  "Operation complete": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        114
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        119
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        121
+      ]
+    ]
+  },
+  "Bases": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        128
+      ],
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        130
+      ]
+    ]
+  },
+  "Create new base": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        139
+      ]
+    ]
+  },
+  "Delete selected bases": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        139
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        170
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        171
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        172
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        174
+      ]
+    ]
+  }
+}
