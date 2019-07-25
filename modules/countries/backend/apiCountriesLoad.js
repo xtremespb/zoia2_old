@@ -10,7 +10,7 @@ export default fastify => ({
                 },
                 id: {
                     type: 'integer',
-                    minimum: 1000
+                    minimum: 1
                 }
             },
             required: ['token', 'id']
@@ -64,7 +64,7 @@ export default fastify => ({
                         default: {
                             name: nameEn,
                             name_ru: nameRu,
-                            destination: countryRecord.destination
+                            destination: countryRecord.id_dest
                         }
                     }
                 }));

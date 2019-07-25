@@ -25,7 +25,7 @@ export default class ZCheckbox extends Component {
                 onChange={this.onValueChanged}
                 disabled={this.props.disabled}
             />
-            &nbsp;{val}
+            &nbsp;{this.props.i18n._(val)}
         </label>);
     });
 

@@ -15,7 +15,7 @@
       ],
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        175
+        182
       ]
     ]
   },
@@ -31,7 +31,7 @@
       ],
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        173
+        180
       ]
     ]
   },
@@ -75,11 +75,11 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        128
+        135
       ],
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        130
+        137
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        139
+        146
       ]
     ]
   },
@@ -95,7 +95,15 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        139
+        146
+      ]
+    ]
+  },
+  "Refresh": {
+    "origin": [
+      [
+        "modules/bases/frontend/components/admin/BasesList.jsx",
+        146
       ]
     ]
   },
@@ -103,7 +111,7 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        170
+        177
       ]
     ]
   },
@@ -111,7 +119,7 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        171
+        178
       ]
     ]
   },
@@ -119,7 +127,7 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        172
+        179
       ]
     ]
   },
@@ -127,7 +135,7 @@
     "origin": [
       [
         "modules/bases/frontend/components/admin/BasesList.jsx",
-        174
+        181
       ]
     ]
   }

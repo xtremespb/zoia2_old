@@ -19,7 +19,7 @@ const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: 
 class DestinationsEdit extends Component {
     constructor(props) {
         super(props);
-        this.editUserForm = React.createRef();
+        this.editDestinationsForm = React.createRef();
     }
 
     state = {
@@ -54,8 +54,8 @@ class DestinationsEdit extends Component {
     }
 
     getEditForm = i18n => (<FormBuilder
-        ref={this.editUserForm}
-        prefix="editUserForm"
+        ref={this.editDestinationsForm}
+        prefix="editDestinationsForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
@@ -66,14 +66,14 @@ class DestinationsEdit extends Component {
                         id: 'name',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Destination`)}:`,
+                        label: `Destination`,
                         autofocus: true
                     },
                     {
                         id: 'name_ru',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Destination (RU)`)}:`
+                        label: `Destination (RU)`
                     }
                 ],
                 {
@@ -87,13 +87,13 @@ class DestinationsEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/destinations',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: i18n._(t`Cancel`)
+                        label: `Cancel`
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: i18n._(t`Save`)
+                        label: `Save`
                     }
                 ]
             ]
@@ -118,14 +118,14 @@ class DestinationsEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: i18n._(t`Field is required`),
-            ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
-            ERR_LOAD: i18n._(t`Could not load data from server`),
-            ERR_SAVE: i18n._(t`Could not save data`),
-            WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
-            YES: i18n._(t`Yes`),
-            CANCEL: i18n._(t`Cancel`)
+            ERR_VMANDATORY: `Field is required`,
+            ERR_VFORMAT: `Invalid format`,
+            ERR_VNOMATCH: `Passwords do not match`,
+            ERR_LOAD: `Could not load data from server`,
+            ERR_SAVE: `Could not save data`,
+            WILL_BE_DELETED: `will be deleted. Are you sure?`,
+            YES: `Yes`,
+            CANCEL: `Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/destinations/save`,
@@ -159,7 +159,7 @@ class DestinationsEdit extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit Destination' : 'New Destination'), this.props.appData.language);
                     return (<>
-                        <h1>{this.props.match.params.id ? <Trans>Edit Destination</Trans> : <Trans>New Destination</Trans>}</h1>
+                        <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit Destination</Trans> : <Trans>New Destination</Trans>}</div>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}

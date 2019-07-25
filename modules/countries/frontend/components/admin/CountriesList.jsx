@@ -121,13 +121,20 @@ class CountriesList extends Component {
         <a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} />
     </>);
 
+    onRefreshTable = e => {
+        e.preventDefault();
+        if (this.countriesListTable.current) {
+            this.countriesListTable.current.reloadURL();
+        }
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Countries`), this.props.appData.language);
                     return (<>
-                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Countries`)}</div>
+                        <div className="uk-title-head uk-margin-bottom">{i18n._(t`Countries`)}</div>
                         <Table
                             prefix="countriesListTable"
                             ref={this.countriesListTable}
@@ -136,7 +143,7 @@ class CountriesList extends Component {
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/countries/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new country`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected countries`)} onClick={this.onDeleteRecord} /></>}
+                            topButtons={<><Link to="/admin/countries/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new country`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected countries`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'name',
                                 title: 'Country',

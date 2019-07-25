@@ -114,13 +114,20 @@ class UserList extends Component {
         }).catch(() => this.usersListTable.current.setLoading(false) && UIkit.notification(i18n._(t`Cannot delete one or more users`), { status: 'danger' }));
     }
 
+    onRefreshTable = e => {
+        e.preventDefault();
+        if (this.usersListTable.current) {
+            this.usersListTable.current.reloadURL();
+        }
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language);
                     return (<>
-                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Users`)}</div>
+                        <div className="uk-title-head uk-margin-bottom">{i18n._(t`Users`)}</div>
                         <Table
                             prefix="usersListTable"
                             ref={this.usersListTable}
@@ -129,7 +136,7 @@ class UserList extends Component {
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={e => this.onDeleteRecord(null, e)} /></>}
+                            topButtons={<><Link to="/admin/users/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new user`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected users`)} onClick={e => this.onDeleteRecord(null, e)} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'username',
                                 title: 'Username',

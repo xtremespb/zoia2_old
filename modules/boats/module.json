@@ -1,0 +1,6 @@
+{
+	"id": "boats",
+	"icon": "world",
+	"admin": true,
+	"adminRoute": "/admin/boats"
+}

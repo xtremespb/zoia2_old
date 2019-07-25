@@ -71,11 +71,7 @@ export default fastify => ({
             const options = {
                 sort: {}
             };
-            const query = {
-                _id: {
-                    $gte: 1000
-                }
-            };
+            const query = {};
             if (req.body.search) {
                 query.$or = searchColumns.map(c => {
                     const sr = {};
@@ -100,7 +96,7 @@ export default fastify => ({
                     en,
                     ru
                 ] = base.name.split(/\|/);
-                base.name = req.body.language === 'ru' ? ru : en;
+                base.name = req.body.language === 'ru' ? ru || en : en;
                 return base;
             });
             // Send response

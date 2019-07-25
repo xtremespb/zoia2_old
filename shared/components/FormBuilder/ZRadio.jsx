@@ -17,7 +17,7 @@ export default class ZRadio extends Component {
                 onChange={e => this.props.onValueChanged && typeof this.props.onValueChanged === 'function' ? this.props.onValueChanged(this.props.originalId, e.target.value) : null}
                 disabled={this.props.disabled}
             />
-            &nbsp;{val}W
+            &nbsp;{this.props.i18n._(val)}
         </label>);
     })
 

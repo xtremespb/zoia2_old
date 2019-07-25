@@ -121,13 +121,20 @@ class BasesList extends Component {
         <a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} />
     </>);
 
+    onRefreshTable = e => {
+        e.preventDefault();
+        if (this.basesListTable.current) {
+            this.basesListTable.current.reloadURL();
+        }
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Bases`), this.props.appData.language);
                     return (<>
-                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Bases`)}</div>
+                        <div className="uk-title-head uk-margin-bottom">{i18n._(t`Bases`)}</div>
                         <Table
                             prefix="basesListTable"
                             ref={this.basesListTable}
@@ -136,7 +143,7 @@ class BasesList extends Component {
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/bases/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new base`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected bases`)} onClick={this.onDeleteRecord} /></>}
+                            topButtons={<><Link to="/admin/bases/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new base`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected bases`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'name',
                                 title: 'Base',

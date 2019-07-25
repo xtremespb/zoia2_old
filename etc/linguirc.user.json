@@ -4,6 +4,7 @@
     "shared/components/",
     "modules/admin/frontend/components/user/",
     "modules/bases/frontend/components/user/",
+    "modules/boats/frontend/components/user/",
     "modules/countries/frontend/components/user/",
     "modules/destinations/frontend/components/user/",
     "modules/pages/frontend/components/user/",

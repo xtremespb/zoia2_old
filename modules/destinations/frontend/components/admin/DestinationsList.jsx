@@ -121,13 +121,20 @@ class DestinationsList extends Component {
         <a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} />
     </>);
 
+    onRefreshTable = e => {
+        e.preventDefault();
+        if (this.destinationsListTable.current) {
+            this.destinationsListTable.current.reloadURL();
+        }
+    }
+
     render = () => (
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Destinations`), this.props.appData.language);
                     return (<>
-                        <div className="uk-text-lead uk-margin-bottom">{i18n._(t`Destinations`)}</div>
+                        <div className="uk-title-head uk-margin-bottom">{i18n._(t`Destinations`)}</div>
                         <Table
                             prefix="destinationsListTable"
                             ref={this.destinationsListTable}
@@ -136,7 +143,7 @@ class DestinationsList extends Component {
                             i18n={i18n}
                             UIkit={UIkit}
                             axios={axios}
-                            topButtons={<><Link to="/admin/destinations/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new destination`)} /><button type="button" className="uk-icon-button uk-button-danger" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected destinations`)} onClick={this.onDeleteRecord} /></>}
+                            topButtons={<><Link to="/admin/destinations/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new destination`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected destinations`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'name',
                                 title: 'Destination',

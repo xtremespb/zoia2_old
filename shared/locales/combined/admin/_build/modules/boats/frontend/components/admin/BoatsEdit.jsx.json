@@ -1,0 +1,174 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        50
+      ]
+    ]
+  },
+  "Could not get a list of destinations": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        81
+      ]
+    ]
+  },
+  "Could not get a list of countries": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        107
+      ]
+    ]
+  },
+  "Destination": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        124
+      ]
+    ]
+  },
+  "Country": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        134
+      ]
+    ]
+  },
+  "Bases": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        142
+      ]
+    ]
+  },
+  "Add new base": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        144
+      ]
+    ]
+  },
+  "Boat": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        151
+      ]
+    ]
+  },
+  "Boat (RU)": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        157
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        171
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        197
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        177
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        190
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        191
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        192
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        193
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        194
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        195
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        196
+      ]
+    ]
+  },
+  "Edit Boat": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        233
+      ]
+    ]
+  },
+  "New Boat": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        233
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        235
+      ]
+    ]
+  }
+}

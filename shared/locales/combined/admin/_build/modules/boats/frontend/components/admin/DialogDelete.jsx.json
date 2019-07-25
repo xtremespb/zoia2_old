@@ -1,0 +1,26 @@
+{
+  "The following boat(s) will be permanently deleted:": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/DialogDelete.jsx",
+        49
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/DialogDelete.jsx",
+        53
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/DialogDelete.jsx",
+        54
+      ]
+    ]
+  }
+}

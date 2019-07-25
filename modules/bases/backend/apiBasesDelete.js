@@ -13,7 +13,7 @@ export default fastify => ({
                     minItems: 1,
                     contains: {
                         type: 'integer',
-                        minimum: 1000
+                        minimum: 1
                     }
                 }
             },

@@ -11,107 +11,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        70
-      ]
-    ]
-  },
-  "Destination": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        94
-      ]
-    ]
-  },
-  "Country": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        105
-      ]
-    ]
-  },
-  "Country (RU)": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        111
-      ]
-    ]
-  },
-  "Cancel": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        125
-      ],
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        163
-      ]
-    ]
-  },
-  "Save": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        131
-      ]
-    ]
-  },
-  "Field is required": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        156
-      ]
-    ]
-  },
-  "Invalid format": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        157
-      ]
-    ]
-  },
-  "Passwords do not match": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        158
-      ]
-    ]
-  },
-  "Could not load data from server": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        159
-      ]
-    ]
-  },
-  "Could not save data": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        160
-      ]
-    ]
-  },
-  "will be deleted. Are you sure?": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        161
-      ]
-    ]
-  },
-  "Yes": {
-    "origin": [
-      [
-        "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        162
+        73
       ]
     ]
   },
@@ -119,7 +19,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        199
+        202
       ]
     ]
   },
@@ -127,7 +27,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        199
+        202
       ]
     ]
   },
@@ -135,7 +35,7 @@
     "origin": [
       [
         "modules/countries/frontend/components/admin/CountriesEdit.jsx",
-        201
+        204
       ]
     ]
   }

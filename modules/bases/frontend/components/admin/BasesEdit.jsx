@@ -19,7 +19,7 @@ const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: 
 class BasesEdit extends Component {
     constructor(props) {
         super(props);
-        this.editUserForm = React.createRef();
+        this.editBasesForm = React.createRef();
     }
 
     state = {
@@ -54,29 +54,29 @@ class BasesEdit extends Component {
     }
 
     loadDestinations = (i18n, data) => new Promise(async resolve => {
-        if (this.editUserForm.current) {
-            await this.editUserForm.current.setProperty('destination', 'disabled', true);
-            await this.editUserForm.current.setProperty('country', 'disabled', true);
+        if (this.editBasesForm.current) {
+            await this.editBasesForm.current.setProperty('destination', 'disabled', true);
+            await this.editBasesForm.current.setProperty('country', 'disabled', true);
         }
         axios.post(`${config.apiURL}/api/bases/getDestinations`, {
             token: this.props.appDataRuntime.token,
             language: this.props.appData.language,
             destination: data ? data.default.destination : undefined
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editUserForm.current.setProperty('destination', 'disabled', null);
-            await this.editUserForm.current.setProperty('destination', 'values', res.data.destinations);
-            await this.editUserForm.current.setProperty('country', 'disabled', null);
-            await this.editUserForm.current.setProperty('country', 'values', res.data.countries);
+            await this.editBasesForm.current.setProperty('destination', 'disabled', null);
+            await this.editBasesForm.current.setProperty('destination', 'values', res.data.destinations);
+            await this.editBasesForm.current.setProperty('country', 'disabled', null);
+            await this.editBasesForm.current.setProperty('country', 'values', res.data.countries);
             if (data) {
-                await this.editUserForm.current.setProperty('country', 'value', data.default.country);
+                await this.editBasesForm.current.setProperty('country', 'value', data.default.country);
             }
             resolve({
                 destinations: res.data.destinations,
                 countries: res.data.countries
             });
         }).catch(async () => {
-            await this.editUserForm.current.setProperty('destination', 'disabled', null);
-            await this.editUserForm.current.setProperty('country', 'disabled', null);
+            await this.editBasesForm.current.setProperty('destination', 'disabled', null);
+            await this.editBasesForm.current.setProperty('country', 'disabled', null);
             UIkit.notification({
                 message: i18n._('Could not get a list of destinations'),
                 status: 'danger'
@@ -87,22 +87,22 @@ class BasesEdit extends Component {
     onFormBuilt = async i18n => {
         if (!this.props.match.params.id) {
             const { destinations, countries } = await this.loadDestinations(i18n);
-            await this.editUserForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
-            await this.editUserForm.current.setValue('country', countries && Object.keys(countries).length ? Object.keys(countries)[0] : {}, 'default');
+            await this.editBasesForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
+            await this.editBasesForm.current.setValue('country', countries && Object.keys(countries).length ? Object.keys(countries)[0] : {}, 'default');
         }
     }
 
     onDestinationChange = async (destination, i18n) => {
-        await this.editUserForm.current.setProperty('country', 'disabled', true);
+        await this.editBasesForm.current.setProperty('country', 'disabled', true);
         axios.post(`${config.apiURL}/api/bases/getCountries`, {
             token: this.props.appDataRuntime.token,
             language: this.props.appData.language,
             destination
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editUserForm.current.setProperty('country', 'disabled', null);
-            await this.editUserForm.current.setProperty('country', 'values', res.data.countries);
+            await this.editBasesForm.current.setProperty('country', 'disabled', null);
+            await this.editBasesForm.current.setProperty('country', 'values', res.data.countries);
         }).catch(async () => {
-            await this.editUserForm.current.setProperty('country', 'disabled', null);
+            await this.editBasesForm.current.setProperty('country', 'disabled', null);
             UIkit.notification({
                 message: i18n._('Could not get a list of countries'),
                 status: 'danger'
@@ -111,8 +111,8 @@ class BasesEdit extends Component {
     }
 
     getEditForm = i18n => (<FormBuilder
-        ref={this.editUserForm}
-        prefix="editUserForm"
+        ref={this.editBasesForm}
+        prefix="editBasesForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
@@ -121,7 +121,7 @@ class BasesEdit extends Component {
                 {
                     id: 'destination',
                     type: 'select',
-                    label: `${i18n._(t`Destination`)}:`,
+                    label: `Destination`,
                     css: 'uk-form-width-large',
                     defaultValue: '',
                     values: {},
@@ -131,7 +131,7 @@ class BasesEdit extends Component {
                 {
                     id: 'country',
                     type: 'select',
-                    label: `${i18n._(t`Country`)}:`,
+                    label: `Country`,
                     css: 'uk-form-width-large',
                     defaultValue: '',
                     values: {}
@@ -141,13 +141,13 @@ class BasesEdit extends Component {
                         id: 'name',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Base`)}:`
+                        label: `Base`
                     },
                     {
                         id: 'name_ru',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Base (RU)`)}:`
+                        label: `Base (RU)`
                     }
                 ],
                 {
@@ -161,13 +161,13 @@ class BasesEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/bases',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: i18n._(t`Cancel`)
+                        label: `Cancel`
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: i18n._(t`Save`)
+                        label: `Save`
                     }
                 ]
             ]
@@ -192,14 +192,14 @@ class BasesEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: i18n._(t`Field is required`),
-            ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
-            ERR_LOAD: i18n._(t`Could not load data from server`),
-            ERR_SAVE: i18n._(t`Could not save data`),
-            WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
-            YES: i18n._(t`Yes`),
-            CANCEL: i18n._(t`Cancel`)
+            ERR_VMANDATORY: `Field is required`,
+            ERR_VFORMAT: `Invalid format`,
+            ERR_VNOMATCH: `Passwords do not match`,
+            ERR_LOAD: `Could not load data from server`,
+            ERR_SAVE: `Could not save data`,
+            WILL_BE_DELETED: `will be deleted. Are you sure?`,
+            YES: `Yes`,
+            CANCEL: `Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/bases/save`,
@@ -221,7 +221,7 @@ class BasesEdit extends Component {
         onLoadError={() => this.setState({ loadingError: true })}
         onLoadSuccess={() => this.setState({ loadingError: false })}
         onDataDeserialized={data => this.loadDestinations(i18n, data)}
-        onFormBuilt={i18n => this.onFormBuilt(i18n)}
+        onFormBuilt={() => this.onFormBuilt(i18n)}
     />);
 
     reloadEditFormData = e => {
@@ -235,7 +235,7 @@ class BasesEdit extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit Base' : 'New Base'), this.props.appData.language);
                     return (<>
-                        <h1>{this.props.match.params.id ? <Trans>Edit Base</Trans> : <Trans>New Base</Trans>}</h1>
+                        <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit Base</Trans> : <Trans>New Base</Trans>}</div>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}

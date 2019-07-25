@@ -48,19 +48,14 @@ export default fastify => ({
         // End of check permissions
         try {
             // Get data
-            const query = {
-                _id: {
-                    $gte: 1000
-                }
-            };
             const destinations = {};
-            (await this.mongo.db.collection('destinations').find(query).toArray() || []).map(d => {
+            (await this.mongo.db.collection('destinations').find({}).toArray() || []).map(d => {
                 const destination = d;
                 const [
                     en,
                     ru
                 ] = destination.name.split(/\|/);
-                destination.name = req.body.language === 'ru' ? ru : en;
+                destination.name = req.body.language === 'ru' ? ru || en : en;
                 destinations[destination._id] = destination.name;
             });
             // Send response

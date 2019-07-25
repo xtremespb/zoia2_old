@@ -59,7 +59,7 @@ class AdminPanel extends Component {
 
     getModulesList = prefix => (
         <I18n>
-            {({ i18n }) => (Object.keys(modulesData).map(id => modulesData[id].admin ? (<li key={`${prefix}_${id}`}><Link to={modulesData[id].adminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;{i18n._(id)}</Link></li>) : null))}
+            {({ i18n }) => (Object.keys(modulesData).map(id => modulesData[id].admin ? (<li key={`${prefix}_${id}`}><Link to={modulesData[id].adminRoute}><span uk-icon={`icon:${modulesData[id].icon};ratio:0.95`} />&nbsp;&nbsp;{i18n._(id)}</Link></li>) : null))}
         </I18n>
     );
 

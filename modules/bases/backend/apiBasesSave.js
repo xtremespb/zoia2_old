@@ -11,7 +11,7 @@ const baseValidate = ajv.compile({
         },
         id: {
             type: 'string',
-            pattern: '^[0-9]{4,}$'
+            pattern: '^[0-9]+$'
         }
     },
     required: ['token']
@@ -27,7 +27,6 @@ const formValidate = ajv.compile({
         },
         name_ru: {
             type: 'string',
-            minLength: 1,
             maxLength: 32
         },
         destination: {
@@ -43,7 +42,7 @@ const formValidate = ajv.compile({
             maxLength: 10
         }
     },
-    required: ['name', 'name_ru', 'destination', 'country']
+    required: ['name', 'destination', 'country']
 });
 
 export default fastify => ({
@@ -76,7 +75,7 @@ export default fastify => ({
             // Start of Form Validation
             const baseDataValidation = baseValidate(formData);
             const formDataValidation = formValidate(formData.default);
-            if (!baseDataValidation || !formDataValidation || (formData.id && (typeof formData.id !== 'string' || !parseInt(formData.id, 10) || parseInt(formData.id, 10) < 1000))) {
+            if (!baseDataValidation || !formDataValidation || (formData.id && (typeof formData.id !== 'string' || !parseInt(formData.id, 10) || parseInt(formData.id, 10) < 1))) {
                 const errorData = {
                     base: baseDataValidation ? undefined : (baseValidate.errors || {
                         error: 'General validation error'
@@ -161,10 +160,10 @@ export default fastify => ({
                 _id: id
             }, {
                 $set: {
-                    name: `${formData.default.name}|${formData.default.name_ru}`,
+                    name: `${formData.default.name}${formData.default.name_ru ? `|${formData.default.name_ru}` : ''}`,
                     name_ru: formData.default.name_ru,
-                    destination: parseInt(formData.default.destination, 10),
-                    country: parseInt(formData.default.country, 10)
+                    id_dest: parseInt(formData.default.destination, 10),
+                    id_country: parseInt(formData.default.country, 10)
                 }
             }, {
                 upsert: true

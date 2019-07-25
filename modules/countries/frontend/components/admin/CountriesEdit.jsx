@@ -19,7 +19,7 @@ const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: 
 class CountriesEdit extends Component {
     constructor(props) {
         super(props);
-        this.editUserForm = React.createRef();
+        this.editCountryForm = React.createRef();
     }
 
     state = {
@@ -54,18 +54,21 @@ class CountriesEdit extends Component {
     }
 
     loadDestinations = i18n => new Promise(async resolve => {
-        if (this.editUserForm.current) {
-            await this.editUserForm.current.setProperty('destination', 'disabled', true);
+        if (this.editCountryForm.current) {
+            await this.editCountryForm.current.setProperty('destination', 'disabled', true);
         }
         axios.post(`${config.apiURL}/api/countries/getDestinations`, {
             token: this.props.appDataRuntime.token,
             language: this.props.appData.language
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editUserForm.current.setProperty('destination', 'disabled', null);
-            await this.editUserForm.current.setProperty('destination', 'values', res.data.destinations);
+            await this.editCountryForm.current.setProperty('destination', 'disabled', null);
+            await this.editCountryForm.current.setProperty('destination', 'values', res.data.destinations);
+            if (!this.editCountryForm.current.getValue('destination') && Object.keys(res.data.destinations).length) {
+                await this.editCountryForm.current.setValue('destination', Object.keys(res.data.destinations)[0]);
+            }
             resolve(res.data.destinations);
         }).catch(async () => {
-            await this.editUserForm.current.setProperty('destination', 'disabled', null);
+            await this.editCountryForm.current.setProperty('destination', 'disabled', null);
             UIkit.notification({
                 message: i18n._('Could not get a list of destinations'),
                 status: 'danger'
@@ -76,13 +79,13 @@ class CountriesEdit extends Component {
     onFormBuilt = async () => {
         if (!this.props.match.params.id) {
             const destinations = await this.loadDestinations();
-            await this.editUserForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
+            await this.editCountryForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
         }
     }
 
     getEditForm = i18n => (<FormBuilder
-        ref={this.editUserForm}
-        prefix="editUserForm"
+        ref={this.editCountryForm}
+        prefix="editCountryForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
@@ -91,7 +94,7 @@ class CountriesEdit extends Component {
                 {
                     id: 'destination',
                     type: 'select',
-                    label: `${i18n._(t`Destination`)}:`,
+                    label: `Destination`,
                     css: 'uk-form-width-large',
                     defaultValue: '',
                     values: {},
@@ -102,13 +105,13 @@ class CountriesEdit extends Component {
                         id: 'name',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Country`)}:`
+                        label: `Country`
                     },
                     {
                         id: 'name_ru',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Country (RU)`)}:`
+                        label: `Country (RU)`
                     }
                 ],
                 {
@@ -122,13 +125,13 @@ class CountriesEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/countries',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: i18n._(t`Cancel`)
+                        label: `Cancel`
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: i18n._(t`Save`)
+                        label: `Save`
                     }
                 ]
             ]
@@ -153,14 +156,14 @@ class CountriesEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: i18n._(t`Field is required`),
-            ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
-            ERR_LOAD: i18n._(t`Could not load data from server`),
-            ERR_SAVE: i18n._(t`Could not save data`),
-            WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
-            YES: i18n._(t`Yes`),
-            CANCEL: i18n._(t`Cancel`)
+            ERR_VMANDATORY: `Field is required`,
+            ERR_VFORMAT: `Invalid format`,
+            ERR_VNOMATCH: `Passwords do not match`,
+            ERR_LOAD: `Could not load data from server`,
+            ERR_SAVE: `Could not save data`,
+            WILL_BE_DELETED: `will be deleted. Are you sure?`,
+            YES: `Yes`,
+            CANCEL: `Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/countries/save`,
@@ -196,7 +199,7 @@ class CountriesEdit extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit Country' : 'New Country'), this.props.appData.language);
                     return (<>
-                        <h1>{this.props.match.params.id ? <Trans>Edit Country</Trans> : <Trans>New Country</Trans>}</h1>
+                        <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit Country</Trans> : <Trans>New Country</Trans>}</div>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}

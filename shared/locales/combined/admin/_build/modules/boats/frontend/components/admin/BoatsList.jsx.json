@@ -1,0 +1,142 @@
+{
+  "Record with the entered value already exists": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        64
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        67
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        182
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        70
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        73
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        180
+      ]
+    ]
+  },
+  "Cannot delete one or more boats": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        111
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        115
+      ]
+    ]
+  },
+  "Operation complete": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        114
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        119
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        121
+      ]
+    ]
+  },
+  "Boats": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        135
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        137
+      ]
+    ]
+  },
+  "Create new boat": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        146
+      ]
+    ]
+  },
+  "Delete selected boats": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        146
+      ]
+    ]
+  },
+  "Refresh": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        146
+      ]
+    ]
+  },
+  "Loading data, please wait…": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        177
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        178
+      ]
+    ]
+  },
+  "Could not load data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        179
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        181
+      ]
+    ]
+  }
+}

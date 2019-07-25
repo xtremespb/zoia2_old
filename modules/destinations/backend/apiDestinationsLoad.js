@@ -10,7 +10,7 @@ export default fastify => ({
                 },
                 id: {
                     type: 'integer',
-                    minimum: 1000
+                    minimum: 1
                 }
             },
             required: ['token', 'id']

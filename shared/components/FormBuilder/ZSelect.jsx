@@ -12,12 +12,12 @@ export default class ZSelect extends Component {
 
     getCheckboxes = () => Object.keys(this.props.values).map((key) => {
         const val = this.props.values[key];
-        return (<label key={`${this.props.id}_checkbox_${val}`} className="uk-margin-small-right"><input className="uk-checkbox" type="checkbox" data-id={key} checked={this.props.value[key]} onChange={this.onValueChanged} disabled={this.props.disabled} />&nbsp;{val}</label>);
+        return (<label key={`${this.props.id}_checkbox_${key}`} className="uk-margin-small-right"><input className="uk-checkbox" type="checkbox" data-id={key} checked={this.props.value[key]} onChange={this.onValueChanged} disabled={this.props.disabled} />&nbsp;{this.props.i18n._(val)}</label>);
     })
 
     getOptions = () => Object.keys(this.props.values).map((key) => {
         const val = this.props.values[key];
-        return (<option key={`${this.props.id}_option_${val}`} value={key}>{val}</option>);
+        return (<option key={`${this.props.id}_option_${key}`} value={key}>{this.props.i18n._(val)}</option>);
     })
 
     render = () => (<div className={this.props.cname}>
