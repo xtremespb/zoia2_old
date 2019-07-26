@@ -66,36 +66,38 @@ class UsersEdit extends Component {
                         id: 'username',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `Username`,
-                        helpText: `Latin chars/_/-, length: 4-32`,
+                        label: i18n._(t`Username`),
+                        helpText: i18n._(t`Latin chars/_/-, length: 4-32`),
                         autofocus: true
                     },
                     {
                         id: 'email',
                         type: 'text',
                         css: 'uk-form-width-large',
-                        label: `E-mail`,
-                        helpText: `Example: username@zoiajs.org`
+                        label: i18n._(t`E-mail`),
+                        helpText: i18n._(t`Example: username@zoiajs.org`)
                     },
                     {
                         id: 'active',
                         type: 'select',
-                        label: `Status`,
+                        label: i18n._(t`Status`),
                         css: 'uk-form-width-small',
                         defaultValue: '1',
+                        updateFromProps: true,
                         values: {
-                            0: `Inactive`,
-                            1: `Active`
+                            0: i18n._(t`Inactive`),
+                            1: i18n._(t`Active`)
                         }
                     },
                     {
                         id: 'admin',
                         type: 'select',
-                        label: `Permissions`,
+                        label: i18n._(t`Permissions`),
                         css: 'uk-form-width-small',
+                        updateFromProps: true,
                         values: {
-                            0: `Normal User`,
-                            1: `Administrator`
+                            0: i18n._(t`Normal User`),
+                            1: i18n._(t`Administrator`)
                         }
                     }
                 ],
@@ -103,19 +105,19 @@ class UsersEdit extends Component {
                     id: 'password',
                     type: 'password',
                     css: 'uk-width-small',
-                    label: `Password`,
+                    label: i18n._(t`Password`),
                 },
                 {
                     id: 'password2',
                     type: 'password',
                     css: 'uk-width-small',
-                    label: `Repeat Password`,
+                    label: i18n._(t`Repeat Password`),
                 }],
                 {
                     id: 'passwordMessage',
                     type: 'message',
                     css: 'uk-text-small',
-                    text: this.props.match.params.id ? `Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long.` : `Password is required when creating a new user, should be at least 8 characters long.`
+                    text: this.props.match.params.id ? i18n._(t`Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long.`) : i18n._(t`Password is required when creating a new user, should be at least 8 characters long.`)
                 },
                 {
                     id: 'divider1',
@@ -128,13 +130,13 @@ class UsersEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/users',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: `Cancel`
+                        label: i18n._(t`Cancel`)
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: `Save`
+                        label: i18n._(t`Save`)
                     }
                 ]
             ]
@@ -159,14 +161,14 @@ class UsersEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: `Field is required`,
-            ERR_VFORMAT: `Invalid format`,
-            ERR_VNOMATCH: `Passwords do not match`,
-            ERR_LOAD: `Could not load data from server`,
-            ERR_SAVE: `Could not save data`,
-            WILL_BE_DELETED: `will be deleted. Are you sure?`,
-            YES: `Yes`,
-            CANCEL: `Cancel`
+            ERR_VMANDATORY: t`Field is required`,
+            ERR_VFORMAT: t`Invalid format`,
+            ERR_VNOMATCH: t`Passwords do not match`,
+            ERR_LOAD: t`Could not load data from server`,
+            ERR_SAVE: t`Could not save data`,
+            WILL_BE_DELETED: t`will be deleted. Are you sure?`,
+            YES: t`Yes`,
+            CANCEL: t`Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/users/saveUser`,

@@ -25,13 +25,25 @@ msgstr ""
 #~ msgid "Active"
 #~ msgstr ""
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:156
+msgid "Add"
+msgstr ""
+
 #: modules/boats/frontend/components/admin/BoatsEdit.jsx:144
 msgid "Add new base"
+msgstr ""
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:155
+msgid "Add or remove availability data"
 msgstr ""
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:98
 #~ msgid "Administrator"
 #~ msgstr ""
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:153
+msgid "Availability"
+msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:144
 #~ msgid "Base"
@@ -51,11 +63,11 @@ msgstr ""
 msgid "Bases"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:151
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:163
 msgid "Boat"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:157
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:169
 msgid "Boat (RU)"
 msgstr ""
 
@@ -69,8 +81,8 @@ msgid "Boats"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/DialogDelete.jsx:53
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:171
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:197
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:183
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:209
 #: modules/boats/frontend/components/admin/DialogDelete.jsx:53
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:53
 #: modules/destinations/frontend/components/admin/DialogDelete.jsx:53
@@ -133,12 +145,12 @@ msgstr ""
 msgid "Could not load data"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:193
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:205
 msgid "Could not load data from server"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:240
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:235
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:247
 #: modules/countries/frontend/components/admin/CountriesEdit.jsx:204
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersEdit.jsx:205
@@ -148,7 +160,7 @@ msgstr ""
 #: modules/bases/frontend/components/admin/BasesList.jsx:70
 #: modules/bases/frontend/components/admin/BasesList.jsx:73
 #: modules/bases/frontend/components/admin/BasesList.jsx:180
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:194
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:206
 #: modules/boats/frontend/components/admin/BoatsList.jsx:70
 #: modules/boats/frontend/components/admin/BoatsList.jsx:73
 #: modules/boats/frontend/components/admin/BoatsList.jsx:180
@@ -303,7 +315,7 @@ msgstr ""
 msgid "Edit Base"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:233
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:245
 msgid "Edit Boat"
 msgstr ""
 
@@ -324,7 +336,7 @@ msgstr ""
 #~ msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:181
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:190
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:202
 #: modules/boats/frontend/components/admin/BoatsList.jsx:181
 #: modules/countries/frontend/components/admin/CountriesList.jsx:181
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:181
@@ -342,7 +354,7 @@ msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:67
 #: modules/bases/frontend/components/admin/BasesList.jsx:182
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:191
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:203
 #: modules/boats/frontend/components/admin/BoatsList.jsx:67
 #: modules/boats/frontend/components/admin/BoatsList.jsx:182
 #: modules/countries/frontend/components/admin/CountriesList.jsx:67
@@ -374,7 +386,7 @@ msgstr ""
 msgid "New Base"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:233
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:245
 msgid "New Boat"
 msgstr ""
 
@@ -422,7 +434,7 @@ msgstr ""
 #~ msgid "Password is required when creating a new user, should be at least 8 characters long."
 #~ msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:192
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:204
 msgid "Passwords do not match"
 msgstr ""
 
@@ -458,7 +470,7 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:177
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:189
 msgid "Save"
 msgstr ""
 
@@ -507,7 +519,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:196
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:208
 msgid "Yes"
 msgstr ""
 
@@ -531,6 +543,6 @@ msgstr "Destinations"
 msgid "users"
 msgstr "Users"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:195
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:207
 msgid "will be deleted. Are you sure?"
 msgstr ""

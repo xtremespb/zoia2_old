@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import ZButton from './ZButton.jsx';
 import ZText from './ZText.jsx';
 import ZTags from './ZTags.jsx';
+import ZData from './ZData.jsx';
 import ZTextarea from './ZTextarea.jsx';
 import ZCKEditor4 from './ZCKEditor4.jsx';
 import ZCKEditor5 from './ZCKEditor5.jsx';
@@ -171,6 +172,8 @@ export default class ZFormBuilder extends Component {
         });
     }
 
+    getData = () => this.state.dataStorage;
+
     setFormDataExtra = data => {
         this.formDataExtra = data;
     }
@@ -279,6 +282,19 @@ export default class ZFormBuilder extends Component {
     }
 
     getFormItem = (item, cname) => {
+        let itemProps;
+        this.props.data.map(pi => {
+            if (Array.isArray(pi)) {
+                pi.map(spi => {
+                    if (spi.id === item.id) {
+                        itemProps = spi;
+                    }
+                });
+            }
+            if (pi.id === item.id) {
+                itemProps = pi;
+            }
+        });
         switch (item.type) {
             case 'text':
                 return (<ZText
@@ -287,10 +303,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -303,10 +319,10 @@ export default class ZFormBuilder extends Component {
                     originalId={item.id}
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || []}
@@ -317,6 +333,24 @@ export default class ZFormBuilder extends Component {
                     i18n={this.props.i18n}
                     suggestions={item.suggestions || []}
                 />);
+            case 'data':
+                return (<ZData
+                    ref={input => { this.fields[item.id] = input; }}
+                    i18n={this.props.i18n}
+                    originalId={item.id}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    cname={cname}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
+                    error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
+                    buttons={itemProps ? itemProps.buttons : item.buttons}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
+                    value={item.value}
+                    view={item.view}
+                    viewTemplate={item.viewTemplate}
+                />);
             case 'password':
                 return (<ZText
                     ref={input => { this.fields[item.id] = input; }}
@@ -324,10 +358,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -342,11 +376,11 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     source={item.source}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -360,10 +394,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -377,10 +411,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -396,11 +430,11 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     scriptLoaded={false}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={this.props.i18n._(item.helpText)}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
@@ -415,7 +449,7 @@ export default class ZFormBuilder extends Component {
                     buttonType={item.buttonType || 'button'}
                     linkTo={item.linkTo}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     disabled={this.state.loading}
                     onButtonClick={item.onButtonClick}
                 />);
@@ -430,7 +464,7 @@ export default class ZFormBuilder extends Component {
                     key={`field_${this.props.prefix}_${item.id}`}
                     id={`field_${this.props.prefix}_${item.id}`}
                     originalId={item.id}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     value={this.state.dataStorage[this.state.tab][item.id]}
                     lang={this.props.lang}
                     onValueChanged={this.onFileValueChanged}
@@ -444,10 +478,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={item.helpText}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || Object.keys(item.values)[0]}
@@ -463,10 +497,10 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={item.helpText}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || {}}
@@ -482,14 +516,14 @@ export default class ZFormBuilder extends Component {
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    label={this.props.i18n._(item.label)}
+                    label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
-                    helpText={item.helpText}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
                     value={this.state.dataStorage[this.state.tab][item.id] || Object.keys(item.values)[0]}
-                    values={item.values || {}}
+                    values={itemProps && item.updateFromProps ? itemProps.values : item.values || ''}
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading || item.disabled}
                     i18n={this.props.i18n}
@@ -498,7 +532,7 @@ export default class ZFormBuilder extends Component {
                 return (<ZMessage
                     key={`field_${this.props.prefix}_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    text={this.props.i18n._(item.text)}
+                    text={itemProps ? itemProps.text : item.text || ''}
                 />);
             default:
                 return null;
@@ -506,12 +540,12 @@ export default class ZFormBuilder extends Component {
     }
 
     getFormFields = () => {
-        const data = this.state.data.map(item => {
+        const data = this.state.data.map((item) => {
             if (Array.isArray(item)) {
-                const items = item.map(ai => this.getFormItem(ai, 'uk-width-auto uk-margin-small-right'));
+                const items = item.map((ai) => this.getFormItem(ai, 'uk-width-auto uk-margin-small-right'));
                 return (<ZWrap key={`field_${this.props.prefix}_wrap_${item[0].id}`} items={items} />);
             }
-            return this.getFormItem(item);
+            return this.getFormItem(item, null);
         });
         return data;
     }

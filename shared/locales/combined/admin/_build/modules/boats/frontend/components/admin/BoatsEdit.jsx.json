@@ -55,11 +55,35 @@
       ]
     ]
   },
+  "Availability": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        153
+      ]
+    ]
+  },
+  "Add or remove availability data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        155
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsEdit.jsx",
+        156
+      ]
+    ]
+  },
   "Boat": {
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        151
+        163
       ]
     ]
   },
@@ -67,7 +91,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        157
+        169
       ]
     ]
   },
@@ -75,11 +99,11 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        171
+        183
       ],
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        197
+        209
       ]
     ]
   },
@@ -87,7 +111,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        177
+        189
       ]
     ]
   },
@@ -95,7 +119,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        190
+        202
       ]
     ]
   },
@@ -103,7 +127,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        191
+        203
       ]
     ]
   },
@@ -111,7 +135,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        192
+        204
       ]
     ]
   },
@@ -119,7 +143,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        193
+        205
       ]
     ]
   },
@@ -127,7 +151,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        194
+        206
       ]
     ]
   },
@@ -135,7 +159,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        195
+        207
       ]
     ]
   },
@@ -143,7 +167,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        196
+        208
       ]
     ]
   },
@@ -151,7 +175,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        233
+        245
       ]
     ]
   },
@@ -159,7 +183,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        233
+        245
       ]
     ]
   },
@@ -167,7 +191,7 @@
     "origin": [
       [
         "modules/boats/frontend/components/admin/BoatsEdit.jsx",
-        235
+        247
       ]
     ]
   }

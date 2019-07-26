@@ -32,6 +32,12 @@ class BoatsEdit extends Component {
         }
     }
 
+    // componentDidUpdate = async prevProps => {
+    //     if (prevProps.appData.language !== this.props.appData.language) {
+    //         await this.editBoatsForm.current.setProperty('avail', 'buttons', (<button type="button" className="uk-button uk-button-primary uk-button-small">{this.i18n._(t`Add`)}</button>));
+    //     }
+    // }
+
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
@@ -116,73 +122,79 @@ class BoatsEdit extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        data={
+        data={[
+            {
+                id: 'destination',
+                type: 'select',
+                label: `${i18n._(t`Destination`)}:`,
+                css: 'uk-form-width-large',
+                defaultValue: '',
+                values: {},
+                autofocus: true,
+                onChange: (id, value) => this.onDestinationChange(value, i18n)
+            },
+            {
+                id: 'country',
+                type: 'select',
+                label: `${i18n._(t`Country`)}:`,
+                css: 'uk-form-width-large',
+                defaultValue: '',
+                values: {}
+            },
+            {
+                id: 'bases',
+                type: 'tags',
+                label: `${i18n._(t`Bases`)}:`,
+                css: 'uk-form-width-large',
+                placeholderText: i18n._(t`Add new base`),
+                suggestions: [
+                    { id: 1, name: 'Test 1' },
+                    { id: 2, name: 'Test 2' }
+                ]
+            },
+            {
+                id: 'avail',
+                type: 'data',
+                label: `${i18n._(t`Availability`)}:`,
+                css: 'uk-form-width-large',
+                placeholderText: i18n._(t`Add or remove availability data`),
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small">{i18n._(t`Add`)}</button>)
+            },
             [
                 {
-                    id: 'destination',
-                    type: 'select',
-                    label: t`Destination`,
-                    css: 'uk-form-width-large',
-                    defaultValue: '',
-                    values: {},
-                    autofocus: true,
-                    onChange: (id, value) => this.onDestinationChange(value, i18n)
+                    id: 'name',
+                    type: 'text',
+                    css: 'uk-form-width-medium',
+                    label: `${i18n._(t`Boat`)}:`
                 },
                 {
-                    id: 'country',
-                    type: 'select',
-                    label: t`Country`,
-                    css: 'uk-form-width-large',
-                    defaultValue: '',
-                    values: {}
-                },
+                    id: 'name_ru',
+                    type: 'text',
+                    css: 'uk-form-width-medium',
+                    label: `${i18n._(t`Boat (RU)`)}:`
+                }
+            ],
+            {
+                id: 'divider1',
+                type: 'divider'
+            },
+            [
                 {
-                    id: 'bases',
-                    type: 'tags',
-                    label: t`Bases`,
-                    css: 'uk-form-width-large',
-                    placeholderText: t`Add new base`,
-                    suggestions: [
-                        { id: 1, name: 'Test 1' },
-                        { id: 2, name: 'Test 2' }
-                    ]
-                },
-                [
-                    {
-                        id: 'name',
-                        type: 'text',
-                        css: 'uk-form-width-medium',
-                        label: t`Boat`
-                    },
-                    {
-                        id: 'name_ru',
-                        type: 'text',
-                        css: 'uk-form-width-medium',
-                        label: t`Boat (RU)`
-                    }
-                ],
-                {
-                    id: 'divider1',
-                    type: 'divider'
-                },
-                [
-                    {
-                        id: 'btnCancel',
-                        type: 'button',
-                        buttonType: 'link',
-                        linkTo: '/admin/boats',
-                        css: 'uk-button-default uk-margin-small-right',
-                        label: t`Cancel`
-                    }, {
-                        id: 'btnSave',
-                        type: 'button',
-                        buttonType: 'submit',
-                        css: 'uk-button-primary',
-                        label: t`Save`
-                    }
-                ]
+                    id: 'btnCancel',
+                    type: 'button',
+                    buttonType: 'link',
+                    linkTo: '/admin/boats',
+                    css: 'uk-button-default uk-margin-small-right',
+                    label: i18n._(t`Cancel`)
+                }, {
+                    id: 'btnSave',
+                    type: 'button',
+                    buttonType: 'submit',
+                    css: 'uk-button-primary',
+                    label: i18n._(t`Save`)
+                }
             ]
-        }
+        ]}
         validation={
             {
                 name: {
@@ -191,14 +203,14 @@ class BoatsEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: t`Field is required`,
-            ERR_VFORMAT: t`Invalid format`,
-            ERR_VNOMATCH: t`Passwords do not match`,
-            ERR_LOAD: t`Could not load data from server`,
-            ERR_SAVE: t`Could not save data`,
-            WILL_BE_DELETED: t`will be deleted. Are you sure?`,
-            YES: t`Yes`,
-            CANCEL: t`Cancel`
+            ERR_VMANDATORY: i18n._(t`Field is required`),
+            ERR_VFORMAT: i18n._(t`Invalid format`),
+            ERR_VNOMATCH: i18n._(`Passwords do not match`),
+            ERR_LOAD: i18n._(t`Could not load data from server`),
+            ERR_SAVE: i18n._(t`Could not save data`),
+            WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
+            YES: i18n._(t`Yes`),
+            CANCEL: i18n._(t`Cancel`)
         }}
         save={{
             url: `${config.apiURL}/api/boats/save`,

@@ -66,14 +66,14 @@ class DestinationsEdit extends Component {
                         id: 'name',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `Destination`,
+                        label: `${i18n._(t`Destination`)}:`,
                         autofocus: true
                     },
                     {
                         id: 'name_ru',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `Destination (RU)`
+                        label: `${i18n._(t`Destination (RU)`)}:`
                     }
                 ],
                 {
@@ -87,13 +87,13 @@ class DestinationsEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/destinations',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: `Cancel`
+                        label: i18n._(t`Cancel`)
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: `Save`
+                        label: i18n._(t`Save`)
                     }
                 ]
             ]
@@ -118,14 +118,14 @@ class DestinationsEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: `Field is required`,
-            ERR_VFORMAT: `Invalid format`,
-            ERR_VNOMATCH: `Passwords do not match`,
-            ERR_LOAD: `Could not load data from server`,
-            ERR_SAVE: `Could not save data`,
-            WILL_BE_DELETED: `will be deleted. Are you sure?`,
-            YES: `Yes`,
-            CANCEL: `Cancel`
+            ERR_VMANDATORY: t`Field is required`,
+            ERR_VFORMAT: t`Invalid format`,
+            ERR_VNOMATCH: t`Passwords do not match`,
+            ERR_LOAD: t`Could not load data from server`,
+            ERR_SAVE: t`Could not save data`,
+            WILL_BE_DELETED: t`will be deleted. Are you sure?`,
+            YES: t`Yes`,
+            CANCEL: t`Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/destinations/save`,

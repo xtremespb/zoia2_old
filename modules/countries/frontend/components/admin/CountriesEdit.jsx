@@ -32,6 +32,12 @@ class CountriesEdit extends Component {
         }
     }
 
+    componentDidUpdate = async prevProps => {
+        if (prevProps.appData.language !== this.props.appData.language) {
+            await this.reloadFormDynamicValues();
+        }
+    }
+
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
@@ -76,6 +82,11 @@ class CountriesEdit extends Component {
         });
     });
 
+    reloadFormDynamicValues = async (i18n) => {
+        const destinations = await this.loadDestinations(i18n, this.editCountryForm.current.getData());
+        await this.editCountryForm.current.setProperty('destination', 'values', destinations);
+    }
+
     onFormBuilt = async () => {
         if (!this.props.match.params.id) {
             const destinations = await this.loadDestinations();
@@ -94,7 +105,7 @@ class CountriesEdit extends Component {
                 {
                     id: 'destination',
                     type: 'select',
-                    label: `Destination`,
+                    label: `${i18n._(t`Destination`)}:`,
                     css: 'uk-form-width-large',
                     defaultValue: '',
                     values: {},
@@ -105,13 +116,13 @@ class CountriesEdit extends Component {
                         id: 'name',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `Country`
+                        label: `${i18n._(t`Country`)}:`
                     },
                     {
                         id: 'name_ru',
                         type: 'text',
                         css: 'uk-form-width-medium',
-                        label: `Country (RU)`
+                        label: `${i18n._(t`Country (RU)`)}:`
                     }
                 ],
                 {
@@ -125,13 +136,13 @@ class CountriesEdit extends Component {
                         buttonType: 'link',
                         linkTo: '/admin/countries',
                         css: 'uk-button-default uk-margin-small-right',
-                        label: `Cancel`
+                        label: i18n._(t`Cancel`)
                     }, {
                         id: 'btnSave',
                         type: 'button',
                         buttonType: 'submit',
                         css: 'uk-button-primary',
-                        label: `Save`
+                        label: i18n._(t`Save`)
                     }
                 ]
             ]
@@ -156,14 +167,14 @@ class CountriesEdit extends Component {
             }
         }
         lang={{
-            ERR_VMANDATORY: `Field is required`,
-            ERR_VFORMAT: `Invalid format`,
-            ERR_VNOMATCH: `Passwords do not match`,
-            ERR_LOAD: `Could not load data from server`,
-            ERR_SAVE: `Could not save data`,
-            WILL_BE_DELETED: `will be deleted. Are you sure?`,
-            YES: `Yes`,
-            CANCEL: `Cancel`
+            ERR_VMANDATORY: t`Field is required`,
+            ERR_VFORMAT: t`Invalid format`,
+            ERR_VNOMATCH: t`Passwords do not match`,
+            ERR_LOAD: t`Could not load data from server`,
+            ERR_SAVE: t`Could not save data`,
+            WILL_BE_DELETED: t`will be deleted. Are you sure?`,
+            YES: t`Yes`,
+            CANCEL: t`Cancel`
         }}
         save={{
             url: `${config.apiURL}/api/countries/save`,
