@@ -102,17 +102,18 @@ const webpackConfig = {
             orderWarning: true
         }),
         new HtmlWebpackPlugin({
+            chunksSortMode: 'none',
             filename: path.resolve(__dirname, '..', 'static', 'index.html'),
             chunks: ['app', 'styles', 'vendors'],
-            template: path.resolve(__dirname, '..', 'shared', 'templates', 'template.html')
-            // minify: {
-            //     collapseWhitespace: true,
-            //     removeComments: true,
-            //     removeRedundantAttributes: true,
-            //     removeScriptTypeAttributes: true,
-            //     removeStyleLinkTypeAttributes: true,
-            //     useShortDoctype: true
-            // }
+            template: path.resolve(__dirname, '..', 'shared', 'templates', 'template.html'),
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            }
         })
     ]
 };
