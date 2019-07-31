@@ -154,15 +154,14 @@ class BoatsEdit extends Component {
     onAvailabilityDialogSaveClick = async (formData, id) => {
         const data = formData;
         const availValues = await this.editBoatsForm.current.getValue('avail');
-        let index;
-        console.log(availValues);
+        let index = null;
         availValues.map((v, i) => {
             if (v.id === id) {
                 index = i;
             }
         });
         data.id = id;
-        if (index) {
+        if (index !== null) {
             availValues[index] = data;
         } else {
             availValues.push(data);
