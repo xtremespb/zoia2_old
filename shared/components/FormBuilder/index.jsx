@@ -101,11 +101,8 @@ export default class ZFormBuilder extends Component {
         simple: false
     }
 
-    constructor(props) {
-        super(props);
+    getValuesFromData = data => {
         const values = {};
-        this.state.data = props.data;
-        const { data } = props;
         data.map(item => {
             if (Array.isArray(item)) {
                 item.map(ai => {
@@ -120,6 +117,7 @@ export default class ZFormBuilder extends Component {
                             values[ai.id] = {};
                             break;
                         case 'tags':
+                        case 'data':
                             values[ai.id] = [];
                             break;
                         case 'select':
@@ -141,6 +139,7 @@ export default class ZFormBuilder extends Component {
                         values[item.id] = {};
                         break;
                     case 'tags':
+                    case 'data':
                         values[item.id] = [];
                         break;
                     case 'select':
@@ -151,6 +150,23 @@ export default class ZFormBuilder extends Component {
                 }
             }
         });
+        return values;
+    }
+
+    resetValuesToDefault = () => {
+        const { data } = this.props;
+        const dataStorage = {};
+        dataStorage[this.state.tab] = this.getValuesFromData(data);
+        this.setState({
+            dataStorage
+        });
+    }
+
+    constructor(props) {
+        super(props);
+        this.state.data = props.data;
+        const { data } = props;
+        const values = this.getValuesFromData(data);
         Object.keys(props.tabs).map(key => {
             this.state.dataStorage[key] = {};
             this.state.allTabs[key] = true;
@@ -223,6 +239,25 @@ export default class ZFormBuilder extends Component {
             data
         }, () => resolve());
     });
+
+    getProperty = (id, property) => {
+        const { data } = this.state;
+        let value = null;
+        data.map((item, i1) => {
+            if (Array.isArray(item)) {
+                item.map((ai, i2) => {
+                    if (ai.id === id) {
+                        value = data[i1][i2][property];
+                    }
+                });
+            } else if (item.id === id) {
+                value = data[i1][property];
+            }
+        });
+        return value;
+    };
+
+    getValue = (id, tab = this.state.tab) => this.state.dataStorage[tab][id];
 
     setValue = (property, value, tab = this.state.tab) => new Promise(resolve => {
         const dataStorage = cloneDeep(this.state.dataStorage);
@@ -329,9 +364,9 @@ export default class ZFormBuilder extends Component {
                     onDelete={i => this.onTagDelete(item.id, i)}
                     onAddition={tag => this.onTagAddition(item.id, tag)}
                     disabled={this.state.loading}
-                    placeholderText={item.placeholderText}
                     i18n={this.props.i18n}
                     suggestions={item.suggestions || []}
+                    placeholderText={item.placeholderText}
                 />);
             case 'data':
                 return (<ZData
@@ -347,9 +382,8 @@ export default class ZFormBuilder extends Component {
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     buttons={itemProps ? itemProps.buttons : item.buttons}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
-                    value={item.value}
+                    values={this.state.dataStorage[this.state.tab][item.id] || []}
                     view={item.view}
-                    viewTemplate={item.viewTemplate}
                 />);
             case 'password':
                 return (<ZText
@@ -532,7 +566,7 @@ export default class ZFormBuilder extends Component {
                 return (<ZMessage
                     key={`field_${this.props.prefix}_${this.props.prefix}_${item.id}`}
                     css={item.css}
-                    text={itemProps ? itemProps.text : item.text || ''}
+                    text={itemProps && item.updateFromProps ? itemProps.text : item.text || ''}
                 />);
             default:
                 return null;
@@ -693,7 +727,7 @@ export default class ZFormBuilder extends Component {
                         break;
                     case 'radio':
                     case 'select':
-                        data[tab][field] = String(data[tab][field]) || String(Object.keys(this.types[field].values)[0]);
+                        data[tab][field] = data[tab][field] ? String(data[tab][field]) || String(Object.keys(this.types[field].values)[0]) : null;
                         break;
                     default:
                         data[tab][field] = data[tab][field] || '';
@@ -877,6 +911,19 @@ export default class ZFormBuilder extends Component {
         }).filter(item => item.error > ERR_NONE);
         return vdata;
     }
+
+    hideErrors = () => new Promise(resolve => {
+        const errors = {};
+        const errorMessages = {};
+        Object.keys(this.props.tabs).map(key => {
+            errors[key] = {};
+            errorMessages[key] = {};
+        });
+        this.setState({
+            errors,
+            errorMessages
+        }, () => resolve());
+    });
 
     showErrors = vdata => {
         const errorsNew = {};

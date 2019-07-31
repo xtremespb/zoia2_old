@@ -12,6 +12,7 @@ import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntime
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import BoatAvailabilityDialog from './BoatAvailabilityDialog.jsx';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
@@ -20,6 +21,7 @@ class BoatsEdit extends Component {
     constructor(props) {
         super(props);
         this.editBoatsForm = React.createRef();
+        this.boatAvailabilityDialog = React.createRef();
     }
 
     state = {
@@ -31,12 +33,6 @@ class BoatsEdit extends Component {
             history.push('/users/auth?redirect=/admin/boats');
         }
     }
-
-    // componentDidUpdate = async prevProps => {
-    //     if (prevProps.appData.language !== this.props.appData.language) {
-    //         await this.editBoatsForm.current.setProperty('avail', 'buttons', (<button type="button" className="uk-button uk-button-primary uk-button-small">{this.i18n._(t`Add`)}</button>));
-    //     }
-    // }
 
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
@@ -59,61 +55,20 @@ class BoatsEdit extends Component {
         history.push('/admin/boats?reload=1');
     }
 
-    loadDestinations = (i18n, data) => new Promise(async resolve => {
-        if (this.editBoatsForm.current) {
-            await this.editBoatsForm.current.setProperty('destination', 'disabled', true);
-            await this.editBoatsForm.current.setProperty('country', 'disabled', true);
-        }
-        axios.post(`${config.apiURL}/api/boats/getDestinations`, {
-            token: this.props.appDataRuntime.token,
-            language: this.props.appData.language,
-            destination: data ? data.default.destination : undefined
-        }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editBoatsForm.current.setProperty('destination', 'disabled', null);
-            await this.editBoatsForm.current.setProperty('destination', 'values', res.data.destinations);
-            await this.editBoatsForm.current.setProperty('country', 'disabled', null);
-            await this.editBoatsForm.current.setProperty('country', 'values', res.data.countries);
-            if (data) {
-                await this.editBoatsForm.current.setProperty('country', 'value', data.default.country);
-            }
-            resolve({
-                destinations: res.data.destinations,
-                countries: res.data.countries
-            });
-        }).catch(async () => {
-            await this.editBoatsForm.current.setProperty('destination', 'disabled', null);
-            await this.editBoatsForm.current.setProperty('country', 'disabled', null);
-            UIkit.notification({
-                message: i18n._('Could not get a list of destinations'),
-                status: 'danger'
-            });
-        });
-    });
-
-    onFormBuilt = async i18n => {
-        if (!this.props.match.params.id) {
-            const { destinations, countries } = await this.loadDestinations(i18n);
-            await this.editBoatsForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
-            await this.editBoatsForm.current.setValue('country', countries && Object.keys(countries).length ? Object.keys(countries)[0] : {}, 'default');
-        }
+    onAddAvailClick = i18n => {
+        this.boatAvailabilityDialog.current.showDialog(i18n, null);
     }
 
-    onDestinationChange = async (destination, i18n) => {
-        await this.editBoatsForm.current.setProperty('country', 'disabled', true);
-        axios.post(`${config.apiURL}/api/boats/getCountries`, {
-            token: this.props.appDataRuntime.token,
-            language: this.props.appData.language,
-            destination
-        }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editBoatsForm.current.setProperty('country', 'disabled', null);
-            await this.editBoatsForm.current.setProperty('country', 'values', res.data.countries);
-        }).catch(async () => {
-            await this.editBoatsForm.current.setProperty('country', 'disabled', null);
-            UIkit.notification({
-                message: i18n._('Could not get a list of countries'),
-                status: 'danger'
-            });
-        });
+    onEditAvailClick = (e, item, i18n) => {
+        e.preventDefault();
+        const data = {
+            default: {
+                destination: item.destination.id,
+                country: item.country.id,
+                bases: item.bases
+            }
+        };
+        this.boatAvailabilityDialog.current.showDialog(i18n, item.id, data);
     }
 
     getEditForm = i18n => (<FormBuilder
@@ -124,56 +79,14 @@ class BoatsEdit extends Component {
         i18n={i18n}
         data={[
             {
-                id: 'destination',
-                type: 'select',
-                label: `${i18n._(t`Destination`)}:`,
-                css: 'uk-form-width-large',
-                defaultValue: '',
-                values: {},
-                autofocus: true,
-                onChange: (id, value) => this.onDestinationChange(value, i18n)
-            },
-            {
-                id: 'country',
-                type: 'select',
-                label: `${i18n._(t`Country`)}:`,
-                css: 'uk-form-width-large',
-                defaultValue: '',
-                values: {}
-            },
-            {
-                id: 'bases',
-                type: 'tags',
-                label: `${i18n._(t`Bases`)}:`,
-                css: 'uk-form-width-large',
-                placeholderText: i18n._(t`Add new base`),
-                suggestions: [
-                    { id: 1, name: 'Test 1' },
-                    { id: 2, name: 'Test 2' }
-                ]
-            },
-            {
                 id: 'avail',
                 type: 'data',
                 label: `${i18n._(t`Availability`)}:`,
                 css: 'uk-form-width-large',
                 placeholderText: i18n._(t`Add or remove availability data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small">{i18n._(t`Add`)}</button>)
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddAvailClick(i18n)}>{i18n._(t`Add`)}</button>),
+                view: data => (<div key={data.id}>ID : {data.id} --- {data.destination.name} <a href="" onClick={e => this.onEditAvailClick(e, data, i18n)}>[ Edit ]</a></div>)
             },
-            [
-                {
-                    id: 'name',
-                    type: 'text',
-                    css: 'uk-form-width-medium',
-                    label: `${i18n._(t`Boat`)}:`
-                },
-                {
-                    id: 'name_ru',
-                    type: 'text',
-                    css: 'uk-form-width-medium',
-                    label: `${i18n._(t`Boat (RU)`)}:`
-                }
-            ],
             {
                 id: 'divider1',
                 type: 'divider'
@@ -231,13 +144,30 @@ class BoatsEdit extends Component {
         onSaveSuccess={() => this.onSaveSuccessHandler(i18n)}
         onLoadError={() => this.setState({ loadingError: true })}
         onLoadSuccess={() => this.setState({ loadingError: false })}
-        onDataDeserialized={data => this.loadDestinations(i18n, data)}
-        onFormBuilt={() => this.onFormBuilt(i18n)}
     />);
 
     reloadEditFormData = e => {
         e.preventDefault();
         this.setState({ loadingError: false });
+    }
+
+    onAvailabilityDialogSaveClick = async (formData, id) => {
+        const data = formData;
+        const availValues = await this.editBoatsForm.current.getValue('avail');
+        let index;
+        console.log(availValues);
+        availValues.map((v, i) => {
+            if (v.id === id) {
+                index = i;
+            }
+        });
+        data.id = id;
+        if (index) {
+            availValues[index] = data;
+        } else {
+            availValues.push(data);
+        }
+        await this.editBoatsForm.current.setValue('avail', availValues);
     }
 
     render = () => (
@@ -250,6 +180,11 @@ class BoatsEdit extends Component {
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}
+                        <BoatAvailabilityDialog
+                            ref={this.boatAvailabilityDialog}
+                            onAvailabilityDialogSaveClick={this.onAvailabilityDialogSaveClick}
+                            i18n={i18n}
+                        />
                     </>);
                 }}
             </I18n>

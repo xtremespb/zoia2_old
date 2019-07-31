@@ -52,6 +52,7 @@ export default fastify => ({
         try {
             // Get data
             const countries = {};
+            let bases = [];
             const destination = parseInt(req.body.destination, 10);
             (await this.mongo.db.collection('countries').find({
                 id_dest: destination
@@ -64,11 +65,30 @@ export default fastify => ({
                 country.name = req.body.language === 'ru' ? ru || en : en;
                 countries[country._id] = country.name;
             });
+            if (Object.keys(countries).length) {
+                const country = parseInt(Object.keys(countries)[0], 10);
+                bases = ((await this.mongo.db.collection('bases').find({
+                    id_dest: destination,
+                    id_country: country
+                }).toArray() || []).map(b => {
+                    const base = b;
+                    const [
+                        en,
+                        ru
+                    ] = base.name.split(/\|/);
+                    const name = req.body.language === 'ru' ? ru || en : en;
+                    return {
+                        id: base._id,
+                        name
+                    };
+                })) || [];
+            }
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
-                    countries
+                    countries,
+                    bases
                 }));
         } catch (e) {
             req.log.error({

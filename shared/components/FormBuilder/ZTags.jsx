@@ -14,7 +14,7 @@ export default class ZTags extends Component {
                 suggestions={this.props.suggestions}
                 onDelete={this.props.onDelete}
                 onAddition={this.props.onAddition}
-                placeholderText={this.props.i18n._(this.props.placeholderText)}
+                placeholderText={this.props.placeholderText}
                 classNames={{
                     root: 'zform-react-tags',
                     rootFocused: 'is-focused',

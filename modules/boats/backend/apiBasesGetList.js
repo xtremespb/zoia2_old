@@ -13,16 +13,12 @@ export default fastify => ({
                     minLength: 2,
                     maxLength: 2
                 },
-                destination: {
-                    type: 'string',
-                    pattern: '^[0-9]+$'
-                },
                 country: {
                     type: 'string',
                     pattern: '^[0-9]+$'
                 }
             },
-            required: ['token', 'language']
+            required: ['token', 'language', 'country']
         }
     },
     attachValidation: true,
@@ -55,57 +51,25 @@ export default fastify => ({
         // End of check permissions
         try {
             // Get data
-            const query = {};
-            const destinations = {};
-            (await this.mongo.db.collection('destinations').find(query).toArray() || []).map(d => {
-                const destination = d;
+            const country = parseInt(req.body.country, 10);
+            const bases = ((await this.mongo.db.collection('bases').find({
+                id_country: country
+            }).toArray() || []).map(b => {
+                const base = b;
                 const [
                     en,
                     ru
-                ] = destination.name.split(/\|/);
-                destination.name = req.body.language === 'ru' ? ru || en : en;
-                destinations[destination._id] = destination.name;
-            });
-            const countries = {};
-            let bases = [];
-            if (Object.keys(destinations).length) {
-                const destination = req.body.destination ? parseInt(req.body.destination, 10) : parseInt(Object.keys(destinations)[0], 10);
-                (await this.mongo.db.collection('countries').find({
-                    id_dest: destination
-                }).toArray() || []).map(d => {
-                    const country = d;
-                    const [
-                        en,
-                        ru
-                    ] = country.name.split(/\|/);
-                    country.name = req.body.language === 'ru' ? ru || en : en;
-                    countries[country._id] = country.name;
-                });
-                if (Object.keys(countries).length) {
-                    const country = parseInt(req.body.country || Object.keys(countries)[0], 10);
-                    bases = ((await this.mongo.db.collection('bases').find({
-                        id_dest: destination,
-                        id_country: country
-                    }).toArray() || []).map(b => {
-                        const base = b;
-                        const [
-                            en,
-                            ru
-                        ] = base.name.split(/\|/);
-                        const name = req.body.language === 'ru' ? ru || en : en;
-                        return {
-                            id: base._id,
-                            name
-                        };
-                    })) || [];
-                }
-            }
+                ] = base.name.split(/\|/);
+                const name = req.body.language === 'ru' ? ru || en : en;
+                return {
+                    id: base._id,
+                    name
+                };
+            })) || [];
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
-                    destinations,
-                    countries,
                     bases
                 }));
         } catch (e) {
