@@ -84,7 +84,6 @@ export default fastify => ({
                 if (Object.keys(countries).length) {
                     const country = parseInt(req.body.country || Object.keys(countries)[0], 10);
                     bases = ((await this.mongo.db.collection('bases').find({
-                        id_dest: destination,
                         id_country: country
                     }).toArray() || []).map(b => {
                         const base = b;

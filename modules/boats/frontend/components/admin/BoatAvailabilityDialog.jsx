@@ -62,8 +62,8 @@ class BoatAvailabilityDialog extends Component {
 
     loadDestinations = (i18n, data) => new Promise(async resolve => {
         if (this.editAvailForm.current) {
-            await this.editAvailForm.current.setProperty('destination', 'disabled', true);
-            await this.editAvailForm.current.setProperty('country', 'disabled', true);
+            await this.editAvailForm.current.setLoading(true);
+            await this.editAvailForm.current.resetValuesToDefault();
         }
         axios.post(`${config.apiURL}/api/boats/getDestinations`, {
             token: this.props.appDataRuntime.token,
@@ -71,12 +71,15 @@ class BoatAvailabilityDialog extends Component {
             destination: data ? data.default.destination : undefined,
             country: data ? data.default.country : undefined
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            await this.editAvailForm.current.setProperty('destination', 'disabled', null);
+            await this.editAvailForm.current.setLoading(false);
             await this.editAvailForm.current.setProperty('destination', 'values', res.data.destinations);
-            await this.editAvailForm.current.setProperty('country', 'disabled', null);
             await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
+            const basesList = {};
+            res.data.bases.map(b => basesList[b.id] = b.name);
+            await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
             if (data) {
                 await this.editAvailForm.current.setProperty('country', 'value', data.default.country);
+                await this.editAvailForm.current.setProperty('homeBase', 'value', data.default.homeBase);
             }
             resolve({
                 destinations: res.data.destinations,
@@ -84,8 +87,7 @@ class BoatAvailabilityDialog extends Component {
                 bases: res.data.bases
             });
         }).catch(async () => {
-            await this.editAvailForm.current.setProperty('destination', 'disabled', null);
-            await this.editAvailForm.current.setProperty('country', 'disabled', null);
+            await this.editAvailForm.current.setLoading(false);
             UIkit.notification({
                 message: i18n._('Could not get a list of destinations'),
                 status: 'danger'
@@ -102,11 +104,14 @@ class BoatAvailabilityDialog extends Component {
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
             await this.editAvailForm.current.setProperty('country', 'disabled', null);
             await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
-            await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases);
+            await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases || []);
             await this.editAvailForm.current.setValue('bases', [], 'default');
             await this.editAvailForm.current.setValue('country', Object.keys(res.data.countries)[0], 'default');
             const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
             await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+            const basesList = {};
+            res.data.bases.map(b => basesList[b.id] = b.name);
+            await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
         }).catch(async () => {
             await this.editAvailForm.current.setProperty('country', 'disabled', null);
             UIkit.notification({
@@ -125,6 +130,11 @@ class BoatAvailabilityDialog extends Component {
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
             await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases);
             await this.editAvailForm.current.setValue('bases', [], 'default');
+            const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+            await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+            const basesList = {};
+            res.data.bases.map(b => basesList[b.id] = b.name);
+            await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
         }).catch(async () => {
             await this.editAvailForm.current.setProperty('bases', 'disabled', null);
             UIkit.notification({
@@ -140,6 +150,7 @@ class BoatAvailabilityDialog extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
+        locale={this.props.appData.language}
         data={[
             {
                 id: 'destination',
@@ -173,7 +184,28 @@ class BoatAvailabilityDialog extends Component {
                 id: 'basesListText',
                 type: 'message',
                 text: ''
-            }
+            },
+            {
+                id: 'homeBase',
+                type: 'select',
+                label: `${i18n._(t`Home Base`)}:`,
+                css: 'uk-form-width-medium',
+                defaultValue: '',
+                values: {}
+            },
+            [{
+                id: 'start',
+                type: 'datePicker',
+                label: `${i18n._(t`Start date`)}:`,
+                css: 'uk-form-width-medium',
+                value: ''
+            }, {
+                id: 'end',
+                type: 'datePicker',
+                label: `${i18n._(t`End date`)}:`,
+                css: 'uk-form-width-medium',
+                value: ''
+            }]
         ]}
         validation={
             {
@@ -181,6 +213,15 @@ class BoatAvailabilityDialog extends Component {
                     mandatory: true
                 },
                 country: {
+                    mandatory: true
+                },
+                homeBase: {
+                    mandatory: true
+                },
+                start: {
+                    mandatory: true
+                },
+                end: {
                     mandatory: true
                 }
             }
@@ -217,24 +258,35 @@ class BoatAvailabilityDialog extends Component {
         await this.editAvailForm.current.setProperty('bases', 'suggestions', value || []);
     }
 
-    showDialog = (i18n, id, data) => {
+    showDialog = async (i18n, id, data) => {
+        if (this.editAvailForm.current) {
+            await this.editAvailForm.current.setLoading(true);
+            await this.editAvailForm.current.resetValuesToDefault();
+        }
         this.recordId = id || uuid();
         this.boatAvailabilityDialog.show().then(async () => {
             if (data) {
-                await this.loadDestinations(i18n, data);                
+                const { bases } = await this.loadDestinations(i18n, data);
+                await this.editAvailForm.current.setProperty('bases', 'suggestions', bases);
                 await this.editAvailForm.current.setValue('destination', data.default.destination, 'default');
                 await this.editAvailForm.current.setValue('country', data.default.country, 'default');
                 await this.editAvailForm.current.setValue('bases', data.default.bases, 'default');
-                const basesJSX = data.default.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                await this.editAvailForm.current.setValue('homeBase', data.default.homeBase, 'default');
+                const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+                await this.editAvailForm.current.setValue('start', data.default.start, 'default');
+                await this.editAvailForm.current.setValue('end', data.default.end, 'default');
             } else {
                 const { destinations, countries, bases } = await this.loadDestinations(i18n);
                 await this.editAvailForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
                 await this.editAvailForm.current.setValue('country', countries && Object.keys(countries).length ? Object.keys(countries)[0] : {}, 'default');
                 await this.editAvailForm.current.setProperty('bases', 'suggestions', bases && bases.length ? bases : []);
                 await this.editAvailForm.current.setValue('bases', [], 'default');
+                await this.editAvailForm.current.setValue('homeBase', bases && bases.length ? bases[0].id : null, 'default');
                 const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+                await this.editAvailForm.current.setValue('start', null, 'default');
+                await this.editAvailForm.current.setValue('end', null, 'default');
             }
         });
     }
@@ -264,7 +316,20 @@ class BoatAvailabilityDialog extends Component {
                 name: countries[data.default.country]
             };
             const bases = await this.editAvailForm.current.getValue('bases');
-            this.props.onAvailabilityDialogSaveClick({ destination, country, bases }, this.recordId);
+            const homeBases = await this.editAvailForm.current.getProperty('homeBase', 'values');
+            const homeBase = {
+                id: data.default.homeBase,
+                name: homeBases[data.default.homeBase]
+            };
+            const { start, end } = data.default;
+            this.props.onAvailabilityDialogSaveClick({
+                destination,
+                country,
+                bases,
+                homeBase,
+                start,
+                end
+            }, this.recordId);
         }
     }
 

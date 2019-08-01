@@ -19,6 +19,7 @@ import ZDivider from './ZDivider.jsx';
 import ZWrap from './ZWrap.jsx';
 import ZLoading from './ZLoading.jsx';
 import ZMessage from './ZMessage.jsx';
+import ZDatePicker from './ZDatePicker.jsx';
 // Import styles
 import './style.css';
 
@@ -62,7 +63,8 @@ export default class ZFormBuilder extends Component {
         onFormBuilt: PropTypes.func,
         axios: PropTypes.func.isRequired,
         simple: PropTypes.bool,
-        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
+        i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired,
+        locale: PropTypes.string
     }
 
     static defaultProps = {
@@ -98,8 +100,11 @@ export default class ZFormBuilder extends Component {
         onSaveSuccess: null,
         onDataDeserialized: null,
         onFormBuilt: null,
-        simple: false
+        simple: false,
+        locale: 'en'
     }
+
+    setLoading = async flag => new Promise(resolve => this.setState({ loading: flag }, () => resolve()));
 
     getValuesFromData = data => {
         const values = {};
@@ -347,6 +352,25 @@ export default class ZFormBuilder extends Component {
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading}
+                />);
+            case 'datePicker':
+                return (<ZDatePicker
+                    ref={input => { this.fields[item.id] = input; }}
+                    originalId={item.id}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    css={item.css}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    cname={cname}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
+                    error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
+                    value={this.state.dataStorage[this.state.tab][item.id] || ''}
+                    onValueChanged={this.onGenericFieldValueChanged}
+                    disabled={this.state.loading}
+                    locale={this.props.locale}
+                    placeholder={item.placeholder || ''}
                 />);
             case 'tags':
                 return (<ZTags

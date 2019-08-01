@@ -16,6 +16,10 @@ export default fastify => ({
                 destination: {
                     type: 'string',
                     pattern: '^[0-9]+$'
+                },
+                country: {
+                    type: 'string',
+                    pattern: '^[0-9]+$'
                 }
             },
             required: ['token', 'language', 'destination']
@@ -66,9 +70,8 @@ export default fastify => ({
                 countries[country._id] = country.name;
             });
             if (Object.keys(countries).length) {
-                const country = parseInt(Object.keys(countries)[0], 10);
+                const country = parseInt(req.body.country || Object.keys(countries)[0], 10);
                 bases = ((await this.mongo.db.collection('bases').find({
-                    id_dest: destination,
                     id_country: country
                 }).toArray() || []).map(b => {
                     const base = b;

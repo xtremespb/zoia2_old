@@ -65,7 +65,10 @@ class BoatsEdit extends Component {
             default: {
                 destination: item.destination.id,
                 country: item.country.id,
-                bases: item.bases
+                bases: item.bases,
+                homeBase: item.homeBase.id,
+                start: item.start,
+                end: item.end
             }
         };
         this.boatAvailabilityDialog.current.showDialog(i18n, item.id, data);
