@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 export default class ZData extends Component {
-    focus = () => {}
+    focus = () => { }
 
     getData = () => this.props.view && typeof this.props.view === 'function' ? this.props.values.map(v => this.props.view(v)) : null;
 
@@ -12,7 +12,9 @@ export default class ZData extends Component {
         <div className="uk-form-controls">
             {this.props.buttons}
             <div>
-                {this.getData()}
+                <this.props.wrap>
+                    {this.getData()}
+                </this.props.wrap>
             </div>
             {this.props.error && this.props.errorMessage ? <div><span className="uk-label uk-label-danger">{this.props.errorMessage}</span></div> : null}
             {this.props.helpText ? <div className="uk-text-small uk-text-muted">{this.props.helpText}</div> : null}

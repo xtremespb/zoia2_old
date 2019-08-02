@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { remove as removeCookie } from 'es-cookie';
 import UIkit from 'uikit';
 import axios from 'axios';
+import moment from 'moment';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
@@ -31,6 +32,12 @@ class BoatsEdit extends Component {
     componentDidMount = () => {
         if (!this.props.appDataRuntime.token) {
             history.push('/users/auth?redirect=/admin/boats');
+        }
+    }
+
+    componentDidUpdate = prevProps => {
+        if (prevProps.appData.language !== this.props.appData.language) {
+            moment.locale(this.props.appData.language);
         }
     }
 
@@ -74,6 +81,12 @@ class BoatsEdit extends Component {
         this.boatAvailabilityDialog.current.showDialog(i18n, item.id, data);
     }
 
+    onDeleteAvailClick = async (e, item) => {
+        e.preventDefault();
+        const data = (await this.editBoatsForm.current.getValue('avail')).filter(i => i.id !== item.id);
+        await this.editBoatsForm.current.setValue('avail', data);
+    }
+
     getEditForm = i18n => (<FormBuilder
         ref={this.editBoatsForm}
         prefix="editBoatsForm"
@@ -87,8 +100,14 @@ class BoatsEdit extends Component {
                 label: `${i18n._(t`Availability`)}:`,
                 css: 'uk-form-width-large',
                 placeholderText: i18n._(t`Add or remove availability data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddAvailClick(i18n)}>{i18n._(t`Add`)}</button>),
-                view: data => (<div key={data.id}>ID : {data.id} --- {data.destination.name} <a href="" onClick={e => this.onEditAvailClick(e, data, i18n)}>[ Edit ]</a></div>)
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddAvailClick(i18n)}><span uk-icon="icon:plus;ratio:0.5" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
+                wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
+                view: data => (<li key={data.id}>
+                    <a href="" className="uk-button uk-button-default uk-button-small uk-margin-small-right" onClick={e => this.onEditAvailClick(e, data, i18n)}>{i18n._(t`Edit`)}</a>
+                    <a href="" className="uk-button uk-button-danger uk-button-small uk-margin-right" onClick={e => this.onDeleteAvailClick(e, data, i18n)}>{i18n._(t`Delete`)}</a>
+                    <span className="uk-margin-small-right">{moment(data.start).format('L')} &ndash; {moment(data.end).format('L')}</span>
+                    <span className="uk-margin-small-right">{data.homeBase.name}</span>
+                </li>)
             },
             {
                 id: 'divider1',

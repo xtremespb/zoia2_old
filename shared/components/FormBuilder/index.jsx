@@ -408,6 +408,7 @@ export default class ZFormBuilder extends Component {
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
                     values={this.state.dataStorage[this.state.tab][item.id] || []}
                     view={item.view}
+                    wrap={item.wrap}
                 />);
             case 'password':
                 return (<ZText
