@@ -46,20 +46,6 @@ class BoatAvailabilityDialog extends Component {
         history.push(`/users/auth?redirect=/admin/boats`);
     }
 
-    onBoatsTableLoadError = data => {
-        if (data && data.statusCode === 403) {
-            this.deauthorize();
-        }
-    }
-
-    onSaveSuccessHandler = i18n => {
-        UIkit.notification({
-            message: i18n._('Data has been saved successfully'),
-            status: 'success'
-        });
-        history.push('/admin/boats?reload=1');
-    }
-
     loadDestinations = (i18n, data) => new Promise(async resolve => {
         if (this.editAvailForm.current) {
             await this.editAvailForm.current.setLoading(true);
@@ -72,24 +58,22 @@ class BoatAvailabilityDialog extends Component {
             country: data ? data.default.country : undefined
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
             await this.editAvailForm.current.setLoading(false);
-            if (res && res.data) {
-                if (res.data.statusCode === 200) {
-                    await this.editAvailForm.current.setProperty('destination', 'values', res.data.destinations);
-                    await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
-                    const basesList = {};
-                    res.data.bases.map(b => basesList[b.id] = b.name);
-                    await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
-                    resolve({
-                        destinations: res.data.destinations,
-                        countries: res.data.countries,
-                        bases: res.data.bases
-                    });
-                } else {
-                    UIkit.notification({
-                        message: i18n._('Could not get a list of destinations'),
-                        status: 'danger'
-                    });
-                }
+            if (res && res.data && res.data.statusCode === 200) {
+                await this.editAvailForm.current.setProperty('destination', 'values', res.data.destinations);
+                await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
+                const basesList = {};
+                res.data.bases.map(b => basesList[b.id] = b.name);
+                await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
+                resolve({
+                    destinations: res.data.destinations,
+                    countries: res.data.countries,
+                    bases: res.data.bases
+                });
+            } else {
+                UIkit.notification({
+                    message: i18n._('Could not get a list of destinations'),
+                    status: 'danger'
+                });
             }
         }).catch(async err => {
             if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
@@ -111,24 +95,23 @@ class BoatAvailabilityDialog extends Component {
             language: this.props.appData.language,
             destination
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
-            if (res && res.data) {
-                if (res.data.statusCode === 200) {
-                    await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
-                    await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases || []);
-                    await this.editAvailForm.current.setValue('bases', [], 'default');
-                    await this.editAvailForm.current.setValue('country', Object.keys(res.data.countries)[0], 'default');
-                    const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
-                    await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
-                    const basesList = {};
-                    res.data.bases.map(b => basesList[b.id] = b.name);
-                    await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
-                    await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
-                } else {
-                    UIkit.notification({
-                        message: i18n._('Could not get a list of destinations'),
-                        status: 'danger'
-                    });
-                }
+            await this.editAvailForm.current.setProperty('country', 'disabled', null);
+            if (res && res.data && res.data.statusCode === 200) {
+                await this.editAvailForm.current.setProperty('country', 'values', res.data.countries);
+                await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases || []);
+                await this.editAvailForm.current.setValue('bases', [], 'default');
+                await this.editAvailForm.current.setValue('country', Object.keys(res.data.countries)[0], 'default');
+                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+                const basesList = {};
+                res.data.bases.map(b => basesList[b.id] = b.name);
+                await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
+                await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
+            } else {
+                UIkit.notification({
+                    message: i18n._('Could not get a list of destinations'),
+                    status: 'danger'
+                });
             }
         }).catch(async err => {
             if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
@@ -151,22 +134,20 @@ class BoatAvailabilityDialog extends Component {
             country
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
             await this.editAvailForm.current.setProperty('bases', 'disabled', null);
-            if (res && res.data) {
-                if (res.data.statusCode === 200) {
-                    await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases);
-                    await this.editAvailForm.current.setValue('bases', [], 'default');
-                    const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
-                    await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
-                    const basesList = {};
-                    res.data.bases.map(b => basesList[b.id] = b.name);
-                    await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
-                    await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
-                } else {
-                    UIkit.notification({
-                        message: i18n._('Could not get a list of destinations'),
-                        status: 'danger'
-                    });
-                }
+            if (res && res.data && res.data.statusCode === 200) {
+                await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases);
+                await this.editAvailForm.current.setValue('bases', [], 'default');
+                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
+                const basesList = {};
+                res.data.bases.map(b => basesList[b.id] = b.name);
+                await this.editAvailForm.current.setProperty('homeBase', 'values', basesList);
+                await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
+            } else {
+                UIkit.notification({
+                    message: i18n._('Could not get a list of destinations'),
+                    status: 'danger'
+                });
             }
         }).catch(async err => {
             if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
@@ -273,7 +254,6 @@ class BoatAvailabilityDialog extends Component {
             YES: i18n._(t`Yes`),
             CANCEL: i18n._(t`Cancel`)
         }}
-        onSaveSuccess={() => this.onSaveSuccessHandler(i18n)}
         onDataDeserialized={data => this.loadDestinations(i18n, data)}
     // onFormBuilt={() => this.onFormBuilt(i18n)}
     />);
@@ -326,6 +306,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('start', null, 'default');
                 await this.editAvailForm.current.setValue('end', null, 'default');
             }
+            this.editAvailForm.current.setFocusOnFields();
         });
     }
 

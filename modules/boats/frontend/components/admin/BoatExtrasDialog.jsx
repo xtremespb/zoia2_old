@@ -15,14 +15,14 @@ import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDat
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
-class BoatBlocksDialog extends Component {
+class BoatExtrasDialog extends Component {
     constructor(props) {
         super(props);
-        this.editBlocksForm = React.createRef();
+        this.editExtrasForm = React.createRef();
     }
 
     componentWillUnmount = () => {
-        this.boatBlocksDialog.$destroy(true);
+        this.boatExtrasDialog.$destroy(true);
     }
 
     componentDidMount = () => {
@@ -30,7 +30,7 @@ class BoatBlocksDialog extends Component {
             history.push('/users/auth?redirect=/admin/boats');
             return;
         }
-        this.boatBlocksDialog = UIkit.modal(`#BoatBlocksDialog`, {
+        this.boatExtrasDialog = UIkit.modal(`#BoatExtrasDialog`, {
             bgClose: false,
             escClose: false,
             stack: false
@@ -45,34 +45,67 @@ class BoatBlocksDialog extends Component {
     }
 
     getEditForm = i18n => (<FormBuilder
-        ref={this.editBlocksForm}
-        prefix="editBlocksForm"
+        ref={this.editExtrasForm}
+        prefix="editExtrasForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
         locale={this.props.appData.language}
         data={
-            [[{
-                id: 'start',
-                type: 'datePicker',
-                label: `${i18n._(t`Start date`)}:`,
-                css: 'uk-form-width-medium',
-                value: '',
-                autofocus: true
-            }, {
-                id: 'end',
-                type: 'datePicker',
-                label: `${i18n._(t`End date`)}:`,
-                css: 'uk-form-width-medium',
-                value: ''
-            }]]
+            [
+                {
+                    id: 'name',
+                    type: 'text',
+                    label: `${i18n._(t`Name`)}:`,
+                    css: 'uk-form-width-large',
+                    autofocus: true,
+                    helpText: i18n._(t`Format: NAME_EN|NAME_RU, example: "Option|Опция" (without quotes)`)
+                },
+                [{
+                    id: 'cost',
+                    type: 'text',
+                    label: `${i18n._(t`Cost`)}:`,
+                    css: 'uk-form-width-small',
+                },
+                {
+                    id: 'per1',
+                    type: 'select',
+                    label: `${i18n._(t`Per`)}:`,
+                    css: 'uk-form-width-small',
+                    defaultValue: 'stay',
+                    values: { stay: i18n._(t`stay`), day: i18n._(t`day`), week: i18n._(t`week`) },
+                },
+                {
+                    id: 'per2',
+                    type: 'select',
+                    label: `${i18n._(t`Per`)}:`,
+                    css: 'uk-form-width-small',
+                    defaultValue: 'boat',
+                    values: { boat: i18n._(t`boat`), pax: i18n._(t`pax`) },
+                }],
+                {
+                    id: 'options',
+                    type: 'checkbox',
+                    label: `${i18n._(t`Options`)}:`,
+                    values: {
+                        mand: 'Extra is a mandatory'
+                    }
+                }
+            ]
         }
         validation={
             {
-                start: {
+                name: {
                     mandatory: true
                 },
-                end: {
+                cost: {
+                    mandatory: true,
+                    regexp: /^\d+(\.\d+)?$/
+                },
+                per1: {
+                    mandatory: true
+                },
+                per2: {
                     mandatory: true
                 }
             }
@@ -95,50 +128,59 @@ class BoatBlocksDialog extends Component {
     }
 
     showDialog = async (i18n, id, data) => {
-        if (this.editBlocksForm.current) {
-            await this.editBlocksForm.current.resetValuesToDefault();
+        if (this.editExtrasForm.current) {
+            await this.editExtrasForm.current.resetValuesToDefault();
         }
         this.recordId = id || uuid();
-        this.boatBlocksDialog.show().then(async () => {
+        this.boatExtrasDialog.show().then(async () => {
             if (data) {
-                await this.editBlocksForm.current.setValue('start', data.default.start, 'default');
-                await this.editBlocksForm.current.setValue('end', data.default.end, 'default');
-            } else {
-                await this.editBlocksForm.current.setValue('start', null, 'default');
-                await this.editBlocksForm.current.setValue('end', null, 'default');
+                await this.editExtrasForm.current.setValue('name', data.default.name, 'default');
+                await this.editExtrasForm.current.setValue('cost', data.default.cost, 'default');
+                await this.editExtrasForm.current.setValue('per1', data.default.per1, 'default');
+                await this.editExtrasForm.current.setValue('per2', data.default.per2, 'default');
+                await this.editExtrasForm.current.setValue('options', data.default.options, 'default');
             }
-            this.editBlocksForm.current.setFocusOnFields();
+            this.editExtrasForm.current.setFocusOnFields();
         });
     }
 
     hideDialog = () => {
-        this.boatBlocksDialog.hide();
+        this.boatExtrasDialog.hide();
     }
 
     saveButtonClick = async () => {
-        const { data } = this.editBlocksForm.current.serializeData();
-        const vdata = this.editBlocksForm.current.validateData(data);
-        await this.editBlocksForm.current.hideErrors();
+        const { data } = this.editExtrasForm.current.serializeData();
+        const vdata = this.editExtrasForm.current.validateData(data);
+        await this.editExtrasForm.current.hideErrors();
         if (vdata && vdata.length) {
-            this.editBlocksForm.current.showErrors(vdata);
+            this.editExtrasForm.current.showErrors(vdata);
             return;
         }
         this.hideDialog();
-        if (this.props.onBlocksDialogSaveClick && typeof this.props.onBlocksDialogSaveClick === 'function') {
-            const { start, end } = data.default;
-            this.props.onBlocksDialogSaveClick({
-                start,
-                end
+        if (this.props.onExtrasDialogSaveClick && typeof this.props.onExtrasDialogSaveClick === 'function') {
+            const {
+                name,
+                cost,
+                per1,
+                per2,
+                options
+            } = data.default;
+            this.props.onExtrasDialogSaveClick({
+                name,
+                cost,
+                per1,
+                per2,
+                options: options.indexOf('mand') > -1 ? { mand: true } : { mand: false }
             }, this.recordId);
         }
     }
 
     render = () => (
         <div>
-            <div id="BoatBlocksDialog" uk-modal="true">
+            <div id="BoatExtrasDialog" uk-modal="true">
                 <div className="uk-modal-dialog">
                     <div className="uk-modal-header">
-                        <h2 className="uk-modal-title">{this.props.i18n._(t`Blocks`)}</h2>
+                        <h2 className="uk-modal-title">{this.props.i18n._(t`Extras`)}</h2>
                     </div>
                     <div className="uk-modal-body">
                         {this.getEditForm(this.props.i18n)}
@@ -162,4 +204,4 @@ export default connect(store => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
-    }), null, { forwardRef: true })(BoatBlocksDialog);
+    }), null, { forwardRef: true })(BoatExtrasDialog);

@@ -15,14 +15,14 @@ import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDat
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
-class BoatBlocksDialog extends Component {
+class BoatPricesDialog extends Component {
     constructor(props) {
         super(props);
-        this.editBlocksForm = React.createRef();
+        this.editPricesForm = React.createRef();
     }
 
     componentWillUnmount = () => {
-        this.boatBlocksDialog.$destroy(true);
+        this.boatPricesDialog.$destroy(true);
     }
 
     componentDidMount = () => {
@@ -30,7 +30,7 @@ class BoatBlocksDialog extends Component {
             history.push('/users/auth?redirect=/admin/boats');
             return;
         }
-        this.boatBlocksDialog = UIkit.modal(`#BoatBlocksDialog`, {
+        this.boatPricesDialog = UIkit.modal(`#BoatPricesDialog`, {
             bgClose: false,
             escClose: false,
             stack: false
@@ -45,27 +45,43 @@ class BoatBlocksDialog extends Component {
     }
 
     getEditForm = i18n => (<FormBuilder
-        ref={this.editBlocksForm}
-        prefix="editBlocksForm"
+        ref={this.editPricesForm}
+        prefix="editPricesForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
         locale={this.props.appData.language}
         data={
-            [[{
-                id: 'start',
-                type: 'datePicker',
-                label: `${i18n._(t`Start date`)}:`,
-                css: 'uk-form-width-medium',
-                value: '',
-                autofocus: true
-            }, {
-                id: 'end',
-                type: 'datePicker',
-                label: `${i18n._(t`End date`)}:`,
-                css: 'uk-form-width-medium',
-                value: ''
-            }]]
+            [
+                [{
+                    id: 'cost',
+                    type: 'text',
+                    label: `${i18n._(t`Cost per week`)}:`,
+                    css: 'uk-form-width-small',
+                    autofocus: true
+                },
+                {
+                    id: 'currency',
+                    type: 'select',
+                    label: `${i18n._(t`Currency`)}:`,
+                    css: 'uk-form-width-small',
+                    defaultValue: 'RUR',
+                    values: { EUR: 'EUR', USD: 'USD', RUR: 'RUR' },
+                }],
+                [{
+                    id: 'start',
+                    type: 'datePicker',
+                    label: `${i18n._(t`Start date`)}:`,
+                    css: 'uk-form-width-medium',
+                    value: '',
+                }, {
+                    id: 'end',
+                    type: 'datePicker',
+                    label: `${i18n._(t`End date`)}:`,
+                    css: 'uk-form-width-medium',
+                    value: ''
+                }]
+            ]
         }
         validation={
             {
@@ -73,6 +89,13 @@ class BoatBlocksDialog extends Component {
                     mandatory: true
                 },
                 end: {
+                    mandatory: true
+                },
+                cost: {
+                    mandatory: true,
+                    regexp: /^\d+(\.\d+)?$/
+                },
+                currency: {
                     mandatory: true
                 }
             }
@@ -95,50 +118,56 @@ class BoatBlocksDialog extends Component {
     }
 
     showDialog = async (i18n, id, data) => {
-        if (this.editBlocksForm.current) {
-            await this.editBlocksForm.current.resetValuesToDefault();
+        if (this.editPricesForm.current) {
+            await this.editPricesForm.current.resetValuesToDefault();
         }
         this.recordId = id || uuid();
-        this.boatBlocksDialog.show().then(async () => {
+        this.boatPricesDialog.show().then(async () => {
             if (data) {
-                await this.editBlocksForm.current.setValue('start', data.default.start, 'default');
-                await this.editBlocksForm.current.setValue('end', data.default.end, 'default');
-            } else {
-                await this.editBlocksForm.current.setValue('start', null, 'default');
-                await this.editBlocksForm.current.setValue('end', null, 'default');
+                await this.editPricesForm.current.setValue('cost', data.default.cost, 'default');
+                await this.editPricesForm.current.setValue('currency', data.default.currency, 'default');
+                await this.editPricesForm.current.setValue('start', data.default.start, 'default');
+                await this.editPricesForm.current.setValue('end', data.default.end, 'default');
             }
-            this.editBlocksForm.current.setFocusOnFields();
+            this.editPricesForm.current.setFocusOnFields();
         });
     }
 
     hideDialog = () => {
-        this.boatBlocksDialog.hide();
+        this.boatPricesDialog.hide();
     }
 
     saveButtonClick = async () => {
-        const { data } = this.editBlocksForm.current.serializeData();
-        const vdata = this.editBlocksForm.current.validateData(data);
-        await this.editBlocksForm.current.hideErrors();
+        const { data } = this.editPricesForm.current.serializeData();
+        const vdata = this.editPricesForm.current.validateData(data);
+        await this.editPricesForm.current.hideErrors();
         if (vdata && vdata.length) {
-            this.editBlocksForm.current.showErrors(vdata);
+            this.editPricesForm.current.showErrors(vdata);
             return;
         }
         this.hideDialog();
-        if (this.props.onBlocksDialogSaveClick && typeof this.props.onBlocksDialogSaveClick === 'function') {
-            const { start, end } = data.default;
-            this.props.onBlocksDialogSaveClick({
+        if (this.props.onPricesDialogSaveClick && typeof this.props.onPricesDialogSaveClick === 'function') {
+            const {
                 start,
-                end
+                end,
+                cost,
+                currency
+            } = data.default;
+            this.props.onPricesDialogSaveClick({
+                start,
+                end,
+                cost,
+                currency
             }, this.recordId);
         }
     }
 
     render = () => (
         <div>
-            <div id="BoatBlocksDialog" uk-modal="true">
+            <div id="BoatPricesDialog" uk-modal="true">
                 <div className="uk-modal-dialog">
                     <div className="uk-modal-header">
-                        <h2 className="uk-modal-title">{this.props.i18n._(t`Blocks`)}</h2>
+                        <h2 className="uk-modal-title">{this.props.i18n._(t`Prices`)}</h2>
                     </div>
                     <div className="uk-modal-body">
                         {this.getEditForm(this.props.i18n)}
@@ -162,4 +191,4 @@ export default connect(store => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
-    }), null, { forwardRef: true })(BoatBlocksDialog);
+    }), null, { forwardRef: true })(BoatPricesDialog);

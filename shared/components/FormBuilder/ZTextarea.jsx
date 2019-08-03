@@ -7,11 +7,13 @@ export default class ZTextarea extends Component {
 
     render = () => (<div className={this.props.cname}>
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
+        {this.props.rows}
         <div className="uk-form-controls">
             <textarea
                 ref={field => { this.field = field; }}
                 type="text"
                 id={this.props.id}
+                rows={this.props.rows}
                 className={`uk-input${this.props.error ? ' uk-form-danger' : ''}${this.props.css ? ` ${this.props.css}` : ''}`}
                 value={this.props.value}
                 onChange={e => this.props.onValueChanged && typeof this.props.onValueChanged === 'function' ? this.props.onValueChanged(this.props.originalId, e.target.value) : null}

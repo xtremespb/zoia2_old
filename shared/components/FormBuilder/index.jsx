@@ -455,6 +455,7 @@ export default class ZFormBuilder extends Component {
                     css={item.css}
                     label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
+                    rows={item.rows}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
                     helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
