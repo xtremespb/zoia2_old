@@ -223,6 +223,34 @@ class BoatAvailabilityDialog extends Component {
                 label: `${i18n._(t`End date`)}:`,
                 css: 'uk-form-width-medium',
                 value: ''
+            }],
+            [{
+                id: 'daystart',
+                type: 'select',
+                label: `${i18n._(t`Possible Start`)}:`,
+                css: 'uk-form-width-medium',
+                defaultValue: '',
+                values: {
+                    0: i18n._(t`Any Day of a Week`),
+                    2: i18n._(t`Monday`),
+                    3: i18n._(t`Tuesday`),
+                    4: i18n._(t`Wednesday`),
+                    5: i18n._(t`Thursday`),
+                    6: i18n._(t`Friday`),
+                    7: i18n._(t`Saturday`),
+                    1: i18n._(t`Sunday`)
+                }
+            },
+            {
+                id: 'm7',
+                type: 'select',
+                label: `${i18n._(t`Rent period`)}:`,
+                css: 'uk-form-width-small',
+                defaultValue: '',
+                values: {
+                    0: i18n._(t`Any Period`),
+                    1: i18n._(t`Multiple of 7`)
+                }
             }]
         ]}
         validation={
@@ -241,6 +269,12 @@ class BoatAvailabilityDialog extends Component {
                 },
                 end: {
                     mandatory: true
+                },
+                daystart: {
+                    mandatory: true
+                },
+                m7: {
+                    mandatory: true
                 }
             }
         }
@@ -255,7 +289,6 @@ class BoatAvailabilityDialog extends Component {
             CANCEL: i18n._(t`Cancel`)
         }}
         onDataDeserialized={data => this.loadDestinations(i18n, data)}
-    // onFormBuilt={() => this.onFormBuilt(i18n)}
     />);
 
     reloadEditFormData = e => {
@@ -294,6 +327,8 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 await this.editAvailForm.current.setValue('start', data.default.start, 'default');
                 await this.editAvailForm.current.setValue('end', data.default.end, 'default');
+                await this.editAvailForm.current.setValue('daystart', data.default.daystart, 'default');
+                await this.editAvailForm.current.setValue('m7', data.default.m7, 'default');
             } else {
                 const { destinations, countries, bases } = await this.loadDestinations(i18n);
                 await this.editAvailForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
@@ -305,6 +340,8 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 await this.editAvailForm.current.setValue('start', null, 'default');
                 await this.editAvailForm.current.setValue('end', null, 'default');
+                await this.editAvailForm.current.setValue('daystart', '0', 'default');
+                await this.editAvailForm.current.setValue('m7', '0', 'default');
             }
             this.editAvailForm.current.setFocusOnFields();
         });
@@ -340,6 +377,8 @@ class BoatAvailabilityDialog extends Component {
                 id: data.default.homeBase,
                 name: homeBases[data.default.homeBase]
             };
+            const daystart = await this.editAvailForm.current.getValue('daystart');
+            const m7 = await this.editAvailForm.current.getValue('m7');
             const { start, end } = data.default;
             this.props.onAvailabilityDialogSaveClick({
                 destination,
@@ -347,7 +386,9 @@ class BoatAvailabilityDialog extends Component {
                 bases,
                 homeBase,
                 start,
-                end
+                end,
+                daystart,
+                m7
             }, this.recordId);
         }
     }

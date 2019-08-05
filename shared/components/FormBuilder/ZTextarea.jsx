@@ -14,7 +14,7 @@ export default class ZTextarea extends Component {
                 type="text"
                 id={this.props.id}
                 rows={this.props.rows}
-                className={`uk-input${this.props.error ? ' uk-form-danger' : ''}${this.props.css ? ` ${this.props.css}` : ''}`}
+                className={`zform-textarea uk-input${this.props.error ? ' uk-form-danger' : ''}${this.props.css ? ` ${this.props.css}` : ''}`}
                 value={this.props.value}
                 onChange={e => this.props.onValueChanged && typeof this.props.onValueChanged === 'function' ? this.props.onValueChanged(this.props.originalId, e.target.value) : null}
                 disabled={this.props.disabled}

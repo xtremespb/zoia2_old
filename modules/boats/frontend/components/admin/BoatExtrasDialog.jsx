@@ -88,7 +88,7 @@ class BoatExtrasDialog extends Component {
                     type: 'checkbox',
                     label: `${i18n._(t`Options`)}:`,
                     values: {
-                        mand: 'Extra is a mandatory'
+                        mand: i18n._(t`Extra is a mandatory`)
                     }
                 }
             ]
@@ -96,7 +96,8 @@ class BoatExtrasDialog extends Component {
         validation={
             {
                 name: {
-                    mandatory: true
+                    mandatory: true,
+                    maxLength: 64
                 },
                 cost: {
                     mandatory: true,

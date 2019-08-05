@@ -81,7 +81,9 @@ class BoatsEdit extends Component {
                 bases: item.bases,
                 homeBase: item.homeBase.id,
                 start: item.start,
-                end: item.end
+                end: item.end,
+                daystart: item.daystart,
+                m7: item.m7
             }
         };
         this.boatAvailabilityDialog.current.showDialog(i18n, item.id, data);
@@ -198,6 +200,16 @@ class BoatsEdit extends Component {
                     10: 'Launch',
                     11: 'Motor Shop',
                     12: 'Houseboat'
+                },
+            }, {
+                id: 'crew',
+                type: 'select',
+                label: `${i18n._(t`Crew`)}:`,
+                css: 'uk-form-width-small',
+                defaultValue: '1',
+                values: {
+                    0: 'Bare Boat',
+                    1: 'Crewed'
                 },
             }],
             [
@@ -329,6 +341,12 @@ class BoatsEdit extends Component {
             ],
             [
                 {
+                    id: 'averageprice',
+                    type: 'text',
+                    label: `${i18n._(t`Avg. Price`)}:`,
+                    css: 'uk-form-width-small',
+                },
+                {
                     id: 'caution',
                     type: 'text',
                     label: `${i18n._(t`Damage Deposit`)}:`,
@@ -388,7 +406,7 @@ class BoatsEdit extends Component {
                 id: 'charsTextHelp',
                 type: 'message',
                 css: 'uk-text-small uk-text-muted',
-                text: i18n._(t`Each line should contain a new characteristic. Start a new line with an * character to define a category, format: * NAME_EN|NAME_RU, example: "* New Category|Новая категория" (without quotes). A line without * at the beginning will be parsed as a characteristic. The format is as following: NAME_EN|NAME_RU,QUANTITY,UNIT, example: "Boat anchor|Якорь для яхты,10,meters" (without quotes).`)
+                text: i18n._(t`Each line should contain a new characteristic or a category. Start a new line with an * character to define a category, format: * NAME_EN|NAME_RU, example: "* New Category|Новая категория" (without quotes). A line without * at the beginning will be parsed as a characteristic. The format is as following: NAME_EN|NAME_RU,QUANTITY_EN|QUANTITIY_RU,UNIT_EN|UNIT_RU, example: "Boat anchor|Якорь для яхты,10,meters|метров" (without quotes).`)
             },
             {
                 id: 'extras',
@@ -404,17 +422,40 @@ class BoatsEdit extends Component {
                     <span className="uk-margin-small-right">{this.getLocalizedString(data.name)}: {data.cost} {i18n._(t`per`)} {i18n._(data.per1)}, {i18n._(t`per`)} {i18n._(data.per2)} ({data.options.mand ? i18n._(t`mandatory`) : i18n._(t`optional`)})</span>
                 </li>)
             },
-            [
-                {
-                    id: 'pics',
-                    type: 'file',
-                    label: `${i18n._(t`Boat Photos`)}:`
-                },
-                {
-                    id: 'plan',
-                    type: 'file',
-                    label: `${i18n._(t`Boat Plan`)}:`
+            {
+                id: 'equipment',
+                type: 'checkbox',
+                label: `${i18n._(t`Equipment & Extras`)}:`,
+                values: {
+                    1: i18n._(t`Air Conditioneer`),
+                    2: i18n._(t`Water Maker`),
+                    3: i18n._(t`Generator`),
+                    4: i18n._(t`Anchor`),
+                    5: i18n._(t`Outboard Motor`),
+                    6: i18n._(t`Autopilot`),
+                    7: i18n._(t`Thruster`),
+                    8: i18n._(t`Electric Toilettes`),
+                    9: i18n._(t`Furling Mainsail`),
+                    10: i18n._(t`Solar Panel`),
+                    11: i18n._(t`BBQ`),
+                    12: i18n._(t`GPS`),
+                    13: i18n._(t`Electric Winch`),
+                    14: i18n._(t`Wi-Fi`)
                 }
+            },
+            [
+            {
+                id: 'pics',
+                type: 'fileImage',
+                label: `${i18n._(t`Boat Photos`)}:`,
+                allowedTypes: ['image/jpeg', 'image/png']
+            },
+            {
+                id: 'plan',
+                type: 'fileImage',
+                label: `${i18n._(t`Boat Plan`)}:`,
+                allowedTypes: ['image/jpeg', 'image/png']
+            }
             ],
             {
                 id: 'divider1',
@@ -446,6 +487,9 @@ class BoatsEdit extends Component {
                 type: {
                     mandatory: true
                 },
+                crew: {
+                    mandatory: true
+                },
                 model: {
                     mandatory: true,
                     maxLength: 64
@@ -463,7 +507,7 @@ class BoatsEdit extends Component {
                 },
                 power: {
                     mandatory: true,
-                    regexp: /^\d+(\.\d+)?$/
+                    maxLength: 32
                 },
                 npax: {
                     mandatory: true,
@@ -499,11 +543,24 @@ class BoatsEdit extends Component {
                 dberth: {
                     regexp: /^[\d]+$/
                 },
+                averageprice: {
+                    mandatory: true,
+                    regexp: /^\d+(\.\d+)?$/
+                },
                 caution: {
                     regexp: /^\d+(\.\d+)?$/
                 },
+                discounts: {
+                    maxLength: 1024
+                },
                 skipperCost: {
                     regexp: /^\d+(\.\d+)?$/
+                },
+                skipperPer1: {
+                    regexp: /^(stay|day|week)$/
+                },
+                skipperPer2: {
+                    regexp: /^(boat|pax)$/
                 },
                 chars: {
                     maxLength: 8192
@@ -518,7 +575,12 @@ class BoatsEdit extends Component {
             ERR_SAVE: i18n._(t`Could not save data`),
             WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
             YES: i18n._(t`Yes`),
-            CANCEL: i18n._(t`Cancel`)
+            CANCEL: i18n._(t`Cancel`),
+            ERR_UNSUPPORTED_FILE_TYPE: i18n._(t`Selected image type is not supported`),
+            FILE_ATTACH: 'Attach file(s) by dropping them here',
+            FILE_ORSELECT: 'or selecting one',
+            FILE_IMAGE_ATTACH: 'Attach image(s) by dropping them here',
+            FILE_IMAGE_ORSELECT: 'or selecting one'
         }}
         save={{
             url: `${config.apiURL}/api/boats/save`,

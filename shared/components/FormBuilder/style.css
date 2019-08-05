@@ -167,3 +167,24 @@
 .DayPicker-Day {
     border-radius: unset !important;
 }
+
+.zform-file-image-thumb-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.zform-file-image-thumb {
+    width: auto;
+    height: auto;
+    margin: 3px;
+    min-height: 100px;
+}
+
+.zform-files-list>ul {
+    padding-left: unset !important;
+}
+
+.zform-textarea {
+    line-height: unset !important;
+}

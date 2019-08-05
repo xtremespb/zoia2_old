@@ -45,11 +45,11 @@ export default class ZFile extends Component {
         <label className="uk-form-label">{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
         <div className="zform-drop-area uk-text-center uk-width-large" onDragOver={this.onDragOverFilesArea} onDrop={this.onDropFilesArea}>
             <span className="uk-text-middle">
-                {this.props.lang && this.props.lang.FILE_ATTACH ? this.props.lang.FILE_ATTACH : 'Attach file(s) by dropping them here'}
+                {this.props.lang.FILE_ATTACH}
                 &nbsp;
                 <label className="zform-upload-btn-wrapper uk-link" ref={field => { this.field = field; }}>
                     <input type="file" multiple={true} onChange={this.onValueChanged} />
-                    {this.props.lang && this.props.lang.FILE_ORSELECT ? this.props.lang.FILE_ORSELECT : 'or selecting one'}
+                    {this.props.lang.FILE_ORSELECT}
                 </label>
             </span>
         </div>

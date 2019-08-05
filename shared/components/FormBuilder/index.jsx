@@ -11,6 +11,7 @@ import ZTextarea from './ZTextarea.jsx';
 import ZCKEditor4 from './ZCKEditor4.jsx';
 import ZCKEditor5 from './ZCKEditor5.jsx';
 import ZFile from './ZFile.jsx';
+import ZFileImage from './ZFileImage.jsx';
 import ZRadio from './ZRadio.jsx';
 import ZCheckbox from './ZCheckbox.jsx';
 import ZSelect from './ZSelect.jsx';
@@ -83,8 +84,13 @@ export default class ZFormBuilder extends Component {
             WILL_BE_DELETED: 'will be deleted. Are you sure?',
             ERR_VTOOSHORT: 'Too short',
             ERR_VTOOLONG: 'Too long',
+            ERR_UNSUPPORTED_FILE_TYPE: 'Unsupported image type',
             YES: 'Yes',
-            CANCEL: 'Cancel'
+            CANCEL: 'Cancel',
+            FILE_ATTACH: 'Attach file(s) by dropping them here',
+            FILE_ORSELECT: 'or selecting one',
+            FILE_IMAGE_ATTACH: 'Attach image(s) by dropping them here',
+            FILE_IMAGE_ORSELECT: 'or selecting one'
         },
         save: {
             url: null,
@@ -531,6 +537,20 @@ export default class ZFormBuilder extends Component {
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
                     UIkit={this.props.UIkit}
                 />);
+            case 'fileImage':
+                return (<ZFileImage
+                    ref={input => { this.fields[item.id] = input; }}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    originalId={item.id}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    value={this.state.dataStorage[this.state.tab][item.id]}
+                    lang={this.props.lang}
+                    onValueChanged={this.onFileValueChanged}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    UIkit={this.props.UIkit}
+                    allowedTypes={item.allowedTypes}
+                />);
             case 'radio':
                 return (<ZRadio
                     ref={input => { this.fields[item.id] = input; }}
@@ -749,6 +769,7 @@ export default class ZFormBuilder extends Component {
                         data[tab][field] = data[tab][field].map(item => item.id);
                         break;
                     case 'file':
+                    case 'fileImage':
                         data[tab][field] = data[tab][field] || [];
                         break;
                     case 'radio':
@@ -775,7 +796,7 @@ export default class ZFormBuilder extends Component {
         Object.keys(data).map(key => {
             if (this.props.tabs[key]) {
                 Object.keys(data[key]).map(tkey => {
-                    if (this.types[tkey].type === 'file') {
+                    if (this.types[tkey].type === 'file' || this.types[tkey].type === 'fileImage') {
                         const arr = [];
                         data[key][tkey].map(file => {
                             if (fileList.indexOf(file.name) === -1 && file.lastModified) {
@@ -787,7 +808,7 @@ export default class ZFormBuilder extends Component {
                         data[key][tkey] = arr;
                     }
                 });
-            } else if (this.types[key].type === 'file') {
+            } else if (this.types[key].type === 'file' || this.types[key].type === 'fileImage') {
                 const arr = [];
                 data[key].map(file => {
                     if (fileList.indexOf(file.name) === -1 && file.lastModified) {
@@ -820,6 +841,7 @@ export default class ZFormBuilder extends Component {
                             });
                             break;
                         case 'file':
+                        case 'fileImage':
                             dataStorageNew[tab][field] = data[tab][field].map(item => ({
                                 name: item.name,
                                 size: item.size
@@ -857,6 +879,7 @@ export default class ZFormBuilder extends Component {
                         });
                         break;
                     case 'file':
+                    case 'fileImage':
                         dataStorageNew[tab][key] = data[key].map(item => ({
                             name: item.name,
                             size: item.size
