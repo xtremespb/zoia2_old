@@ -16,7 +16,7 @@
   "apiURL": "http://127.0.0.1:3000",
   "mongo": {
     "url": "mongodb://localhost:27017",
-    "dbName": "zoia2"
+    "dbName": "sedna"
   },
   "languages": {
     "en": "English",

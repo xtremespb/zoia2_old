@@ -2,4 +2,4 @@
 
 import React from 'react';
 
-export default props => (<div className={`uk-margin-top ${props.css || ''}`} />);
+export default props => (<div className={`zform-divider-margin-top ${props.css || ''}`} />);

@@ -48,30 +48,35 @@ export default class ZFileImage extends Component {
         e.preventDefault();
         const files = this.props.value;
         const { index } = e.currentTarget.dataset;
-        const [removed] = files.splice(index, 1);
+        files.splice(index, 1);
         this.props.onValueChanged && typeof this.props.onValueChanged === 'function' ? this.props.onValueChanged(this.props.originalId, files, true) : null;
     }
 
     getFilesList = () => (<DragDropContext onDragEnd={result => this.onDragEnd(result)}>
         <Droppable droppableId="droppable" direction="horizontal">
-            {(provided, snapshot) => (
+            {provided => (
                 <>
                     <ul
                         ref={provided.innerRef}
-                        className="uk-grid uk-grid-collapse uk-flex-wrap uk-flex"
+                        className="uk-grid uk-grid-collapse uk-flex-wrap uk-flex uk-card uk-card-default uk-card-body uk-card-small uk-box-shadow-small"
                         uk-silder="true"
                         id={`${this.props.id}_fileImage_List`}
                         {...provided.droppableProps}
                     >
                         {this.props.value.map((item, index) => {
-                            const imageSrc = window.URL.createObjectURL(item);
+                            let imageSrc;
+                            try {
+                                imageSrc = window.URL.createObjectURL(item);
+                            } catch (e) {
+                                imageSrc = `${this.props.thumbURL}/${this.props.thumbID ? `${this.props.thumbID}/` : ''}${this.props.thumbPrefix || ''}${item.name}.${this.props.thumbExtension}`;
+                            }
                             return (<Draggable key={`${this.props.id}_${item.name}`} draggableId={item.name} index={index}>
-                                {(provided, snapshot) => (
+                                {providedDraggable => (
                                     <li
                                         key={`${this.props.id}_${item.name}`}
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
+                                        ref={providedDraggable.innerRef}
+                                        {...providedDraggable.draggableProps}
+                                        {...providedDraggable.dragHandleProps}
                                     >
                                         <div className="uk-panel zform-file-image-thumb-container uk-inline">
                                             <img className="zform-file-image-thumb" src={imageSrc} alt="" />

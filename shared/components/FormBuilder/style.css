@@ -181,10 +181,14 @@
     min-height: 100px;
 }
 
-.zform-files-list>ul {
+/* .zform-files-list>ul {
     padding-left: unset !important;
-}
+} */
 
 .zform-textarea {
     line-height: unset !important;
+}
+
+.zform-divider-margin-top {
+    margin-top: 50px;
 }

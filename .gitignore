@@ -27,3 +27,4 @@ node_modules/
 /static/index.html
 /bin/server.js
 /static/data/**
+/static/custom

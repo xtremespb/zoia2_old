@@ -12,6 +12,7 @@ import { history } from '../../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
+import configBoats from '../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import BoatAvailabilityDialog from './BoatAvailabilityDialog.jsx';
 import BoatBlocksDialog from './BoatBlocksDialog.jsx';
@@ -54,12 +55,6 @@ class BoatsEdit extends Component {
         history.push(`/users/auth?redirect=/admin/boats`);
     }
 
-    onBoatsTableLoadError = data => {
-        if (data && data.statusCode === 403) {
-            this.deauthorize();
-        }
-    }
-
     onSaveSuccessHandler = i18n => {
         UIkit.notification({
             message: i18n._('Data has been saved successfully'),
@@ -80,10 +75,11 @@ class BoatsEdit extends Component {
                 country: item.country.id,
                 bases: item.bases,
                 homeBase: item.homeBase.id,
-                start: item.start,
-                end: item.end,
+                start: item.start instanceof Date ? item.start : new Date(item.start),
+                end: item.end instanceof Date ? item.end : new Date(item.end),
                 daystart: item.daystart,
-                m7: item.m7
+                m7: item.m7,
+                miniday: item.miniday
             }
         };
         this.boatAvailabilityDialog.current.showDialog(i18n, item.id, data);
@@ -103,8 +99,8 @@ class BoatsEdit extends Component {
         e.preventDefault();
         const data = {
             default: {
-                start: item.start,
-                end: item.end
+                start: item.start instanceof Date ? item.start : new Date(item.start),
+                end: item.end instanceof Date ? item.end : new Date(item.end)
             }
         };
         this.boatBlocksDialog.current.showDialog(i18n, item.id, data);
@@ -124,8 +120,8 @@ class BoatsEdit extends Component {
         e.preventDefault();
         const data = {
             default: {
-                start: item.start,
-                end: item.end,
+                start: item.start instanceof Date ? item.start : new Date(item.start),
+                end: item.end instanceof Date ? item.end : new Date(item.end),
                 cost: item.cost,
                 currency: item.currency
             }
@@ -252,35 +248,35 @@ class BoatsEdit extends Component {
                     css: 'uk-form-width-small',
                 }
             ],
-            {
+            [{
                 id: 'avail',
                 type: 'data',
                 label: `${i18n._(t`Availability`)}:`,
-                css: 'uk-form-width-large',
+                css: 'uk-width-large@m',
                 placeholderText: i18n._(t`Add or remove availability data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddAvailClick(i18n)}><span uk-icon="icon:plus;ratio:0.5" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddAvailClick(i18n)}><span uk-icon="icon:plus;ratio:0.7" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
                 wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
                 view: data => (<li key={data.id}>
-                    <a href="" className="uk-button uk-button-default uk-button-small uk-margin-small-right" onClick={e => this.onEditAvailClick(e, data, i18n)}>{i18n._(t`Edit`)}</a>
-                    <a href="" className="uk-button uk-button-danger uk-button-small uk-margin-right" onClick={e => this.onDeleteAvailClick(e, data, i18n)}>{i18n._(t`Delete`)}</a>
-                    <span className="uk-margin-small-right">{moment(data.start).format('L')} &ndash; {moment(data.end).format('L')}</span>
-                    <span className="uk-margin-small-right">{data.homeBase.name}</span>
+                    <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditAvailClick(e, data, i18n)} />
+                    <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeleteAvailClick(e, data, i18n)} />
+                    <span className="uk-margin-small-right uk-text-small">{moment(data.start).format('L')} &ndash; {moment(data.end).format('L')}</span>
+                    <span className="uk-margin-small-right uk-text-small">{data.homeBase.name}</span>
                 </li>)
             },
             {
                 id: 'blocks',
                 type: 'data',
                 label: `${i18n._(t`Blocks`)}:`,
-                css: 'uk-form-width-large',
+                css: 'uk-width-large@m',
                 placeholderText: i18n._(t`Add or remove blocks data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddBlocksClick(i18n)}><span uk-icon="icon:plus;ratio:0.5" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddBlocksClick(i18n)}><span uk-icon="icon:plus;ratio:0.7" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
                 wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
                 view: data => (<li key={data.id}>
-                    <a href="" className="uk-button uk-button-default uk-button-small uk-margin-small-right" onClick={e => this.onEditBlocksClick(e, data, i18n)}>{i18n._(t`Edit`)}</a>
-                    <a href="" className="uk-button uk-button-danger uk-button-small uk-margin-right" onClick={e => this.onDeleteBlocksClick(e, data, i18n)}>{i18n._(t`Delete`)}</a>
-                    <span className="uk-margin-small-right">{moment(data.start).format('L')} &ndash; {moment(data.end).format('L')}</span>
+                    <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditBlocksClick(e, data, i18n)} />
+                    <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeleteBlocksClick(e, data, i18n)} />
+                    <span className="uk-margin-small-right uk-text-small">{moment(data.start).format('L')} &ndash; {moment(data.end).format('L')}</span>
                 </li>)
-            },
+            }],
             [
                 {
                     id: 'beam',
@@ -386,14 +382,14 @@ class BoatsEdit extends Component {
                 id: 'prices',
                 type: 'data',
                 label: `${i18n._(t`Prices`)}:`,
-                css: 'uk-form-width-large',
+                css: 'uk-width-large@m',
                 placeholderText: i18n._(t`Add or remove prices data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddPricesClick(i18n)}><span uk-icon="icon:plus;ratio:0.5" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddPricesClick(i18n)}><span uk-icon="icon:plus;ratio:0.7" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
                 wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
                 view: data => (<li key={data.id}>
-                    <a href="" className="uk-button uk-button-default uk-button-small uk-margin-small-right" onClick={e => this.onEditPricesClick(e, data, i18n)}>{i18n._(t`Edit`)}</a>
-                    <a href="" className="uk-button uk-button-danger uk-button-small uk-margin-right" onClick={e => this.onDeletePricesClick(e, data, i18n)}>{i18n._(t`Delete`)}</a>
-                    <span className="uk-margin-small-right">{data.cost} {data.currency} ({moment(data.start).format('L')} &ndash; {moment(data.end).format('L')})</span>
+                    <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditPricesClick(e, data, i18n)} />
+                    <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeletePricesClick(e, data, i18n)} />
+                    <span className="uk-margin-small-right uk-text-small">{data.cost} {data.currency} ({moment(data.start).format('L')} &ndash; {moment(data.end).format('L')})</span>
                 </li>)
             },
             {
@@ -412,20 +408,21 @@ class BoatsEdit extends Component {
                 id: 'extras',
                 type: 'data',
                 label: `${i18n._(t`Extras`)}:`,
-                css: 'uk-form-width-large',
+                css: 'uk-width-large@m',
                 placeholderText: i18n._(t`Add or remove extras data`),
-                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddExtrasClick(i18n)}><span uk-icon="icon:plus;ratio:0.5" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
+                buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddExtrasClick(i18n)}><span uk-icon="icon:plus;ratio:0.7" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
                 wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
                 view: data => (<li key={data.id}>
-                    <a href="" className="uk-button uk-button-default uk-button-small uk-margin-small-right" onClick={e => this.onEditExtrasClick(e, data, i18n)}>{i18n._(t`Edit`)}</a>
-                    <a href="" className="uk-button uk-button-danger uk-button-small uk-margin-right" onClick={e => this.onDeleteExtrasClick(e, data, i18n)}>{i18n._(t`Delete`)}</a>
-                    <span className="uk-margin-small-right">{this.getLocalizedString(data.name)}: {data.cost} {i18n._(t`per`)} {i18n._(data.per1)}, {i18n._(t`per`)} {i18n._(data.per2)} ({data.options.mand ? i18n._(t`mandatory`) : i18n._(t`optional`)})</span>
+                    <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditExtrasClick(e, data, i18n)} />
+                    <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeleteExtrasClick(e, data, i18n)} />
+                    <span className="uk-margin-small-right uk-text-small">{this.getLocalizedString(data.name)}: {data.cost} {i18n._(t`per`)} {i18n._(data.per1)}, {i18n._(t`per`)} {i18n._(data.per2)} ({data.options.mand ? i18n._(t`mandatory`) : i18n._(t`optional`)})</span>
                 </li>)
             },
             {
                 id: 'equipment',
                 type: 'checkbox',
                 label: `${i18n._(t`Equipment & Extras`)}:`,
+                css: 'uk-width-xlarge uk-column-1-3@m',
                 values: {
                     1: i18n._(t`Air Conditioneer`),
                     2: i18n._(t`Water Maker`),
@@ -444,18 +441,26 @@ class BoatsEdit extends Component {
                 }
             },
             [
-            {
-                id: 'pics',
-                type: 'fileImage',
-                label: `${i18n._(t`Boat Photos`)}:`,
-                allowedTypes: ['image/jpeg', 'image/png']
-            },
-            {
-                id: 'plan',
-                type: 'fileImage',
-                label: `${i18n._(t`Boat Plan`)}:`,
-                allowedTypes: ['image/jpeg', 'image/png']
-            }
+                {
+                    id: 'pics',
+                    type: 'fileImage',
+                    label: `${i18n._(t`Boat Photos`)}:`,
+                    allowedTypes: ['image/jpeg', 'image/png'],
+                    thumbURL: configBoats.thumbURL,
+                    thumbExtension: 'jpg',
+                    thumbID: this.props.match.params.id,
+                    thumbPrefix: 'photos/tn_'
+                },
+                {
+                    id: 'plans',
+                    type: 'fileImage',
+                    label: `${i18n._(t`Boat Plan`)}:`,
+                    allowedTypes: ['image/jpeg', 'image/png'],
+                    thumbURL: configBoats.thumbURL,
+                    thumbExtension: 'jpg',
+                    thumbID: this.props.match.params.id,
+                    thumbPrefix: 'plans/tn_'
+                }
             ],
             {
                 id: 'divider1',
@@ -562,7 +567,7 @@ class BoatsEdit extends Component {
                 skipperPer2: {
                     regexp: /^(boat|pax)$/
                 },
-                chars: {
+                charsText: {
                     maxLength: 8192
                 }
             }
@@ -595,7 +600,8 @@ class BoatsEdit extends Component {
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
-                token: this.props.appDataRuntime.token
+                token: this.props.appDataRuntime.token,
+                language: this.props.appData.language
             }
         } : null}
         onSaveSuccess={() => this.onSaveSuccessHandler(i18n)}
@@ -686,10 +692,6 @@ class BoatsEdit extends Component {
                 {({ i18n }) => {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit Boat' : 'New Boat'), this.props.appData.language);
                     return (<>
-                        <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit Boat</Trans> : <Trans>New Boat</Trans>}</div>
-                        {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
-                            <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
-                        </div> : this.getEditForm(i18n)}
                         <BoatAvailabilityDialog
                             ref={this.boatAvailabilityDialog}
                             onAvailabilityDialogSaveClick={this.onAvailabilityDialogSaveClick}
@@ -710,6 +712,10 @@ class BoatsEdit extends Component {
                             onExtrasDialogSaveClick={this.onExtrasDialogSaveClick}
                             i18n={i18n}
                         />
+                        <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit Boat</Trans> : <Trans>New Boat</Trans>}</div>
+                        {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
+                            <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
+                        </div> : this.getEditForm(i18n)}
                     </>);
                 }}
             </I18n>

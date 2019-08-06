@@ -53,7 +53,7 @@ class CountriesEdit extends Component {
 
     onSaveSuccessHandler = i18n => {
         UIkit.notification({
-            message: i18n._('Data has been saved successfully'),
+            message: i18n._(t`Data has been saved successfully`),
             status: 'success'
         });
         history.push('/admin/countries?reload=1');
@@ -76,7 +76,7 @@ class CountriesEdit extends Component {
         }).catch(async () => {
             await this.editCountryForm.current.setProperty('destination', 'disabled', null);
             UIkit.notification({
-                message: i18n._('Could not get a list of destinations'),
+                message: i18n._(t`Could not get a list of destinations`),
                 status: 'danger'
             });
         });

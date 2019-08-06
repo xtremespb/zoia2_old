@@ -86,12 +86,12 @@ class BoatsList extends Component {
         if (id && e) {
             ids.push(id);
             const data = boatsListTable.getCurrentData();
-            boats.push(data.name[id]);
+            boats.push(data.title[id]);
         } else {
             const data = boatsListTable.getCheckboxData();
             data.map(i => {
                 ids.push(i._id);
-                boats.push(i.name);
+                boats.push(i.title);
             });
         }
         if (ids.length) {
@@ -145,7 +145,7 @@ class BoatsList extends Component {
                             axios={axios}
                             topButtons={<><Link to="/admin/boats/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new boat`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected boats`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
-                                id: 'name',
+                                id: 'title',
                                 title: 'Boat',
                                 sortable: true,
                                 cssHeader: 'uk-text-nowrap'

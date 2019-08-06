@@ -47,7 +47,7 @@ class DestinationsEdit extends Component {
 
     onSaveSuccessHandler = i18n => {
         UIkit.notification({
-            message: i18n._('Data has been saved successfully'),
+            message: i18n._(t`Data has been saved successfully`),
             status: 'success'
         });
         history.push('/admin/destinations?reload=1');

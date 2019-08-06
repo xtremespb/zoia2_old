@@ -1,7 +1,16 @@
 import Ajv from 'ajv';
-import auth from '../../../shared/api/auth';
 import cloneDeep from 'lodash/cloneDeep';
+import Jimp from 'jimp';
+import fs from 'fs-extra';
+import uuid from 'uuid/v1';
+import Moment from 'moment';
+import {
+    extendMoment
+} from 'moment-range';
+import auth from '../../../shared/api/auth';
+import config from '../etc/config.json';
 
+const moment = extendMoment(Moment);
 const ajv = new Ajv();
 
 const boatValidate = ajv.compile({
@@ -118,7 +127,7 @@ const formValidate = ajv.compile({
             type: 'string',
             pattern: '^(boat|pax)?$'
         },
-        chars: {
+        charsText: {
             type: 'string',
             maxLength: 8192
         },
@@ -191,9 +200,13 @@ const formValidate = ajv.compile({
                     end: {
                         type: 'string',
                         format: 'date-time'
+                    },
+                    miniday: {
+                        type: 'string',
+                        pattern: '^[\\d]+$'
                     }
                 },
-                required: ['destination', 'country', 'bases', 'homeBase', 'daystart', 'm7', 'start', 'end']
+                required: ['destination', 'country', 'bases', 'homeBase', 'daystart', 'm7', 'start', 'end', 'miniday']
             }
         },
         blocks: {
@@ -385,6 +398,7 @@ export default fastify => ({
                 }
             }
             // Get next ID if required
+            let currentBoatData;
             if (!id) {
                 await this.mongo.db.collection('counters').updateOne({
                     _id: 'boats'
@@ -409,6 +423,10 @@ export default fastify => ({
                     throw new Error('Could not get ID for a record');
                 }
                 id = incr.value.seq;
+            } else {
+                currentBoatData = await this.mongo.db.collection('counters').findOne({
+                    _id: parseInt(id, 10)
+                });
             }
             // Build JSON
             const boatData = {
@@ -420,6 +438,7 @@ export default fastify => ({
                     unit: 'meters'
                 },
                 blocks: [],
+                blocksData: [],
                 byear: parseInt(formData.default.byear, 10),
                 cabins: parseInt(formData.default.cabins, 10),
                 caution: formData.default.caution ? parseFloat(formData.default.caution) : null,
@@ -439,18 +458,21 @@ export default fastify => ({
                 length: parseFloat(formData.default.length),
                 ltdiscounts: {},
                 model: formData.default.model,
-                name: formData.default.name,
+                name: formData.default.title,
                 npax: parseInt(formData.default.npax, 10),
                 operatorId: 0,
+                pic: currentBoatData && currentBoatData.pic ? currentBoatData.pic : null,
+                pics: currentBoatData && currentBoatData.pics ? currentBoatData.pics : [],
+                plans: currentBoatData && currentBoatData.plans ? currentBoatData.plans : [],
                 power: {
-                    value: parseFloat(formData.default.power),
+                    value: String(formData.default.power),
                     unit: 'HP'
                 },
                 prices: [],
                 ryear: formData.default.ryear ? parseInt(formData.default.ryear, 10) : null,
                 scabins: formData.default.scabins ? parseInt(formData.default.scabins, 10) : null,
                 showers: formData.default.showers ? {
-                    value: parseInt(formData.default.showers, 10),
+                    value: String(formData.default.showers),
                     unit: null
                 } : null,
                 skipper: formData.default.skipperCost && formData.default.skipperPer1 && formData.default.skipperPer2 ? {
@@ -468,7 +490,7 @@ export default fastify => ({
                     end: new Date(item.end),
                     days: [parseInt(item.daystart, 10)],
                     m7: item.m7 === '1',
-                    miniday: 7, // TODO Probably this needs to be imported, too
+                    miniday: parseInt(item.miniday, 10),
                     bases: item.bases.map(b => parseInt(b.id, 10)),
                     countries: [parseInt(item.country.id, 10)],
                     destinations: [parseInt(item.destination.id, 10)],
@@ -477,11 +499,47 @@ export default fastify => ({
             }
             // Blocks
             if (formData.default.blocks) {
-                boatData.blocks = formData.default.blocks.map(item => ({
+                boatData.blocksData = formData.default.blocks.map(item => ({
                     start: new Date(item.start),
                     end: new Date(item.end)
                 }));
             }
+            const ranges = [];
+            const rangesAllowed = [];
+            boatData.avail.map(ai => ranges.push(moment.range(moment.utc(ai.start).startOf('day'), moment.utc(ai.end).endOf('day'))));
+            const blockRanges = boatData.blocksData.map(b => moment.range(moment.utc(b.start).startOf('day'), moment.utc(b.end).endOf('day')));
+            ranges.map(range => {
+                let days = Array.from(range.by('day')).map(date => ({
+                    date,
+                    active: true
+                }));
+                days.map((d, i) => {
+                    blockRanges.map(b => {
+                        if (d.date.within(b)) {
+                            days[i].active = false;
+                        }
+                    });
+                });
+                days = days.filter(d => d.active).map(d => d.date);
+                let start;
+                let prev;
+                days.map((d, i) => {
+                    start = start || d;
+                    if (prev) {
+                        const daysDiff = d.valueOf() - prev.valueOf();
+                        if (daysDiff > 86400000 || i + 1 === days.length) {
+                            rangesAllowed.push(moment.range(start, prev));
+                            start = d;
+                            prev = null;
+                        }
+                    }
+                    prev = d;
+                });
+            });
+            boatData.blocks = rangesAllowed.map(r => ({
+                start: r.start.toDate(),
+                end: r.end.toDate(),
+            }));
             // Extras
             if (formData.default.extras) {
                 boatData.extras = formData.default.extras.map((item, i) => ({
@@ -492,7 +550,7 @@ export default fastify => ({
                     per: item.per1,
                     per2: item.per2,
                     quantity: 1,
-                    mand: item.options.mand,
+                    mand: item.options.mand ? 1 : 0,
                     payatbase: 0,
                     rate: 0,
                     typeopt: '',
@@ -559,33 +617,143 @@ export default fastify => ({
                 });
                 if (!closed) {
                     currentItem.name = currentItem.name || '';
-                    boatData.chars.push(currentItem.slice(0));
+                    boatData.chars.push(cloneDeep(currentItem));
                 }
             }
+            // Process pictures
+            const picsHash = {};
+            if (formData.default.pics) {
+                try {
+                    const watermark = await Jimp.read(`${__dirname}/../static/custom/watermark.png`);
+                    // This is an ugly hack for a serial processing
+                    await formData.default.pics.reduce(async (prev, p) => {
+                        await prev;
+                        const {
+                            name
+                        } = p;
+                        if (req.body[name]) {
+                            try {
+                                const filename = uuid();
+                                const img = await Jimp.read(req.body[name][0].data);
+                                const thumb = await Jimp.read(req.body[name][0].data);
+                                await fs.ensureDir(`${__dirname}/../static/cache/${id}/photos`);
+                                img.scaleToFit(800, Jimp.AUTO);
+                                img.quality(config.qualityThumbPic);
+                                thumb.quality(config.qualityFullPic);
+                                img.composite(watermark, img.bitmap.width - config.watermarkWidth, img.bitmap.height - config.watermarkHeight);
+                                const imgBuffer = await img.getBufferAsync(Jimp.MIME_JPEG);
+                                await fs.writeFile(`${__dirname}/../static/cache/${id}/photos/${filename}.jpg`, imgBuffer);
+                                thumb.cover(config.thumbnailWidth, config.thumbnailHeight, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE); // eslint-disable-line no-bitwise
+                                const thumbBuffer = await thumb.getBufferAsync(Jimp.MIME_JPEG);
+                                await fs.writeFile(`${__dirname}/../static/cache/${id}/photos/tn_${filename}.jpg`, thumbBuffer);
+                                picsHash[name] = filename;
+                            } catch (e) {
+                                req.log.error({
+                                    ip: req.ip,
+                                    path: req.urlData().path,
+                                    query: req.urlData().query,
+                                    error: e.message
+                                });
+                                rep.code(400)
+                                    .send(JSON.stringify({
+                                        statusCode: 400,
+                                        errors: {
+                                            default: {
+                                                name: 'Error while processing images'
+                                            }
+                                        }
+                                    }));
+                            }
+                        }
+                    }, Promise.resolve());
+                } catch (e) {
+                    req.log.error({
+                        ip: req.ip,
+                        path: req.urlData().path,
+                        query: req.urlData().query,
+                        error: e.message
+                    });
+                }
+            }
+            boatData.pics = (formData.default.pics || []).map(i => picsHash[i.name] || i.name);
+            if (formData.default.pics && formData.default.pics.length) {
+                boatData.pic = picsHash[formData.default.pics[0].name] || formData.default.pics[0].name;
+            }
+            // Process pictures
+            const plansHash = {};
+            if (formData.default.plans) {
+                try {
+                    const watermark = await Jimp.read(`${__dirname}/../static/custom/watermark.png`);
+                    // This is an ugly hack for a serial processing
+                    await formData.default.plans.reduce(async (prev, p) => {
+                        await prev;
+                        const {
+                            name
+                        } = p;
+                        if (req.body[name]) {
+                            try {
+                                const filename = uuid();
+                                const img = await Jimp.read(req.body[name][0].data);
+                                const thumb = await Jimp.read(req.body[name][0].data);
+                                await fs.ensureDir(`${__dirname}/../static/cache/${id}/plans`);
+                                img.scaleToFit(800, Jimp.AUTO);
+                                img.quality(config.qualityThumbPic);
+                                thumb.quality(config.qualityFullPic);
+                                img.composite(watermark, img.bitmap.width - config.watermarkWidth, img.bitmap.height - config.watermarkHeight);
+                                const imgBuffer = await img.getBufferAsync(Jimp.MIME_JPEG);
+                                await fs.writeFile(`${__dirname}/../static/cache/${id}/plans/${filename}.jpg`, imgBuffer);
+                                thumb.cover(config.thumbnailWidth, config.thumbnailHeight, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE); // eslint-disable-line no-bitwise
+                                const thumbBuffer = await thumb.getBufferAsync(Jimp.MIME_JPEG);
+                                await fs.writeFile(`${__dirname}/../static/cache/${id}/plans/tn_${filename}.jpg`, thumbBuffer);
+                                plansHash[name] = filename;
+                            } catch (e) {
+                                req.log.error({
+                                    ip: req.ip,
+                                    path: req.urlData().path,
+                                    query: req.urlData().query,
+                                    error: e.message
+                                });
+                                rep.code(400)
+                                    .send(JSON.stringify({
+                                        statusCode: 400,
+                                        errors: {
+                                            default: {
+                                                name: 'Error while processing images'
+                                            }
+                                        }
+                                    }));
+                            }
+                        }
+                    }, Promise.resolve());
+                } catch (e) {
+                    req.log.error({
+                        ip: req.ip,
+                        path: req.urlData().path,
+                        query: req.urlData().query,
+                        error: e.message
+                    });
+                }
+            }
+            boatData.plans = (formData.default.plans || []).map(i => plansHash[i.name] || i.name);
             // Update boat
-            // const update = await this.mongo.db.collection('boats').updateOne({
-            //     _id: id
-            // }, {
-            //     $set: {
-            //         name: `${formData.default.name}${formData.default.name_ru ? `|${formData.default.name_ru}` : ''}`,
-            //         name_ru: formData.default.name_ru,
-            //         id_dest: parseInt(formData.default.destination, 10),
-            //         id_country: parseInt(formData.default.country, 10)
-            //     }
-            // }, {
-            //     upsert: true
-            // });
+            const update = await this.mongo.db.collection('boats').updateOne({
+                _id: id
+            }, {
+                $set: boatData
+            }, {
+                upsert: true
+            });
             // Check result
-            // if (!update || !update.result || !update.result.ok) {
-            //     return rep.code(200)
-            //         .send(JSON.stringify({
-            //             statusCode: 400,
-            //             error: 'Cannot update databoat record'
-            //         }));
-            // }
-            return rep.code(400)
+            if (!update || !update.result || !update.result.ok) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        error: 'Cannot update databoat record'
+                    }));
+            }
+            return rep.code(200)
                 .send(JSON.stringify({
-                    statusCode: 400
+                    statusCode: 200
                 }));
         } catch (e) {
             req.log.error({

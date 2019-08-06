@@ -51,6 +51,7 @@ class BoatBlocksDialog extends Component {
         axios={axios}
         i18n={i18n}
         locale={this.props.appData.language}
+        doNotSetFocusOnMount={true}
         data={
             [[{
                 id: 'start',

@@ -71,7 +71,7 @@ class BoatAvailabilityDialog extends Component {
                 });
             } else {
                 UIkit.notification({
-                    message: i18n._('Could not get a list of destinations'),
+                    message: i18n._(`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -82,7 +82,7 @@ class BoatAvailabilityDialog extends Component {
             }
             await this.editAvailForm.current.setLoading(false);
             UIkit.notification({
-                message: i18n._('Could not get a list of destinations'),
+                message: i18n._(`Could not get a list of destinations`),
                 status: 'danger'
             });
         });
@@ -109,7 +109,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
             } else {
                 UIkit.notification({
-                    message: i18n._('Could not get a list of destinations'),
+                    message: i18n._(`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -145,7 +145,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
             } else {
                 UIkit.notification({
-                    message: i18n._('Could not get a list of destinations'),
+                    message: i18n._(`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -169,6 +169,7 @@ class BoatAvailabilityDialog extends Component {
         axios={axios}
         i18n={i18n}
         locale={this.props.appData.language}
+        doNotSetFocusOnMount={true}
         data={[
             {
                 id: 'destination',
@@ -251,6 +252,12 @@ class BoatAvailabilityDialog extends Component {
                     0: i18n._(t`Any Period`),
                     1: i18n._(t`Multiple of 7`)
                 }
+            }, {
+                id: 'miniday',
+                type: 'text',
+                label: `${i18n._(t`Min. days`)}:`,
+                css: 'uk-form-width-small',
+                defaultValue: '1'
             }]
         ]}
         validation={
@@ -275,6 +282,10 @@ class BoatAvailabilityDialog extends Component {
                 },
                 m7: {
                     mandatory: true
+                },
+                miniday: {
+                    mandatory: true,
+                    regexp: '^[\\d]+$'
                 }
             }
         }
@@ -329,6 +340,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('end', data.default.end, 'default');
                 await this.editAvailForm.current.setValue('daystart', data.default.daystart, 'default');
                 await this.editAvailForm.current.setValue('m7', data.default.m7, 'default');
+                await this.editAvailForm.current.setValue('miniday', data.default.miniday, 'default');
             } else {
                 const { destinations, countries, bases } = await this.loadDestinations(i18n);
                 await this.editAvailForm.current.setValue('destination', destinations && Object.keys(destinations).length ? Object.keys(destinations)[0] : {}, 'default');
@@ -342,6 +354,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('end', null, 'default');
                 await this.editAvailForm.current.setValue('daystart', '0', 'default');
                 await this.editAvailForm.current.setValue('m7', '0', 'default');
+                await this.editAvailForm.current.setValue('miniday', '1', 'default');
             }
             this.editAvailForm.current.setFocusOnFields();
         });
@@ -379,6 +392,7 @@ class BoatAvailabilityDialog extends Component {
             };
             const daystart = await this.editAvailForm.current.getValue('daystart');
             const m7 = await this.editAvailForm.current.getValue('m7');
+            const miniday = await this.editAvailForm.current.getValue('miniday');
             const { start, end } = data.default;
             this.props.onAvailabilityDialogSaveClick({
                 destination,
@@ -388,7 +402,8 @@ class BoatAvailabilityDialog extends Component {
                 start,
                 end,
                 daystart,
-                m7
+                m7,
+                miniday
             }, this.recordId);
         }
     }

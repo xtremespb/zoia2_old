@@ -50,6 +50,7 @@ class BoatExtrasDialog extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
+        doNotSetFocusOnMount={true}
         locale={this.props.appData.language}
         data={
             [

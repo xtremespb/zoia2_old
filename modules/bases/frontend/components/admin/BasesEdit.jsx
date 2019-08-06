@@ -53,7 +53,7 @@ class BasesEdit extends Component {
 
     onSaveSuccessHandler = i18n => {
         UIkit.notification({
-            message: i18n._('Data has been saved successfully'),
+            message: i18n._(t`Data has been saved successfully`),
             status: 'success'
         });
         history.push('/admin/bases?reload=1');
@@ -85,7 +85,7 @@ class BasesEdit extends Component {
             await this.editBasesForm.current.setProperty('country', 'disabled', null);
             if (i18n) {
                 UIkit.notification({
-                    message: i18n._('Could not get a list of destinations'),
+                    message: i18n._(t`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -115,10 +115,11 @@ class BasesEdit extends Component {
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
             await this.editBasesForm.current.setProperty('country', 'disabled', null);
             await this.editBasesForm.current.setProperty('country', 'values', res.data.countries);
+            await this.editBasesForm.current.setValue('country', Object.keys(res.data.countries)[0], 'default');
         }).catch(async () => {
             await this.editBasesForm.current.setProperty('country', 'disabled', null);
             UIkit.notification({
-                message: i18n._('Could not get a list of countries'),
+                message: i18n._(t`Could not get a list of countries`),
                 status: 'danger'
             });
         });

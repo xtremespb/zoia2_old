@@ -61,11 +61,11 @@ export default class ZFormBuilder extends Component {
         onSaveError: PropTypes.func,
         onSaveSuccess: PropTypes.func,
         onDataDeserialized: PropTypes.func,
-        onFormBuilt: PropTypes.func,
         axios: PropTypes.func.isRequired,
         simple: PropTypes.bool,
         i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired,
-        locale: PropTypes.string
+        locale: PropTypes.string,
+        doNotSetFocusOnMount: PropTypes.bool
     }
 
     static defaultProps = {
@@ -105,9 +105,9 @@ export default class ZFormBuilder extends Component {
         onSaveError: null,
         onSaveSuccess: null,
         onDataDeserialized: null,
-        onFormBuilt: null,
         simple: false,
-        locale: 'en'
+        locale: 'en',
+        doNotSetFocusOnMount: false
     }
 
     setLoading = async flag => new Promise(resolve => this.setState({ loading: flag }, () => resolve()));
@@ -220,7 +220,6 @@ export default class ZFormBuilder extends Component {
     }
 
     componentDidMount = () => {
-        this.setFocusOnFields();
         // This is required no to set focus on "+" icon
         this.props.UIkit.util.on(this.tabDivDropdown, 'hidden', () => {
             this.props.UIkit.tab(this.tabDiv).show(this.state.tabs.indexOf(this.state.tab));
@@ -228,8 +227,8 @@ export default class ZFormBuilder extends Component {
         if (this.props.load && this.props.load.url) {
             this.loadData();
         }
-        if (this.props.onFormBuilt && typeof this.props.onFormBuilt === 'function') {
-            this.props.onFormBuilt();
+        if (!this.props.doNotSetFocusOnMount) {
+            this.setFocusOnFields();
         }
     }
 
@@ -405,6 +404,7 @@ export default class ZFormBuilder extends Component {
                     originalId={item.id}
                     id={`field_${this.props.prefix}_${item.id}`}
                     key={`field_${this.props.prefix}_${item.id}`}
+                    css={item.css}
                     label={itemProps ? itemProps.label : item.label || ''}
                     cname={cname}
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
@@ -550,6 +550,10 @@ export default class ZFormBuilder extends Component {
                     mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
                     UIkit={this.props.UIkit}
                     allowedTypes={item.allowedTypes}
+                    thumbURL={item.thumbURL}
+                    thumbID={item.thumbID}
+                    thumbPrefix={item.thumbPrefix}
+                    thumbExtension={item.thumbExtension}
                 />);
             case 'radio':
                 return (<ZRadio
@@ -833,22 +837,27 @@ export default class ZFormBuilder extends Component {
                 dataStorageNew[tab] = {};
                 const tabData = data[tab];
                 Object.keys(tabData).map(field => {
-                    switch (this.types[field].type) {
-                        case 'checkbox':
-                            dataStorageNew[tab][field] = {};
-                            data[tab][field].map(key => {
-                                dataStorageNew[tab][field][key] = true;
-                            });
-                            break;
-                        case 'file':
-                        case 'fileImage':
-                            dataStorageNew[tab][field] = data[tab][field].map(item => ({
-                                name: item.name,
-                                size: item.size
-                            }));
-                            break;
-                        default:
-                            dataStorageNew[tab][field] = data[tab][field];
+                    if (this.types[field] && data[tab][field]) {
+                        switch (this.types[field].type) {
+                            case 'datePicker':
+                                dataStorageNew[tab][field] = new Date(data[tab][field]);
+                                break;
+                            case 'checkbox':
+                                dataStorageNew[tab][field] = {};
+                                data[tab][field].map(key => {
+                                    dataStorageNew[tab][field][key] = true;
+                                });
+                                break;
+                            case 'file':
+                            case 'fileImage':
+                                dataStorageNew[tab][field] = data[tab][field].map(item => ({
+                                    name: item.name,
+                                    size: item.size
+                                }));
+                                break;
+                            default:
+                                dataStorageNew[tab][field] = data[tab][field];
+                        }
                     }
                 });
                 this.state.data.map(item => {
@@ -1117,7 +1126,7 @@ export default class ZFormBuilder extends Component {
         });
     }
 
-    render = () => (
+    render = () => (<>
         <div className="zform-wrap">
             {this.props.tabs && Object.keys(this.props.tabs).length > 1 ? <ul uk-tab="" ref={item => { this.tabDiv = item; }}>{this.getTabs()}
                 <li className={this.getRemainingTabsData().length || 'uk-hidden'} ref={item => { this.tabDiv = item; }}>
@@ -1132,7 +1141,10 @@ export default class ZFormBuilder extends Component {
             {this.state.errorMessage ? <div className="uk-alert-danger" uk-alert="true">
                 <p>{this.state.errorMessage}</p>
             </div> : null}
-            {this.state.tabs.length > 0 ? <form className="zform" onSubmit={this.onFormSubmit} id={this.props.prefix} uk-margin="uk-margin">{this.getFormFields()}{this.state.loading ? <ZLoading /> : null}</form> : null}
+            {this.state.tabs.length > 0 ? <form className="zform" onSubmit={this.onFormSubmit} id={this.props.prefix} uk-margin="uk-margin">
+                {this.getFormFields()}
+                {this.state.loading ? <ZLoading /> : null}
+            </form> : null}
         </div>
-    )
+    </>)
 }

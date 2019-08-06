@@ -21,3 +21,13 @@ $global-font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Sego
 	font-size: 200%;
 	font-weight: 300;
 }
+// 6. Fixes
+/* This is just a fix to prevent modal dialog to scroll to top */
+.uk-modal-page {
+    overflow: visible !important;
+}
+/* This is just a fix to prevent modal dialog to scroll to top */
+.uk-modal-page>body {
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+}
