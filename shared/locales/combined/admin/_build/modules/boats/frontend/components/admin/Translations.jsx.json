@@ -7,7 +7,7 @@
       ]
     ]
   },
-  "Cannot update databoat record": {
+  "Cannot update boat record": {
     "origin": [
       [
         "modules/boats/frontend/components/admin/Translations.jsx",

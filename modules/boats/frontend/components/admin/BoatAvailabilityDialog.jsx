@@ -71,7 +71,7 @@ class BoatAvailabilityDialog extends Component {
                 });
             } else {
                 UIkit.notification({
-                    message: i18n._(`Could not get a list of destinations`),
+                    message: i18n._(t`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -82,7 +82,7 @@ class BoatAvailabilityDialog extends Component {
             }
             await this.editAvailForm.current.setLoading(false);
             UIkit.notification({
-                message: i18n._(`Could not get a list of destinations`),
+                message: i18n._(t`Could not get a list of destinations`),
                 status: 'danger'
             });
         });
@@ -101,7 +101,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases || []);
                 await this.editAvailForm.current.setValue('bases', [], 'default');
                 await this.editAvailForm.current.setValue('country', Object.keys(res.data.countries)[0], 'default');
-                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 const basesList = {};
                 res.data.bases.map(b => basesList[b.id] = b.name);
@@ -109,7 +109,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
             } else {
                 UIkit.notification({
-                    message: i18n._(`Could not get a list of destinations`),
+                    message: i18n._(t`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -137,7 +137,7 @@ class BoatAvailabilityDialog extends Component {
             if (res && res.data && res.data.statusCode === 200) {
                 await this.editAvailForm.current.setProperty('bases', 'suggestions', res.data.bases);
                 await this.editAvailForm.current.setValue('bases', [], 'default');
-                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                const basesJSX = res.data.bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 const basesList = {};
                 res.data.bases.map(b => basesList[b.id] = b.name);
@@ -145,7 +145,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('homeBase', res.data.bases && res.data.bases.length ? res.data.bases[0].id : null, 'default');
             } else {
                 UIkit.notification({
-                    message: i18n._(`Could not get a list of destinations`),
+                    message: i18n._(t`Could not get a list of destinations`),
                     status: 'danger'
                 });
             }
@@ -202,7 +202,8 @@ class BoatAvailabilityDialog extends Component {
             {
                 id: 'basesListText',
                 type: 'message',
-                text: ''
+                text: '',
+                translate: false
             },
             {
                 id: 'homeBase',
@@ -232,14 +233,14 @@ class BoatAvailabilityDialog extends Component {
                 css: 'uk-form-width-medium',
                 defaultValue: '',
                 values: {
-                    0: i18n._(t`Any Day of a Week`),
-                    2: i18n._(t`Monday`),
-                    3: i18n._(t`Tuesday`),
-                    4: i18n._(t`Wednesday`),
-                    5: i18n._(t`Thursday`),
-                    6: i18n._(t`Friday`),
-                    7: i18n._(t`Saturday`),
-                    1: i18n._(t`Sunday`)
+                    0: t`Any Day of a Week`,
+                    2: t`Monday`,
+                    3: t`Tuesday`,
+                    4: t`Wednesday`,
+                    5: t`Thursday`,
+                    6: t`Friday`,
+                    7: t`Saturday`,
+                    1: t`Sunday`
                 }
             },
             {
@@ -249,8 +250,8 @@ class BoatAvailabilityDialog extends Component {
                 css: 'uk-form-width-small',
                 defaultValue: '',
                 values: {
-                    0: i18n._(t`Any Period`),
-                    1: i18n._(t`Multiple of 7`)
+                    0: t`Any Period`,
+                    1: t`Multiple of 7`
                 }
             }, {
                 id: 'miniday',
@@ -292,7 +293,7 @@ class BoatAvailabilityDialog extends Component {
         lang={{
             ERR_VMANDATORY: i18n._(t`Field is required`),
             ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(`Passwords do not match`),
+            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
             ERR_LOAD: i18n._(t`Could not load data from server`),
             ERR_SAVE: i18n._(t`Could not save data`),
             WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
@@ -334,7 +335,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setValue('country', data.default.country, 'default');
                 await this.editAvailForm.current.setValue('bases', data.default.bases, 'default');
                 await this.editAvailForm.current.setValue('homeBase', data.default.homeBase, 'default');
-                const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 await this.editAvailForm.current.setValue('start', data.default.start, 'default');
                 await this.editAvailForm.current.setValue('end', data.default.end, 'default');
@@ -348,7 +349,7 @@ class BoatAvailabilityDialog extends Component {
                 await this.editAvailForm.current.setProperty('bases', 'suggestions', bases && bases.length ? bases : []);
                 await this.editAvailForm.current.setValue('bases', [], 'default');
                 await this.editAvailForm.current.setValue('homeBase', bases && bases.length ? bases[0].id : null, 'default');
-                const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label uk-margin-small-right za-ad-addBaseLink" key={b.id}>{b.name}</a>));
+                const basesJSX = bases.map(b => (<a href="" data-id={b.id} data-name={b.name} onClick={this.onAddBaseLabelClick} className="uk-label za-ad-addBaseLink" key={b.id}>{b.name}</a>));
                 await this.editAvailForm.current.setProperty('basesListText', 'text', basesJSX);
                 await this.editAvailForm.current.setValue('start', null, 'default');
                 await this.editAvailForm.current.setValue('end', null, 'default');

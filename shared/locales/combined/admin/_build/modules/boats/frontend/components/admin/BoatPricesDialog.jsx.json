@@ -1,0 +1,118 @@
+{
+  "Cost per week": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        60
+      ]
+    ]
+  },
+  "Currency": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        67
+      ]
+    ]
+  },
+  "Start date": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        75
+      ]
+    ]
+  },
+  "End date": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        81
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        105
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        106
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        107
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        108
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        109
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        110
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        111
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        112
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        177
+      ]
+    ]
+  },
+  "Prices": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        171
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatPricesDialog.jsx",
+        178
+      ]
+    ]
+  }
+}

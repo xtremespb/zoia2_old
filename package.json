@@ -21,7 +21,9 @@
         "add-locale-user": "lingui add-locale --config ./etc/linguirc.user.json",
         "extract-user": "lingui extract --config ./etc/linguirc.user.json",
         "compile-user": "lingui compile --config ./etc/linguirc.user.json",
-        "rebuild-locales": "lingui compile --config ./etc/linguirc.admin.json && lingui compile --config ./etc/linguirc.user.json",
+        "add-locale": "lingui add-locale --config ./etc/linguirc.admin.json && lingui add-locale --config ./etc/linguirc.user.json",
+        "extract": "lingui extract --config ./etc/linguirc.admin.json && lingui extract --config ./etc/linguirc.user.json",
+        "compile": "lingui compile --config ./etc/linguirc.admin.json && lingui compile --config ./etc/linguirc.user.json",
         "setup": "node ./bin/setup.js",
         "split-locales": "node ./bin/setup.js -s",
         "combine-locales": "node ./bin/setup.js -c"

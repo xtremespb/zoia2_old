@@ -107,6 +107,14 @@
       ]
     ]
   },
+  "Boat title": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatsList.jsx",
+        149
+      ]
+    ]
+  },
   "Loading data, please wait…": {
     "origin": [
       [

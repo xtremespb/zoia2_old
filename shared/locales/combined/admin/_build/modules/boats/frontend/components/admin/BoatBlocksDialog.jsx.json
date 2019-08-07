@@ -1,0 +1,94 @@
+{
+  "Start date": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        59
+      ]
+    ]
+  },
+  "End date": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        66
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        82
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        83
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        85
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        86
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        87
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        88
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        89
+      ],
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        148
+      ]
+    ]
+  },
+  "Blocks": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        142
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/boats/frontend/components/admin/BoatBlocksDialog.jsx",
+        149
+      ]
+    ]
+  }
+}

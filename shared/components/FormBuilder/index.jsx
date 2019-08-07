@@ -617,6 +617,8 @@ export default class ZFormBuilder extends Component {
                     key={`field_${this.props.prefix}_${this.props.prefix}_${item.id}`}
                     css={item.css}
                     text={itemProps && item.updateFromProps ? itemProps.text : item.text || ''}
+                    i18n={this.props.i18n}
+                    translate={item.translate}
                 />);
             default:
                 return null;

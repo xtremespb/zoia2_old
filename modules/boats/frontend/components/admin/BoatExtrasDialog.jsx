@@ -74,7 +74,7 @@ class BoatExtrasDialog extends Component {
                     label: `${i18n._(t`Per`)}:`,
                     css: 'uk-form-width-small',
                     defaultValue: 'stay',
-                    values: { stay: i18n._(t`stay`), day: i18n._(t`day`), week: i18n._(t`week`) },
+                    values: { stay: t`stay`, day: t`day`, week: t`week` },
                 },
                 {
                     id: 'per2',
@@ -82,14 +82,14 @@ class BoatExtrasDialog extends Component {
                     label: `${i18n._(t`Per`)}:`,
                     css: 'uk-form-width-small',
                     defaultValue: 'boat',
-                    values: { boat: i18n._(t`boat`), pax: i18n._(t`pax`) },
+                    values: { boat: t`boat`, pax: t`pax` },
                 }],
                 {
                     id: 'options',
                     type: 'checkbox',
                     label: `${i18n._(t`Options`)}:`,
                     values: {
-                        mand: i18n._(t`Extra is a mandatory`)
+                        mand: t`Extra is a mandatory`
                     }
                 }
             ]
@@ -115,7 +115,7 @@ class BoatExtrasDialog extends Component {
         lang={{
             ERR_VMANDATORY: i18n._(t`Field is required`),
             ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(`Passwords do not match`),
+            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
             ERR_LOAD: i18n._(t`Could not load data from server`),
             ERR_SAVE: i18n._(t`Could not save data`),
             WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),

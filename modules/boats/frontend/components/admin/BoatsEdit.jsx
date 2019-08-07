@@ -188,14 +188,14 @@ class BoatsEdit extends Component {
                 css: 'uk-form-width-medium',
                 defaultValue: '1',
                 values: {
-                    1: 'Monohull',
-                    2: 'Catamaran',
-                    3: 'Motor Boat',
-                    4: 'Powered Catamaran',
-                    5: 'Gulet',
-                    10: 'Launch',
-                    11: 'Motor Shop',
-                    12: 'Houseboat'
+                    1: t`Monohull`,
+                    2: t`Catamaran`,
+                    3: t`Motor Boat`,
+                    4: t`Powered Catamaran`,
+                    5: t`Gulet`,
+                    10: t`Speedboat`,
+                    11: t`Cruise Ship`,
+                    12: t`Houseboat`
                 },
             }, {
                 id: 'crew',
@@ -204,8 +204,8 @@ class BoatsEdit extends Component {
                 css: 'uk-form-width-small',
                 defaultValue: '1',
                 values: {
-                    0: 'Bare Boat',
-                    1: 'Crewed'
+                    0: t`Bare Boat`,
+                    1: t`Crewed`
                 },
             }],
             [
@@ -368,7 +368,7 @@ class BoatsEdit extends Component {
                 label: `${i18n._(t`Per`)}:`,
                 css: 'uk-form-width-small',
                 defaultValue: 'stay',
-                values: { stay: i18n._(t`stay`), day: i18n._(t`day`), week: i18n._(t`week`) },
+                values: { stay: t`stay`, day: t`day`, week: t`week` },
             },
             {
                 id: 'skipperPer2',
@@ -376,7 +376,7 @@ class BoatsEdit extends Component {
                 label: `${i18n._(t`Per`)}:`,
                 css: 'uk-form-width-small',
                 defaultValue: 'boat',
-                values: { boat: i18n._(t`boat`), pax: i18n._(t`pax`) },
+                values: { boat: t`boat`, pax: t`pax` },
             }],
             {
                 id: 'prices',
@@ -402,7 +402,7 @@ class BoatsEdit extends Component {
                 id: 'charsTextHelp',
                 type: 'message',
                 css: 'uk-text-small uk-text-muted',
-                text: i18n._(t`Each line should contain a new characteristic or a category. Start a new line with an * character to define a category, format: * NAME_EN|NAME_RU, example: "* New Category|Новая категория" (without quotes). A line without * at the beginning will be parsed as a characteristic. The format is as following: NAME_EN|NAME_RU,QUANTITY_EN|QUANTITIY_RU,UNIT_EN|UNIT_RU, example: "Boat anchor|Якорь для яхты,10,meters|метров" (without quotes).`)
+                text: t`Each line should contain a new characteristic or a category. Start a new line with an * character to define a category, format: * NAME_EN|NAME_RU, example: "* New Category|Новая категория" (without quotes). A line without * at the beginning will be parsed as a characteristic. The format is as following: NAME_EN|NAME_RU,QUANTITY_EN|QUANTITIY_RU,UNIT_EN|UNIT_RU, example: "Boat anchor|Якорь для яхты,10,meters|метров" (without quotes).`
             },
             {
                 id: 'extras',
@@ -412,10 +412,14 @@ class BoatsEdit extends Component {
                 placeholderText: i18n._(t`Add or remove extras data`),
                 buttons: (<button type="button" className="uk-button uk-button-primary uk-button-small" onClick={() => this.onAddExtrasClick(i18n)}><span uk-icon="icon:plus;ratio:0.7" className="uk-margin-small-right" />{i18n._(t`Add`)}</button>),
                 wrap: ({ children }) => (<ul className={`uk-list uk-list-divider${children.length ? ' uk-card uk-card-default uk-card-small uk-card-body' : ''}`}>{children}</ul>),
-                view: data => (<li key={data.id}>
-                    <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditExtrasClick(e, data, i18n)} />
-                    <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeleteExtrasClick(e, data, i18n)} />
-                    <span className="uk-margin-small-right uk-text-small">{this.getLocalizedString(data.name)}: {data.cost} {i18n._(t`per`)} {i18n._(data.per1)}, {i18n._(t`per`)} {i18n._(data.per2)} ({data.options.mand ? i18n._(t`mandatory`) : i18n._(t`optional`)})</span>
+                view: data => (<li key={data.id} className="uk-grid uk-grid-collapse">
+                    <div className="uk-width-auto">
+                        <button uk-tooltip={`title:${i18n._(t`Add`)}`} type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={e => this.onEditExtrasClick(e, data, i18n)} />
+                        <button uk-tooltip={`title:${i18n._(t`Delete`)}`} type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" onClick={e => this.onDeleteExtrasClick(e, data, i18n)} />
+                    </div>
+                    <div className="uk-width-expand">
+                        <span className="uk-margin-small-right uk-text-small">{this.getLocalizedString(data.name)}: {data.cost} {i18n._(t`per`)} {i18n._(data.per1)}, {i18n._(t`per`)} {i18n._(data.per2)} ({data.options.mand ? i18n._(t`mandatory`) : i18n._(t`optional`)})</span>
+                    </div>
                 </li>)
             },
             {
@@ -424,20 +428,20 @@ class BoatsEdit extends Component {
                 label: `${i18n._(t`Equipment & Extras`)}:`,
                 css: 'uk-width-xlarge uk-column-1-3@m',
                 values: {
-                    1: i18n._(t`Air Conditioneer`),
-                    2: i18n._(t`Water Maker`),
-                    3: i18n._(t`Generator`),
-                    4: i18n._(t`Anchor`),
-                    5: i18n._(t`Outboard Motor`),
-                    6: i18n._(t`Autopilot`),
-                    7: i18n._(t`Thruster`),
-                    8: i18n._(t`Electric Toilettes`),
-                    9: i18n._(t`Furling Mainsail`),
-                    10: i18n._(t`Solar Panel`),
-                    11: i18n._(t`BBQ`),
-                    12: i18n._(t`GPS`),
-                    13: i18n._(t`Electric Winch`),
-                    14: i18n._(t`Wi-Fi`)
+                    1: t`Air Conditioneer`,
+                    2: t`Water Maker`,
+                    3: t`Generator`,
+                    4: t`Anchor`,
+                    5: t`Outboard Motor`,
+                    6: t`Autopilot`,
+                    7: t`Thruster`,
+                    8: t`Electric Toilettes`,
+                    9: t`Furling Mainsail`,
+                    10: t`Solar Panel`,
+                    11: t`BBQ`,
+                    12: t`GPS`,
+                    13: t`Electric Winch`,
+                    14: t`Wi-Fi`
                 }
             },
             [
@@ -575,17 +579,17 @@ class BoatsEdit extends Component {
         lang={{
             ERR_VMANDATORY: i18n._(t`Field is required`),
             ERR_VFORMAT: i18n._(t`Invalid format`),
-            ERR_VNOMATCH: i18n._(`Passwords do not match`),
+            ERR_VNOMATCH: i18n._(t`Passwords do not match`),
             ERR_LOAD: i18n._(t`Could not load data from server`),
             ERR_SAVE: i18n._(t`Could not save data`),
             WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
             YES: i18n._(t`Yes`),
             CANCEL: i18n._(t`Cancel`),
             ERR_UNSUPPORTED_FILE_TYPE: i18n._(t`Selected image type is not supported`),
-            FILE_ATTACH: 'Attach file(s) by dropping them here',
-            FILE_ORSELECT: 'or selecting one',
-            FILE_IMAGE_ATTACH: 'Attach image(s) by dropping them here',
-            FILE_IMAGE_ORSELECT: 'or selecting one'
+            FILE_ATTACH: i18n._(t`Attach file(s) by dropping them here`),
+            FILE_ORSELECT: i18n._(t`or selecting one`),
+            FILE_IMAGE_ATTACH: i18n._(t`Attach image(s) by dropping them here`),
+            FILE_IMAGE_ORSELECT: i18n._(t`or selecting one`)
         }}
         save={{
             url: `${config.apiURL}/api/boats/save`,

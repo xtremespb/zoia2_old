@@ -2,4 +2,4 @@
 
 import React from 'react';
 
-export default props => (<div className={`uk-margin-top uk-margin-bottom ${props.css || ''}`}>{props.text}</div>);
+export default props => (<div className={`uk-margin-top uk-margin-bottom ${props.css || ''}`}>{props.translate === false ? props.text : props.i18n._(props.text)}</div>);

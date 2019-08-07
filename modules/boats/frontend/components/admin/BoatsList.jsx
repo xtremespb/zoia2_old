@@ -146,7 +146,7 @@ class BoatsList extends Component {
                             topButtons={<><Link to="/admin/boats/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new boat`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected boats`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'title',
-                                title: 'Boat',
+                                title: i18n._(t`Boat title`),
                                 sortable: true,
                                 cssHeader: 'uk-text-nowrap'
                             }, {

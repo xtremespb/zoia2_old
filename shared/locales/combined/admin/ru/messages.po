@@ -21,37 +21,97 @@ msgstr ""
 msgid "Actions"
 msgstr "Действия"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:88
-#~ msgid "Active"
-#~ msgstr "Активен"
+#: modules/users/frontend/components/admin/UsersEdit.jsx:89
+msgid "Active"
+msgstr "Активен"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:156
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:257
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:260
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:272
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:275
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:387
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:390
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:413
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:416
 msgid "Add"
 msgstr "Добавить"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:144
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:199
 msgid "Add new base"
 msgstr "Добавить базу"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:155
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:256
 msgid "Add or remove availability data"
-msgstr ""
+msgstr "Добавить или удалить данные о доступности"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:98
-#~ msgid "Administrator"
-#~ msgstr "Администратор"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:271
+msgid "Add or remove blocks data"
+msgstr "Добавить или удалить данные о блоках"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:153
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:412
+msgid "Add or remove extras data"
+msgstr "Добавить или удалить данные об опциях"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:386
+msgid "Add or remove prices data"
+msgstr "Добавить или удалить данные о ценах"
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:100
+msgid "Administrator"
+msgstr "Администратор"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:427
+msgid "Air Conditioneer"
+msgstr "Кондиционер"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:430
+msgid "Anchor"
+msgstr "Якорь"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:235
+msgid "Any Day of a Week"
+msgstr "Любой день недели"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:252
+msgid "Any Period"
+msgstr "Любой период"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:585
+msgid "Attach file(s) by dropping them here"
+msgstr "Добавьте файлы, перетащив их,"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:587
+msgid "Attach image(s) by dropping them here"
+msgstr "Добавьте изображения, перетащив их,"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:432
+msgid "Autopilot"
+msgstr "Автопилот"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:416
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:254
 msgid "Availability"
-msgstr ""
+msgstr "Доступность"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:144
-#~ msgid "Base"
-#~ msgstr "База"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:342
+msgid "Avg. Price"
+msgstr "Средняя цена"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:150
-#~ msgid "Base (RU)"
-#~ msgstr "База (рус.)"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:437
+msgid "BBQ"
+msgstr "Гриль"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:207
+msgid "Bare Boat"
+msgstr "Без экипажа"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:159
+msgid "Base"
+msgstr "База"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:165
+msgid "Base (RU)"
+msgstr "База (рус.)"
 
 #: modules/bases/frontend/components/admin/Translations.jsx:11
 msgid "Base not found"
@@ -59,34 +119,76 @@ msgstr "База не найдена"
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:135
 #: modules/bases/frontend/components/admin/BasesList.jsx:137
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:142
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:196
 msgid "Bases"
 msgstr "Базы"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:163
-msgid "Boat"
-msgstr ""
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:304
+msgid "Bathrooms"
+msgstr "Ванные комнаты"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:169
-msgid "Boat (RU)"
-msgstr ""
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:284
+msgid "Beam"
+msgstr "Ширина"
+
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:142
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:269
+msgid "Blocks"
+msgstr "Блоки"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:447
+msgid "Boat Photos"
+msgstr "Фотографии"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:457
+msgid "Boat Plan"
+msgstr "Планы"
 
 #: modules/boats/frontend/components/admin/Translations.jsx:11
 msgid "Boat not found"
-msgstr ""
+msgstr "Яхта не найдена"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:180
+#: modules/boats/frontend/components/admin/BoatsList.jsx:149
+msgid "Boat title"
+msgstr "Название яхты"
 
 #: modules/boats/frontend/components/admin/BoatsList.jsx:135
 #: modules/boats/frontend/components/admin/BoatsList.jsx:137
 msgid "Boats"
-msgstr ""
+msgstr "Яхты"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:221
+msgid "Build Year"
+msgstr "Год постройки"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:298
+msgid "Cabins"
+msgstr "Каюты"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:179
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:217
 #: modules/bases/frontend/components/admin/DialogDelete.jsx:53
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:183
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:209
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:300
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:422
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:89
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:148
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:123
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:191
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:112
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:177
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:476
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:583
 #: modules/boats/frontend/components/admin/DialogDelete.jsx:53
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:139
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:177
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:53
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:90
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:128
 #: modules/destinations/frontend/components/admin/DialogDelete.jsx:53
 #: modules/users/frontend/components/admin/DialogDelete.jsx:53
+#: modules/users/frontend/components/admin/UsersEdit.jsx:133
+#: modules/users/frontend/components/admin/UsersEdit.jsx:171
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -98,7 +200,7 @@ msgstr "Ошибка во время удаления одной или неск
 #: modules/boats/frontend/components/admin/BoatsList.jsx:111
 #: modules/boats/frontend/components/admin/BoatsList.jsx:115
 msgid "Cannot delete one or more boats"
-msgstr ""
+msgstr "Ошибка во время удаления одной или нескольких яхт"
 
 #: modules/countries/frontend/components/admin/CountriesList.jsx:111
 #: modules/countries/frontend/components/admin/CountriesList.jsx:115
@@ -115,6 +217,10 @@ msgstr "Ошибка во время удаления одного или нес
 msgid "Cannot delete one or more users"
 msgstr "Ошибка во время удаления одного или нескольких пользователей"
 
+#: modules/boats/frontend/components/admin/Translations.jsx:9
+msgid "Cannot update boat record"
+msgstr "Ошибка во время обновления записи в базе данных"
+
 #: modules/bases/frontend/components/admin/Translations.jsx:9
 #: modules/countries/frontend/components/admin/Translations.jsx:9
 #: modules/destinations/frontend/components/admin/Translations.jsx:9
@@ -122,18 +228,37 @@ msgstr "Ошибка во время удаления одного или нес
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
-#: modules/boats/frontend/components/admin/Translations.jsx:9
-msgid "Cannot update databoat record"
-msgstr ""
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:192
+msgid "Catamaran"
+msgstr "Катамаран"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:107
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:107
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:398
+msgid "Characteristics"
+msgstr "Характеристики"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:68
+msgid "Cost"
+msgstr "Стоимость"
+
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:60
+msgid "Cost per week"
+msgstr "Стоимость, в неделю"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:159
+msgid "Could not get a list of bases"
+msgstr "Ошибка во время получения списка баз"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:122
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:123
 msgid "Could not get a list of countries"
 msgstr "Ошибка во время получения списка стран"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:81
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:81
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:73
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:88
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:74
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:85
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:112
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:148
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:79
 msgid "Could not get a list of destinations"
 msgstr "Ошибка во время получения списка направлений"
 
@@ -145,31 +270,47 @@ msgstr "Ошибка во время получения списка напра�
 msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:205
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:213
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:296
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:85
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:119
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:108
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:579
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:173
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:124
+#: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:240
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:247
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:204
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:255
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:717
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:215
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:164
-#: modules/users/frontend/components/admin/UsersEdit.jsx:205
+#: modules/users/frontend/components/admin/UsersEdit.jsx:207
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или попробуйте <0>обновить</0> данные."
 
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:214
 #: modules/bases/frontend/components/admin/BasesList.jsx:70
 #: modules/bases/frontend/components/admin/BasesList.jsx:73
 #: modules/bases/frontend/components/admin/BasesList.jsx:180
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:206
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:297
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:86
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:120
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:109
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:580
 #: modules/boats/frontend/components/admin/BoatsList.jsx:70
 #: modules/boats/frontend/components/admin/BoatsList.jsx:73
 #: modules/boats/frontend/components/admin/BoatsList.jsx:180
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:174
 #: modules/countries/frontend/components/admin/CountriesList.jsx:70
 #: modules/countries/frontend/components/admin/CountriesList.jsx:73
 #: modules/countries/frontend/components/admin/CountriesList.jsx:180
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:125
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:70
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:73
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:180
+#: modules/users/frontend/components/admin/UsersEdit.jsx:168
 #: modules/users/frontend/components/admin/UsersList.jsx:70
 #: modules/users/frontend/components/admin/UsersList.jsx:73
 #: modules/users/frontend/components/admin/UsersList.jsx:198
@@ -181,19 +322,21 @@ msgstr "Ошибка во время сохранения данных"
 msgid "Countries"
 msgstr "Страны"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:134
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:149
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:187
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:119
 msgid "Country"
 msgstr "Страна"
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:111
-#~ msgid "Country (RU)"
-#~ msgstr "Страна (русский)"
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:125
+msgid "Country (RU)"
+msgstr "Страна (русский)"
 
 #: modules/countries/frontend/components/admin/Translations.jsx:11
 msgid "Country not found"
 msgstr "Страна не найдена"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:203
+#: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Create User"
 msgstr "Добавление пользователя"
 
@@ -203,7 +346,7 @@ msgstr "Добавление базы"
 
 #: modules/boats/frontend/components/admin/BoatsList.jsx:146
 msgid "Create new boat"
-msgstr ""
+msgstr "Добавить лодку"
 
 #: modules/countries/frontend/components/admin/CountriesList.jsx:146
 msgid "Create new country"
@@ -217,9 +360,29 @@ msgstr "Добавить направление"
 msgid "Create new user"
 msgstr "Добавление пользователя"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:50
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:50
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:50
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:203
+msgid "Crew"
+msgstr "Команда"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:208
+msgid "Crewed"
+msgstr "С командой"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:197
+msgid "Cruise Ship"
+msgstr "Теплоход"
+
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:67
+msgid "Currency"
+msgstr "Валюта"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:348
+msgid "Damage Deposit"
+msgstr "Страховой депозит"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:56
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:60
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:56
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:50
 #: modules/users/frontend/components/admin/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
@@ -227,6 +390,10 @@ msgstr "Данные успешно сохранены"
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:121
 #: modules/bases/frontend/components/admin/DialogDelete.jsx:54
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:261
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:276
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:391
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:417
 #: modules/boats/frontend/components/admin/BoatsList.jsx:121
 #: modules/boats/frontend/components/admin/DialogDelete.jsx:54
 #: modules/countries/frontend/components/admin/CountriesList.jsx:121
@@ -244,7 +411,7 @@ msgstr "Удалить выбранные базы"
 
 #: modules/boats/frontend/components/admin/BoatsList.jsx:146
 msgid "Delete selected boats"
-msgstr ""
+msgstr "Удалить выбранные лодки"
 
 #: modules/countries/frontend/components/admin/CountriesList.jsx:146
 msgid "Delete selected countries"
@@ -258,13 +425,16 @@ msgstr "Удалить выбранные направления"
 msgid "Delete selected users"
 msgstr "Удаление выбранных"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:124
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:139
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:177
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:108
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:69
 msgid "Destination"
 msgstr "Направление"
 
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:76
-#~ msgid "Destination (RU)"
-#~ msgstr "Направление (рус.)"
+msgid "Destination (RU)"
+msgstr "Направление (рус.)"
 
 #: modules/destinations/frontend/components/admin/Translations.jsx:11
 msgid "Destination not found"
@@ -275,13 +445,29 @@ msgstr "Направление не найдено"
 msgid "Destinations"
 msgstr "Направления"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:354
+msgid "Discounts"
+msgstr "Скидки"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:334
+msgid "Double Berths"
+msgstr "Двухместные койки"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:322
+msgid "Double Cabins"
+msgstr "Двухместные кабины"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:291
+msgid "Draft"
+msgstr "Осадка"
+
 #: modules/bases/frontend/components/admin/Translations.jsx:10
 msgid "Duplicate base"
 msgstr "База уже добавлена"
 
 #: modules/boats/frontend/components/admin/Translations.jsx:10
 msgid "Duplicate boat"
-msgstr ""
+msgstr "Лодка уже добавлена в систему"
 
 #: modules/countries/frontend/components/admin/Translations.jsx:10
 msgid "Duplicate country"
@@ -300,8 +486,12 @@ msgid "Duplicate username"
 msgstr "Имя пользователя уже существует"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:77
-#~ msgid "E-mail"
-#~ msgstr "E-mail"
+msgid "E-mail"
+msgstr "E-mail"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:405
+msgid "Each line should contain a new characteristic or a category. Start a new line with an * character to define a category, format: * NAME_EN|NAME_RU, example: \"* New Category|Новая категория\" (without quotes). A line without * at the beginning will be parsed as a characteristic. The format is as following: NAME_EN|NAME_RU,QUANTITY_EN|QUANTITIY_RU,UNIT_EN|UNIT_RU, example: \"Boat anchor|Якорь для яхты,10,meters|метров\" (without quotes)."
+msgstr "Каждая новая строка должна содержать категорию или характеристику яхты. Для добавления новой категории начните строку с символа \"*\", формат: * ENGLISH|РУССКИЙ, например: \"* New Category|Новая категория\" (без кавычек). Строка без символа \"*\" в начале будет интерпретироваться как характеристика, формат следующий: NAME|НАЗВАНИЕ,QUANTITY|КОЛ-ВО,UNIT|ЕДИНИЦА, например: \"Boat anchor|Якорь для яхты,10,meters|метров\" (без кавычек). Количество и единицы измерения опциональны."
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:119
 #: modules/boats/frontend/components/admin/BoatsList.jsx:119
@@ -311,15 +501,15 @@ msgstr "Имя пользователя уже существует"
 msgid "Edit"
 msgstr "Редактирование"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:238
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:253
 msgid "Edit Base"
 msgstr "Редактирования базы"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:245
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:715
 msgid "Edit Boat"
-msgstr ""
+msgstr "Редактирование яхты"
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:202
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:213
 msgid "Edit Country"
 msgstr "Редактирование страны"
 
@@ -327,48 +517,139 @@ msgstr "Редактирование страны"
 msgid "Edit Destination"
 msgstr "Редактирование направления"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:203
+#: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Edit User"
 msgstr "Редактирование пользователя"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:78
-#~ msgid "Example: username@zoiajs.org"
-#~ msgstr "Пример: username@zoiajs.org"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:434
+msgid "Electric Toilettes"
+msgstr "Электрические туалеты"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:439
+msgid "Electric Winch"
+msgstr "Электрическая лебедка"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:224
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:66
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:81
+msgid "End date"
+msgstr "Дата окончания"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:424
+msgid "Equipment & Extras"
+msgstr "Оборудование и дополнения"
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:78
+msgid "Example: username@zoiajs.org"
+msgstr "Пример: username@zoiajs.org"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:92
+msgid "Extra is a mandatory"
+msgstr "Опция обязательна для заказа"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:185
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:410
+msgid "Extras"
+msgstr "Опции"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:210
 #: modules/bases/frontend/components/admin/BasesList.jsx:181
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:202
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:293
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:82
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:116
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:105
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:576
 #: modules/boats/frontend/components/admin/BoatsList.jsx:181
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:170
 #: modules/countries/frontend/components/admin/CountriesList.jsx:181
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:121
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:181
+#: modules/users/frontend/components/admin/UsersEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersList.jsx:199
 msgid "Field is required"
 msgstr "Обязательное поле"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:87
-#~ msgid "Inactive"
-#~ msgstr "Неактивен"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:355
+msgid "Format: DAYS=DISCOUNT, DAYS=DISCOUNT, ... (example: 7=5, 14=10)"
+msgstr "Формат: ДНИ=СКИДКА, ДНИ=СКИДКА, ... (например: 7=5, 14=10)"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:63
+msgid "Format: NAME_EN|NAME_RU, example: \"Option|Опция\" (without quotes)"
+msgstr "Формат: ENGLISH|РУССКИЙ, например: \"Option|Опция\" (без кавычек)"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:240
+msgid "Friday"
+msgstr "Пятница"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:435
+msgid "Furling Mainsail"
+msgstr "Закрутки"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:438
+msgid "GPS"
+msgstr "GPS"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:429
+msgid "Generator"
+msgstr "Генератор"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:195
+msgid "Gulet"
+msgstr "Гулет"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:241
+msgid "HP"
+msgstr "Л.с."
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:316
+msgid "Heads"
+msgstr "Туалеты"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:210
+msgid "Home Base"
+msgstr "Домашнаяя база"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:198
+msgid "Houseboat"
+msgstr "Хаусбот"
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:88
+msgid "Inactive"
+msgstr "Неактивен"
 
 #: shared/components/Error/Error.jsx:54
 msgid "Internal Error"
 msgstr "Внутренняя ошибка"
 
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:211
 #: modules/bases/frontend/components/admin/BasesList.jsx:67
 #: modules/bases/frontend/components/admin/BasesList.jsx:182
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:203
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:294
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:83
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:117
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:106
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:577
 #: modules/boats/frontend/components/admin/BoatsList.jsx:67
 #: modules/boats/frontend/components/admin/BoatsList.jsx:182
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:171
 #: modules/countries/frontend/components/admin/CountriesList.jsx:67
 #: modules/countries/frontend/components/admin/CountriesList.jsx:182
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:122
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:67
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:182
+#: modules/users/frontend/components/admin/UsersEdit.jsx:165
 #: modules/users/frontend/components/admin/UsersList.jsx:67
 #: modules/users/frontend/components/admin/UsersList.jsx:200
 msgid "Invalid format"
 msgstr "Неверный формат"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:70
-#~ msgid "Latin chars/_/-, length: 4-32"
-#~ msgstr "Лат. символы/_/-, длина: 4-32"
+msgid "Latin chars/_/-, length: 4-32"
+msgstr "Лат. символы/_/-, длина: 4-32"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:233
+msgid "Length"
+msgstr "Длина"
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:177
 #: modules/boats/frontend/components/admin/BoatsList.jsx:177
@@ -382,15 +663,49 @@ msgstr "Загрузка данных, пожалуйста, подождите�
 msgid "Log Out"
 msgstr "Выход"
 
-#: modules/bases/frontend/components/admin/BasesEdit.jsx:238
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:234
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:285
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:292
+msgid "Meters"
+msgstr "Метры"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:258
+msgid "Min. days"
+msgstr "Мин. дней"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:215
+msgid "Model"
+msgstr "Модель"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:236
+msgid "Monday"
+msgstr "Понедельник"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:191
+msgid "Monohull"
+msgstr "Парусная яхта"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:193
+msgid "Motor Boat"
+msgstr "Моторная яхта"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:253
+msgid "Multiple of 7"
+msgstr "Кратно семи"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:60
+msgid "Name"
+msgstr "Имя"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:253
 msgid "New Base"
 msgstr "Новая база"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:245
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:715
 msgid "New Boat"
-msgstr ""
+msgstr "Новая яхта"
 
-#: modules/countries/frontend/components/admin/CountriesEdit.jsx:202
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:213
 msgid "New Country"
 msgstr "Новая страна"
 
@@ -406,13 +721,13 @@ msgstr "Новое направление"
 msgid "No records to display"
 msgstr "Нет записей для отображения"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:97
-#~ msgid "Normal User"
-#~ msgstr "Пользователь"
+#: modules/users/frontend/components/admin/UsersEdit.jsx:99
+msgid "Normal User"
+msgstr "Пользователь"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:118
-#~ msgid "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long."
-#~ msgstr "Введите новый пароль только в том случае, если вы хотите изменить его для текущего пользователя. Пароль должен содержать не менее 8 символов."
+#: modules/users/frontend/components/admin/UsersEdit.jsx:120
+msgid "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long."
+msgstr "Введите новый пароль только в том случае, если вы хотите изменить его для текущего пользователя. Пароль должен содержать не менее 8 символов."
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:114
 #: modules/boats/frontend/components/admin/BoatsList.jsx:114
@@ -422,25 +737,68 @@ msgstr "Нет записей для отображения"
 msgid "Operation complete"
 msgstr "Операция выполнена"
 
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:90
+msgid "Options"
+msgstr "Опции"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:431
+msgid "Outboard Motor"
+msgstr "Тузик"
+
 #: shared/components/Error/Error.jsx:54
 msgid "Page not Found"
 msgstr "Страница не найдена"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:106
-#~ msgid "Password"
-#~ msgstr "Пароль"
+#: modules/users/frontend/components/admin/UsersEdit.jsx:108
+msgid "Password"
+msgstr "Пароль"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:118
-#~ msgid "Password is required when creating a new user, should be at least 8 characters long."
-#~ msgstr "Пароль требуется при создании нового пользователя, должен быть не менее 8 символов."
+#: modules/users/frontend/components/admin/UsersEdit.jsx:120
+msgid "Password is required when creating a new user, should be at least 8 characters long."
+msgstr "Пароль требуется при создании нового пользователя, должен быть не менее 8 символов."
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:204
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:212
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:295
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:118
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:107
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:578
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:172
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:123
+#: modules/users/frontend/components/admin/UsersEdit.jsx:166
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:94
-#~ msgid "Permissions"
-#~ msgstr "Права"
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:247
+msgid "Pax"
+msgstr "Пасс."
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:74
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:82
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:368
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:376
+msgid "Per"
+msgstr "за"
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:95
+msgid "Permissions"
+msgstr "Права"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:231
+msgid "Possible Start"
+msgstr "Возможный старт"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:240
+msgid "Power"
+msgstr "Мощность"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:194
+msgid "Powered Catamaran"
+msgstr "Моторный катамаран"
+
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:171
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:384
+msgid "Prices"
+msgstr "Цены"
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:64
 #: modules/boats/frontend/components/admin/BoatsList.jsx:64
@@ -450,17 +808,25 @@ msgstr "Пароль не совпадает"
 msgid "Record with the entered value already exists"
 msgstr "Запись с таким значением уже существует"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:227
+msgid "Refitted Year"
+msgstr "Год ремонта"
+
 #: modules/bases/frontend/components/admin/BasesList.jsx:146
 #: modules/boats/frontend/components/admin/BoatsList.jsx:146
 #: modules/countries/frontend/components/admin/CountriesList.jsx:146
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:146
 #: modules/users/frontend/components/admin/UsersList.jsx:139
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:112
-#~ msgid "Repeat Password"
-#~ msgstr "Повтор пароля"
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:248
+msgid "Rent period"
+msgstr "Период аренды"
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:114
+msgid "Repeat Password"
+msgstr "Повтор пароля"
 
 #: modules/bases/frontend/components/admin/Translations.jsx:13
 #: modules/boats/frontend/components/admin/Translations.jsx:13
@@ -470,13 +836,59 @@ msgstr ""
 msgid "Required"
 msgstr "Обязательное поле"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:189
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:241
+msgid "Saturday"
+msgstr "Суббота"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:185
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:423
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:149
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:192
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:178
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:482
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:145
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:96
+#: modules/users/frontend/components/admin/UsersEdit.jsx:139
 msgid "Save"
 msgstr "Сохранить"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:584
+msgid "Selected image type is not supported"
+msgstr "Выбранный тип изображения не поддерживается"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:310
+msgid "Showers"
+msgstr "Души"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:328
+msgid "Single Cabins"
+msgstr "Одноместные каюты"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:362
+msgid "Skipper Cost"
+msgstr "Аренда капитана"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:436
+msgid "Solar Panel"
+msgstr "Солнечные панели"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:196
+msgid "Speedboat"
+msgstr "Катер"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:218
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:59
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:75
+msgid "Start date"
+msgstr "Дата начала"
+
 #: modules/users/frontend/components/admin/UsersEdit.jsx:83
-#~ msgid "Status"
-#~ msgstr "Статус"
+msgid "Status"
+msgstr "Статус"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:242
+msgid "Sunday"
+msgstr "Воскресенье"
 
 #: modules/bases/frontend/components/admin/DialogDelete.jsx:49
 msgid "The following base(s) will be permanently deleted:"
@@ -484,7 +896,7 @@ msgstr "Следующая база(базы) будут удалены безв
 
 #: modules/boats/frontend/components/admin/DialogDelete.jsx:49
 msgid "The following boat(s) will be permanently deleted:"
-msgstr ""
+msgstr "Следующая яхта(яхты) будут удалены безвозвратно:"
 
 #: modules/countries/frontend/components/admin/DialogDelete.jsx:49
 msgid "The following country(ies) will be permanently deleted:"
@@ -498,6 +910,14 @@ msgstr "Следующее направление(направления) буд
 msgid "The following user(s) will be permanently deleted:"
 msgstr "Следующие пользователи будут удалены навсегда:"
 
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:433
+msgid "Thruster"
+msgstr "Подруливающее устр."
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:239
+msgid "Thursday"
+msgstr "Четверг"
+
 #: modules/bases/frontend/components/admin/Translations.jsx:12
 #: modules/boats/frontend/components/admin/Translations.jsx:12
 #: modules/countries/frontend/components/admin/Translations.jsx:12
@@ -506,26 +926,59 @@ msgstr "Следующие пользователи будут удалены н
 msgid "Too short"
 msgstr "Слишком корокий"
 
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:237
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:187
+msgid "Type"
+msgstr "Тип"
+
 #: modules/users/frontend/components/admin/Translations.jsx:12
 msgid "User not found"
 msgstr "Не найден"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:69
-#~ msgid "Username"
-#~ msgstr "Имя пользователя"
+msgid "Username"
+msgstr "Имя пользователя"
 
 #: modules/users/frontend/components/admin/UsersList.jsx:128
 #: modules/users/frontend/components/admin/UsersList.jsx:130
 msgid "Users"
 msgstr "Пользователи"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:208
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:428
+msgid "Water Maker"
+msgstr "Опреснитель воды"
+
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:238
+msgid "Wednesday"
+msgstr "Среда"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:440
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:216
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:299
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:88
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:122
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:111
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:582
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:176
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:127
+#: modules/users/frontend/components/admin/UsersEdit.jsx:170
 msgid "Yes"
 msgstr "Да"
 
 #: modules/bases/frontend/components/admin/Translations.jsx:8
 msgid "bases"
 msgstr "Базы"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:85
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:379
+msgid "boat"
+msgstr "яхту"
 
 #: modules/boats/frontend/components/admin/Translations.jsx:8
 msgid "boats"
@@ -535,14 +988,60 @@ msgstr "Яхты"
 msgid "countries"
 msgstr "Страны"
 
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:77
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:371
+msgid "day"
+msgstr "день"
+
 #: modules/destinations/frontend/components/admin/Translations.jsx:8
 msgid "destinations"
 msgstr "Направления"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:418
+msgid "mandatory"
+msgstr "обязательно"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:418
+msgid "optional"
+msgstr "опционально"
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:586
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:588
+msgid "or selecting one"
+msgstr "или выберите на диске"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:85
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:379
+msgid "pax"
+msgstr "пасс."
+
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:418
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:418
+msgid "per"
+msgstr "за"
+
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:77
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:371
+msgid "stay"
+msgstr "период аренды"
 
 #: modules/users/frontend/components/admin/Translations.jsx:8
 msgid "users"
 msgstr "Пользователи"
 
-#: modules/boats/frontend/components/admin/BoatsEdit.jsx:207
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:77
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:371
+msgid "week"
+msgstr "неделю"
+
+#: modules/bases/frontend/components/admin/BasesEdit.jsx:215
+#: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:298
+#: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:87
+#: modules/boats/frontend/components/admin/BoatExtrasDialog.jsx:121
+#: modules/boats/frontend/components/admin/BoatPricesDialog.jsx:110
+#: modules/boats/frontend/components/admin/BoatsEdit.jsx:581
+#: modules/countries/frontend/components/admin/CountriesEdit.jsx:175
+#: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:126
+#: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

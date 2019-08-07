@@ -282,4 +282,11 @@ if (options.combine) {
     process.exit(0);
 }
 
+// Do we only need to clean up locales?
+if (options.cleanup) {
+    cleanupLocales();
+    console.log(`${colors.green(' * ')} Done`);
+    process.exit(0);
+}
+
 install();
