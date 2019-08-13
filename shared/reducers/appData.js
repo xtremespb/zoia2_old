@@ -1,10 +1,12 @@
+import config from '../../etc/config.json';
+
 import {
     APP_DATA_SET_LANGUAGE,
     APP_DATA_SET_USER
 } from '../constants/core';
 
 const initialState = {
-    language: 'en',
+    language: Object.keys(config.languages)[0],
     user: {}
 };
 

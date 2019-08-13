@@ -68,8 +68,8 @@ class ZoiaTemplate extends Component {
                 <div className="uk-navbar-right uk-margin-top">
                     <ul className="uk-navbar-nav">
                         <li>
-                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language}`} /></a>
-                            <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
+                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language}`} />&nbsp;</a>
+                            <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:top-right">
                                 <ul className="uk-nav uk-navbar-dropdown-nav">
                                     {this.getLanguagesList('desktop')}
                                 </ul>

@@ -93,15 +93,15 @@ class AdminPanel extends Component {
                         <ul className="uk-navbar-nav">
                             <li>
                                 <a href="#">{this.props.appData.user.username}&nbsp;<span uk-icon="triangle-down" /></a>
-                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:top-right">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         <li><Link to="/users/logout"><Trans>Log Out</Trans></Link></li>
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} /></a>
-                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20">
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} />&nbsp;&nbsp;</a>
+                                <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:top-right">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         {this.getLanguagesList('desktop')}
                                     </ul>
