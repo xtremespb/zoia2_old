@@ -28,8 +28,5 @@ node_modules/
 /bin/server.js
 /static/data/**
 /static/custom
-/etc/security.json
-/etc/config.json
 /dist/*.zip
-/etc/linguirc.admin.json
-/etc/linguirc.user.json
+/etc/*.json
