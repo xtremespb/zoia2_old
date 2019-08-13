@@ -36,7 +36,7 @@ const formValidate = ajv.compile({
         },
         type: {
             type: 'string',
-            pattern: '^(1|2|3|4|5|10|11|12)$'
+            pattern: '^(1|2|3|4|5|6|7|8)$'
         },
         crew: {
             type: 'string',

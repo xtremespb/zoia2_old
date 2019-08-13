@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
-import config from '../../../etc/config.json';
+import security from '../../../etc/security.json';
 
 export default fastify => ({
     schema: {
@@ -37,7 +37,7 @@ export default fastify => ({
         // End of Validation
         // Processing
         try {
-            const passwordHash = crypto.createHmac('sha512', config.secret).update(req.body.password).digest('hex');
+            const passwordHash = crypto.createHmac('sha512', security.secret).update(req.body.password).digest('hex');
             const user = await this.mongo.db.collection('users').findOne({
                 username: req.body.username
             });
@@ -55,7 +55,7 @@ export default fastify => ({
                 userId,
                 sessionId
             }, {
-                expiresIn: config.authTokenExpiresIn
+                expiresIn: security.authTokenExpiresIn
             });
             // Update database and set session ID
             await this.mongo.db.collection('users').updateOne({

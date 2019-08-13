@@ -1,8 +1,0 @@
-{
-    "collections": {
-        "users": {
-            "indexesAsc": ["username", "password", "sessionId", "email", "active", "admin"],
-            "indexesDesc": ["username", "email", "active", "admin"]
-        }
-    }
-}

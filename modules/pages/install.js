@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-const colors = require('colors');
+import colors from 'colors';
 
 const install = async db => {
     console.log(`${colors.green(' * ')} Inserting or updating default page (/)...`);
@@ -24,4 +24,4 @@ const install = async db => {
     });
 };
 
-module.exports = install;
+export default install;

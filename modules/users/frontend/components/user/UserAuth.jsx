@@ -121,7 +121,8 @@ class UserAuth extends Component {
                             },
                             {
                                 id: 'divider1',
-                                type: 'divider'
+                                type: 'divider',
+                                css: 'za-users-auth-form-divider'
                             },
                             {
                                 id: 'btnLogin',

@@ -9,7 +9,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 
 import '../templates/uikit.scss';
 // import config from '../../etc/config.json';
-import modules from '../../etc/modules.json';
+import modules from '../build/modules.json';
 import configureStore, { history } from '../store/configureStore';
 import Error from './Error/Error.jsx';
 import ErrorBoundary from './Error/ErrorBoundary.jsx';

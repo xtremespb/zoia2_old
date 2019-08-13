@@ -28,3 +28,6 @@ node_modules/
 /bin/server.js
 /static/data/**
 /static/custom
+/etc/security.json
+/etc/config.json
+/dist/*.zip

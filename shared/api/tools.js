@@ -1,18 +1,20 @@
 /* eslint no-console:0 */
-const inquirer = require('inquirer');
-const commandLineArgs = require('command-line-args');
-const colors = require('colors/safe');
-const fs = require('fs-extra');
-const path = require('path');
-const crypto = require('crypto');
-const uuid = require('uuid/v1');
-const gettextParser = require('gettext-parser');
-const {
+import inquirer from 'inquirer';
+import commandLineArgs from 'command-line-args';
+import colors from 'colors/safe';
+import fs from 'fs-extra';
+import gettextParser from 'gettext-parser';
+import cloneDeep from 'lodash/cloneDeep';
+import {
     MongoClient
-} = require('mongodb');
+} from 'mongodb';
 
 let db;
 const optionDefinitions = [{
+    name: 'install',
+    alias: 'i',
+    type: Boolean
+}, {
     name: 'modify',
     alias: 'm',
     type: Boolean
@@ -24,67 +26,12 @@ const optionDefinitions = [{
     name: 'combine',
     alias: 'c',
     type: Boolean
+}, {
+    name: 'cleanup',
+    alias: 'd',
+    type: Boolean
 }];
 const options = commandLineArgs(optionDefinitions);
-const config = require(options.modify && fs.existsSync(`${__dirname}/../etc/config.json`) ? '../etc/config.json' : '../etc/templates/config.json');
-const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
-const questions = [{
-        type: 'confirm',
-        name: 'configure',
-        message: 'Set values in config.json?',
-        default: true
-    },
-    {
-        type: 'input',
-        name: 'ip',
-        message: 'Which IP address should API listen to?',
-        default: config.httpServer.ip,
-        when: a => a.configure
-    },
-    {
-        type: 'input',
-        name: 'port',
-        message: 'Which port should API listen to?',
-        default: config.httpServer.port,
-        when: a => a.configure
-    },
-    {
-        type: 'input',
-        name: 'apiURL',
-        message: 'Which Zoia API URL to use?',
-        default: config.apiURL,
-        when: a => a.configure
-    },
-    {
-        type: 'input',
-        name: 'mongourl',
-        message: 'Mongo server URL?',
-        default: config.mongo.url,
-        when: a => a.configure
-    },
-    {
-        type: 'input',
-        name: 'mongodb',
-        message: 'Mongo database name?',
-        default: config.mongo.dbName,
-        when: a => a.configure
-    },
-    {
-        type: 'rawlist',
-        name: 'loglevel',
-        message: 'Loglevel?',
-        choices: ['info', 'warn', 'error'],
-        default: config.loglevel,
-        when: a => a.configure
-    },
-    {
-        type: 'rawlist',
-        name: 'install',
-        message: 'Which modules to process?',
-        choices: ['All', 'None', ...modules],
-        default: 'All'
-    }
-];
 
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
@@ -120,8 +67,8 @@ const splitLocales = () => {
                     return;
                 }
                 console.log(`${colors.green(' * ')} Processing module: ${m}`);
-                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
-                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
+                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../../modules/${m}/locales/${t}/${locale}`;
+                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
@@ -137,6 +84,7 @@ const splitLocales = () => {
 };
 
 const combieLocales = () => {
+    const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Combining locales...`);
     ['user', 'admin'].map(t => {
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/core`);
@@ -145,10 +93,10 @@ const combieLocales = () => {
             const messagesCorePo = gettextParser.po.parse(messagesCore);
             const messagesCoreTrans = messagesCorePo.translations[''];
             modules.map(m => {
-                if (!fs.existsSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`)) {
+                if (!fs.existsSync(`${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`)) {
                     return;
                 }
-                const messagesModule = fs.readFileSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`);
+                const messagesModule = fs.readFileSync(`${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`);
                 const messagesModulePo = gettextParser.po.parse(messagesModule);
                 const messagesModuleTrans = messagesModulePo.translations[''];
                 Object.keys(messagesModuleTrans).map(mmt => {
@@ -169,41 +117,69 @@ const combieLocales = () => {
     });
 };
 
+const cleanupLocales = () => {
+    const modules = Object.keys(require('../build/modules.json'));
+    console.log(`${colors.green(' * ')} Cleaning up combined locales...`);
+    ['user', 'admin'].map(t => {
+        console.log(`${colors.green(' * ')} Processing area: ${t}`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/combined/${t}`);
+        locales.filter(l => l !== '_build').map(locale => {
+            console.log(`${colors.green(' * ')} Processing locale: ${locale}`);
+            const input = fs.readFileSync(`${__dirname}/../../locales/combined/${t}/${locale}/messages.po`);
+            const po = gettextParser.po.parse(input);
+            const trans = cloneDeep(po.translations['']);
+            Object.keys(trans).map(item => {
+                if (trans[item].comments && trans[item].comments.reference) {
+                    const references = trans[item].comments.reference.split(/\n/).filter(ref => {
+                        const [sign, module] = ref.split(/\//);
+                        if (sign === 'modules' && module && modules.indexOf(module) === -1) {
+                            return false;
+                        }
+                        return true;
+                    });
+                    if (references.length) {
+                        po.translations[''][item].comments.reference = references.join(/\n/);
+                    } else {
+                        delete po.translations[''][item];
+                    }
+                }
+            });
+            const data = gettextParser.po.compile({
+                charset: po.charset,
+                headers: po.headers,
+                translations: po.translations
+            });
+            fs.writeFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`, data);
+        });
+    });
+};
+
 const install = async () => {
+    const security = require('../../etc/security.json');
+    const modules = Object.keys(require('../build/modules.json'));
+    const questions = [{
+        type: 'rawlist',
+        name: 'install',
+        message: 'Which modules to process?',
+        choices: ['All', 'None', ...modules],
+        default: 'All'
+    }];
     try {
-        console.log(colors.green.inverse('                                      '));
-        console.log(colors.green.inverse(' Zoia Installation                    '));
-        console.log(colors.green.inverse('                                      '));
-        console.log('');
-        console.log('This script will generate the configuration file for Zoia,\ncreate the collections in the MongoDB, ensure the database\nindexes, etc.');
+        console.log(`This tool will run the module installation scripts.`);
+        console.log(`Modules available: ${modules.join(', ')}`);
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
-        if (data.configure) {
-            console.log(`${colors.green(' * ')} Saving configuration to config.json file...`);
-            config.httpServer.ip = data.ip;
-            config.httpServer.port = data.port;
-            config.apiURL = data.apiURL;
-            config.mongo.url = data.mongourl;
-            config.mongo.dbName = data.mongodb;
-            config.loglevel = data.loglevel;
-            if (!options.modify) {
-                config.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
-            }
-            fs.writeJSONSync('../etc/config.json', config, {
-                spaces: 2
-            });
-        }
-        const mongoClient = new MongoClient(config.mongo.url, {
+        const mongoClient = new MongoClient(security.mongo.url, {
             useNewUrlParser: true
         });
         await mongoClient.connect();
-        db = mongoClient.db(config.mongo.dbName);
+        db = mongoClient.db(security.mongo.dbName);
         if (data.install !== 'None') {
             await Promise.all((data.install === 'All' ? modules : [data.install]).map(async m => {
                 console.log(`${colors.green(' * ')} Processing module: ${m}...`);
-                if (fs.existsSync(`${__dirname}/../modules/${m}/database.json`)) {
-                    const moduleDatabaseConfig = require(`../modules/${m}/database.json`);
+                try {
+                    const moduleDatabaseConfig = require(`../../modules/${m}/database.json`);
                     const collections = Object.keys(moduleDatabaseConfig.collections);
                     if (collections.length) {
                         await Promise.all(collections.map(async c => {
@@ -211,9 +187,7 @@ const install = async () => {
                             try {
                                 await db.createCollection(c);
                             } catch (e) {
-                                console.log('');
-                                console.log(colors.red(e));
-                                process.exit(1);
+                                console.log(`${colors.green(' ! ')} Collection is not created: ${c} (already exists?)`);
                             }
                             const {
                                 indexesAsc,
@@ -249,17 +223,19 @@ const install = async () => {
                             }
                         }));
                     }
+                } catch (e) {
+                    // Ignore
                 }
-                if (fs.existsSync(`${__dirname}/../modules/${m}/install.js`)) {
+                try {
                     console.log(`${colors.green(' * ')} Running installation script for module: ${m}...`);
-                    const installScript = require(`../modules/${m}/install.js`);
-                    await installScript(db);
+                    const installScript = require(`../../modules/${m}/install.js`);
+                    await installScript.default(db);
+                } catch (e) {
+                    // Ignore
                 }
             }));
         }
         console.log(`${colors.green(' * ')} Done`);
-        console.log('');
-        console.log(`${colors.yellow('Please do the following:\n\n1. Check your')} ${colors.bold('config.js')} ${colors.yellow('file and apply missing changes.\n2. Re-build locales using')} ${colors.bold('npm run rebuild-locales')} ${colors.yellow('command.\n3. Re-build Zoia using')} ${colors.bold('npm run build')} ${colors.yellow('command.')}`);
         mongoClient.close();
     } catch (e) {
         console.log('');
@@ -268,25 +244,33 @@ const install = async () => {
     }
 };
 
-// Do we only need to split locales?
+console.log(colors.green.inverse('\n                                      '));
+console.log(colors.green.inverse(' Zoia 2 Helper Scripts                '));
+console.log(colors.green.inverse('                                      \n'));
+
+// Do we need to split locales?
 if (options.split) {
     splitLocales();
     console.log(`${colors.green(' * ')} Done`);
     process.exit(0);
 }
 
-// Do we only need to combine locales?
+// Do we need to combine locales?
 if (options.combine) {
     combieLocales();
     console.log(`${colors.green(' * ')} Done`);
     process.exit(0);
 }
 
-// Do we only need to clean up locales?
+// Do we need to clean up locales?
 if (options.cleanup) {
     cleanupLocales();
     console.log(`${colors.green(' * ')} Done`);
     process.exit(0);
 }
-
-install();
+// Do we need to install?
+if (options.install) {
+    install();
+} else {
+    console.log('Usage: node tools <--install (--modify)|--split|--combine|--cleanup>\n\n --install (-i): run Zoia installation, use --modify (-m) to modify existing config.json file\n --split (-s): split locales from shared directory to modules\n --combine locales from modules to shared directory\n --cleanup (-d): remove unused locale entries from shared directory');
+}

@@ -124,7 +124,7 @@ console.log('Getting modules info...');
 const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
 const modulesInfo = {};
 modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', 'modules', module, 'module.json')));
-fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
+fs.writeJSONSync(path.join(__dirname, '..', 'shared', 'build', 'modules.json'), modulesInfo);
 const linguiUser = fs.readJSONSync(`${__dirname}/linguirc.user.json`);
 const linguiPathsArrUser = modules.map(module => `modules/${module}/frontend/components/user/`);
 linguiUser.srcPathDirs = ['shared/components/', ...linguiPathsArrUser];

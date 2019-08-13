@@ -1,12 +1,12 @@
 /* eslint no-console:0 */
-const crypto = require('crypto');
-const colors = require('colors');
+import crypto from 'crypto';
+import colors from 'colors';
 
-const config = require('../../etc/config.json');
+const security = require('../../etc/security.json');
 
 const install = async db => {
     console.log(`${colors.green(' * ')} Inserting or updating default user (admin)...`);
-    const passwordHash = crypto.createHmac('sha512', config.secret).update('password').digest('hex');
+    const passwordHash = crypto.createHmac('sha512', security.secret).update('password').digest('hex');
     await db.collection('users').updateOne({
         username: 'admin'
     }, {
@@ -22,4 +22,4 @@ const install = async db => {
     });
 };
 
-module.exports = install;
+export default install;

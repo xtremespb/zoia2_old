@@ -7,11 +7,11 @@ const path = require('path');
 
 const webpackConfig = {
     entry: {
-        app: `${__dirname}/../shared/api/server.js`
+        app: `${__dirname}/../shared/api/tools.js`
     },
     output: {
         path: `${__dirname}/../bin`,
-        filename: 'server.js'
+        filename: 'tools.js'
     },
     target: 'node',
     node: {

@@ -1,5 +1,6 @@
 /* eslint-disable import/order */
 import config from '../../etc/config.json';
+import security from '../../etc/security.json';
 import logger from './logger';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
@@ -7,7 +8,7 @@ import fastifyCORS from 'fastify-cors';
 import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
-import modules from '../../etc/modules.json';
+import modules from '../build/modules.json';
 import {
     MongoClient
 } from 'mongodb';
@@ -19,11 +20,11 @@ const log = Pino({
 });
 const fastify = Fastify({
     logger,
-    trustProxy: config.trustProxy
+    trustProxy: security.trustProxy
 });
 
 (async () => {
-    const mongoClient = new MongoClient(config.mongo.url, {
+    const mongoClient = new MongoClient(security.mongo.url, {
         useNewUrlParser: true
     });
     await mongoClient.connect();
@@ -34,19 +35,19 @@ const fastify = Fastify({
     fastify.register(fastifyURLData);
     fastify.register(fastifyMongo, {
         client: mongoClient,
-        database: config.mongo.dbName
+        database: security.mongo.dbName
     }).register((ff, opts, next) => {
-        ff.mongo.client.db(config.mongo.dbName).on('close', () => {
+        ff.mongo.client.db(security.mongo.dbName).on('close', () => {
             log.error('Connection to MongoDB is broken');
             process.exit(1);
         });
         next();
     });
     fastify.register(fastifyCORS, {
-        origin: config.originCORS
+        origin: security.originCORS
     });
     fastify.register(fastifyJWT, {
-        secret: config.secret
+        secret: security.secret
     });
     await Promise.all(Object.keys(modules).map(async m => {
         const module = await import(`../../modules/${m}/backend/index.js`);

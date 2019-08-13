@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, no-console */
 import React, { Component } from 'react';
 
 import Error from './Error.jsx';
@@ -8,7 +8,8 @@ export default class ErrorBoundary extends Component {
         error: false
     }
 
-    static getDerivedStateFromError() {
+    static getDerivedStateFromError = error => {
+        console.error(error);
         return { error: true };
     }
 

@@ -1,34 +1,20 @@
 {
-  "siteId": "zoia2",
-  "secret": "4134a01fa35ac0767b1fedc8729736089721e037309732842287e30f3e5b6df4",
-  "authTokenExpiresIn": "7 days",
-  "cookieOptions": {
-    "expires": 14,
-    "path": "/",
-    "domain": "",
-    "secure": false,
-    "sameSite": "strict"
-  },
+  "siteId": "jonacor-booking-admin",
   "httpServer": {
     "ip": "127.0.0.1",
-    "port": 3000
+    "port": 3145
   },
-  "apiURL": "http://127.0.0.1:3000",
-  "mongo": {
-    "url": "mongodb://localhost:27017",
-    "dbName": "sedna"
-  },
+  "apiURL": "https://booking-admin.jonacor-charter.ru",
   "languages": {
-    "en": "English",
-    "ru": "Русский"
+    "ru": "Русский",
+    "en": "English"
   },
   "siteTitle": {
-    "en": "Example Website",
-    "ru": "Тестовый веб-сайт"
+    "en": "Jonacor Boats Control",
+    "ru": "Управление яхтами Jonacor"
   },
   "development": false,
-  "loglevel": "info",
-  "originCORS": "*",
+  "loglevel": "error",
   "commonItemsLimit": 12,
   "entrypoints": {
     "pages": [

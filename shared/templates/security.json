@@ -1,0 +1,17 @@
+{
+  "secret": "",
+  "authTokenExpiresIn": "7 days",
+  "cookieOptions": {
+    "expires": 14,
+    "path": "/",
+    "domain": "",
+    "secure": false,
+    "sameSite": "strict"
+  },
+  "mongo": {
+    "url": "mongodb://localhost:27017",
+    "dbName": "zoia"
+  },
+  "originCORS": "*",
+  "trustProxy": true
+}

@@ -3,7 +3,7 @@ import {
     ObjectId
 } from 'mongodb';
 import crypto from 'crypto';
-import config from '../../../etc/config.json';
+import security from '../../../etc/security.json';
 import auth from '../../../shared/api/auth';
 
 const ajv = new Ajv();
@@ -144,7 +144,7 @@ export default fastify => ({
                             }
                         }));
                 }
-                passwordUpdate.password = crypto.createHmac('sha512', config.secret).update(formData.default.password).digest('hex');
+                passwordUpdate.password = crypto.createHmac('sha512', security.secret).update(formData.default.password).digest('hex');
             }
             // Check if such user exists
             if (formData.id) {

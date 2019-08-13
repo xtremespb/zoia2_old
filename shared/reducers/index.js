@@ -5,7 +5,7 @@ import {
 import appData from './appData';
 import appDataRuntime from './appDataRuntime';
 import appLingui from './appLingui';
-import modules from '../../etc/modules.json';
+import modules from '../build/modules.json';
 
 let moduleReducers = {};
 // eslint-disable-next-line global-require

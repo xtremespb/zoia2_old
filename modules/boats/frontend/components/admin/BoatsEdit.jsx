@@ -193,9 +193,9 @@ class BoatsEdit extends Component {
                     3: t`Motor Boat`,
                     4: t`Powered Catamaran`,
                     5: t`Gulet`,
-                    10: t`Speedboat`,
-                    11: t`Cruise Ship`,
-                    12: t`Houseboat`
+                    6: t`Speedboat`,
+                    7: t`Cruise Ship`,
+                    8: t`Houseboat`
                 },
             }, {
                 id: 'crew',

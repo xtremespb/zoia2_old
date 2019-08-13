@@ -5,11 +5,11 @@ import { I18nProvider, I18n } from '@lingui/react';
 import { Trans } from '@lingui/macro';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import UIkit from 'uikit';
 import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
 
-import modulesData from '../../../etc/modules.json';
+import modulesData from '../../build/modules.json';
 import config from '../../../etc/config.json';
 
 import './AdminPanel.css';
@@ -46,6 +46,10 @@ class AdminPanel extends Component {
     componentDidMount = () => {
         window.onresize = this.resizeNav;
         this.resizeNav();
+    }
+
+    componentWillUnmount = () => {
+        UIkit.offcanvas('#offcanvas-nav').$destroy(true);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -125,11 +129,13 @@ class AdminPanel extends Component {
                     </div>
                 </div>
             </div>
-            <div id="offcanvas-nav" uk-offcanvas="overlay:true">
-                <div className="uk-offcanvas-bar">
-                    <ul className="uk-nav uk-nav-default">
-                        {this.getModulesList('mobile')}
-                    </ul>
+            <div>
+                <div id="offcanvas-nav" uk-offcanvas="overlay:true">
+                    <div className="uk-offcanvas-bar">
+                        <ul className="uk-nav uk-nav-default">
+                            {this.getModulesList('mobile')}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </I18nProvider>);
