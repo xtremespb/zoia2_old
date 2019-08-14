@@ -1,0 +1,126 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        50
+      ]
+    ]
+  },
+  "Page": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        69
+      ]
+    ]
+  },
+  "Page (RU)": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        76
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        90
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        128
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        96
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        121
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        122
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        123
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        124
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        125
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        126
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        127
+      ]
+    ]
+  },
+  "Edit Page": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        162
+      ]
+    ]
+  },
+  "New Page": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        162
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        164
+      ]
+    ]
+  }
+}

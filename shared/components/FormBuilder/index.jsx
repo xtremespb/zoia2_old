@@ -7,6 +7,7 @@ import ZButton from './ZButton.jsx';
 import ZText from './ZText.jsx';
 import ZTags from './ZTags.jsx';
 import ZData from './ZData.jsx';
+import ZTree from './ZTree.jsx';
 import ZTextarea from './ZTextarea.jsx';
 import ZCKEditor4 from './ZCKEditor4.jsx';
 import ZCKEditor5 from './ZCKEditor5.jsx';
@@ -176,6 +177,9 @@ export default class ZFormBuilder extends Component {
     constructor(props) {
         super(props);
         this.state.data = props.data;
+        if ((!this.props.load || !this.props.load.url) && props.tabs) {
+            this.state.tabs = [Object.keys(props.tabs)[0]];
+        }
         const { data } = props;
         const values = this.getValuesFromData(data);
         Object.keys(props.tabs).map(key => {
@@ -415,6 +419,27 @@ export default class ZFormBuilder extends Component {
                     values={this.state.dataStorage[this.state.tab][item.id] || []}
                     view={item.view}
                     wrap={item.wrap}
+                />);
+            case 'tree':
+                return (<ZTree
+                    ref={input => { this.fields[item.id] = input; }}
+                    i18n={this.props.i18n}
+                    originalId={item.id}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    css={item.css}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    cname={cname}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
+                    error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
+                    value={this.state.dataStorage[this.state.tab][item.id] || []}
+                    axios={this.props.axios}
+                    UIkit={this.props.UIkit}
+                    tabs={item.tabs}
+                    addItemButtonLabel={item.addItemButtonLabel}
+                    onAddItemButtonClick={item.onAddItemButtonClick}
                 />);
             case 'password':
                 return (<ZText
@@ -676,17 +701,17 @@ export default class ZFormBuilder extends Component {
         }
     }
 
-    getTabs = () => this.state.tabs.map(langShort => {
-        const langFull = this.props.tabs[langShort];
-        return (<li key={`${this.props.prefix}_tabitem_${langShort}`} className={this.state.tab === langShort ? 'uk-active' : null}>
-            <a href="#" data-id={langShort} onClick={this.onTabClick}>
-                {langFull}
+    getTabs = () => this.state.tabs.map(tabShort => {
+        const tabFull = this.props.tabs[tabShort];
+        return (<li key={`${this.props.prefix}_tabitem_${tabShort}`} className={this.state.tab === tabShort ? 'uk-active' : null}>
+            <a href="#" data-id={tabShort} onClick={this.onTabClick}>
+                {tabFull}
                 &nbsp;
                 <button
                     onClick={this.onTabCloseClick}
                     type="button"
                     uk-icon="icon:close;ratio:0.8"
-                    data-id={langShort}
+                    data-id={tabShort}
                 />
             </a>
         </li>);
@@ -734,21 +759,20 @@ export default class ZFormBuilder extends Component {
                     if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
                         this.props.onLoadError(response.data);
                     } else {
-                        this.props.UIkit.notification(response.data.errorMessage || this.props.lang.ERR_LOAD, { status: 'danger' });
+                        this.props.UIkit.notification(response.data.errorMessage || this.props.i18n._(this.props.lang.ERR_LOAD), { status: 'danger' });
                     }
                     return;
                 }
                 this.deserializeData(response.data.data);
                 this.props.onLoadSuccess(response.data);
                 this.setFocusOnFields();
-            }).catch(e => {
+            }).catch(() => {
                 // eslint-disable-next-line no-console
-                console.error(e);
                 this.setState({ loading: false });
                 if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
                     this.props.onLoadError();
                 } else {
-                    this.props.UIkit.notification(this.props.lang.ERR_LOAD, { status: 'danger' });
+                    this.props.UIkit.notification(this.props.i18n._(this.props.lang.ERR_LOAD), { status: 'danger' });
                 }
             });
         });
@@ -826,7 +850,8 @@ export default class ZFormBuilder extends Component {
                 data[key] = arr;
             }
         });
-        formData.append('__form_data', JSON.stringify(Object.assign({}, data, this.formDataExtra)));
+        const { formDataExtra } = this;
+        formData.append('__form_data', JSON.stringify({ ...data, formDataExtra }));
         return { data, formData };
     }
 
@@ -1121,7 +1146,7 @@ export default class ZFormBuilder extends Component {
                     }).catch(() => {
                         this.refreshCaptchaFields();
                         this.setState({ loading: false, saving: false });
-                        this.props.UIkit.notification(this.props.lang.ERR_SAVE, { status: 'danger' });
+                        this.props.UIkit.notification(this.props.i18n._(this.props.lang.ERR_SAVE), { status: 'danger' });
                     });
                 });
             }

@@ -119,15 +119,31 @@
       ]
     ]
   },
+  "Tree Test": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersEdit.jsx",
+        125
+      ]
+    ]
+  },
+  "Add Item": {
+    "origin": [
+      [
+        "modules/users/frontend/components/admin/UsersEdit.jsx",
+        126
+      ]
+    ]
+  },
   "Cancel": {
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        133
+        140
       ],
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        171
+        178
       ]
     ]
   },
@@ -135,7 +151,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        139
+        146
       ]
     ]
   },
@@ -143,7 +159,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        164
+        171
       ]
     ]
   },
@@ -151,7 +167,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        165
+        172
       ]
     ]
   },
@@ -159,7 +175,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        166
+        173
       ]
     ]
   },
@@ -167,7 +183,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        167
+        174
       ]
     ]
   },
@@ -175,7 +191,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        168
+        175
       ]
     ]
   },
@@ -183,7 +199,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        169
+        176
       ]
     ]
   },
@@ -191,7 +207,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        170
+        177
       ]
     ]
   },
@@ -199,7 +215,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        205
+        212
       ]
     ]
   },
@@ -207,7 +223,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        205
+        212
       ]
     ]
   },
@@ -215,7 +231,7 @@
     "origin": [
       [
         "modules/users/frontend/components/admin/UsersEdit.jsx",
-        207
+        214
       ]
     ]
   }

@@ -125,7 +125,7 @@ const cleanupLocales = () => {
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/combined/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
             console.log(`${colors.green(' * ')} Processing locale: ${locale}`);
-            const input = fs.readFileSync(`${__dirname}/../../locales/combined/${t}/${locale}/messages.po`);
+            const input = fs.readFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`);
             const po = gettextParser.po.parse(input);
             const trans = cloneDeep(po.translations['']);
             Object.keys(trans).map(item => {

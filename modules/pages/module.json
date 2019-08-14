@@ -1,6 +1,6 @@
 {
 	"id": "pages",
-	"icon": "pages",
-	"admin": false,
-	"adminRoute": ""
+	"icon": "file-text",
+	"admin": true,
+	"adminRoute": "/admin/pages"
 }

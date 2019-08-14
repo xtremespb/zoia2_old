@@ -1,4 +1,4 @@
-/* eslint react/prop-types:0 */
+/* eslint react/prop-types:0, react/jsx-props-no-spreading:0 */
 
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';

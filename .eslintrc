@@ -51,6 +51,9 @@
         "jsx-a11y/anchor-has-content": "off",
         "no-case-declarations": "off",
         "global-require": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/static-property-placement": "off",
+        "jsx-a11y/control-has-associated-label": "off"
     }
 }

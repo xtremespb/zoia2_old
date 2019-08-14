@@ -4,7 +4,9 @@ import uuid from 'uuid/v1';
 
 import config from '../../../etc/config.json';
 
-const PageView = lazy(() => import(/*  webpackChunkName: "UserAuth" */ './components/user/PageView.jsx'));
+const PagesList = lazy(() => import(/* webpackChunkName: "PagesList" */ './components/admin/PagesList.jsx'));
+const PagesEdit = lazy(() => import(/* webpackChunkName: "PagesEdit" */ './components/admin/PagesEdit.jsx'));
+const PageView = lazy(() => import(/*  webpackChunkName: "PageView" */ './components/user/PageView.jsx'));
 
 const getSuspense = () => (<div className="uk-flex uk-flex-center uk-flex-middle" style={{ height: '100%' }}><span uk-spinner="ratio:2" /></div>);
 
@@ -16,7 +18,21 @@ const getPageView = props => ((
     </Suspense>
 ));
 
-export default (config.entrypoints && config.entrypoints.pages ? config.entrypoints.pages : []).map((p) => p === '/' ? (<Route
+const getPagesList = () => ((
+    <Suspense fallback={getSuspense()}>
+        <PagesList />
+    </Suspense>
+));
+
+const getPagesEdit = props => ((
+    <Suspense fallback={getSuspense()}>
+        <PagesEdit
+            {...props}
+        />
+    </Suspense>
+));
+
+export default [(config.entrypoints && config.entrypoints.pages ? config.entrypoints.pages : []).map((p) => p === '/' ? (<Route
     key={`pageView_${uuid()}`}
     path={p}
     component={getPageView}
@@ -25,4 +41,22 @@ export default (config.entrypoints && config.entrypoints.pages ? config.entrypoi
     key={`pageView_${uuid()}`}
     path={p}
     component={getPageView}
-/>));
+/>)),
+(<Route
+    key="pagesList"
+    path="/admin/pages"
+    component={getPagesList}
+    exact
+/>),
+(<Route
+    key="pagesCreate"
+    path="/admin/pages/add"
+    exact
+    component={getPagesEdit}
+/>),
+(<Route
+    key="pagesEdit"
+    path="/admin/pages/edit/:id"
+    exact
+    component={getPagesEdit}
+/>)];
