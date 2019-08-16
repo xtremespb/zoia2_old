@@ -89,7 +89,10 @@ export default fastify => ({
                 _id: 1,
                 name: 1
             };
-            options.sort[req.body.language === 'ru' ? 'name_ru' : req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;
+            if (req.body.language === 'ru' && req.body.sortColumn === 'name') {
+                options.sort.name_ru = req.body.sortDirection === 'asc' ? 1 : -1;
+            }
+            options.sort[req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;
             const bases = (await this.mongo.db.collection('bases').find(query, options).toArray() || []).map(d => {
                 const base = d;
                 const [

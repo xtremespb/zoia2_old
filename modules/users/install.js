@@ -2,7 +2,7 @@
 import crypto from 'crypto';
 import colors from 'colors';
 
-const security = require('../../etc/security.json');
+const security = require('../../etc/secure.json');
 
 const install = async db => {
     console.log(`${colors.green(' * ')} Inserting or updating default user (admin)...`);

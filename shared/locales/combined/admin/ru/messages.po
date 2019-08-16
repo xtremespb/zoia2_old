@@ -27,11 +27,11 @@ msgid "Administrator"
 msgstr "Администратор"
 
 #: modules/pages/frontend/components/admin/DialogDelete.jsx:53
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:90
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:128
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:96
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:134
 #: modules/users/frontend/components/admin/DialogDelete.jsx:53
-#: modules/users/frontend/components/admin/UsersEdit.jsx:140
-#: modules/users/frontend/components/admin/UsersEdit.jsx:178
+#: modules/users/frontend/components/admin/UsersEdit.jsx:133
+#: modules/users/frontend/components/admin/UsersEdit.jsx:171
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -50,39 +50,43 @@ msgstr "Ошибка во время удаления одного или нес
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:83
+msgid "Content"
+msgstr "Контент"
+
 #: modules/pages/frontend/components/admin/PagesList.jsx:179
 #: modules/users/frontend/components/admin/UsersList.jsx:197
 msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:124
-#: modules/users/frontend/components/admin/UsersEdit.jsx:174
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:130
+#: modules/users/frontend/components/admin/UsersEdit.jsx:167
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:164
-#: modules/users/frontend/components/admin/UsersEdit.jsx:214
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:170
+#: modules/users/frontend/components/admin/UsersEdit.jsx:207
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или попробуйте <0>обновить</0> данные."
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:125
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:131
 #: modules/pages/frontend/components/admin/PagesList.jsx:70
 #: modules/pages/frontend/components/admin/PagesList.jsx:73
 #: modules/pages/frontend/components/admin/PagesList.jsx:180
-#: modules/users/frontend/components/admin/UsersEdit.jsx:175
+#: modules/users/frontend/components/admin/UsersEdit.jsx:168
 #: modules/users/frontend/components/admin/UsersList.jsx:70
 #: modules/users/frontend/components/admin/UsersList.jsx:73
 #: modules/users/frontend/components/admin/UsersList.jsx:198
 msgid "Could not save data"
 msgstr "Ошибка во время сохранения данных"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:212
+#: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Create User"
 msgstr "Добавление пользователя"
 
 #: modules/pages/frontend/components/admin/PagesList.jsx:146
 msgid "Create new page"
-msgstr "Создать страницу"
+msgstr "Добавление страницы"
 
 #: modules/users/frontend/components/admin/UsersList.jsx:139
 msgid "Create new user"
@@ -102,11 +106,11 @@ msgstr "Удаление"
 
 #: modules/pages/frontend/components/admin/PagesList.jsx:146
 msgid "Delete selected pages"
-msgstr "Удаление выбранных страниц"
+msgstr "Удалить выбранные страницы"
 
 #: modules/users/frontend/components/admin/UsersList.jsx:139
 msgid "Delete selected users"
-msgstr "Удаление выбранных пользователей"
+msgstr "Удаление выбранных"
 
 #: modules/users/frontend/components/admin/Translations.jsx:10
 msgid "Duplicate e-mail"
@@ -129,11 +133,11 @@ msgstr "E-mail"
 msgid "Edit"
 msgstr "Редактирование"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:162
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:168
 msgid "Edit Page"
 msgstr "Редактирование страницы"
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:212
+#: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Edit User"
 msgstr "Редактирование пользователя"
 
@@ -141,9 +145,9 @@ msgstr "Редактирование пользователя"
 msgid "Example: username@zoiajs.org"
 msgstr "Пример: username@zoiajs.org"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:121
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:127
 #: modules/pages/frontend/components/admin/PagesList.jsx:181
-#: modules/users/frontend/components/admin/UsersEdit.jsx:171
+#: modules/users/frontend/components/admin/UsersEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersList.jsx:199
 msgid "Field is required"
 msgstr "Обязательное поле"
@@ -156,10 +160,10 @@ msgstr "Неактивен"
 msgid "Internal Error"
 msgstr "Внутренняя ошибка"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:122
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:128
 #: modules/pages/frontend/components/admin/PagesList.jsx:67
 #: modules/pages/frontend/components/admin/PagesList.jsx:182
-#: modules/users/frontend/components/admin/UsersEdit.jsx:172
+#: modules/users/frontend/components/admin/UsersEdit.jsx:165
 #: modules/users/frontend/components/admin/UsersList.jsx:67
 #: modules/users/frontend/components/admin/UsersList.jsx:200
 msgid "Invalid format"
@@ -178,7 +182,7 @@ msgstr "Загрузка данных, пожалуйста, подождите�
 msgid "Log Out"
 msgstr "Выход"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:162
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:168
 msgid "New Page"
 msgstr "Новая страница"
 
@@ -200,17 +204,13 @@ msgstr "Введите новый пароль только в том случа
 msgid "Operation complete"
 msgstr "Операция выполнена"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:69
-msgid "Page"
-msgstr "Страница"
-
 #: shared/components/Error/Error.jsx:54
 msgid "Page not Found"
 msgstr "Страница не найдена"
 
 #: modules/pages/frontend/components/admin/Translations.jsx:11
 msgid "Page not found"
-msgstr ""
+msgstr "Страница не найдена"
 
 #: modules/pages/frontend/components/admin/PagesList.jsx:135
 #: modules/pages/frontend/components/admin/PagesList.jsx:137
@@ -225,10 +225,14 @@ msgstr "Пароль"
 msgid "Password is required when creating a new user, should be at least 8 characters long."
 msgstr "Пароль требуется при создании нового пользователя, должен быть не менее 8 символов."
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:123
-#: modules/users/frontend/components/admin/UsersEdit.jsx:173
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:129
+#: modules/users/frontend/components/admin/UsersEdit.jsx:166
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
+
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:70
+msgid "Path"
+msgstr "Путь"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:95
 msgid "Permissions"
@@ -253,8 +257,8 @@ msgstr "Повтор пароля"
 msgid "Required"
 msgstr "Обязательное поле"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:96
-#: modules/users/frontend/components/admin/UsersEdit.jsx:146
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:102
+#: modules/users/frontend/components/admin/UsersEdit.jsx:139
 msgid "Save"
 msgstr "Сохранить"
 
@@ -269,6 +273,10 @@ msgstr "Следующие страницы будут удалены навсе
 #: modules/users/frontend/components/admin/DialogDelete.jsx:49
 msgid "The following user(s) will be permanently deleted:"
 msgstr "Следующие пользователи будут удалены навсегда:"
+
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:77
+msgid "Title"
+msgstr "Заголовок"
 
 #: modules/pages/frontend/components/admin/Translations.jsx:12
 #: modules/users/frontend/components/admin/Translations.jsx:13
@@ -288,8 +296,8 @@ msgstr "Имя пользователя"
 msgid "Users"
 msgstr "Пользователи"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:127
-#: modules/users/frontend/components/admin/UsersEdit.jsx:177
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:133
+#: modules/users/frontend/components/admin/UsersEdit.jsx:170
 msgid "Yes"
 msgstr "Да"
 
@@ -301,7 +309,7 @@ msgstr "Страницы"
 msgid "users"
 msgstr "Пользователи"
 
-#: modules/pages/frontend/components/admin/PagesEdit.jsx:126
-#: modules/users/frontend/components/admin/UsersEdit.jsx:176
+#: modules/pages/frontend/components/admin/PagesEdit.jsx:132
+#: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

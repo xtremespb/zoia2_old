@@ -117,6 +117,9 @@ const webpackConfig = {
         })
     ]
 };
+console.log('Clening up...');
+fs.removeSync(path.join(__dirname, '..', 'static', 'data'));
+fs.ensureDirSync(path.join(__dirname, '..', 'static', 'data'));
 console.log('Getting modules info...');
 const modules = fs.readdirSync(path.join(__dirname, '..', 'modules'));
 const modulesInfo = {};

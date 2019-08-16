@@ -4,7 +4,6 @@ import React, { lazy, Component } from 'react';
 import { t } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-import UIkit from 'uikit';
 import axios from 'axios';
 import { remove as removeCookie } from 'es-cookie';
 import { Link } from 'react-router-dom';
@@ -17,6 +16,7 @@ import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import basesListTableSetState from '../../actions/basesListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import UIkit from '../../../../../shared/utils/uikit';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../../shared/components/Table/index.jsx'));

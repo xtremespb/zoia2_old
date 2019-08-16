@@ -155,7 +155,7 @@ const cleanupLocales = () => {
 };
 
 const install = async () => {
-    const security = require('../../etc/security.json');
+    const security = require('../../etc/secure.json');
     const modules = Object.keys(require('../build/modules.json'));
     const questions = [{
         type: 'rawlist',

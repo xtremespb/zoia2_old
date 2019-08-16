@@ -4,11 +4,11 @@ import React, { lazy, Component } from 'react';
 import { I18nProvider, I18n } from '@lingui/react';
 import { Trans, t } from '@lingui/macro';
 import { connect } from 'react-redux';
-import UIkit from 'uikit';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { set as setCookie } from 'es-cookie';
+import UIkit from '../../../../../shared/utils/uikit';
 
 import { history } from '../../../../../shared/store/configureStore';
 import config from '../../../../../etc/config.json';

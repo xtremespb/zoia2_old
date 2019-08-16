@@ -4,7 +4,6 @@ import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import { remove as removeCookie } from 'es-cookie';
-import UIkit from 'uikit';
 import axios from 'axios';
 import moment from 'moment';
 import { Trans, t } from '@lingui/macro';
@@ -18,6 +17,7 @@ import BoatAvailabilityDialog from './BoatAvailabilityDialog.jsx';
 import BoatBlocksDialog from './BoatBlocksDialog.jsx';
 import BoatPricesDialog from './BoatPricesDialog.jsx';
 import BoatExtrasDialog from './BoatExtrasDialog.jsx';
+import UIkit from '../../../../../shared/utils/uikit';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));

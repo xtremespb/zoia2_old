@@ -3,7 +3,7 @@ import {
     ObjectId
 } from 'mongodb';
 import crypto from 'crypto';
-import security from '../../../etc/security.json';
+import security from '../../../etc/secure.json';
 import auth from '../../../shared/api/auth';
 
 const ajv = new Ajv();

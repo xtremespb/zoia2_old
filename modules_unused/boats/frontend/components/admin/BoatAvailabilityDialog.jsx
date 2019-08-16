@@ -3,7 +3,6 @@
 import React, { lazy, Component } from 'react';
 import { connect } from 'react-redux';
 import { remove as removeCookie } from 'es-cookie';
-import UIkit from 'uikit';
 import axios from 'axios';
 import { t } from '@lingui/macro';
 import uuid from 'uuid/v1';
@@ -12,6 +11,7 @@ import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntime
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import UIkit from '../../../../../shared/utils/uikit';
 
 import './BoatAvailabilityDialog.css';
 

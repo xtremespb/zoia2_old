@@ -7,7 +7,7 @@ const uuid = require('uuid/v1');
 
 const install = async () => {
     const config = require('../shared/templates/config.json');
-    const security = require('../shared/templates/security.json');
+    const security = require('../shared/templates/secure.json');
     const questions = [{
             type: 'input',
             name: 'ip',
@@ -47,7 +47,7 @@ const install = async () => {
         }
     ];
     try {
-        console.log(`This script will generate the configuration files (config.json and security.json).`);
+        console.log(`This script will generate the configuration files (config.json and secure.json).`);
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
@@ -62,8 +62,8 @@ const install = async () => {
         fs.writeJSONSync(`${__dirname}/../etc/config.json`, config, {
             spaces: 2
         });
-        console.log(`${colors.green(' * ')} Saving configuration to security.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/security.json`, security, {
+        console.log(`${colors.green(' * ')} Saving configuration to secure.json file...`);
+        fs.writeJSONSync(`${__dirname}/../etc/secure.json`, security, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done`);

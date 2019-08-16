@@ -4,7 +4,6 @@ import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import { remove as removeCookie } from 'es-cookie';
-import UIkit from 'uikit';
 import axios from 'axios';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../../shared/store/configureStore';
@@ -12,6 +11,7 @@ import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntime
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import UIkit from '../../../../../shared/utils/uikit';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));

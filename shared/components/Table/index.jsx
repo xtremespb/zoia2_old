@@ -98,7 +98,7 @@ export default class ZTable extends Component {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = () => {        
         document.addEventListener('keydown', this.onEditModeEscapeBinding);
         if (this.props.initialState && !this.props.initialState.loading && Object.keys(this.props.initialState).length) {
             this.setState({

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { t } from '@lingui/macro';
-import UIkit from 'uikit';
+import UIkit from '../../../../../shared/utils/uikit';
 
 class DialogDelete extends Component {
     state = {

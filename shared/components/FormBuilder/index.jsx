@@ -66,7 +66,8 @@ export default class ZFormBuilder extends Component {
         simple: PropTypes.bool,
         i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired,
         locale: PropTypes.string,
-        doNotSetFocusOnMount: PropTypes.bool
+        doNotSetFocusOnMount: PropTypes.bool,
+        onFormBuilt: PropTypes.func
     }
 
     static defaultProps = {
@@ -108,7 +109,8 @@ export default class ZFormBuilder extends Component {
         onDataDeserialized: null,
         simple: false,
         locale: 'en',
-        doNotSetFocusOnMount: false
+        doNotSetFocusOnMount: false,
+        onFormBuilt: null
     }
 
     setLoading = async flag => new Promise(resolve => this.setState({ loading: flag }, () => resolve()));
@@ -233,6 +235,9 @@ export default class ZFormBuilder extends Component {
         }
         if (!this.props.doNotSetFocusOnMount) {
             this.setFocusOnFields();
+        }
+        if (this.props.onFormBuilt && typeof this.props.onFormBuilt === 'function') {
+            this.props.onFormBuilt();
         }
     }
 
@@ -851,7 +856,7 @@ export default class ZFormBuilder extends Component {
             }
         });
         const { formDataExtra } = this;
-        formData.append('__form_data', JSON.stringify({ ...data, formDataExtra }));
+        formData.append('__form_data', JSON.stringify({ ...data, ...formDataExtra }));
         return { data, formData };
     }
 

@@ -5,9 +5,9 @@ import { I18nProvider, I18n } from '@lingui/react';
 import { Trans } from '@lingui/macro';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import UIkit from 'uikit';
 import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
+import UIkit from '../../utils/uikit';
 
 import modulesData from '../../build/modules.json';
 import config from '../../../etc/config.json';

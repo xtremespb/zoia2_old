@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
-import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import UIkit from '../utils/uikit';
 
 import '../templates/uikit.scss';
 // import config from '../../etc/config.json';
@@ -15,7 +15,9 @@ import Error from './Error/Error.jsx';
 import ErrorBoundary from './Error/ErrorBoundary.jsx';
 
 const { store, persistor } = configureStore();
-UIkit.use(Icons);
+if (UIkit) {
+    UIkit.use(Icons);
+}
 
 const getModuleRoutes = () => Object.keys(modules).map(m => require(`../../modules/${m}/frontend/routes.jsx`).default).flat();
 

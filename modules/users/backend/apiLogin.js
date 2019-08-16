@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
-import security from '../../../etc/security.json';
+import security from '../../../etc/secure.json';
 
 export default fastify => ({
     schema: {

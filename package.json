@@ -28,8 +28,8 @@
     "compile": "lingui compile --config ./etc/linguirc.admin.json && lingui compile --config ./etc/linguirc.user.json",
     "configure": "node ./bin/configure.js",
     "install-modules": "node ./bin/tools.js -i",
-    "split-locales": "node ./bin/setup.js -s",
-    "combine-locales": "node ./bin/setup.js -c",
+    "split-locales": "node ./bin/tools.js -s",
+    "combine-locales": "node ./bin/tools.js -c",
     "generate-package": "node ./bin/package.js"
   },
   "keywords": [
@@ -56,7 +56,6 @@
     "connected-react-router": "^6.5.2",
     "cookies-js": "^1.2.3",
     "enquire.js": "^2.1.6",
-    "es-cookie": "^1.2.0",
     "extract-css-chunks-webpack-plugin": "^4.6.0",
     "fast-xml-parser": "^3.12.19",
     "fastify": "^2.7.1",
@@ -93,7 +92,6 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
-    "redux-persist-cookie-storage": "^1.0.0",
     "redux-thunk": "^2.3.0",
     "terser-webpack-plugin": "^1.4.1",
     "uikit": "^3.1.7",

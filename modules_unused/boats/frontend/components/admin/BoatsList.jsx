@@ -4,12 +4,12 @@ import React, { lazy, Component } from 'react';
 import { t } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-import UIkit from 'uikit';
 import axios from 'axios';
 import { remove as removeCookie } from 'es-cookie';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { history } from '../../../../../shared/store/configureStore';
+import UIkit from '../../../../../shared/utils/uikit';
 
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
