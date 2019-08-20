@@ -53,6 +53,11 @@ class PagesEdit extends Component {
         history.push('/admin/pages?reload=1');
     }
 
+    onAddTreeItemButtonClick = e => {
+        e.preventDefault();
+        console.log('Button is clicked');
+    }
+
     getEditForm = i18n => (<FormBuilder
         ref={this.editPagesForm}
         prefix="editPagesForm"
@@ -77,11 +82,96 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Title`)}:`
                 },
                 {
-                    id: 'content',
-                    type: 'textarea',
-                    css: 'uk-width-1-1 uk-height-large',
-                    label: `${i18n._(t`Content`)}:`
+                    id: 'category',
+                    type: 'tree',
+                    defaultValue: {
+                        tree: [
+                            {
+                                key: 'item1',
+                                title: 'Item 1',
+                                metadata: 'Hello world'
+                            },
+                            {
+                                key: 'item2',
+                                title: 'Item 2'
+                            },
+                            {
+                                key: 'item3',
+                                title: 'Item 3',
+                                children: [
+                                    {
+                                        key: 'i3s1',
+                                        title: 'Item 3 Sub 1',
+                                        parent: 'item3'
+                                    },
+                                    {
+                                        key: 'i3s2',
+                                        title: 'Item 3 Sub 2',
+                                        parent: 'item3',
+                                        disableCheckbox: true
+                                    }
+                                ]
+                            },
+                            {
+                                key: 'item4',
+                                title: 'Item 4'
+                            },
+                            {
+                                key: 'item5',
+                                title: 'Item 5'
+                            },
+                            {
+                                key: 'item6',
+                                title: 'Item 6'
+                            },
+                            {
+                                key: 'item7',
+                                title: 'Item 7'
+                            },
+                            {
+                                key: 'item8',
+                                title: 'Item 8'
+                            },
+                            {
+                                key: 'item9',
+                                title: 'Item 9'
+                            },
+                            {
+                                key: 'item10',
+                                title: 'Item 10'
+                            },
+                            {
+                                key: 'item11',
+                                title: 'Item 11'
+                            },
+                            {
+                                key: 'item12',
+                                title: 'Item 12'
+                            },
+                            {
+                                key: 'item13',
+                                title: 'Item 13'
+                            },
+                            {
+                                key: 'item14',
+                                title: 'Item 14'
+                            },
+                            {
+                                key: 'item15',
+                                title: 'Item 15'
+                            },
+                        ],
+                        selected: ['i3s2'],
+                        checked: ['item4', 'item5']
+                    },
+                    onAddItemButtonClick: e => this.onAddTreeItemButtonClick(e)
                 },
+                // {
+                //     id: 'content',
+                //     type: 'textarea',
+                //     css: 'uk-width-1-1 uk-height-large',
+                //     label: `${i18n._(t`Content`)}:`
+                // },
                 {
                     id: 'divider1',
                     type: 'divider'

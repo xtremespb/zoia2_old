@@ -309,6 +309,29 @@ export default class ZFormBuilder extends Component {
         });
     }
 
+    onTreeFieldValueChanged = (id, tree, selected, checked) => {
+        const storage = cloneDeep(this.state.dataStorage);
+        storage[this.state.tab][id].tree = tree || storage[this.state.tab][id].tree || [];
+        storage[this.state.tab][id].selected = selected || storage[this.state.tab][id].selected || [];
+        storage[this.state.tab][id].checked = checked || storage[this.state.tab][id].checked || [];
+        this.setState({
+            dataStorage: storage
+        }, () => {
+            // Call onChange if defined
+            this.state.data.map(item => {
+                if (Array.isArray(item)) {
+                    item.map(ai => {
+                        if (ai.id === id && ai.onChange && typeof ai.onChange === 'function') {
+                            ai.onChange(id, storage[this.state.tab][id]);
+                        }
+                    });
+                } else if (item.id === id && item.onChange && typeof item.onChange === 'function') {
+                    item.onChange(id, storage[this.state.tab][id]);
+                }
+            });
+        });
+    }
+
     onFileValueChanged = (id, value, flagDelete) => {
         const storage = cloneDeep(this.state.dataStorage);
         storage[this.state.tab][id] = storage[this.state.tab][id] || [];
@@ -439,12 +462,15 @@ export default class ZFormBuilder extends Component {
                     helpText={itemProps ? itemProps.helpText : item.helpText || ''}
                     error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
                     errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
-                    value={this.state.dataStorage[this.state.tab][item.id] || []}
+                    tree={this.state.dataStorage[this.state.tab][item.id].tree || []}
+                    selected={this.state.dataStorage[this.state.tab][item.id].selected || []}
+                    checked={this.state.dataStorage[this.state.tab][item.id].checked || []}
                     axios={this.props.axios}
                     UIkit={this.props.UIkit}
                     tabs={item.tabs}
                     addItemButtonLabel={item.addItemButtonLabel}
                     onAddItemButtonClick={item.onAddItemButtonClick}
+                    onValueChanged={this.onTreeFieldValueChanged}
                 />);
             case 'password':
                 return (<ZText
