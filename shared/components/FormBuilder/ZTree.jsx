@@ -11,16 +11,15 @@ export default class ZTree extends Component {
     }
 
     state = {
-        expandedKeys: [],
         autoExpandParent: true
     }
 
-    componentDidMount = () => this.setState({ expandedKeys: this.props.selected })
-
-    onExpand = expandedKeys => this.setState({
-        expandedKeys,
-        autoExpandParent: false,
-    })
+    onExpand = expandedKeys => {
+        this.props.onValueChanged(this.props.originalId, null, null, null, expandedKeys);
+        this.setState({
+            autoExpandParent: false
+        });
+    }
 
     onAddItemButtonClick = e => {
         e.preventDefault();
@@ -29,11 +28,14 @@ export default class ZTree extends Component {
         }
     }
 
-    onDragEnter = info => {
-        this.setState({
-            expandedKeys: info.expandedKeys,
-        });
+    onEditItemButtonClick = e => {
+        e.preventDefault();
+        if (this.props.onEditItemButtonClick && typeof this.props.onEditItemButtonClick === 'function') {
+            this.props.onEditItemButtonClick(e);
+        }
     }
+
+    onDragEnter = info => this.props.onValueChanged(this.props.originalId, null, null, null, info.expandedKeys)
 
     loop = (data, key, callback) => {
         data.forEach((item, index, arr) => {
@@ -47,9 +49,9 @@ export default class ZTree extends Component {
         });
     };
 
-    onSelect = selectedKeys => this.props.onValueChanged(this.props.originalId, null, selectedKeys, null);
+    onSelect = selectedKeys => this.props.onValueChanged(this.props.originalId, null, selectedKeys, null, null);
 
-    onCheck = checkedKeys => this.props.onValueChanged(this.props.originalId, null, null, checkedKeys);
+    onCheck = checkedKeys => this.props.onValueChanged(this.props.originalId, null, null, checkedKeys, null);
 
     onDrop = info => {
         const dropKey = info.node.props.eventKey;
@@ -86,24 +88,24 @@ export default class ZTree extends Component {
                 ar.splice(i + 1, 0, dragObj);
             }
         }
-        this.props.onValueChanged(this.props.originalId, data, null, null);
+        this.props.onValueChanged(this.props.originalId, data, null, null, null, null);
     }
 
     render = () => (<div className={this.props.cname}>
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
         <div className="uk-form-controls">
             <div>
-                <button type="button" className="uk-button uk-button-small uk-button-primary" onClick={this.onAddItemButtonClick}><span uk-icon="icon:plus;ratio:0.8" />&nbsp;{this.props.addItemButtonLabel}</button>
+                <button type="button" className="uk-button uk-button-small uk-button-primary uk-margin-small-right" onClick={this.onAddItemButtonClick}><span uk-icon="icon:plus;ratio:0.8" />&nbsp;{this.props.addItemButtonLabel}</button><button type="button" className="uk-button uk-button-small uk-button-secondary uk-margin-small-right" onClick={this.onEditItemButtonClick}><span uk-icon="icon:pencil;ratio:0.8" />&nbsp;{this.props.editItemButtonLabel}</button>
             </div>
             <div className="uk-margin-top">
                 <Tree
-                    expandedKeys={this.state.expandedKeys}
+                    expandedKeys={this.props.expanded}
                     autoExpandParent={this.state.autoExpandParent}
                     treeData={this.props.tree}
                     onExpand={this.onExpand}
-                    draggable
-                    selectable
-                    checkable
+                    draggable={this.props.draggable}
+                    selectable={this.props.selectable}
+                    checkable={this.props.checkable}
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}
                     onDrop={this.onDrop}

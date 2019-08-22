@@ -131,15 +131,15 @@ msgstr "E-mail"
 #: modules/pages/frontend/components/admin/PagesList.jsx:119
 #: modules/users/frontend/components/admin/UsersList.jsx:175
 msgid "Edit"
-msgstr "Редактирование"
+msgstr "Правка"
 
 #: modules/pages/frontend/components/admin/PagesEdit.jsx:168
 msgid "Edit Page"
-msgstr "Редактирование страницы"
+msgstr "Правка страницы"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:205
 msgid "Edit User"
-msgstr "Редактирование пользователя"
+msgstr "Правка пользователя"
 
 #: modules/users/frontend/components/admin/UsersEdit.jsx:78
 msgid "Example: username@zoiajs.org"

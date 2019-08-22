@@ -5,6 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 // Import components
 import ZButton from './ZButton.jsx';
 import ZText from './ZText.jsx';
+import ZVal from './ZVal.jsx';
 import ZTags from './ZTags.jsx';
 import ZData from './ZData.jsx';
 import ZTree from './ZTree.jsx';
@@ -170,9 +171,13 @@ export default class ZFormBuilder extends Component {
     resetValuesToDefault = () => {
         const { data } = this.props;
         const dataStorage = {};
-        dataStorage[this.state.tab] = this.getValuesFromData(data);
+        const tabs = [Object.keys(this.props.tabs)[0]];
+        const tab = Object.keys(this.props.tabs)[0];
+        dataStorage[tab] = this.getValuesFromData(data);
         this.setState({
-            dataStorage
+            dataStorage,
+            tabs,
+            tab
         });
     }
 
@@ -215,7 +220,7 @@ export default class ZFormBuilder extends Component {
         this.state.data.map(item => {
             if (Array.isArray(item)) {
                 item.map(ai => {
-                    if (ai.autofocus && !this.state.loading && this.fields[ai.id].focus) {
+                    if (ai.autofocus && !this.state.loading && this.fields[ai.id] && this.fields[ai.id].focus) {
                         this.fields[ai.id].focus();
                     }
                 });
@@ -286,8 +291,6 @@ export default class ZFormBuilder extends Component {
         }, () => resolve());
     });
 
-    getValue = (property, tab = this.state.tab) => this.state.dataStorage[tab][property];
-
     onGenericFieldValueChanged = (id, value) => {
         const storage = cloneDeep(this.state.dataStorage);
         storage[this.state.tab][id] = value;
@@ -309,11 +312,12 @@ export default class ZFormBuilder extends Component {
         });
     }
 
-    onTreeFieldValueChanged = (id, tree, selected, checked) => {
+    onTreeFieldValueChanged = (id, tree, selected, checked, expanded) => {
         const storage = cloneDeep(this.state.dataStorage);
         storage[this.state.tab][id].tree = tree || storage[this.state.tab][id].tree || [];
         storage[this.state.tab][id].selected = selected || storage[this.state.tab][id].selected || [];
         storage[this.state.tab][id].checked = checked || storage[this.state.tab][id].checked || [];
+        storage[this.state.tab][id].expanded = expanded || storage[this.state.tab][id].expanded || [];
         this.setState({
             dataStorage: storage
         }, () => {
@@ -390,6 +394,24 @@ export default class ZFormBuilder extends Component {
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading}
                 />);
+            case 'val':
+                return (<ZVal
+                    ref={input => { this.fields[item.id] = input; }}
+                    originalId={item.id}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    css={item.css}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    cname={cname}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
+                    error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.props.i18n._(this.state.errorMessages[this.state.tab][item.id]) : null}
+                    value={this.state.dataStorage[this.state.tab][item.id] || ''}
+                    onValueChanged={this.onGenericFieldValueChanged}
+                    disabled={this.state.loading}
+                    onSetValButtonClick={item.onSetValButtonClick}
+                />);
             case 'datePicker':
                 return (<ZDatePicker
                     ref={input => { this.fields[item.id] = input; }}
@@ -465,12 +487,18 @@ export default class ZFormBuilder extends Component {
                     tree={this.state.dataStorage[this.state.tab][item.id].tree || []}
                     selected={this.state.dataStorage[this.state.tab][item.id].selected || []}
                     checked={this.state.dataStorage[this.state.tab][item.id].checked || []}
+                    expanded={this.state.dataStorage[this.state.tab][item.id].expanded || []}
                     axios={this.props.axios}
                     UIkit={this.props.UIkit}
                     tabs={item.tabs}
                     addItemButtonLabel={item.addItemButtonLabel}
                     onAddItemButtonClick={item.onAddItemButtonClick}
+                    editItemButtonLabel={item.editItemButtonLabel}
+                    onEditItemButtonClick={item.onEditItemButtonClick}
                     onValueChanged={this.onTreeFieldValueChanged}
+                    draggable={item.draggable || false}
+                    checkable={item.checkable || false}
+                    selectable={item.selectable || false}
                 />);
             case 'password':
                 return (<ZText

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, no-loop-func */
 
 import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
@@ -12,6 +12,7 @@ import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
 import config from '../../../../../etc/config.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../../shared/utils/uikit';
+import DialogFolder from './DialogFolder.jsx';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../../shared/components/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
@@ -20,6 +21,7 @@ class PagesEdit extends Component {
     constructor(props) {
         super(props);
         this.editPagesForm = React.createRef();
+        this.dialogFolder = React.createRef();
     }
 
     state = {
@@ -53,9 +55,91 @@ class PagesEdit extends Component {
         history.push('/admin/pages?reload=1');
     }
 
-    onAddTreeItemButtonClick = e => {
-        e.preventDefault();
-        console.log('Button is clicked');
+    loadFoldersData = () => new Promise((resolve, reject) => {
+        axios.post(`${config.apiURL}/api/pages/folders/load`, {
+            token: this.props.appDataRuntime.token,
+            language: this.props.appData.language
+        }, { headers: { 'content-type': 'application/json' } }).then(async res => {
+            if (res && res.data && res.data.statusCode === 200 && res.data.data) {
+                resolve(res.data.data);
+                return;
+            }
+            reject(res);
+        }).catch(async err => {
+            if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
+                this.deauthorize();
+            }
+            reject(err);
+        });
+    })
+
+    loop = (data, key, callback) => {
+        data.forEach((item, index, arr) => {
+            if (item.key === key) {
+                callback(item, index, arr);
+                return;
+            }
+            if (item.children) {
+                this.loop(item.children, key, callback);
+            }
+        });
+    };
+
+    onSaveFolderHandler = (i18n, folders) => {
+        axios.post(`${config.apiURL}/api/pages/folders/save`, {
+            token: this.props.appDataRuntime.token,
+            folders: folders.tree
+        }, { headers: { 'content-type': 'application/json' } }).then(async res => {
+            if (res && res.data && res.data.statusCode === 200) {
+                return;
+            }
+            UIkit.notification({
+                message: i18n._(t`Could not save data`),
+                status: 'danger'
+            });
+        }).catch(async err => {
+            if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
+                this.deauthorize();
+                return;
+            }
+            UIkit.notification({
+                message: i18n._(t`Could not save data`),
+                status: 'danger'
+            });
+        });
+        const path = [];
+        if (!folders.selected.length) {
+            this.editPagesForm.current.setValue('path', '/');
+        } else {
+            this.loop(folders.tree, folders.selected[0], item => {
+                path.push(item.key);
+                let { parent } = item;
+                while (parent) {
+                    this.loop(folders.tree, parent, sitem => {
+                        path.push(sitem.key);
+                        parent = sitem.parent;
+                    });
+                }
+            });
+            this.editPagesForm.current.setValue('path', `/${path.reverse().join('/')}`);
+        }
+    }
+
+    onSetPathValButtonClick = async (event, i18n) => {
+        event.preventDefault();
+        try {
+            this.editPagesForm.current.setLoading(true);
+            const tree = await this.loadFoldersData();
+            this.dialogFolder.current.setTreeValues(tree);
+            this.editPagesForm.current.setLoading(false);
+            this.dialogFolder.current.show();
+        } catch (e) {
+            this.editPagesForm.current.setLoading(false);
+            UIkit.notification({
+                message: i18n._(t`Could not load data from server`),
+                status: 'danger'
+            });
+        }
     }
 
     getEditForm = i18n => (<FormBuilder
@@ -70,10 +154,11 @@ class PagesEdit extends Component {
             [
                 {
                     id: 'path',
-                    type: 'text',
+                    type: 'val',
                     css: 'uk-form-width-medium',
                     label: `${i18n._(t`Path`)}:`,
-                    autofocus: true
+                    autofocus: true,
+                    onSetValButtonClick: e => this.onSetPathValButtonClick(e, i18n)
                 },
                 {
                     id: 'title',
@@ -81,97 +166,6 @@ class PagesEdit extends Component {
                     css: 'uk-form-width-large',
                     label: `${i18n._(t`Title`)}:`
                 },
-                {
-                    id: 'category',
-                    type: 'tree',
-                    defaultValue: {
-                        tree: [
-                            {
-                                key: 'item1',
-                                title: 'Item 1',
-                                metadata: 'Hello world'
-                            },
-                            {
-                                key: 'item2',
-                                title: 'Item 2'
-                            },
-                            {
-                                key: 'item3',
-                                title: 'Item 3',
-                                children: [
-                                    {
-                                        key: 'i3s1',
-                                        title: 'Item 3 Sub 1',
-                                        parent: 'item3'
-                                    },
-                                    {
-                                        key: 'i3s2',
-                                        title: 'Item 3 Sub 2',
-                                        parent: 'item3',
-                                        disableCheckbox: true
-                                    }
-                                ]
-                            },
-                            {
-                                key: 'item4',
-                                title: 'Item 4'
-                            },
-                            {
-                                key: 'item5',
-                                title: 'Item 5'
-                            },
-                            {
-                                key: 'item6',
-                                title: 'Item 6'
-                            },
-                            {
-                                key: 'item7',
-                                title: 'Item 7'
-                            },
-                            {
-                                key: 'item8',
-                                title: 'Item 8'
-                            },
-                            {
-                                key: 'item9',
-                                title: 'Item 9'
-                            },
-                            {
-                                key: 'item10',
-                                title: 'Item 10'
-                            },
-                            {
-                                key: 'item11',
-                                title: 'Item 11'
-                            },
-                            {
-                                key: 'item12',
-                                title: 'Item 12'
-                            },
-                            {
-                                key: 'item13',
-                                title: 'Item 13'
-                            },
-                            {
-                                key: 'item14',
-                                title: 'Item 14'
-                            },
-                            {
-                                key: 'item15',
-                                title: 'Item 15'
-                            },
-                        ],
-                        selected: ['i3s2'],
-                        checked: ['item4', 'item5']
-                    },
-                    onAddItemButtonClick: e => this.onAddTreeItemButtonClick(e)
-                },
-                // {
-                //     id: 'content',
-                //     type: 'textarea',
-                //     css: 'uk-width-1-1 uk-height-large',
-                //     label: `${i18n._(t`Content`)}:`
-                // },
                 {
                     id: 'divider1',
                     type: 'divider'
@@ -259,6 +253,11 @@ class PagesEdit extends Component {
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}
+                        <DialogFolder
+                            ref={this.dialogFolder}
+                            i18n={i18n}
+                            onSaveButtonClickHandler={folders => this.onSaveFolderHandler(i18n, folders)}
+                        />
                     </>);
                 }}
             </I18n>
