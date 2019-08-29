@@ -112,11 +112,11 @@ class PagesEdit extends Component {
             this.editPagesForm.current.setValue('path', '/');
         } else {
             this.loop(folders.tree, folders.selected[0], item => {
-                path.push(item.key);
-                let { parent } = item;
+                path.push(item.id);
+                let { parent } = item.key;
                 while (parent) {
                     this.loop(folders.tree, parent, sitem => {
-                        path.push(sitem.key);
+                        path.push(sitem.id);
                         parent = sitem.parent;
                     });
                 }

@@ -968,22 +968,24 @@ export default class ZFormBuilder extends Component {
         Object.keys(data).map(key => {
             tabsNew.map(tab => {
                 dataStorageNew[tab] = dataStorageNew[tab] || {};
-                switch (this.types[key].type) {
-                    case 'checkbox':
-                        dataStorageNew[tab][key] = {};
-                        data[key].map(ckey => {
-                            dataStorageNew[tab][key][ckey] = true;
-                        });
-                        break;
-                    case 'file':
-                    case 'fileImage':
-                        dataStorageNew[tab][key] = data[key].map(item => ({
-                            name: item.name,
-                            size: item.size
-                        }));
-                        break;
-                    default:
-                        dataStorageNew[tab][key] = data[key];
+                if (this.types[key]) {
+                    switch (this.types[key].type) {
+                        case 'checkbox':
+                            dataStorageNew[tab][key] = {};
+                            data[key].map(ckey => {
+                                dataStorageNew[tab][key][ckey] = true;
+                            });
+                            break;
+                        case 'file':
+                        case 'fileImage':
+                            dataStorageNew[tab][key] = data[key].map(item => ({
+                                name: item.name,
+                                size: item.size
+                            }));
+                            break;
+                        default:
+                            dataStorageNew[tab][key] = data[key];
+                    }
                 }
             });
         });

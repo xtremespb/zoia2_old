@@ -41,9 +41,7 @@ class DialogFolder extends Component {
         data.forEach((item, index, arr) => {
             if (item.key === key) {
                 callback(item, index, arr);
-                return;
-            }
-            if (item.children) {
+            } else if (item.children) {
                 this.loop(item.children, key, callback);
             }
         });
@@ -117,7 +115,14 @@ class DialogFolder extends Component {
             key: data.key
         };
         if (item) {
-            // item = data;
+            let editItem;
+            this.loop(folders.tree, data.key, i => {
+                editItem = i;
+            });
+            editItem.data = tree;
+            if (typeof editItem.data.children === 'undefined') {
+                delete editItem.data.children;
+            }
         } else if (folders.selected.length) {
             let selected;
             this.loop(folders.tree, folders.selected[0], i => {
