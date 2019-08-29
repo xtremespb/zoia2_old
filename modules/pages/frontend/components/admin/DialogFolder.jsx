@@ -128,7 +128,7 @@ class DialogFolder extends Component {
         } else {
             folders.tree.push(dataTree);
         }
-        if (folders.expanded.indexOf(data.key) === -1) {
+        if (folders.expanded && folders.expanded.indexOf(data.key) === -1) {
             folders.expanded.push(data.key);
         }
         this.loopEach(folders.tree, i => {

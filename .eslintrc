@@ -55,6 +55,7 @@
         "react/jsx-props-no-spreading": "off",
         "react/static-property-placement": "off",
         "jsx-a11y/control-has-associated-label": "off",
-        "no-async-promise-executor": "off"
+        "no-async-promise-executor": "off",
+        "react/state-in-constructor": "off"
     }
 }

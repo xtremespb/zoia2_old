@@ -68,7 +68,8 @@ export default class ZFormBuilder extends Component {
         i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired,
         locale: PropTypes.string,
         doNotSetFocusOnMount: PropTypes.bool,
-        onFormBuilt: PropTypes.func
+        onFormBuilt: PropTypes.func,
+        onFormPreSubmit: PropTypes.func
     }
 
     static defaultProps = {
@@ -111,7 +112,8 @@ export default class ZFormBuilder extends Component {
         simple: false,
         locale: 'en',
         doNotSetFocusOnMount: false,
-        onFormBuilt: null
+        onFormBuilt: null,
+        onFormPreSubmit: null
     }
 
     setLoading = async flag => new Promise(resolve => this.setState({ loading: flag }, () => resolve()));
@@ -224,7 +226,7 @@ export default class ZFormBuilder extends Component {
                         this.fields[ai.id].focus();
                     }
                 });
-            } else if (item.autofocus && !this.state.loading && this.fields[item.id].focus) {
+            } else if (item.autofocus && !this.state.loading && this.fields[item.id] && this.fields[item.id].focus) {
                 this.fields[item.id].focus();
             }
         });
@@ -710,13 +712,13 @@ export default class ZFormBuilder extends Component {
     }
 
     getFormFields = () => {
-        const data = this.state.data.map((item) => {
+        const data = [...this.state.data.map((item) => {
             if (Array.isArray(item)) {
                 const items = item.map((ai) => this.getFormItem(ai, 'uk-width-auto uk-margin-small-right'));
                 return (<ZWrap key={`field_${this.props.prefix}_wrap_${item[0].id}`} items={items} />);
             }
             return this.getFormItem(item, null);
-        });
+        }), this.props.save ? (<button key="__formSubmitHiddenButton" type="submit" style={{ display: 'none' }} />) : null];
         return data;
     }
 
@@ -1141,7 +1143,10 @@ export default class ZFormBuilder extends Component {
 
     onFormSubmit = e => {
         e.preventDefault();
-        if (this.state.saving) {
+        if (this.props.onFormPreSubmit && typeof this.props.onFormPreSubmit === 'function') {
+            this.props.onFormPreSubmit(e);
+        }
+        if (this.state.saving || !this.props.save || !this.props.save.url) {
             return;
         }
         this.setState({

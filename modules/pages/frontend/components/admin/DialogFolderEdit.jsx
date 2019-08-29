@@ -118,6 +118,7 @@ class DialogFolderEdit extends Component {
                 }
             }
         }
+        onFormPreSubmit={this.onSaveButtonClick}
     />);
 
     render = () => (<div>

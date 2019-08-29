@@ -25,7 +25,8 @@ const fastify = Fastify({
 
 (async () => {
     const mongoClient = new MongoClient(security.mongo.url, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+		useUnifiedTopology: true
     });
     await mongoClient.connect();
     fastify.register(fastifyFormbody);

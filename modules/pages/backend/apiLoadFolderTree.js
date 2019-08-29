@@ -62,8 +62,8 @@ export default fastify => ({
             });
             const folders = (folderTree ? folderTree.data || [] : []);
             loop(folders, item => {
-                const defaultTitle = item.data[Object.keys(item.data)[0]];
-                const title = item.data[req.body.language] ? item.data[req.body.language].title : defaultTitle;
+                const defaultTitle = item.data[Object.keys(item.data)[0]].title;
+                const title = item.data[req.body.language] ? item.data[req.body.language].title || defaultTitle : defaultTitle;
                 item.title = title;
             });
             // Send response

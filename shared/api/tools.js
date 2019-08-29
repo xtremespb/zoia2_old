@@ -171,7 +171,8 @@ const install = async () => {
         const data = await inquirer.prompt(questions);
         console.log('');
         const mongoClient = new MongoClient(security.mongo.url, {
-            useNewUrlParser: true
+            useNewUrlParser: true,
+			useUnifiedTopology: true
         });
         await mongoClient.connect();
         db = mongoClient.db(security.mongo.dbName);
