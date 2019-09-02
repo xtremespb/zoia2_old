@@ -5,6 +5,8 @@ import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import { remove as removeCookie } from 'es-cookie';
 import axios from 'axios';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
@@ -85,6 +87,16 @@ class PagesEdit extends Component {
         });
     };
 
+    loopPath = (data, key, callback, path = []) => data.forEach(item => {
+        path.push(item.id);
+        if (item.key === key) {
+            callback(item, path);
+        } else if (item.children) {
+            this.loopPath(item.children, key, callback, path);
+        }
+        path.pop();
+    });
+
     onSaveFolderHandler = (i18n, folders) => {
         axios.post(`${config.apiURL}/api/pages/folders/save`, {
             token: this.props.appDataRuntime.token,
@@ -107,21 +119,10 @@ class PagesEdit extends Component {
                 status: 'danger'
             });
         });
-        const path = [];
         if (!folders.selected.length) {
             this.editPagesForm.current.setValue('path', '/');
         } else {
-            this.loop(folders.tree, folders.selected[0], item => {
-                path.push(item.id);
-                let { parent } = item.key;
-                while (parent) {
-                    this.loop(folders.tree, parent, sitem => {
-                        path.push(sitem.id);
-                        parent = sitem.parent;
-                    });
-                }
-            });
-            this.editPagesForm.current.setValue('path', `/${path.reverse().join('/')}`);
+            this.loopPath(folders.tree, folders.selected[0], (item, pathArr) => this.editPagesForm.current.setValue('path', `/${pathArr.join('/')}`));
         }
     }
 
@@ -148,23 +149,39 @@ class PagesEdit extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        commonFields={['path']}
+        commonFields={['path', 'filename']}
         tabs={config.languages}
         data={
             [
+                [{
+                    id: 'title',
+                    type: 'text',
+                    css: 'uk-form-width-large',
+                    label: `${i18n._(t`Title`)}:`,
+                    autofocus: true,
+                    helpText: i18n._(t`Displayed in browser window`)
+                },
                 {
                     id: 'path',
                     type: 'val',
                     css: 'uk-form-width-medium',
                     label: `${i18n._(t`Path`)}:`,
-                    autofocus: true,
+                    defaultValue: '/',
                     onSetValButtonClick: e => this.onSetPathValButtonClick(e, i18n)
-                },
-                {
-                    id: 'title',
+                }, {
+                    id: 'filename',
                     type: 'text',
+                    css: 'uk-form-width-medium',
+                    label: `${i18n._(t`Filename`)}:`,
+                    helpText: i18n._(t`Latin characters, numbers, _, - (length: 0-64)`)
+                }],
+                {
+                    id: 'content',
+                    type: 'ckeditor5',
                     css: 'uk-form-width-large',
-                    label: `${i18n._(t`Title`)}:`
+                    label: `${i18n._(t`Content`)}:`,
+                    CKEditorInstance: CKEditor,
+                    EditorInstance: ClassicEditor,
                 },
                 {
                     id: 'divider1',
@@ -190,20 +207,16 @@ class PagesEdit extends Component {
         }
         validation={
             {
-                username: {
+                title: {
                     mandatory: true,
-                    regexp: /^[a-zA-Z0-9_-]{4,32}$/
+                    maxLength: 128
                 },
-                email: {
+                path: {
                     mandatory: true,
-                    // eslint-disable-next-line no-control-regex
-                    regexp: /^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\u0000-\u007F])(?:(?:[a-zA-Z0-9-]|[^\u0000-\u007F]){0,61}(?:[a-zA-Z0-9]|[^\u0000-\u007F]))?(?:\.(?:[a-zA-Z0-9]|[^\u0000-\u007F])(?:(?:[a-zA-Z0-9-]|[^\u0000-\u007F]){0,61}(?:[a-zA-Z0-9]|[^\u0000-\u007F]))?)*$/
                 },
-                password: {
-                    shouldMatch: 'password2'
-                },
-                password2: {
-                    shouldMatch: 'password'
+                filename: {
+                    regexp: /^[a-z0-9_-]+$/i,
+                    maxLength: 64
                 }
             }
         }

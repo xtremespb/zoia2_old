@@ -47,6 +47,13 @@ class DialogFolder extends Component {
         });
     }
 
+    loopFilter = (data, key) => data.filter(item => {
+        if (item.children) {
+            item.children = this.loopFilter(item.children, key);
+        }
+        return item.key !== key;
+    });
+
     loopEach = (data, callback) => {
         data.forEach((item, index, arr) => {
             callback(item, index, arr);
@@ -97,6 +104,16 @@ class DialogFolder extends Component {
         if (item) {
             this.dialogFolderEdit.current.show(item);
         }
+    }
+
+    onDeleteTreeItemButtonClick = async e => {
+        e.preventDefault();
+        const folders = this.editFoldersForm.current.getValue('folders');
+        folders.checked.map(key => folders.tree = this.loopFilter(folders.tree, key));
+        folders.checked = [];
+        folders.selected = [];
+        await this.editFoldersForm.current.setValue('folders', []);
+        await this.editFoldersForm.current.setValue('folders', folders);
     }
 
     onSaveFolderClickHandler = async data => {
@@ -161,8 +178,10 @@ class DialogFolder extends Component {
                     selectable: true,
                     addItemButtonLabel: i18n._(t`Add`),
                     editItemButtonLabel: i18n._(t`Edit`),
+                    deleteItemButtonLabel: i18n._(t`Delete`),
                     onAddItemButtonClick: e => this.onAddTreeItemButtonClick(e),
-                    onEditItemButtonClick: e => this.onEditTreeItemButtonClick(e)
+                    onEditItemButtonClick: e => this.onEditTreeItemButtonClick(e),
+                    onDeleteItemButtonClick: e => this.onDeleteTreeItemButtonClick(e),
                 }
             ]
         }

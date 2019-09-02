@@ -35,6 +35,13 @@ export default class ZTree extends Component {
         }
     }
 
+    onDeleteItemButtonClick = e => {
+        e.preventDefault();
+        if (this.props.onDeleteItemButtonClick && typeof this.props.onDeleteItemButtonClick === 'function') {
+            this.props.onDeleteItemButtonClick(e);
+        }
+    }
+
     onDragEnter = info => this.props.onValueChanged(this.props.originalId, null, null, null, info.expandedKeys)
 
     loop = (data, key, callback) => {
@@ -95,7 +102,7 @@ export default class ZTree extends Component {
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
         <div className="uk-form-controls">
             <div>
-                <button type="button" className="uk-button uk-button-small uk-button-primary uk-margin-small-right" onClick={this.onAddItemButtonClick}><span uk-icon="icon:plus;ratio:0.8" />&nbsp;{this.props.addItemButtonLabel}</button><button type="button" className="uk-button uk-button-small uk-button-secondary uk-margin-small-right" onClick={this.onEditItemButtonClick}><span uk-icon="icon:pencil;ratio:0.8" />&nbsp;{this.props.editItemButtonLabel}</button>
+                <button type="button" className="uk-button uk-button-small uk-button-primary uk-margin-small-right" onClick={this.onAddItemButtonClick}><span uk-icon="icon:plus;ratio:0.8" />&nbsp;{this.props.addItemButtonLabel}</button><button type="button" className="uk-button uk-button-small uk-button-secondary uk-margin-small-right" onClick={this.onEditItemButtonClick}><span uk-icon="icon:pencil;ratio:0.8" />&nbsp;{this.props.editItemButtonLabel}</button><button type="button" className="uk-button uk-button-small uk-button-danger" onClick={this.onDeleteItemButtonClick}><span uk-icon="icon:trash;ratio:0.8" />&nbsp;{this.props.deleteItemButtonLabel}</button>
             </div>
             <div className="uk-margin-top">
                 <Tree

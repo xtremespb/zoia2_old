@@ -497,6 +497,8 @@ export default class ZFormBuilder extends Component {
                     onAddItemButtonClick={item.onAddItemButtonClick}
                     editItemButtonLabel={item.editItemButtonLabel}
                     onEditItemButtonClick={item.onEditItemButtonClick}
+                    deleteItemButtonLabel={item.deleteItemButtonLabel}
+                    onDeleteItemButtonClick={item.onDeleteItemButtonClick}
                     onValueChanged={this.onTreeFieldValueChanged}
                     draggable={item.draggable || false}
                     checkable={item.checkable || false}
