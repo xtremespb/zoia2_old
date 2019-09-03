@@ -68,6 +68,10 @@ class AdminPanel extends Component {
     );
 
     onLanguageClick = e => {
+        e.preventDefault();
+        // A hack to hide dropdown faster
+        // UIkit's "hide" is a way too slow (bug?)
+        document.getElementById('za-admin-languages-select').click();
         this.setState({
             language: e.currentTarget.dataset.lang
         });
@@ -100,7 +104,7 @@ class AdminPanel extends Component {
                                 </div>
                             </li>
                             <li>
-                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} />&nbsp;&nbsp;</a>
+                                <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language} flag-icon-switch`} id="za-admin-languages-select" />&nbsp;&nbsp;</a>
                                 <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:top-right">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
                                         {this.getLanguagesList('desktop')}

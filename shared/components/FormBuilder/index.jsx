@@ -576,6 +576,11 @@ export default class ZFormBuilder extends Component {
                     disabled={this.state.loading}
                     CKEditor={item.CKEditorInstance}
                     editor={item.EditorInstance}
+                    languages={item.languages}
+                    language={item.language}
+                    imageUploadURL={item.imageUploadURL}
+                    imageUploadExtras={item.imageUploadExtras}
+                    axios={this.props.axios}
                 />);
             case 'ckeditor4':
                 return (<ZCKEditor4

@@ -30,3 +30,4 @@ node_modules/
 /static/custom
 /dist/*.zip
 /etc/*.json
+uploads

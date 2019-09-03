@@ -182,6 +182,12 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Content`)}:`,
                     CKEditorInstance: CKEditor,
                     EditorInstance: ClassicEditor,
+                    languages: Object.keys(config.languages),
+                    language: this.props.appData.language,
+                    imageUploadURL: `${config.apiURL}/api/pages/image/upload`,
+                    imageUploadExtras: {
+                        token: this.props.appDataRuntime.token
+                    }
                 },
                 {
                     id: 'divider1',

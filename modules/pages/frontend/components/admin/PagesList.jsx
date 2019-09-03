@@ -145,11 +145,18 @@ class PagesList extends Component {
                             axios={axios}
                             topButtons={<><Link to="/admin/pages/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new page`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected pages`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
-                                id: 'name',
+                                id: 'title',
                                 title: 'Page',
                                 sortable: true,
                                 cssHeader: 'uk-text-nowrap'
-                            }, {
+                            },
+                            {
+                                id: 'path',
+                                title: 'Path',
+                                sortable: true,
+                                cssHeader: 'uk-text-nowrap'
+                            },
+                            {
                                 id: 'actions',
                                 title: 'Actions',
                                 cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
@@ -171,7 +178,7 @@ class PagesList extends Component {
                                     token: this.props.appDataRuntime.token
                                 }
                             }}
-                            sortColumn="name"
+                            sortColumn="title"
                             sortDirection="asc"
                             lang={{
                                 LOADING: i18n._(t`Loading data, please wait…`),
