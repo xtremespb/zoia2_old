@@ -1,0 +1,118 @@
+{
+  "Please select an item first": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        71
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        179
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        180
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        181
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        189
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        190
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        191
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        192
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        193
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        194
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        195
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        196
+      ],
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        212
+      ]
+    ]
+  },
+  "Root": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        213
+      ]
+    ]
+  },
+  "Select": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/DialogFolder.jsx",
+        214
+      ]
+    ]
+  }
+}

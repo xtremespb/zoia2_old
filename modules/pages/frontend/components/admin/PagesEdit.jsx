@@ -219,6 +219,8 @@ class PagesEdit extends Component {
                 },
                 path: {
                     mandatory: true,
+                    regexp: /^[a-z0-9_\-//]+$/i,
+                    maxLength: 128
                 },
                 filename: {
                     regexp: /^[a-z0-9_-]+$/i,

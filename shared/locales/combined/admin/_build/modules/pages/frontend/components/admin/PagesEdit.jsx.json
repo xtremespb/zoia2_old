@@ -3,83 +3,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        50
-      ]
-    ]
-  },
-  "Path": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        70
-      ]
-    ]
-  },
-  "Title": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        77
-      ]
-    ]
-  },
-  "Content": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        83
-      ]
-    ]
-  },
-  "Cancel": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        96
-      ],
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        134
-      ]
-    ]
-  },
-  "Save": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        102
-      ]
-    ]
-  },
-  "Field is required": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        127
-      ]
-    ]
-  },
-  "Invalid format": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        128
-      ]
-    ]
-  },
-  "Passwords do not match": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        129
-      ]
-    ]
-  },
-  "Could not load data from server": {
-    "origin": [
-      [
-        "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        130
+        54
       ]
     ]
   },
@@ -87,7 +11,119 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        131
+        109
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        118
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        236
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        140
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        235
+      ]
+    ]
+  },
+  "Title": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        160
+      ]
+    ]
+  },
+  "Displayed in browser window": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        162
+      ]
+    ]
+  },
+  "Path": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        168
+      ]
+    ]
+  },
+  "Filename": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        175
+      ]
+    ]
+  },
+  "Latin characters, numbers, _, - (length: 0-64)": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        176
+      ]
+    ]
+  },
+  "Content": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        182
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        203
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        239
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        209
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        232
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        233
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        234
       ]
     ]
   },
@@ -95,7 +131,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        132
+        237
       ]
     ]
   },
@@ -103,7 +139,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        133
+        238
       ]
     ]
   },
@@ -111,7 +147,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        168
+        273
       ]
     ]
   },
@@ -119,7 +155,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        168
+        273
       ]
     ]
   },
@@ -127,7 +163,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        170
+        275
       ]
     ]
   }

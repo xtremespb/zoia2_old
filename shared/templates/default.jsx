@@ -47,6 +47,9 @@ class ZoiaTemplate extends Component {
     }
 
     onLanguageClick = e => {
+        // A hack to hide dropdown faster
+        // UIkit's "hide" is a way too slow (bug?)
+        document.getElementById('za-user-languages-select').click();
         this.setState({
             language: e.currentTarget.dataset.lang
         });
@@ -68,7 +71,7 @@ class ZoiaTemplate extends Component {
                 <div className="uk-navbar-right uk-margin-top">
                     <ul className="uk-navbar-nav">
                         <li>
-                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language}`} />&nbsp;</a>
+                            <a href="#"><span className={`flag-icon flag-icon-${this.props.appData.language}`} id="za-user-languages-select" />&nbsp;</a>
                             <div className="uk-navbar-dropdown" uk-dropdown="mode:click;offset:-20;pos:top-right">
                                 <ul className="uk-nav uk-navbar-dropdown-nav">
                                     {this.getLanguagesList('desktop')}

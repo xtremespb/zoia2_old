@@ -62,7 +62,7 @@ msgstr "Неправильное имя пользователя или паро
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: shared/components/AdminPanel/AdminPanel.jsx:98
+#: shared/components/AdminPanel/AdminPanel.jsx:102
 msgid "Log Out"
 msgstr "Выход"
 

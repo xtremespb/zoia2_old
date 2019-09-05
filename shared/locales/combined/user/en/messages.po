@@ -62,7 +62,7 @@ msgstr ""
 msgid "Loading data, please wait…"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:98
+#: shared/components/AdminPanel/AdminPanel.jsx:102
 msgid "Log Out"
 msgstr ""
 

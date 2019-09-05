@@ -33,13 +33,29 @@ export default () => ({
         // End of Validation
         // Processing
         try {
+            const path = req.body.path.toLowerCase().replace(/\/$/, '') || null;
+            let parts = '';
+            let filename = '';
+            if (path) {
+                parts = path.split(/\//).filter(i => i.length);
+                if (parts.length) {
+                    filename = parts.pop();
+                }
+            }
             const query = {
-                path: req.body.path.toLowerCase().replace(/\/$/, '') || '/'
+                $or: [{
+                    path: `/${parts.join('/')}`,
+                    filename
+                }, {
+                    path,
+                    filename: ''
+                }]
             };
             const options = {
                 projection: {
                     _id: 1,
-                    path: 1
+                    path: 1,
+                    filename: 1
                 }
             };
             options.projection[`data.${req.body.language}`] = 1;

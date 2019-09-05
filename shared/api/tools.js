@@ -172,7 +172,7 @@ const install = async () => {
         console.log('');
         const mongoClient = new MongoClient(security.mongo.url, {
             useNewUrlParser: true,
-			useUnifiedTopology: true
+            useUnifiedTopology: true
         });
         await mongoClient.connect();
         db = mongoClient.db(security.mongo.dbName);
@@ -194,10 +194,20 @@ const install = async () => {
                                 indexesAsc,
                                 indexesDesc
                             } = moduleDatabaseConfig.collections[c];
+                            const languages = fs.readdirSync(`${__dirname}/../shared/locales/combined/admin`).filter(i => i !== '_build');
                             if (indexesAsc && indexesAsc.length) {
                                 console.log(`${colors.green(' * ')} Creating ASC indexes for collection: ${c}...`);
                                 const indexes = {};
-                                indexesAsc.map(i => indexes[i] = 1);
+                                indexesAsc.map(i => {
+                                    if (i.match(/\[language\]/i)) {
+                                        languages.map(language => {
+                                            const index = i.replace(/\[language\]/i, language);
+                                            indexes[index] = 1;
+                                        });
+                                    } else {
+                                        indexes[i] = 1;
+                                    }
+                                });
                                 try {
                                     await db.collection(c).createIndex(indexes, {
                                         name: `${m}_asc`
@@ -211,7 +221,16 @@ const install = async () => {
                             if (indexesDesc && indexesDesc.length) {
                                 console.log(`${colors.green(' * ')} Creating DESC indexes for collection: ${c}...`);
                                 const indexes = {};
-                                indexesDesc.map(i => indexes[i] = 1);
+                                indexesDesc.map(i => {
+                                    if (i.match(/\[language\]/i)) {
+                                        languages.map(language => {
+                                            const index = i.replace(/\[language\]/i, language);
+                                            indexes[index] = -1;
+                                        });
+                                    } else {
+                                        indexes[i] = -1;
+                                    }
+                                });
                                 try {
                                     await db.collection(c).createIndex(indexes, {
                                         name: `${m}_desc`

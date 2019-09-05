@@ -101,7 +101,7 @@ class UserList extends Component {
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
         this.usersListTable.current.setLoading(true);
-        axios.post(`${config.apiURL}/api/users/deleteUsers`, {
+        axios.post(`${config.apiURL}/api/users/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
@@ -183,7 +183,7 @@ class UserList extends Component {
                                 }
                             }}
                             save={{
-                                url: `${config.apiURL}/api/users/saveField`,
+                                url: `${config.apiURL}/api/users/save/field`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token

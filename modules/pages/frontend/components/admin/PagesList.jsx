@@ -146,19 +146,19 @@ class PagesList extends Component {
                             topButtons={<><Link to="/admin/pages/add" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" uk-tooltip={i18n._(t`Create new page`)} /><button type="button" className="uk-icon-button uk-button-danger uk-margin-right" uk-icon="trash" uk-tooltip={i18n._(t`Delete selected pages`)} onClick={this.onDeleteRecord} /><button type="button" className="uk-icon-button uk-button-default" uk-icon="refresh" uk-tooltip={i18n._(t`Refresh`)} onClick={this.onRefreshTable} /></>}
                             columns={[{
                                 id: 'title',
-                                title: 'Page',
+                                title: t`Page`,
                                 sortable: true,
-                                cssHeader: 'uk-text-nowrap'
+                                cssHeader: 'uk-text-nowrap uk-width-expand'
                             },
                             {
                                 id: 'path',
-                                title: 'Path',
+                                title: t`Path`,
                                 sortable: true,
                                 cssHeader: 'uk-text-nowrap'
                             },
                             {
                                 id: 'actions',
-                                title: 'Actions',
+                                title: t`Actions`,
                                 cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
                                 process: (val, row) => this.processActions(val, row, i18n)
                             }]}

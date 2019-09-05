@@ -23,7 +23,7 @@ class PageView extends Component {
         this.setState({
             loading: true
         }, () => {
-            axios.post(`${config.apiURL}/api/pages/load`, {
+            axios.post(`${config.apiURL}/api/page/view`, {
                 token: this.props.appDataRuntime.token,
                 language: this.props.appData.language,
                 path: this.props.location.pathname

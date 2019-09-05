@@ -2,7 +2,6 @@ import config from '../../../etc/config.json';
 import auth from '../../../shared/api/auth';
 
 const sortColumns = ['title', 'path'];
-const searchColumns = ['title'];
 
 export default fastify => ({
     schema: {
@@ -72,25 +71,46 @@ export default fastify => ({
             };
             const query = {};
             if (req.body.search) {
-                // query.$or = searchColumns.map(c => {
-                //     const sr = {};
-                //     sr[c] = {
-                //         $regex: req.body.search,
-                //         $options: 'i'
-                //     };
-                //     return sr;
-                // });
+                query.$or = [...Object.keys(config.languages).map(language => {
+                    const sr = {};
+                    sr[`data.${language}.title`] = {
+                        $regex: req.body.search,
+                        $options: 'i'
+                    };
+                    return sr;
+                }), {
+                    path: {
+                        $regex: req.body.search,
+                        $options: 'i'
+                    }
+                }, {
+                    filename: {
+                        $regex: req.body.search,
+                        $options: 'i'
+                    }
+                }];
             }
             const count = await this.mongo.db.collection('pages').find(query, options).count();
             options.limit = config.commonItemsLimit;
             options.skip = (req.body.page - 1) * config.commonItemsLimit;
             options.projection = {
                 _id: 1,
-                path: 1
+                path: 1,
+                filename: 1
             };
-            Object.keys(config.languages).map(language => options.projection.data[language].title = 1);
+            Object.keys(config.languages).map(language => options.projection[`data.${language}.title`] = 1);
             options.sort[req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;
-            const pages = await this.mongo.db.collection('pages').find(query, options).toArray();
+            if (req.body.sortColumn === 'path') {
+                options.sort.filename = req.body.sortDirection === 'asc' ? 1 : -1;
+            }
+            const pages = (await this.mongo.db.collection('pages').find(query, options).toArray() || []).map(p => {
+                const page = {
+                    _id: p._id,
+                    path: `${p.path === '/' ? '' : p.path}${p.filename ? `/${p.filename}` : ''}`
+                };
+                page.title = p.data[req.body.language] && p.data[req.body.language].title ? p.data[req.body.language].title : '';
+                return page;
+            });
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({

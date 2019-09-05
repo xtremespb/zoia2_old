@@ -171,7 +171,7 @@ class UsersEdit extends Component {
             CANCEL: t`Cancel`
         }}
         save={{
-            url: `${config.apiURL}/api/users/saveUser`,
+            url: `${config.apiURL}/api/users/save`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
@@ -179,7 +179,7 @@ class UsersEdit extends Component {
             }
         }}
         load={this.props.match.params.id ? {
-            url: `${config.apiURL}/api/users/loadUser`,
+            url: `${config.apiURL}/api/users/load`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
