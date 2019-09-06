@@ -86,12 +86,12 @@ class PagesList extends Component {
         if (id && e) {
             ids.push(id);
             const data = pagesListTable.getCurrentData();
-            pages.push(data.name[id]);
+            pages.push(`${data.title[id]} (${data.path[id]})`);
         } else {
             const data = pagesListTable.getCheckboxData();
             data.map(i => {
                 ids.push(i._id);
-                pages.push(i.name);
+                pages.push(`${i.title} (${i.path})`);
             });
         }
         if (ids.length) {
