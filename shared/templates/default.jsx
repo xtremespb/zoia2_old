@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import appDataSetLanguage from '../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../actions/appLinguiSetCatalog';
+import appDataRuntimeGetConfig from '../actions/appDataRuntimeGetConfig';
 
 import config from '../../etc/config.json';
 
@@ -20,6 +21,10 @@ class ZoiaTemplate extends Component {
     constructor(props) {
         super(props);
         this.loadCatalog(this.state.language);
+    }
+
+    componentDidMount = () => {
+        this.props.appDataRuntimeGetConfigAction();
     }
 
     loadCatalog = async (language) => {
@@ -94,5 +99,6 @@ export default connect(store => ({
 }),
     dispatch => ({
         appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language)),
-        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
+        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
+        appDataRuntimeGetConfigAction: () => dispatch(appDataRuntimeGetConfig())
     }))(ZoiaTemplate);

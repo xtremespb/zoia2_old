@@ -104,6 +104,41 @@ export default fastify => ({
                 path: formData.path,
                 data: {}
             };
+            // Check for duplicates
+            const pathReduced = pageData.path.split(/\//).slice(0, -1).join('/') || '/';
+            const pathPopped = pageData.path.split(/\//).pop() || '';
+            const duplicatePageQuery = {
+                $or: [{
+                    path: pageData.path,
+                    filename: pageData.filename
+                }],
+            };
+            if (pageData.filename) {
+                duplicatePageQuery.$or.push({
+                    path: `${pageData.path}/${pageData.filename}`,
+                    filename: ''
+                });
+            }
+            if (pathPopped && !pageData.filename) {
+                duplicatePageQuery.$or.push({
+                    path: pathReduced,
+                    filename: pathPopped
+                });
+            }
+            if (id) {
+                duplicatePageQuery._id = {
+                    $ne: new ObjectId(id)
+                };
+            }
+            const duplicatePage = await this.mongo.db.collection('pages').findOne(duplicatePageQuery);
+            if (duplicatePage) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errorCode: 1,
+                        error: 'Page with such path or filename already exists'
+                    }));
+            }
             Object.keys(config.languages).map(language => {
                 if (formData[language]) {
                     pageData.data[language] = {
@@ -113,8 +148,11 @@ export default fastify => ({
                 }
             });
             // Update page
-            const update = await this.mongo.db.collection('pages').updateOne({
-                _id: id ? new ObjectId(id) : null
+            const update = await this.mongo.db.collection('pages').updateOne(id ? {
+                _id: new ObjectId(id)
+            } : {
+                filename: pageData.filename,
+                path: pageData.path
             }, {
                 $set: pageData
             }, {

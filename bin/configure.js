@@ -12,13 +12,13 @@ const install = async () => {
             type: 'input',
             name: 'ip',
             message: 'Which IP address should API listen to?',
-            default: config.httpServer.ip,
+            default: security.httpServer.ip,
         },
         {
             type: 'input',
             name: 'port',
             message: 'Which port should API listen to?',
-            default: config.httpServer.port,
+            default: security.httpServer.port,
         },
         {
             type: 'input',
@@ -43,7 +43,7 @@ const install = async () => {
             name: 'loglevel',
             message: 'Loglevel?',
             choices: ['info', 'warn', 'error'],
-            default: config.loglevel,
+            default: security.loglevel,
         }
     ];
     try {
@@ -51,12 +51,12 @@ const install = async () => {
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
-        config.httpServer.ip = data.ip;
-        config.httpServer.port = data.port;
+        security.httpServer.ip = data.ip;
+        security.httpServer.port = data.port;
         config.apiURL = data.apiURL;
         security.mongo.url = data.mongourl;
         security.mongo.dbName = data.mongodb;
-        config.loglevel = data.loglevel;
+        security.loglevel = data.loglevel;
         security.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
         console.log(`${colors.green(' * ')} Saving configuration to config.json file...`);
         fs.writeJSONSync(`${__dirname}/../etc/config.json`, config, {

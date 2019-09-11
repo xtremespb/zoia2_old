@@ -1,5 +1,4 @@
 /* eslint-disable import/order */
-import config from '../../etc/config.json';
 import security from '../../etc/secure.json';
 import logger from './logger';
 import fastifyMongo from 'fastify-mongodb';
@@ -16,7 +15,7 @@ import Pino from 'pino';
 import Fastify from 'fastify';
 
 const log = Pino({
-    level: config.loglevel
+    level: security.loglevel
 });
 const fastify = Fastify({
     logger,
@@ -26,7 +25,7 @@ const fastify = Fastify({
 (async () => {
     const mongoClient = new MongoClient(security.mongo.url, {
         useNewUrlParser: true,
-		useUnifiedTopology: true
+        useUnifiedTopology: true
     });
     await mongoClient.connect();
     fastify.register(fastifyFormbody);
@@ -55,7 +54,7 @@ const fastify = Fastify({
         module.default(fastify);
     }));
     log.info('Starting API server...');
-    await fastify.listen(config.httpServer.port, config.httpServer.ip);
+    fastify.listen(security.httpServer.port, security.httpServer.ip);
 })().catch(err => {
     log.error(err);
     process.exit(1);

@@ -132,14 +132,13 @@ class DialogFolder extends Component {
             key: data.key
         };
         if (item) {
-            let editItem;
             this.loop(folders.tree, data.key, i => {
-                editItem = i;
+                i.data = dataTree.data;
+                i.id = dataTree.id;
+                if (typeof i.children === 'undefined') {
+                    delete i.children;
+                }
             });
-            editItem.data = tree;
-            if (typeof editItem.data.children === 'undefined') {
-                delete editItem.data.children;
-            }
         } else if (folders.selected.length) {
             let selected;
             this.loop(folders.tree, folders.selected[0], i => {

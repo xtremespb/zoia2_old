@@ -4,11 +4,15 @@ import {
 
 import config from '../../etc/config.json';
 import {
-    APP_DATA_RUNTIME_SET_TOKEN
+    APP_DATA_RUNTIME_SET_TOKEN,
+    APP_DATA_RUNTIME_SET_CONFIG,
+    APP_DATA_RUNTIME_SET_CONFIG_ERROR
 } from '../constants/core';
 
 const initialState = {
-    token: getCookie(`${config.siteId}_auth`) || null
+    token: getCookie(`${config.siteId}_auth`) || null,
+    config: {},
+    configError: false
 };
 
 export default ((state = initialState, action) => {
@@ -17,6 +21,16 @@ export default ((state = initialState, action) => {
         return {
             ...state,
             token: action.payload
+        };
+    case APP_DATA_RUNTIME_SET_CONFIG:
+        return {
+            ...state,
+            config: action.payload
+        };
+    case APP_DATA_RUNTIME_SET_CONFIG_ERROR:
+        return {
+            ...state,
+            configError: true
         };
     default:
         return state;

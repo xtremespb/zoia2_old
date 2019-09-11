@@ -49,12 +49,33 @@ class PagesEdit extends Component {
         }
     }
 
-    onSaveSuccessHandler = i18n => {
-        UIkit.notification({
-            message: i18n._(t`Data has been saved successfully`),
-            status: 'success'
-        });
-        history.push('/admin/pages?reload=1');
+    onSaveSuccessHandler = (res, i18n) => {
+        if (res && res.data && res.data.statusCode === 200) {
+            UIkit.notification({
+                message: i18n._(t`Data has been saved successfully`),
+                status: 'success'
+            });
+            history.push('/admin/pages?reload=1');
+        } else if (res && res.data) {
+            switch (res.data.errorCode) {
+                case 1:
+                    UIkit.notification({
+                        message: i18n._(t`Duplicate page, check filename and path`),
+                        status: 'danger'
+                    });
+                    break;
+                default:
+                    UIkit.notification({
+                        message: i18n._(t`Could not save a page`),
+                        status: 'danger'
+                    });
+            }
+        } else {
+            UIkit.notification({
+                message: i18n._(t`Could not save a page`),
+                status: 'danger'
+            });
+        }
     }
 
     loadFoldersData = () => new Promise((resolve, reject) => {
@@ -254,7 +275,7 @@ class PagesEdit extends Component {
                 token: this.props.appDataRuntime.token
             }
         } : null}
-        onSaveSuccess={() => this.onSaveSuccessHandler(i18n)}
+        onSaveSuccess={res => this.onSaveSuccessHandler(res, i18n)}
         onLoadError={() => this.setState({ loadingError: true })}
         onLoadSuccess={() => this.setState({ loadingError: false })}
     />);

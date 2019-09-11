@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
+import appDataRuntimeGetConfig from '../../actions/appDataRuntimeGetConfig';
 import UIkit from '../../utils/uikit';
 
 import modulesData from '../../build/modules.json';
@@ -46,6 +47,7 @@ class AdminPanel extends Component {
     componentDidMount = () => {
         window.onresize = this.resizeNav;
         this.resizeNav();
+        this.props.appDataRuntimeGetConfigAction();
     }
 
     componentWillUnmount = () => {
@@ -86,7 +88,7 @@ class AdminPanel extends Component {
             return null;
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
-            <div>
+            {Object.keys(this.props.appDataRuntime.config).length ? (<><div>
                 <nav className="uk-navbar-container za-admin-navbar uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left za-admin-navbar-left">
                         <div className="uk-navbar-item uk-logo">
@@ -133,24 +135,27 @@ class AdminPanel extends Component {
                     </div>
                 </div>
             </div>
-            <div>
-                <div id="offcanvas-nav" uk-offcanvas="overlay:true">
-                    <div className="uk-offcanvas-bar">
-                        <ul className="uk-nav uk-nav-default">
-                            {this.getModulesList('mobile')}
-                        </ul>
+                <div>
+                    <div id="offcanvas-nav" uk-offcanvas="overlay:true">
+                        <div className="uk-offcanvas-bar">
+                            <ul className="uk-nav uk-nav-default">
+                                {this.getModulesList('mobile')}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div></>) : !this.props.appDataRuntime.configError ? <></> : null}
+            {this.props.appDataRuntime.configError ? <></> : null}
         </I18nProvider>);
     };
 }
 
 export default connect(store => ({
     appData: store.appData,
+    appDataRuntime: store.appDataRuntime,
     appLingui: store.appLingui
 }),
     dispatch => ({
         appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language)),
-        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog))
+        appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
+        appDataRuntimeGetConfigAction: () => dispatch(appDataRuntimeGetConfig())
     }))(AdminPanel);
