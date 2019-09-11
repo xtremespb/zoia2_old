@@ -11,7 +11,8 @@ import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
-import config from '../../../../../etc/config.json';
+import api from '../../../../../etc/api.json';
+import site from '../../../../../etc/site.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../../shared/utils/uikit';
 import DialogFolder from './DialogFolder.jsx';
@@ -39,7 +40,7 @@ class PagesEdit extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        removeCookie(`${config.siteId}_auth`);
+        removeCookie(`${site.id}_auth`);
         history.push(`/users/auth?redirect=/admin/pages`);
     }
 
@@ -79,7 +80,7 @@ class PagesEdit extends Component {
     }
 
     loadFoldersData = () => new Promise((resolve, reject) => {
-        axios.post(`${config.apiURL}/api/pages/folders/load`, {
+        axios.post(`${api.url}/api/pages/folders/load`, {
             token: this.props.appDataRuntime.token,
             language: this.props.appData.language
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
@@ -119,7 +120,7 @@ class PagesEdit extends Component {
     });
 
     onSaveFolderHandler = (i18n, folders) => {
-        axios.post(`${config.apiURL}/api/pages/folders/save`, {
+        axios.post(`${api.url}/api/pages/folders/save`, {
             token: this.props.appDataRuntime.token,
             folders: folders.tree
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
@@ -171,7 +172,7 @@ class PagesEdit extends Component {
         axios={axios}
         i18n={i18n}
         commonFields={['path', 'filename']}
-        tabs={config.languages}
+        tabs={site.languages}
         data={
             [
                 [{
@@ -203,9 +204,9 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Content`)}:`,
                     CKEditorInstance: CKEditor,
                     EditorInstance: ClassicEditor,
-                    languages: Object.keys(config.languages),
+                    languages: Object.keys(site.languages),
                     language: this.props.appData.language,
-                    imageUploadURL: `${config.apiURL}/api/pages/image/upload`,
+                    imageUploadURL: `${api.url}/api/pages/image/upload`,
                     imageUploadExtras: {
                         token: this.props.appDataRuntime.token
                     }
@@ -260,7 +261,7 @@ class PagesEdit extends Component {
             CANCEL: t`Cancel`
         }}
         save={{
-            url: `${config.apiURL}/api/pages/save`,
+            url: `${api.url}/api/pages/save`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
@@ -268,7 +269,7 @@ class PagesEdit extends Component {
             }
         }}
         load={this.props.match.params.id ? {
-            url: `${config.apiURL}/api/pages/load`,
+            url: `${api.url}/api/pages/load`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,

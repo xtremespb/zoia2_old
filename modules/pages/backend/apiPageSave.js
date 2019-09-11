@@ -2,8 +2,10 @@ import Ajv from 'ajv';
 import {
     ObjectId
 } from 'mongodb';
+import fs from 'fs-extra';
 import auth from '../../../shared/api/auth';
-import config from '../../../etc/config.json';
+
+const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
 
 const ajv = new Ajv();
 
@@ -139,7 +141,7 @@ export default fastify => ({
                         error: 'Page with such path or filename already exists'
                     }));
             }
-            Object.keys(config.languages).map(language => {
+            Object.keys(site.languages).map(language => {
                 if (formData[language]) {
                     pageData.data[language] = {
                         title: formData[language].title,

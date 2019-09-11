@@ -5,14 +5,15 @@ import {
 import {
     history
 } from '../store/configureStore';
-import config from '../../etc/config.json';
+import api from '../../etc/api.json';
+import site from '../../etc/site.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
     APP_DATA_SET_USER
 } from '../constants/core';
 
 export default token => dispatch => {
-    axios.post(`${config.apiURL}/api/users/logout`, {
+    axios.post(`${api.url}/api/users/logout`, {
         token
     }).then(res => {
         if (res.data.statusCode === 200) {
@@ -24,7 +25,7 @@ export default token => dispatch => {
                 type: APP_DATA_SET_USER,
                 payload: {}
             });
-            removeCookie(`${config.siteId}_auth`);
+            removeCookie(`${site.id}_auth`);
             history.push('/');
         }
     }).catch(() => {

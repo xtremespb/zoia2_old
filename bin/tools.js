@@ -90,10 +90,10 @@
 /*!********************************************************!*\
   !*** c:/Users/mma2/Documents/JS/zoia2/etc/secure.json ***!
   \********************************************************/
-/*! exports provided: secret, authTokenExpiresIn, cookieOptions, mongo, originCORS, trustProxy, development, loglevel, default */
+/*! exports provided: secret, authTokenExpiresIn, cookieOptions, mongo, httpServer, originCORS, trustProxy, development, loglevel, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"secret\\\":\\\"79a947c3cbecfb5819b03f21eb00b3180e649bea0c189a7f4ff0bdd10e1fd292\\\",\\\"authTokenExpiresIn\\\":\\\"7 days\\\",\\\"cookieOptions\\\":{\\\"expires\\\":14,\\\"path\\\":\\\"/\\\",\\\"domain\\\":\\\"\\\",\\\"secure\\\":false,\\\"sameSite\\\":\\\"strict\\\"},\\\"mongo\\\":{\\\"url\\\":\\\"mongodb://localhost:27017\\\",\\\"dbName\\\":\\\"zoia\\\"},\\\"originCORS\\\":\\\"*\\\",\\\"trustProxy\\\":true,\\\"development\\\":false,\\\"loglevel\\\":\\\"info\\\"}\");\n\n//# sourceURL=webpack:///c:/Users/mma2/Documents/JS/zoia2/etc/secure.json?");
+eval("module.exports = JSON.parse(\"{\\\"secret\\\":\\\"79a947c3cbecfb5819b03f21eb00b3180e649bea0c189a7f4ff0bdd10e1fd292\\\",\\\"authTokenExpiresIn\\\":\\\"7 days\\\",\\\"cookieOptions\\\":{\\\"expires\\\":14,\\\"path\\\":\\\"/\\\",\\\"domain\\\":\\\"\\\",\\\"secure\\\":false,\\\"sameSite\\\":\\\"strict\\\"},\\\"mongo\\\":{\\\"url\\\":\\\"mongodb://localhost:27017\\\",\\\"dbName\\\":\\\"zoia\\\"},\\\"httpServer\\\":{\\\"ip\\\":\\\"127.0.0.1\\\",\\\"port\\\":3000},\\\"originCORS\\\":\\\"*\\\",\\\"trustProxy\\\":true,\\\"development\\\":false,\\\"loglevel\\\":\\\"info\\\"}\");\n\n//# sourceURL=webpack:///c:/Users/mma2/Documents/JS/zoia2/etc/secure.json?");
 
 /***/ }),
 

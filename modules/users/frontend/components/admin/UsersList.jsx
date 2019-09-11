@@ -14,7 +14,8 @@ import UIkit from '../../../../../shared/utils/uikit';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appLinguiSetCatalog from '../../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
-import config from '../../../../../etc/config.json';
+import api from '../../../../../etc/api.json';
+import site from '../../../../../etc/site.json';
 import usersListTableSetState from '../../actions/usersListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
@@ -43,7 +44,7 @@ class UserList extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        removeCookie(`${config.siteId}_auth`);
+        removeCookie(`${site.id}_auth`);
         history.push(`/users/auth?redirect=/admin/users`);
     }
 
@@ -101,7 +102,7 @@ class UserList extends Component {
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
         this.usersListTable.current.setLoading(true);
-        axios.post(`${config.apiURL}/api/users/delete`, {
+        axios.post(`${api.url}/api/users/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
@@ -174,16 +175,16 @@ class UserList extends Component {
                                 cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
                                 process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
                             }]}
-                            itemsPerPage={config.commonItemsLimit}
+                            itemsPerPage={this.props.appDataRuntime.config.commonItemsLimit}
                             source={{
-                                url: `${config.apiURL}/api/users/list`,
+                                url: `${api.url}/api/users/list`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token
                                 }
                             }}
                             save={{
-                                url: `${config.apiURL}/api/users/save/field`,
+                                url: `${api.url}/api/users/save/field`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token

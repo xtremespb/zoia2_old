@@ -6,7 +6,7 @@ import { t } from '@lingui/macro';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import UIkit from '../../../../../shared/utils/uikit';
-import config from '../../../../../etc/config.json';
+import site from '../../../../../etc/site.json';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../../shared/components/FormBuilder/index.jsx'));
 
@@ -75,7 +75,7 @@ class DialogFolderEdit extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        tabs={config.languages}
+        tabs={site.languages}
         commonFields={['id']}
         data={
             [
@@ -138,5 +138,6 @@ class DialogFolderEdit extends Component {
 
 export default connect(store => ({
     appData: store.appData,
+    appDataRuntime: store.appDataRuntime
 }),
     () => ({}), null, { forwardRef: true })(DialogFolderEdit);

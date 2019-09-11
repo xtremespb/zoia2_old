@@ -8,7 +8,6 @@ import Icons from 'uikit/dist/js/uikit-icons';
 import UIkit from '../utils/uikit';
 
 import '../styles/uikit.scss';
-// import config from '../../etc/config.json';
 import modules from '../build/modules.json';
 import configureStore, { history } from '../store/configureStore';
 import Error from './Error/Error.jsx';

@@ -8,6 +8,8 @@ const uuid = require('uuid/v1');
 const install = async () => {
     const config = require('../shared/templates/config.json');
     const security = require('../shared/templates/secure.json');
+    const api = require('../shared/templates/api.json');
+    const site = require('../shared/templates/site.json');
     const questions = [{
             type: 'input',
             name: 'ip',
@@ -24,7 +26,7 @@ const install = async () => {
             type: 'input',
             name: 'apiURL',
             message: 'Which Zoia API URL to use?',
-            default: config.apiURL,
+            default: api.url,
         },
         {
             type: 'input',
@@ -53,7 +55,7 @@ const install = async () => {
         console.log('');
         security.httpServer.ip = data.ip;
         security.httpServer.port = data.port;
-        config.apiURL = data.apiURL;
+        api.url = data.apiURL;
         security.mongo.url = data.mongourl;
         security.mongo.dbName = data.mongodb;
         security.loglevel = data.loglevel;
@@ -64,6 +66,14 @@ const install = async () => {
         });
         console.log(`${colors.green(' * ')} Saving configuration to secure.json file...`);
         fs.writeJSONSync(`${__dirname}/../etc/secure.json`, security, {
+            spaces: 2
+        });
+        console.log(`${colors.green(' * ')} Saving configuration to api.json file...`);
+        fs.writeJSONSync(`${__dirname}/../etc/api.json`, api, {
+            spaces: 2
+        });
+        console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);
+        fs.writeJSONSync(`${__dirname}/../etc/site.json`, site, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done`);

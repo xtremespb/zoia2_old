@@ -1,6 +1,7 @@
-import config from '../../../etc/config.json';
+import fs from 'fs-extra';
 import auth from '../../../shared/api/auth';
 
+const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
 const sortColumns = ['username', 'email', 'active'];
 const searchColumns = ['username', 'email'];
 

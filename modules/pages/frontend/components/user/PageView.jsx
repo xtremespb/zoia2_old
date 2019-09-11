@@ -10,7 +10,7 @@ import { Trans } from '@lingui/macro';
 
 import { history } from '../../../../../shared/store/configureStore';
 import Template from '../../../../../shared/templates/default.jsx';
-import config from '../../../../../etc/config.json';
+import api from '../../../../../etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 class PageView extends Component {
@@ -23,7 +23,7 @@ class PageView extends Component {
         this.setState({
             loading: true
         }, () => {
-            axios.post(`${config.apiURL}/api/page/view`, {
+            axios.post(`${api.url}/api/page/view`, {
                 token: this.props.appDataRuntime.token,
                 language: this.props.appData.language,
                 path: this.props.location.pathname

@@ -11,7 +11,8 @@ import { set as setCookie } from 'es-cookie';
 import UIkit from '../../../../../shared/utils/uikit';
 
 import { history } from '../../../../../shared/store/configureStore';
-import config from '../../../../../etc/config.json';
+import api from '../../../../../etc/api.json';
+import site from '../../../../../etc/site.json';
 import appDataSetLanguage from '../../../../../shared/actions/appDataSetLanguage';
 import appDataRuntimeSetToken from '../../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../../shared/actions/appDataSetUser';
@@ -81,7 +82,7 @@ class UserAuth extends Component {
             this.props.appDataRuntimeSetToken(response.data.token);
             this.props.appDataSetUserAction(response.data.user);
             document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
-            setCookie(`${config.siteId}_auth`, response.data.token, config.cookieOptions);
+            setCookie(`${site.id}_auth`, response.data.token, this.props.appDataRuntime.config.cookieOptions);
             return history.push(this.query.redirect || '/');
         }
         if (response.data.statusCode === 403) {
@@ -153,12 +154,12 @@ class UserAuth extends Component {
                             CANCEL: i18n._(t`Cancel`)
                         }}
                         save={{
-                            url: `${config.apiURL}/api/users/login`,
+                            url: `${api.url}/api/users/login`,
                             method: 'POST'
                         }}
                         onSaveSuccess={response => this.onSaveSuccessHandler(response, i18n)}
                     />
-                    {config.allowRegistration ? (<div className="uk-text-center uk-text-small uk-margin-top">
+                    {this.props.appDataRuntime.config.allowRegistration ? (<div className="uk-text-center uk-text-small uk-margin-top">
                         <Link to="/users/register"><Trans>Create Account</Trans></Link>
                         &nbsp;|&nbsp;
                         <Link to="/users/password"><Trans>Forgot Password</Trans></Link>

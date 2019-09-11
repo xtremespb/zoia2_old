@@ -1,6 +1,8 @@
-import config from '../../../etc/config.json';
+import fs from 'fs-extra';
 import auth from '../../../shared/api/auth';
 
+const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
+const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
 const sortColumns = ['title', 'path'];
 
 export default fastify => ({
@@ -30,7 +32,7 @@ export default fastify => ({
                 },
                 language: {
                     type: 'string',
-                    pattern: `^(${Object.keys(config.languages).join('|')})$`
+                    pattern: `^(${Object.keys(site.languages).join('|')})$`
                 }
             },
             required: ['token', 'page', 'sortColumn', 'sortDirection', 'language']
@@ -71,7 +73,7 @@ export default fastify => ({
             };
             const query = {};
             if (req.body.search) {
-                query.$or = [...Object.keys(config.languages).map(language => {
+                query.$or = [...Object.keys(site.languages).map(language => {
                     const sr = {};
                     sr[`data.${language}.title`] = {
                         $regex: req.body.search,
@@ -98,7 +100,7 @@ export default fastify => ({
                 path: 1,
                 filename: 1
             };
-            Object.keys(config.languages).map(language => options.projection[`data.${language}.title`] = 1);
+            Object.keys(site.languages).map(language => options.projection[`data.${language}.title`] = 1);
             options.sort[req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;
             if (req.body.sortColumn === 'path') {
                 options.sort.filename = req.body.sortDirection === 'asc' ? 1 : -1;

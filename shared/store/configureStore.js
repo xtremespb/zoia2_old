@@ -19,11 +19,12 @@ import {
 
 import rootReducer from '../reducers';
 import config from '../../etc/config.json';
+import site from '../../etc/site.json';
 
 export const history = createBrowserHistory();
 
 const persistConfig = {
-    key: `${config.siteId}_root`,
+    key: `${site.id}_root`,
     storage,
     whitelist: ['appData']
 };

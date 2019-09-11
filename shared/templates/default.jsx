@@ -1,15 +1,11 @@
 /* eslint-disable react/prop-types */
-
 import React, { Component } from 'react';
 import { I18nProvider } from '@lingui/react';
 import { connect } from 'react-redux';
-
 import appDataSetLanguage from '../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../actions/appLinguiSetCatalog';
 import appDataRuntimeGetConfig from '../actions/appDataRuntimeGetConfig';
-
-import config from '../../etc/config.json';
-
+import site from '../../etc/site.json';
 import '../styles/flags.css';
 
 class ZoiaTemplate extends Component {
@@ -61,7 +57,7 @@ class ZoiaTemplate extends Component {
         this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
     }
 
-    getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
+    getLanguagesList = prefix => Object.keys(site.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{site.languages[lang]}</a></li>));
 
     render = () => {
         const { catalogs, language } = this.state;
@@ -95,6 +91,7 @@ class ZoiaTemplate extends Component {
 
 export default connect(store => ({
     appData: store.appData,
+    appDataRuntime: store.appDataRuntime,
     appLingui: store.appLingui
 }),
     dispatch => ({

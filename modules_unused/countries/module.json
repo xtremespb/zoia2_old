@@ -1,6 +1,0 @@
-{
-	"id": "countries",
-	"icon": "location",
-	"admin": true,
-	"adminRoute": "/admin/countries"
-}

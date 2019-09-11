@@ -1,24 +1,14 @@
 {
-    "siteId": "zoia2",
-    "languages": {
-        "en": "English",
-        "ru": "Русский"
-    },
     "siteTitle": {
         "en": "Example Website",
         "ru": "Тестовый веб-сайт"
     },
-    "cookieOptions": {
-        "expires": 14,
-        "path": "/",
-        "domain": "",
-        "secure": false,
-        "sameSite": "strict"
-    },
-    "apiURL": "http://127.0.0.1:3000",
     "commonItemsLimit": 12,
     "entrypoints": {
-        "pages": ["/", "/pages"]
+        "pages": [
+            "/",
+            "/pages"
+        ]
     },
     "allowRegistration": true
 }

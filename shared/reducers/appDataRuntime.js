@@ -2,7 +2,7 @@ import {
     get as getCookie
 } from 'es-cookie';
 
-import config from '../../etc/config.json';
+import site from '../../etc/site.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
     APP_DATA_RUNTIME_SET_CONFIG,
@@ -10,7 +10,7 @@ import {
 } from '../constants/core';
 
 const initialState = {
-    token: getCookie(`${config.siteId}_auth`) || null,
+    token: getCookie(`${site.id}_auth`) || null,
     config: {},
     configError: false
 };

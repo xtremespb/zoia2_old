@@ -9,9 +9,8 @@ import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
 import appDataRuntimeGetConfig from '../../actions/appDataRuntimeGetConfig';
 import UIkit from '../../utils/uikit';
-
+import site from '../../../etc/site.json';
 import modulesData from '../../build/modules.json';
-import config from '../../../etc/config.json';
 
 import './AdminPanel.css';
 import '../../styles/flags.css';
@@ -80,7 +79,7 @@ class AdminPanel extends Component {
         this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
     }
 
-    getLanguagesList = prefix => Object.keys(config.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{config.languages[lang]}</a></li>));
+    getLanguagesList = prefix => Object.keys(site.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{site.languages[lang]}</a></li>));
 
     render = () => {
         const { catalogs, language } = this.state;
@@ -143,8 +142,11 @@ class AdminPanel extends Component {
                             </ul>
                         </div>
                     </div>
-                </div></>) : !this.props.appDataRuntime.configError ? <></> : null}
-            {this.props.appDataRuntime.configError ? <></> : null}
+                </div></>) : !this.props.appDataRuntime.configError ? <div className="uk-margin-left uk-margin-top"><div className="uk-margin-small-right" uk-spinner="ratio:0.5" /><Trans>Loading site configuration...</Trans></div> : null}
+            {this.props.appDataRuntime.configError ? <><div className="uk-alert-danger" uk-alert="true">
+                <a className="uk-alert-close" uk-close="true" />
+                <p><Trans>Could not load site configuration. Please try to reload the page to try again.</Trans></p>
+            </div></> : null}
         </I18nProvider>);
     };
 }
