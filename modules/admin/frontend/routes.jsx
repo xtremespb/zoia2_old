@@ -11,11 +11,11 @@ const getAdminStub = () => ((
     </Suspense>
 ));
 
-export default [
+export default () => ([
     (<Route
         key="stubAdmin"
         exact
         path="/admin"
         component={getAdminStub}
     />)
-];
+]);

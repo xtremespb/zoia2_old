@@ -143,10 +143,10 @@ class AdminPanel extends Component {
                         </div>
                     </div>
                 </div></>) : !this.props.appDataRuntime.configError ? <div className="uk-margin-left uk-margin-top"><div className="uk-margin-small-right" uk-spinner="ratio:0.5" /><Trans>Loading site configuration...</Trans></div> : null}
-            {this.props.appDataRuntime.configError ? <><div className="uk-alert-danger" uk-alert="true">
+            {this.props.appDataRuntime.configError ? <div className="uk-alert-danger" uk-alert="true">
                 <a className="uk-alert-close" uk-close="true" />
                 <p><Trans>Could not load site configuration. Please try to reload the page to try again.</Trans></p>
-            </div></> : null}
+            </div> : null}
         </I18nProvider>);
     };
 }

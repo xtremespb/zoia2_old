@@ -10,6 +10,7 @@ const install = async () => {
     const security = require('../shared/templates/secure.json');
     const api = require('../shared/templates/api.json');
     const site = require('../shared/templates/site.json');
+    const entrypoints = require('../shared/templates/entrypoints.json');
     const questions = [{
             type: 'input',
             name: 'ip',
@@ -74,6 +75,10 @@ const install = async () => {
         });
         console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);
         fs.writeJSONSync(`${__dirname}/../etc/site.json`, site, {
+            spaces: 2
+        });
+        console.log(`${colors.green(' * ')} Saving configuration to entrypoints.json file...`);
+        fs.writeJSONSync(`${__dirname}/../etc/entrypoints.json`, entrypoints, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done`);

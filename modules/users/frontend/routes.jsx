@@ -34,7 +34,7 @@ const getUsersEdit = props => ((
     </Suspense>
 ));
 
-export default [
+export default () => ([
     (<Route
         key="usersAuth"
         path="/users/auth"
@@ -64,4 +64,4 @@ export default [
         exact
         component={getUsersEdit}
     />)
-];
+]);

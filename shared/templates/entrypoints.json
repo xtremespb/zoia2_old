@@ -1,0 +1,8 @@
+{
+    "entrypoints": {
+        "pages": [
+            "/",
+            "/pages"
+        ]
+    }
+}

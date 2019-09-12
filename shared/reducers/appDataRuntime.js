@@ -12,7 +12,8 @@ import {
 const initialState = {
     token: getCookie(`${site.id}_auth`) || null,
     config: {},
-    configError: false
+    configError: false,
+    routes: []
 };
 
 export default ((state = initialState, action) => {

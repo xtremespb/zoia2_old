@@ -32,7 +32,7 @@ const getPagesEdit = props => ((
     </Suspense>
 ));
 
-export default [(config.entrypoints && config.entrypoints.pages ? config.entrypoints.pages : []).map((p) => p === '/' ? (<Route
+export default entrypoints => ([(entrypoints.pages ? entrypoints.pages : []).map((p) => p === '/' ? (<Route
     key={`pageView_${uuid()}`}
     path={p}
     component={getPageView}
@@ -59,4 +59,4 @@ export default [(config.entrypoints && config.entrypoints.pages ? config.entrypo
     path="/admin/pages/edit/:id"
     exact
     component={getPagesEdit}
-/>)];
+/>)]);
