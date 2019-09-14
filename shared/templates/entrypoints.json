@@ -1,8 +1,6 @@
 {
-    "entrypoints": {
-        "pages": [
-            "/",
-            "/pages"
-        ]
-    }
+    "pages": [
+        "/",
+        "/pages"
+    ]
 }

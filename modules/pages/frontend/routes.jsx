@@ -2,8 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import uuid from 'uuid/v1';
 
-import config from '../../../etc/config.json';
-
 const PagesList = lazy(() => import(/* webpackChunkName: "PagesList" */ './components/admin/PagesList.jsx'));
 const PagesEdit = lazy(() => import(/* webpackChunkName: "PagesEdit" */ './components/admin/PagesEdit.jsx'));
 const PageView = lazy(() => import(/*  webpackChunkName: "PageView" */ './components/user/PageView.jsx'));

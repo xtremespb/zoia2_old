@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 
-const data = fs.readJSONSync(`${__dirname}/../etc/entrypoints.json`);
+const entrypoints = fs.readJSONSync(`${__dirname}/../etc/entrypoints.json`);
 
 export default () => ({
     async handler(req, rep) {
@@ -8,7 +8,7 @@ export default () => ({
             return rep.code(200)
                 .send(JSON.stringify({
                     statusCode: 200,
-                    data
+                    entrypoints
                 }));
         } catch (e) {
             req.log.error({

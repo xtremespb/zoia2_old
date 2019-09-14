@@ -44,7 +44,7 @@ export default () => ({
             }
             const query = {
                 $or: [{
-                    path: `/${parts.join('/')}`,
+                    path: `/${(parts || []).join('/')}`,
                     filename
                 }, {
                     path,
