@@ -52,7 +52,7 @@ class PageView extends Component {
             }).catch(() => {
                 this.setState({
                     loading: false
-                });
+                }, () => history.push('/error/404'));
             });
         });
     }
