@@ -31,3 +31,4 @@ node_modules/
 /dist/*.zip
 /etc/*.json
 uploads
+/bin/tools.js
