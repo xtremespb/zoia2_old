@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { set as setCookie } from 'es-cookie';
+import appDataRuntimeGetConfig from '../../../../../shared/actions/appDataRuntimeGetConfig';
 import UIkit from '../../../../../shared/utils/uikit';
 
 import { history } from '../../../../../shared/store/configureStore';
@@ -37,6 +38,7 @@ class UserAuth extends Component {
     }
 
     componentDidMount = () => {
+        this.props.appDataRuntimeGetConfigAction();
         document.getElementById('app').classList.add('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-users-appTheme');
         this.query = queryString.parse(window.location.search);
         if (this.props.appDataRuntime.token) {
@@ -98,7 +100,7 @@ class UserAuth extends Component {
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <I18n>{({ i18n }) => {
-                this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Authorize`), this.props.appData.language);
+                this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Authorize`), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
                 return (<div className="uk-card uk-card-default uk-card-body uk-card-small">
                     <FormBuilder
                         prefix="za_users_authForm"
@@ -147,11 +149,7 @@ class UserAuth extends Component {
                         lang={{
                             ERR_VMANDATORY: i18n._(t`Field is required`),
                             ERR_VFORMAT: i18n._(t`Invalid format`),
-                            ERR_LOAD: i18n._(t`Could not load data from server`),
-                            ERR_SAVE: i18n._(t`Could not save data`),
-                            WILL_BE_DELETED: i18n._(t`will be deleted. Are you sure?`),
-                            YES: i18n._(t`Yes`),
-                            CANCEL: i18n._(t`Cancel`)
+                            ERR_SAVE: i18n._(t`Could not authorize on server`),
                         }}
                         save={{
                             url: `${api.url}/api/users/login`,
@@ -181,5 +179,6 @@ export default connect(store => ({
         appDataRuntimeSetToken: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
-        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
+        appDataRuntimeGetConfigAction: () => dispatch(appDataRuntimeGetConfig()),
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle))
     }))(UserAuth);

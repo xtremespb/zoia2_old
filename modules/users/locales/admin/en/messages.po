@@ -21,14 +21,6 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:89
-msgid "Active"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:100
-msgid "Administrator"
-msgstr ""
-
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:179
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:217
 #: modules/bases/frontend/components/admin/DialogDelete.jsx:53
@@ -53,11 +45,6 @@ msgstr ""
 #: modules/users/frontend/components/admin/UsersEdit.jsx:133
 #: modules/users/frontend/components/admin/UsersEdit.jsx:171
 msgid "Cancel"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersList.jsx:110
-#: modules/users/frontend/components/admin/UsersList.jsx:114
-msgid "Cannot delete one or more users"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/Translations.jsx:9
@@ -124,14 +111,6 @@ msgstr ""
 msgid "Could not save data"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:205
-msgid "Create User"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersList.jsx:139
-msgid "Create new user"
-msgstr ""
-
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:56
 #: modules/boats/frontend/components/admin/BoatsEdit.jsx:60
 #: modules/countries/frontend/components/admin/CountriesEdit.jsx:56
@@ -157,36 +136,12 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersList.jsx:139
-msgid "Delete selected users"
-msgstr ""
-
-#: modules/users/frontend/components/admin/Translations.jsx:10
-msgid "Duplicate e-mail"
-msgstr ""
-
-#: modules/users/frontend/components/admin/Translations.jsx:11
-msgid "Duplicate username"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:77
-msgid "E-mail"
-msgstr ""
-
 #: modules/bases/frontend/components/admin/BasesList.jsx:119
 #: modules/boats/frontend/components/admin/BoatsList.jsx:119
 #: modules/countries/frontend/components/admin/CountriesList.jsx:119
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:119
 #: modules/users/frontend/components/admin/UsersList.jsx:175
 msgid "Edit"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:205
-msgid "Edit User"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:78
-msgid "Example: username@zoiajs.org"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:210
@@ -204,10 +159,6 @@ msgstr ""
 #: modules/users/frontend/components/admin/UsersEdit.jsx:164
 #: modules/users/frontend/components/admin/UsersList.jsx:199
 msgid "Field is required"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:88
-msgid "Inactive"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:211
@@ -232,10 +183,6 @@ msgstr ""
 msgid "Invalid format"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:70
-msgid "Latin chars/_/-, length: 4-32"
-msgstr ""
-
 #: modules/bases/frontend/components/admin/BasesList.jsx:177
 #: modules/boats/frontend/components/admin/BoatsList.jsx:177
 #: modules/countries/frontend/components/admin/CountriesList.jsx:177
@@ -252,32 +199,12 @@ msgstr ""
 msgid "No records to display"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:99
-msgid "Normal User"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:120
-msgid ""
-"Only enter a new password in case you wish to change it for the current "
-"user. Password should be at least 8 characters long."
-msgstr ""
-
 #: modules/bases/frontend/components/admin/BasesList.jsx:114
 #: modules/boats/frontend/components/admin/BoatsList.jsx:114
 #: modules/countries/frontend/components/admin/CountriesList.jsx:114
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:114
 #: modules/users/frontend/components/admin/UsersList.jsx:113
 msgid "Operation complete"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:108
-msgid "Password"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:120
-msgid ""
-"Password is required when creating a new user, should be at least 8 "
-"characters long."
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:212
@@ -289,10 +216,6 @@ msgstr ""
 #: modules/destinations/frontend/components/admin/DestinationsEdit.jsx:123
 #: modules/users/frontend/components/admin/UsersEdit.jsx:166
 msgid "Passwords do not match"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:95
-msgid "Permissions"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesList.jsx:64
@@ -309,10 +232,6 @@ msgstr ""
 #: modules/destinations/frontend/components/admin/DestinationsList.jsx:146
 #: modules/users/frontend/components/admin/UsersList.jsx:139
 msgid "Refresh"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:114
-msgid "Repeat Password"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/Translations.jsx:13
@@ -335,33 +254,12 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: modules/users/frontend/components/admin/UsersEdit.jsx:83
-msgid "Status"
-msgstr ""
-
-#: modules/users/frontend/components/admin/DialogDelete.jsx:49
-msgid "The following user(s) will be permanently deleted:"
-msgstr ""
-
 #: modules/bases/frontend/components/admin/Translations.jsx:12
 #: modules/boats/frontend/components/admin/Translations.jsx:12
 #: modules/countries/frontend/components/admin/Translations.jsx:12
 #: modules/destinations/frontend/components/admin/Translations.jsx:12
 #: modules/users/frontend/components/admin/Translations.jsx:13
 msgid "Too short"
-msgstr ""
-
-#: modules/users/frontend/components/admin/Translations.jsx:12
-msgid "User not found"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersEdit.jsx:69
-msgid "Username"
-msgstr ""
-
-#: modules/users/frontend/components/admin/UsersList.jsx:128
-#: modules/users/frontend/components/admin/UsersList.jsx:130
-msgid "Users"
 msgstr ""
 
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:216
@@ -376,10 +274,6 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: modules/users/frontend/components/admin/Translations.jsx:8
-msgid "users"
-msgstr "Users"
-
 #: modules/bases/frontend/components/admin/BasesEdit.jsx:215
 #: modules/boats/frontend/components/admin/BoatAvailabilityDialog.jsx:298
 #: modules/boats/frontend/components/admin/BoatBlocksDialog.jsx:87
@@ -391,3 +285,109 @@ msgstr "Users"
 #: modules/users/frontend/components/admin/UsersEdit.jsx:169
 msgid "will be deleted. Are you sure?"
 msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:90
+msgid "Active"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:101
+msgid "Administrator"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:111
+#: modules/users/frontend/components/admin/UsersList.jsx:115
+msgid "Cannot delete one or more users"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:206
+msgid "Create User"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:140
+msgid "Create new user"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:140
+msgid "Delete selected users"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:10
+msgid "Duplicate e-mail"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:11
+msgid "Duplicate username"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:78
+msgid "E-mail"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:206
+msgid "Edit User"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:79
+msgid "Example: username@zoiajs.org"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:89
+msgid "Inactive"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:71
+msgid "Latin chars/_/-, length: 4-32"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:100
+msgid "Normal User"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:121
+msgid ""
+"Only enter a new password in case you wish to change it for the current "
+"user. Password should be at least 8 characters long."
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:109
+msgid "Password"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:121
+msgid ""
+"Password is required when creating a new user, should be at least 8 "
+"characters long."
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:96
+msgid "Permissions"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:115
+msgid "Repeat Password"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:84
+msgid "Status"
+msgstr ""
+
+#: modules/users/frontend/components/admin/DialogDelete.jsx:49
+msgid "The following user(s) will be permanently deleted:"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:12
+msgid "User not found"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersEdit.jsx:70
+msgid "Username"
+msgstr ""
+
+#: modules/users/frontend/components/admin/UsersList.jsx:129
+#: modules/users/frontend/components/admin/UsersList.jsx:131
+msgid "Users"
+msgstr ""
+
+#: modules/users/frontend/components/admin/Translations.jsx:8
+msgid "users"
+msgstr "Users"

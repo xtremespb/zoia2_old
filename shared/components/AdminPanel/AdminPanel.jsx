@@ -44,9 +44,9 @@ class AdminPanel extends Component {
     resizeNav = () => document.getElementById('za_admin_nav_wrap') ? document.getElementById('za_admin_nav_wrap').style.height = `${window.innerHeight - 64}px` : null;
 
     componentDidMount = () => {
+        this.props.appDataRuntimeGetConfigAction();
         window.onresize = this.resizeNav;
         this.resizeNav();
-        this.props.appDataRuntimeGetConfigAction();
     }
 
     componentWillUnmount = () => {

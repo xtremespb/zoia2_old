@@ -6,7 +6,7 @@ import {
 } from '../constants/core';
 
 export default () => async (dispatch, getState) => {
-    if (!Object.keys(getState().appDataRuntime.config).length) {
+    if (Object.keys(getState().appDataRuntime.config).length < 2) {
         try {
             const res = await axios.post(`${api.url}/api/config/load`, {});
             if (res && res.data && res.data.statusCode === 200 && res.data.config) {

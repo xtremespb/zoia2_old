@@ -3,7 +3,27 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        54
+        56
+      ]
+    ]
+  },
+  "Duplicate page, check filename and path": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        64
+      ]
+    ]
+  },
+  "Could not save a page": {
+    "origin": [
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        70
+      ],
+      [
+        "modules/pages/frontend/components/admin/PagesEdit.jsx",
+        76
       ]
     ]
   },
@@ -11,15 +31,15 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        109
+        131
       ],
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        118
+        140
       ],
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        236
+        258
       ]
     ]
   },
@@ -27,11 +47,11 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        140
+        162
       ],
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        235
+        257
       ]
     ]
   },
@@ -39,7 +59,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        160
+        182
       ]
     ]
   },
@@ -47,7 +67,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        162
+        184
       ]
     ]
   },
@@ -55,7 +75,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        168
+        190
       ]
     ]
   },
@@ -63,7 +83,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        175
+        197
       ]
     ]
   },
@@ -71,7 +91,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        176
+        198
       ]
     ]
   },
@@ -79,7 +99,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        182
+        204
       ]
     ]
   },
@@ -87,11 +107,11 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        203
+        225
       ],
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        239
+        261
       ]
     ]
   },
@@ -99,7 +119,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        209
+        231
       ]
     ]
   },
@@ -107,7 +127,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        232
+        254
       ]
     ]
   },
@@ -115,7 +135,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        233
+        255
       ]
     ]
   },
@@ -123,7 +143,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        234
+        256
       ]
     ]
   },
@@ -131,7 +151,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        237
+        259
       ]
     ]
   },
@@ -139,7 +159,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        238
+        260
       ]
     ]
   },
@@ -147,7 +167,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        273
+        295
       ]
     ]
   },
@@ -155,7 +175,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        273
+        295
       ]
     ]
   },
@@ -163,7 +183,7 @@
     "origin": [
       [
         "modules/pages/frontend/components/admin/PagesEdit.jsx",
-        275
+        297
       ]
     ]
   }

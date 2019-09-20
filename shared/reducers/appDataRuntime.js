@@ -11,7 +11,9 @@ import {
 
 const initialState = {
     token: getCookie(`${site.id}_auth`) || null,
-    config: {},
+    config: {
+        siteTitle: {}
+    },
     configError: false,
     routes: []
 };

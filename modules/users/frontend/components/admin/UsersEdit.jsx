@@ -201,7 +201,7 @@ class UsersEdit extends Component {
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
-                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit User' : 'Create User'), this.props.appData.language);
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit User' : 'Create User'), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
                     return (<>
                         <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit User</Trans> : <Trans>Create User</Trans>}</div>
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
@@ -222,5 +222,5 @@ export default connect(store => ({
     dispatch => ({
         appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
-        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle))
     }))(UsersEdit);

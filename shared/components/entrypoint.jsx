@@ -50,6 +50,8 @@ const ERR_NO_ROUTES_MESSAGE = 'Could not load website. Please try to refresh the
             document.getElementById('app')
         );
     } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         ReactDOM.render(
             errorMessage,
             document.getElementById('app')

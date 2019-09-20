@@ -1,5 +1,6 @@
 {
   "pages": {
+    "defaults": "Pages",
     "origin": [
       [
         "modules/pages/frontend/components/admin/Translations.jsx",

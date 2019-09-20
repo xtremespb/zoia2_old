@@ -4,11 +4,5 @@
         "ru": "Тестовый веб-сайт"
     },
     "commonItemsLimit": 12,
-    "entrypoints": {
-        "pages": [
-            "/",
-            "/pages"
-        ]
-    },
     "allowRegistration": true
 }

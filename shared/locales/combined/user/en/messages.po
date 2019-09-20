@@ -13,36 +13,40 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/users/frontend/components/user/UserAuth.jsx:100
-#: modules/users/frontend/components/user/UserAuth.jsx:132
+#: modules/users/frontend/components/user/UserAuth.jsx:103
+#: modules/users/frontend/components/user/UserAuth.jsx:135
 msgid "Authorize"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:153
+#: modules/users/frontend/components/user/UserAuth.jsx:156
 msgid "Cancel"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:90
+#: modules/users/frontend/components/user/UserAuth.jsx:93
 msgid "Could not authorize"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:149
+#: modules/users/frontend/components/user/UserAuth.jsx:152
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:150
+#: shared/components/AdminPanel/AdminPanel.jsx:148
+msgid "Could not load site configuration. Please try to reload the page to try again."
+msgstr ""
+
+#: modules/users/frontend/components/user/UserAuth.jsx:153
 msgid "Could not save data"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:162
+#: modules/users/frontend/components/user/UserAuth.jsx:165
 msgid "Create Account"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:147
+#: modules/users/frontend/components/user/UserAuth.jsx:150
 msgid "Field is required"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:164
+#: modules/users/frontend/components/user/UserAuth.jsx:167
 msgid "Forgot Password"
 msgstr ""
 
@@ -50,11 +54,11 @@ msgstr ""
 msgid "Internal Error"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:148
+#: modules/users/frontend/components/user/UserAuth.jsx:151
 msgid "Invalid format"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:88
+#: modules/users/frontend/components/user/UserAuth.jsx:91
 msgid "Invalid username or password"
 msgstr ""
 
@@ -62,7 +66,11 @@ msgstr ""
 msgid "Loading data, please wait…"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:102
+#: shared/components/AdminPanel/AdminPanel.jsx:145
+msgid "Loading site configuration..."
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:103
 msgid "Log Out"
 msgstr ""
 
@@ -70,18 +78,18 @@ msgstr ""
 msgid "Page not Found"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:120
+#: modules/users/frontend/components/user/UserAuth.jsx:123
 msgid "Password"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:113
+#: modules/users/frontend/components/user/UserAuth.jsx:116
 msgid "Username"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:152
+#: modules/users/frontend/components/user/UserAuth.jsx:155
 msgid "Yes"
 msgstr ""
 
-#: modules/users/frontend/components/user/UserAuth.jsx:151
+#: modules/users/frontend/components/user/UserAuth.jsx:154
 msgid "will be deleted. Are you sure?"
 msgstr ""

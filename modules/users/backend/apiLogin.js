@@ -45,7 +45,13 @@ export default fastify => ({
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 403,
-                        message: 'User not found or invalid password'
+                        message: 'User not found or invalid password',
+                        errors: {
+                            default: {
+                                username: '',
+                                password: ''
+                            }
+                        }
                     }));
             }
             // Prepare token

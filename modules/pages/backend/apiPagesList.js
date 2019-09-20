@@ -108,9 +108,10 @@ export default fastify => ({
             const pages = (await this.mongo.db.collection('pages').find(query, options).toArray() || []).map(p => {
                 const page = {
                     _id: p._id,
-                    path: `${p.path === '/' ? '' : p.path}${p.filename ? `/${p.filename}` : ''}`
+                    path: `${p.path === '/' ? '' : p.path}${p.filename ? `/${p.filename}` : ''}` || '/'
                 };
-                page.title = p.data[req.body.language] && p.data[req.body.language].title ? p.data[req.body.language].title : '';
+                const defaultLanguage = Object.keys(site.languages)[0];
+                page.title = p.data[req.body.language] && p.data[req.body.language].title ? p.data[req.body.language].title : null || p.data[defaultLanguage] ? p.data[defaultLanguage].title : '';
                 return page;
             });
             // Send response

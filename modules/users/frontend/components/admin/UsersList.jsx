@@ -126,7 +126,7 @@ class UserList extends Component {
         <AdminPanel>
             <I18n>
                 {({ i18n }) => {
-                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language);
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Users`), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
                     return (<>
                         <div className="uk-title-head uk-margin-bottom">{i18n._(t`Users`)}</div>
                         <Table
@@ -226,5 +226,5 @@ export default connect(store => ({
         appDataSetUserAction: user => dispatch(appDataSetUser(user)),
         usersListTableSetStateAction: state => dispatch(usersListTableSetState(state)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
-        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle))
     }))(UserList);

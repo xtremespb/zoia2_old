@@ -39,7 +39,7 @@ class PageView extends Component {
                             return null;
                         }
                     });
-                    this.props.appDataRuntimeSetDocumentTitleAction(res.data.page.data[this.props.appData.language].title, this.props.appData.language);
+                    this.props.appDataRuntimeSetDocumentTitleAction(res.data.page.data[this.props.appData.language].title, this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
                     this.setState({
                         content,
                         loading: false
@@ -78,5 +78,5 @@ export default connect(store => ({
     appDataRuntime: store.appDataRuntime
 }),
     dispatch => ({
-        appDataRuntimeSetDocumentTitleAction: (documentTitle, language) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language))
+        appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle))
     }))(PageView);

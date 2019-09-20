@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        88
+        91
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        90
+        93
       ]
     ]
   },
@@ -19,11 +19,11 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        100
+        103
       ],
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        132
+        135
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        113
+        116
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        120
+        123
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        147
+        150
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        148
+        151
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        149
+        152
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        150
+        153
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        151
+        154
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        152
+        155
       ]
     ]
   },
@@ -95,7 +95,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        153
+        156
       ]
     ]
   },
@@ -103,7 +103,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        162
+        165
       ]
     ]
   },
@@ -111,7 +111,7 @@
     "origin": [
       [
         "modules/users/frontend/components/user/UserAuth.jsx",
-        164
+        167
       ]
     ]
   }

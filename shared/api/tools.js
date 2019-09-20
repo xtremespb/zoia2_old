@@ -67,8 +67,8 @@ const splitLocales = () => {
                     return;
                 }
                 console.log(`${colors.green(' * ')} Processing module: ${m}`);
-                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../../modules/${m}/locales/${t}/${locale}`;
-                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`;
+                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
+                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
