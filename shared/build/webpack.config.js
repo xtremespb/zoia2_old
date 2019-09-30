@@ -373,6 +373,7 @@ if (process.argv.indexOf('--build:admin') > -1) {
 
 console.log('');
 console.log('Cleaning up...');
+fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'uploads'));
 fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
 fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
 fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
