@@ -1,0 +1,26 @@
+{
+  "The following user(s) will be permanently deleted:": {
+    "origin": [
+      [
+        "modules/users/admin/components/DialogDelete.jsx",
+        49
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/users/admin/components/DialogDelete.jsx",
+        53
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/users/admin/components/DialogDelete.jsx",
+        54
+      ]
+    ]
+  }
+}

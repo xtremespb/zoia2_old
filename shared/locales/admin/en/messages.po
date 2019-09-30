@@ -1,0 +1,346 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2019-07-09 12:39+0300\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: modules/pages/admin/components/PagesList.jsx:162/\n/modules/pages/admin/components/Translations.jsx:14/\n/modules/users/admin/components/Translations.jsx:15
+msgid "Actions"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:90
+msgid "Active"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:178
+msgid "Add"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:101
+msgid "Administrator"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:103/\n/modules/users/admin/components/UserAuth.jsx:135
+msgid "Authorize"
+msgstr ""
+
+#: modules/pages/admin/components/DialogDelete.jsx:53/\n/modules/pages/admin/components/DialogFolder.jsx:195/\n/modules/pages/admin/components/DialogFolder.jsx:211/\n/modules/pages/admin/components/DialogFolderEdit.jsx:107/\n/modules/pages/admin/components/DialogFolderEdit.jsx:131/\n/modules/pages/admin/components/PagesEdit.jsx:225/\n/modules/pages/admin/components/PagesEdit.jsx:261/\n/modules/users/admin/components/DialogDelete.jsx:53/\n/modules/users/admin/components/UsersEdit.jsx:134/\n/modules/users/admin/components/UsersEdit.jsx:172
+msgid "Cancel"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:112/\n/modules/pages/admin/components/PagesList.jsx:116
+msgid "Cannot delete one or more pages"
+msgstr ""
+
+#: modules/users/admin/components/UsersList.jsx:111/\n/modules/users/admin/components/UsersList.jsx:115
+msgid "Cannot delete one or more users"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:9/\n/modules/users/admin/components/Translations.jsx:9
+msgid "Cannot update database record"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:204
+msgid "Content"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:93
+msgid "Could not authorize"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:152
+msgid "Could not authorize on server"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:187/\n/modules/users/admin/components/UsersList.jsx:198
+msgid "Could not load data"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:191/\n/modules/pages/admin/components/DialogFolderEdit.jsx:103/\n/modules/pages/admin/components/PagesEdit.jsx:162/\n/modules/pages/admin/components/PagesEdit.jsx:257/\n/modules/users/admin/components/UsersEdit.jsx:168
+msgid "Could not load data from server"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:297/\n/modules/users/admin/components/UsersEdit.jsx:208
+msgid ""
+"Could not load data from server. Please check your URL or try to "
+"<0>reload</0> data."
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:155
+msgid ""
+"Could not load site configuration. Please try to reload the page to try "
+"again."
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:70/\n/modules/pages/admin/components/PagesEdit.jsx:76
+msgid "Could not save a page"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:192/\n/modules/pages/admin/components/DialogFolderEdit.jsx:104/\n/modules/pages/admin/components/PagesEdit.jsx:131/\n/modules/pages/admin/components/PagesEdit.jsx:140/\n/modules/pages/admin/components/PagesEdit.jsx:258/\n/modules/pages/admin/components/PagesList.jsx:71/\n/modules/pages/admin/components/PagesList.jsx:74/\n/modules/pages/admin/components/PagesList.jsx:188/\n/modules/users/admin/components/UsersEdit.jsx:169/\n/modules/users/admin/components/UsersList.jsx:71/\n/modules/users/admin/components/UsersList.jsx:74/\n/modules/users/admin/components/UsersList.jsx:199
+msgid "Could not save data"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid "Create User"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:147
+msgid "Create new page"
+msgstr ""
+
+#: modules/users/admin/components/UsersList.jsx:140
+msgid "Create new user"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:56/\n/modules/users/admin/components/UsersEdit.jsx:51
+msgid "Data has been saved successfully"
+msgstr ""
+
+#: modules/pages/admin/components/DialogDelete.jsx:54/\n/modules/pages/admin/components/DialogFolder.jsx:180/\n/modules/pages/admin/components/PagesList.jsx:122/\n/modules/users/admin/components/DialogDelete.jsx:54/\n/modules/users/admin/components/UsersList.jsx:176
+msgid "Delete"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:147
+msgid "Delete selected pages"
+msgstr ""
+
+#: modules/users/admin/components/UsersList.jsx:140
+msgid "Delete selected users"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:184
+msgid "Displayed in browser window"
+msgstr ""
+
+#: modules/users/admin/components/Translations.jsx:10
+msgid "Duplicate e-mail"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:10
+msgid "Duplicate page"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:64
+msgid "Duplicate page, check filename and path"
+msgstr ""
+
+#: modules/users/admin/components/Translations.jsx:11
+msgid "Duplicate username"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:78
+msgid "E-mail"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:179/\n/modules/pages/admin/components/PagesList.jsx:120/\n/modules/users/admin/components/UsersList.jsx:176
+msgid "Edit"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:295
+msgid "Edit Page"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid "Edit User"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:79
+msgid "Example: username@zoiajs.org"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:188/\n/modules/pages/admin/components/DialogFolderEdit.jsx:100/\n/modules/pages/admin/components/PagesEdit.jsx:254/\n/modules/pages/admin/components/PagesList.jsx:189/\n/modules/users/admin/components/UserAuth.jsx:150/\n/modules/users/admin/components/UsersEdit.jsx:165/\n/modules/users/admin/components/UsersList.jsx:200
+msgid "Field is required"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:197
+msgid "Filename"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:87
+msgid "ID"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:89
+msgid "Inactive"
+msgstr ""
+
+#: shared/components/Error/Error.jsx:59
+msgid "Internal Error"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:189/\n/modules/pages/admin/components/DialogFolderEdit.jsx:101/\n/modules/pages/admin/components/PagesEdit.jsx:255/\n/modules/pages/admin/components/PagesList.jsx:68/\n/modules/pages/admin/components/PagesList.jsx:190/\n/modules/users/admin/components/UserAuth.jsx:151/\n/modules/users/admin/components/UsersEdit.jsx:166/\n/modules/users/admin/components/UsersList.jsx:68/\n/modules/users/admin/components/UsersList.jsx:201
+msgid "Invalid format"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:91
+msgid "Invalid username or password"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:198
+msgid "Latin characters, numbers, _, - (length: 0-64)"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:71
+msgid "Latin chars/_/-, length: 4-32"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:185/\n/modules/users/admin/components/UsersList.jsx:196
+msgid "Loading data, please wait…"
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:151
+msgid "Loading site configuration..."
+msgstr ""
+
+#: shared/components/AdminPanel/AdminPanel.jsx:109
+msgid "Log Out"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:295
+msgid "New Page"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:186/\n/modules/users/admin/components/UsersList.jsx:197
+msgid "No records to display"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:100
+msgid "Normal User"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:121
+msgid ""
+"Only enter a new password in case you wish to change it for the current "
+"user. Password should be at least 8 characters long."
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:115/\n/modules/users/admin/components/UsersList.jsx:114
+msgid "Operation complete"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:150
+msgid "Page"
+msgstr ""
+
+#: shared/components/Error/Error.jsx:59
+msgid "Page not Found"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:11
+msgid "Page not found"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:136/\n/modules/pages/admin/components/PagesList.jsx:138
+msgid "Pages"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:123/\n/modules/users/admin/components/UsersEdit.jsx:109
+msgid "Password"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:121
+msgid ""
+"Password is required when creating a new user, should be at least 8 "
+"characters long."
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:190/\n/modules/pages/admin/components/DialogFolderEdit.jsx:102/\n/modules/pages/admin/components/PagesEdit.jsx:256/\n/modules/users/admin/components/UsersEdit.jsx:167
+msgid "Passwords do not match"
+msgstr ""
+
+#: modules/pages/admin/components/PagesEdit.jsx:190/\n/modules/pages/admin/components/PagesList.jsx:156
+msgid "Path"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:96
+msgid "Permissions"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:71
+msgid "Please select an item first"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:65/\n/modules/users/admin/components/UsersList.jsx:65
+msgid "Record with the entered value already exists"
+msgstr ""
+
+#: modules/pages/admin/components/PagesList.jsx:147/\n/modules/users/admin/components/UsersList.jsx:140
+msgid "Refresh"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:115
+msgid "Repeat Password"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:13/\n/modules/users/admin/components/Translations.jsx:14
+msgid "Required"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:212
+msgid "Root"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:132/\n/modules/pages/admin/components/PagesEdit.jsx:231/\n/modules/users/admin/components/UsersEdit.jsx:140
+msgid "Save"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:213
+msgid "Select"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:84
+msgid "Status"
+msgstr ""
+
+#: modules/pages/admin/components/DialogDelete.jsx:49
+msgid "The following page(s) will be permanently deleted:"
+msgstr ""
+
+#: modules/users/admin/components/DialogDelete.jsx:49
+msgid "The following user(s) will be permanently deleted:"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:94/\n/modules/pages/admin/components/PagesEdit.jsx:182
+msgid "Title"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:12/\n/modules/users/admin/components/Translations.jsx:13
+msgid "Too short"
+msgstr ""
+
+#: modules/users/admin/components/Translations.jsx:12
+msgid "User not found"
+msgstr ""
+
+#: modules/users/admin/components/UserAuth.jsx:116/\n/modules/users/admin/components/UsersEdit.jsx:70
+msgid "Username"
+msgstr ""
+
+#: modules/users/admin/components/UsersList.jsx:129/\n/modules/users/admin/components/UsersList.jsx:131
+msgid "Users"
+msgstr ""
+
+#: modules/pages/admin/components/DialogFolder.jsx:194/\n/modules/pages/admin/components/DialogFolderEdit.jsx:106/\n/modules/pages/admin/components/PagesEdit.jsx:260/\n/modules/users/admin/components/UsersEdit.jsx:171
+msgid "Yes"
+msgstr ""
+
+#: modules/pages/admin/components/Translations.jsx:8
+msgid "pages"
+msgstr "Pages"
+
+#: modules/users/admin/components/Translations.jsx:8
+msgid "users"
+msgstr "Users"
+
+#: modules/pages/admin/components/DialogFolder.jsx:193/\n/modules/pages/admin/components/DialogFolderEdit.jsx:105/\n/modules/pages/admin/components/PagesEdit.jsx:259/\n/modules/users/admin/components/UsersEdit.jsx:170
+msgid "will be deleted. Are you sure?"
+msgstr ""

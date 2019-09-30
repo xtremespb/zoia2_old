@@ -1,0 +1,59 @@
+{
+  "countries": {
+    "defaults": "Countries",
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        8
+      ]
+    ]
+  },
+  "Cannot update database record": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        9
+      ]
+    ]
+  },
+  "Duplicate country": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        10
+      ]
+    ]
+  },
+  "Country not found": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        11
+      ]
+    ]
+  },
+  "Too short": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        12
+      ]
+    ]
+  },
+  "Required": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        13
+      ]
+    ]
+  },
+  "Actions": {
+    "origin": [
+      [
+        "modules/countries/admin/components/Translations.jsx",
+        14
+      ]
+    ]
+  }
+}

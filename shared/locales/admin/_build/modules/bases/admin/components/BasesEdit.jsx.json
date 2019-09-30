@@ -1,0 +1,158 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        57
+      ]
+    ]
+  },
+  "Could not get a list of destinations": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        89
+      ]
+    ]
+  },
+  "Could not get a list of countries": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        123
+      ]
+    ]
+  },
+  "Destination": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        140
+      ]
+    ]
+  },
+  "Country": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        150
+      ]
+    ]
+  },
+  "Base": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        160
+      ]
+    ]
+  },
+  "Base (RU)": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        166
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        180
+      ],
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        218
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        186
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        211
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        212
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        213
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        214
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        215
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        216
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        217
+      ]
+    ]
+  },
+  "Edit Base": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        254
+      ]
+    ]
+  },
+  "New Base": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        254
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/bases/admin/components/BasesEdit.jsx",
+        256
+      ]
+    ]
+  }
+}

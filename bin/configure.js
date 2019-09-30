@@ -10,18 +10,29 @@ const install = async () => {
     const security = require('../shared/templates/secure.json');
     const api = require('../shared/templates/api.json');
     const site = require('../shared/templates/site.json');
-    const entrypoints = require('../shared/templates/entrypoints.json');
     const questions = [{
             type: 'input',
-            name: 'ip',
+            name: 'ipAPI',
             message: 'Which IP address should API listen to?',
-            default: security.httpServer.ip,
+            default: security.apiServer.ip,
         },
         {
             type: 'input',
-            name: 'port',
+            name: 'portAPI',
             message: 'Which port should API listen to?',
-            default: security.httpServer.port,
+            default: security.apiServer.port,
+        },
+        {
+            type: 'input',
+            name: 'ipWeb',
+            message: 'Which IP address should Web Server listen to?',
+            default: security.webServer.ip,
+        },
+        {
+            type: 'input',
+            name: 'portWeb',
+            message: 'Which port should WebServer listen to?',
+            default: security.wevServer.port,
         },
         {
             type: 'input',
@@ -54,8 +65,10 @@ const install = async () => {
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
-        security.httpServer.ip = data.ip;
-        security.httpServer.port = data.port;
+        security.apiServer.ip = data.ipAPI;
+        security.apiServer.port = data.portAPI;
+        security.webServer.ip = data.ipWeb;
+        security.webServer.port = data.portWeb;
         api.url = data.apiURL;
         security.mongo.url = data.mongourl;
         security.mongo.dbName = data.mongodb;
@@ -75,10 +88,6 @@ const install = async () => {
         });
         console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);
         fs.writeJSONSync(`${__dirname}/../etc/site.json`, site, {
-            spaces: 2
-        });
-        console.log(`${colors.green(' * ')} Saving configuration to entrypoints.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/entrypoints.json`, entrypoints, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done`);

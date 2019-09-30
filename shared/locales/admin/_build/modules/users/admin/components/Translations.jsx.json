@@ -1,0 +1,66 @@
+{
+  "users": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        8
+      ]
+    ]
+  },
+  "Cannot update database record": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        9
+      ]
+    ]
+  },
+  "Duplicate e-mail": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        10
+      ]
+    ]
+  },
+  "Duplicate username": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        11
+      ]
+    ]
+  },
+  "User not found": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        12
+      ]
+    ]
+  },
+  "Too short": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        13
+      ]
+    ]
+  },
+  "Required": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        14
+      ]
+    ]
+  },
+  "Actions": {
+    "origin": [
+      [
+        "modules/users/admin/components/Translations.jsx",
+        15
+      ]
+    ]
+  }
+}

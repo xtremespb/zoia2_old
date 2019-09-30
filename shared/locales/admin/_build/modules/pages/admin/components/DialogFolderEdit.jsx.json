@@ -1,0 +1,94 @@
+{
+  "ID": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        87
+      ]
+    ]
+  },
+  "Title": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        94
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        100
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        101
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        102
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        103
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        104
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        105
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        106
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        107
+      ],
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        131
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolderEdit.jsx",
+        132
+      ]
+    ]
+  }
+}

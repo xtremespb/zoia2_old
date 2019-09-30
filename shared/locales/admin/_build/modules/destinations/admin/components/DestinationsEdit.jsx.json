@@ -1,0 +1,126 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        51
+      ]
+    ]
+  },
+  "Destination": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        70
+      ]
+    ]
+  },
+  "Destination (RU)": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        77
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        91
+      ],
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        129
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        97
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        122
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        123
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        124
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        125
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        126
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        127
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        128
+      ]
+    ]
+  },
+  "Edit Destination": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        163
+      ]
+    ]
+  },
+  "New Destination": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        163
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/destinations/admin/components/DestinationsEdit.jsx",
+        165
+      ]
+    ]
+  }
+}

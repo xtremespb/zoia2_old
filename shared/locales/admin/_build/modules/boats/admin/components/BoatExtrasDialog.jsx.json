@@ -1,0 +1,178 @@
+{
+  "Name": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        60
+      ]
+    ]
+  },
+  "Format: NAME_EN|NAME_RU, example: \"Option|Опция\" (without quotes)": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        63
+      ]
+    ]
+  },
+  "Cost": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        68
+      ]
+    ]
+  },
+  "Per": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        74
+      ],
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        82
+      ]
+    ]
+  },
+  "stay": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        77
+      ]
+    ]
+  },
+  "day": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        77
+      ]
+    ]
+  },
+  "week": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        77
+      ]
+    ]
+  },
+  "boat": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        85
+      ]
+    ]
+  },
+  "pax": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        85
+      ]
+    ]
+  },
+  "Options": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        90
+      ]
+    ]
+  },
+  "Extra is a mandatory": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        92
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        116
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        117
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        118
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        119
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        120
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        121
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        122
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        123
+      ],
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        191
+      ]
+    ]
+  },
+  "Extras": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        185
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/boats/admin/components/BoatExtrasDialog.jsx",
+        192
+      ]
+    ]
+  }
+}

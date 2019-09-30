@@ -1,0 +1,11 @@
+{
+  "localeDir": "shared/locales/admin",
+  "srcPathDirs": [
+    "shared/components/",
+    "modules/admin/admin/components/",
+    "modules/pages/admin/components/",
+    "modules/registry/admin/components/",
+    "modules/users/admin/components/"
+  ],
+  "format": "po"
+}

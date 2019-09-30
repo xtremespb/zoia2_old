@@ -15,7 +15,7 @@ export default class ZCKEditor5 extends Component {
 
     render = () => (<div className={this.props.cname}>
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
-        <div className="uk-form-controls">
+        <div>
             <this.props.CKEditor
                 config={{
                     language: this.props.language || 'en'

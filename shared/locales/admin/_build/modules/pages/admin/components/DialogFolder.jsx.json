@@ -1,0 +1,118 @@
+{
+  "Please select an item first": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        71
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        178
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        179
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        180
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        188
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        189
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        190
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        191
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        192
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        193
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        194
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        195
+      ],
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        211
+      ]
+    ]
+  },
+  "Root": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        212
+      ]
+    ]
+  },
+  "Select": {
+    "origin": [
+      [
+        "modules/pages/admin/components/DialogFolder.jsx",
+        213
+      ]
+    ]
+  }
+}

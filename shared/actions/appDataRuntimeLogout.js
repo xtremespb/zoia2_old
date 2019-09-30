@@ -2,9 +2,6 @@ import axios from 'axios';
 import {
     remove as removeCookie
 } from 'es-cookie';
-import {
-    history
-} from '../store/configureStore';
 import api from '../../etc/api.json';
 import site from '../../etc/site.json';
 import {
@@ -26,10 +23,10 @@ export default token => dispatch => {
                 payload: {}
             });
             removeCookie(`${site.id}_auth`);
-            history.push('/');
+            window.location.href = '/';
         }
     }).catch(() => {
         // TODO Display an error?
-        history.push('/');
+        window.location.href = '/';
     });
 };

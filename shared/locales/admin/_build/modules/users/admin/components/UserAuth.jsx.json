@@ -1,0 +1,70 @@
+{
+  "Invalid username or password": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        91
+      ]
+    ]
+  },
+  "Could not authorize": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        93
+      ]
+    ]
+  },
+  "Authorize": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        103
+      ],
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        135
+      ]
+    ]
+  },
+  "Username": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        116
+      ]
+    ]
+  },
+  "Password": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        123
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        150
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        151
+      ]
+    ]
+  },
+  "Could not authorize on server": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        152
+      ]
+    ]
+  }
+}

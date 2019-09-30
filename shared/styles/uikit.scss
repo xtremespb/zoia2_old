@@ -48,3 +48,12 @@ sans-serif,
     overflow-y: visible !important;
     overflow-x: hidden !important;
 }
+
+/* Underline links */
+a {
+    text-decoration: underline;
+}
+
+ul.uk-tab>li>a {
+    text-decoration: none;
+}

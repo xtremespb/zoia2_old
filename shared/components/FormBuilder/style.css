@@ -192,3 +192,9 @@
 .zform-divider-margin-top {
     margin-top: 50px;
 }
+
+/* @media (max-width: 680px) {
+    .ck-editor {
+        max-width: 87%;
+    }
+} */

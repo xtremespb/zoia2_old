@@ -10,7 +10,7 @@ import modules from '../build/modules.json';
 let moduleReducers = {};
 // eslint-disable-next-line global-require
 Object.keys(modules).map(m => {
-    const reducers = require(`../../modules/${m}/frontend/reducers/index.js`).default();
+    const reducers = require(`../../modules/${m}/admin/reducers/index.js`).default();
     moduleReducers = {
         ...moduleReducers,
         ...reducers

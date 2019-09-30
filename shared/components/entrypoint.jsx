@@ -12,7 +12,6 @@ import modules from '../build/modules.json';
 import configureStore, { history } from '../store/configureStore';
 import Error from './Error/Error.jsx';
 import ErrorBoundary from './Error/ErrorBoundary.jsx';
-import api from '../../etc/api.json';
 
 const site = require(`../../etc/site.json`);
 const engineTranslations = require(`../locales/core/${Object.keys(site.languages)[0]}/engine.json`);
@@ -30,15 +29,13 @@ const ERR_NO_ROUTES_MESSAGE = 'Could not load website. Please try to refresh the
         </div>
     </div>);
     try {
-        const res = await axios.post(`${api.url}/api/entrypoints/load`, {});
-        const entrypoints = res && res.data && res.data.statusCode === 200 && res.data.entrypoints ? res.data.entrypoints : null;
         ReactDOM.render(
-            (entrypoints ? (<Provider store={store}>
+            <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <ErrorBoundary>
                         <ConnectedRouter history={history}>
                             <Switch>
-                                {Object.keys(modules).map(m => require(`../../modules/${m}/frontend/routes.jsx`).default(entrypoints)).flat()}
+                                {Object.keys(modules).map(m => require(`../../modules/${m}/admin/routes.jsx`).default()).flat()}
                                 <Route
                                     component={getNoMatchComponent}
                                 />
@@ -46,7 +43,7 @@ const ERR_NO_ROUTES_MESSAGE = 'Could not load website. Please try to refresh the
                         </ConnectedRouter>
                     </ErrorBoundary>
                 </PersistGate>
-            </Provider>) : errorMessage),
+            </Provider>,
             document.getElementById('app')
         );
     } catch (e) {

@@ -1,0 +1,354 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2019-07-09 12:39+0300\n"
+"Mime-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ru\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: modules/pages/admin/components/PagesList.jsx:162/\n/modules/pages/admin/components/Translations.jsx:14/\n/modules/users/admin/components/Translations.jsx:15
+msgid "Actions"
+msgstr "Действия"
+
+#: modules/users/admin/components/UsersEdit.jsx:90
+msgid "Active"
+msgstr "Активен"
+
+#: modules/pages/admin/components/DialogFolder.jsx:178
+msgid "Add"
+msgstr "Добавить"
+
+#: modules/users/admin/components/UsersEdit.jsx:101
+msgid "Administrator"
+msgstr "Администратор"
+
+#: modules/users/admin/components/UserAuth.jsx:103/\n/modules/users/admin/components/UserAuth.jsx:135
+msgid "Authorize"
+msgstr "Авторизация"
+
+#: modules/pages/admin/components/DialogDelete.jsx:53/\n/modules/pages/admin/components/DialogFolder.jsx:195/\n/modules/pages/admin/components/DialogFolder.jsx:211/\n/modules/pages/admin/components/DialogFolderEdit.jsx:107/\n/modules/pages/admin/components/DialogFolderEdit.jsx:131/\n/modules/pages/admin/components/PagesEdit.jsx:225/\n/modules/pages/admin/components/PagesEdit.jsx:261/\n/modules/users/admin/components/DialogDelete.jsx:53/\n/modules/users/admin/components/UsersEdit.jsx:134/\n/modules/users/admin/components/UsersEdit.jsx:172
+msgid "Cancel"
+msgstr "Отмена"
+
+#: modules/pages/admin/components/PagesList.jsx:112/\n/modules/pages/admin/components/PagesList.jsx:116
+msgid "Cannot delete one or more pages"
+msgstr "Ошибка во время удаления одной или нескольких страниц"
+
+#: modules/users/admin/components/UsersList.jsx:111/\n/modules/users/admin/components/UsersList.jsx:115
+msgid "Cannot delete one or more users"
+msgstr "Ошибка во время удаления одного или нескольких пользователей"
+
+#: modules/pages/admin/components/Translations.jsx:9/\n/modules/users/admin/components/Translations.jsx:9
+msgid "Cannot update database record"
+msgstr "Ошибка во время обновления базы данных"
+
+#: modules/pages/admin/components/PagesEdit.jsx:204
+msgid "Content"
+msgstr "Контент"
+
+#: modules/users/admin/components/UserAuth.jsx:93
+msgid "Could not authorize"
+msgstr "Ошибка во время авторизации"
+
+#: modules/users/admin/components/UserAuth.jsx:152
+msgid "Could not authorize on server"
+msgstr "Ошибка во время авторизации на сервере"
+
+#: modules/pages/admin/components/PagesList.jsx:187/\n/modules/users/admin/components/UsersList.jsx:198
+msgid "Could not load data"
+msgstr "Ошибка во время загрузки данных с сервера"
+
+#: modules/pages/admin/components/DialogFolder.jsx:191/\n/modules/pages/admin/components/DialogFolderEdit.jsx:103/\n/modules/pages/admin/components/PagesEdit.jsx:162/\n/modules/pages/admin/components/PagesEdit.jsx:257/\n/modules/users/admin/components/UsersEdit.jsx:168
+msgid "Could not load data from server"
+msgstr "Ошибка во время загрузки данных"
+
+#: modules/pages/admin/components/PagesEdit.jsx:297/\n/modules/users/admin/components/UsersEdit.jsx:208
+msgid ""
+"Could not load data from server. Please check your URL or try to "
+"<0>reload</0> data."
+msgstr ""
+"Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или "
+"попробуйте <0>обновить</0> данные."
+
+#: shared/components/AdminPanel/AdminPanel.jsx:155
+msgid ""
+"Could not load site configuration. Please try to reload the page to try "
+"again."
+msgstr ""
+"Ошибка во время загрузки конфигурации сайта. Пожалуйста, попробуйте "
+"обновить страницу."
+
+#: modules/pages/admin/components/PagesEdit.jsx:70/\n/modules/pages/admin/components/PagesEdit.jsx:76
+msgid "Could not save a page"
+msgstr "Ошибка во время сохранения страницы"
+
+#: modules/pages/admin/components/DialogFolder.jsx:192/\n/modules/pages/admin/components/DialogFolderEdit.jsx:104/\n/modules/pages/admin/components/PagesEdit.jsx:131/\n/modules/pages/admin/components/PagesEdit.jsx:140/\n/modules/pages/admin/components/PagesEdit.jsx:258/\n/modules/pages/admin/components/PagesList.jsx:71/\n/modules/pages/admin/components/PagesList.jsx:74/\n/modules/pages/admin/components/PagesList.jsx:188/\n/modules/users/admin/components/UsersEdit.jsx:169/\n/modules/users/admin/components/UsersList.jsx:71/\n/modules/users/admin/components/UsersList.jsx:74/\n/modules/users/admin/components/UsersList.jsx:199
+msgid "Could not save data"
+msgstr "Ошибка во время сохранения данных"
+
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid "Create User"
+msgstr "Добавление пользователя"
+
+#: modules/pages/admin/components/PagesList.jsx:147
+msgid "Create new page"
+msgstr "Созать страницу"
+
+#: modules/users/admin/components/UsersList.jsx:140
+msgid "Create new user"
+msgstr "Добавление пользователя"
+
+#: modules/pages/admin/components/PagesEdit.jsx:56/\n/modules/users/admin/components/UsersEdit.jsx:51
+msgid "Data has been saved successfully"
+msgstr "Данные успешно сохранены"
+
+#: modules/pages/admin/components/DialogDelete.jsx:54/\n/modules/pages/admin/components/DialogFolder.jsx:180/\n/modules/pages/admin/components/PagesList.jsx:122/\n/modules/users/admin/components/DialogDelete.jsx:54/\n/modules/users/admin/components/UsersList.jsx:176
+msgid "Delete"
+msgstr "Удаление"
+
+#: modules/pages/admin/components/PagesList.jsx:147
+msgid "Delete selected pages"
+msgstr "Удалить выбранные страницы"
+
+#: modules/users/admin/components/UsersList.jsx:140
+msgid "Delete selected users"
+msgstr "Удаление выбранных"
+
+#: modules/pages/admin/components/PagesEdit.jsx:184
+msgid "Displayed in browser window"
+msgstr "Отображается в окне браузера"
+
+#: modules/users/admin/components/Translations.jsx:10
+msgid "Duplicate e-mail"
+msgstr "E-mail уже существует"
+
+#: modules/pages/admin/components/Translations.jsx:10
+msgid "Duplicate page"
+msgstr "Страница уже существует"
+
+#: modules/pages/admin/components/PagesEdit.jsx:64
+msgid "Duplicate page, check filename and path"
+msgstr "Страница уже существует, проверьте имя файла и путь"
+
+#: modules/users/admin/components/Translations.jsx:11
+msgid "Duplicate username"
+msgstr "Имя пользователя уже существует"
+
+#: modules/users/admin/components/UsersEdit.jsx:78
+msgid "E-mail"
+msgstr "E-mail"
+
+#: modules/pages/admin/components/DialogFolder.jsx:179/\n/modules/pages/admin/components/PagesList.jsx:120/\n/modules/users/admin/components/UsersList.jsx:176
+msgid "Edit"
+msgstr "Редактирование"
+
+#: modules/pages/admin/components/PagesEdit.jsx:295
+msgid "Edit Page"
+msgstr "Редактирование страницы"
+
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid "Edit User"
+msgstr "Редактирование пользователя"
+
+#: modules/users/admin/components/UsersEdit.jsx:79
+msgid "Example: username@zoiajs.org"
+msgstr "Пример: username@zoiajs.org"
+
+#: modules/pages/admin/components/DialogFolder.jsx:188/\n/modules/pages/admin/components/DialogFolderEdit.jsx:100/\n/modules/pages/admin/components/PagesEdit.jsx:254/\n/modules/pages/admin/components/PagesList.jsx:189/\n/modules/users/admin/components/UserAuth.jsx:150/\n/modules/users/admin/components/UsersEdit.jsx:165/\n/modules/users/admin/components/UsersList.jsx:200
+msgid "Field is required"
+msgstr "Обязательное поле"
+
+#: modules/pages/admin/components/PagesEdit.jsx:197
+msgid "Filename"
+msgstr "Имя файла"
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:87
+msgid "ID"
+msgstr "ID"
+
+#: modules/users/admin/components/UsersEdit.jsx:89
+msgid "Inactive"
+msgstr "Неактивен"
+
+#: shared/components/Error/Error.jsx:59
+msgid "Internal Error"
+msgstr "Внутренняя ошибка"
+
+#: modules/pages/admin/components/DialogFolder.jsx:189/\n/modules/pages/admin/components/DialogFolderEdit.jsx:101/\n/modules/pages/admin/components/PagesEdit.jsx:255/\n/modules/pages/admin/components/PagesList.jsx:68/\n/modules/pages/admin/components/PagesList.jsx:190/\n/modules/users/admin/components/UserAuth.jsx:151/\n/modules/users/admin/components/UsersEdit.jsx:166/\n/modules/users/admin/components/UsersList.jsx:68/\n/modules/users/admin/components/UsersList.jsx:201
+msgid "Invalid format"
+msgstr "Неверный формат"
+
+#: modules/users/admin/components/UserAuth.jsx:91
+msgid "Invalid username or password"
+msgstr "Неверное имя пользователя или пароль"
+
+#: modules/pages/admin/components/PagesEdit.jsx:198
+msgid "Latin characters, numbers, _, - (length: 0-64)"
+msgstr "Лат. символы/_/-, длина: 0-64"
+
+#: modules/users/admin/components/UsersEdit.jsx:71
+msgid "Latin chars/_/-, length: 4-32"
+msgstr "Лат. символы/_/-, длина: 4-32"
+
+#: modules/pages/admin/components/PagesList.jsx:185/\n/modules/users/admin/components/UsersList.jsx:196
+msgid "Loading data, please wait…"
+msgstr "Загрузка данных, пожалуйста, подождите…"
+
+#: shared/components/AdminPanel/AdminPanel.jsx:151
+msgid "Loading site configuration..."
+msgstr "Загрузка конфигурации сайта..."
+
+#: shared/components/AdminPanel/AdminPanel.jsx:109
+msgid "Log Out"
+msgstr "Выход"
+
+#: modules/pages/admin/components/PagesEdit.jsx:295
+msgid "New Page"
+msgstr "Новая страница"
+
+#: modules/pages/admin/components/PagesList.jsx:186/\n/modules/users/admin/components/UsersList.jsx:197
+msgid "No records to display"
+msgstr "Нет записей для отображения"
+
+#: modules/users/admin/components/UsersEdit.jsx:100
+msgid "Normal User"
+msgstr "Пользователь"
+
+#: modules/users/admin/components/UsersEdit.jsx:121
+msgid ""
+"Only enter a new password in case you wish to change it for the current "
+"user. Password should be at least 8 characters long."
+msgstr ""
+"Введите новый пароль только в том случае, если вы хотите изменить его для "
+"текущего пользователя. Пароль должен содержать не менее 8 символов."
+
+#: modules/pages/admin/components/PagesList.jsx:115/\n/modules/users/admin/components/UsersList.jsx:114
+msgid "Operation complete"
+msgstr "Операция выполнена"
+
+#: modules/pages/admin/components/PagesList.jsx:150
+msgid "Page"
+msgstr "Страница"
+
+#: shared/components/Error/Error.jsx:59
+msgid "Page not Found"
+msgstr "Страница не найдена"
+
+#: modules/pages/admin/components/Translations.jsx:11
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: modules/pages/admin/components/PagesList.jsx:136/\n/modules/pages/admin/components/PagesList.jsx:138
+msgid "Pages"
+msgstr "Контент"
+
+#: modules/users/admin/components/UserAuth.jsx:123/\n/modules/users/admin/components/UsersEdit.jsx:109
+msgid "Password"
+msgstr "Пароль"
+
+#: modules/users/admin/components/UsersEdit.jsx:121
+msgid ""
+"Password is required when creating a new user, should be at least 8 "
+"characters long."
+msgstr ""
+"Пароль требуется при создании нового пользователя, должен быть не менее 8 "
+"символов."
+
+#: modules/pages/admin/components/DialogFolder.jsx:190/\n/modules/pages/admin/components/DialogFolderEdit.jsx:102/\n/modules/pages/admin/components/PagesEdit.jsx:256/\n/modules/users/admin/components/UsersEdit.jsx:167
+msgid "Passwords do not match"
+msgstr "Пароль не совпадает"
+
+#: modules/pages/admin/components/PagesEdit.jsx:190/\n/modules/pages/admin/components/PagesList.jsx:156
+msgid "Path"
+msgstr "Путь"
+
+#: modules/users/admin/components/UsersEdit.jsx:96
+msgid "Permissions"
+msgstr "Права"
+
+#: modules/pages/admin/components/DialogFolder.jsx:71
+msgid "Please select an item first"
+msgstr "Пожалуйста, выберите элемент из списка"
+
+#: modules/pages/admin/components/PagesList.jsx:65/\n/modules/users/admin/components/UsersList.jsx:65
+msgid "Record with the entered value already exists"
+msgstr "Запись с таким значением уже существует"
+
+#: modules/pages/admin/components/PagesList.jsx:147/\n/modules/users/admin/components/UsersList.jsx:140
+msgid "Refresh"
+msgstr "Обновить"
+
+#: modules/users/admin/components/UsersEdit.jsx:115
+msgid "Repeat Password"
+msgstr "Повтор пароля"
+
+#: modules/pages/admin/components/Translations.jsx:13/\n/modules/users/admin/components/Translations.jsx:14
+msgid "Required"
+msgstr "Обязательное поле"
+
+#: modules/pages/admin/components/DialogFolder.jsx:212
+msgid "Root"
+msgstr "Корневая папка"
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:132/\n/modules/pages/admin/components/PagesEdit.jsx:231/\n/modules/users/admin/components/UsersEdit.jsx:140
+msgid "Save"
+msgstr "Сохранить"
+
+#: modules/pages/admin/components/DialogFolder.jsx:213
+msgid "Select"
+msgstr "Выбрать"
+
+#: modules/users/admin/components/UsersEdit.jsx:84
+msgid "Status"
+msgstr "Статус"
+
+#: modules/pages/admin/components/DialogDelete.jsx:49
+msgid "The following page(s) will be permanently deleted:"
+msgstr "Следующие страницы будут удалены навсегда:"
+
+#: modules/users/admin/components/DialogDelete.jsx:49
+msgid "The following user(s) will be permanently deleted:"
+msgstr "Следующие пользователи будут удалены навсегда:"
+
+#: modules/pages/admin/components/DialogFolderEdit.jsx:94/\n/modules/pages/admin/components/PagesEdit.jsx:182
+msgid "Title"
+msgstr "Заголовок"
+
+#: modules/pages/admin/components/Translations.jsx:12/\n/modules/users/admin/components/Translations.jsx:13
+msgid "Too short"
+msgstr "Слишком корокий"
+
+#: modules/users/admin/components/Translations.jsx:12
+msgid "User not found"
+msgstr "Не найден"
+
+#: modules/users/admin/components/UserAuth.jsx:116/\n/modules/users/admin/components/UsersEdit.jsx:70
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: modules/users/admin/components/UsersList.jsx:129/\n/modules/users/admin/components/UsersList.jsx:131
+msgid "Users"
+msgstr "Пользователи"
+
+#: modules/pages/admin/components/DialogFolder.jsx:194/\n/modules/pages/admin/components/DialogFolderEdit.jsx:106/\n/modules/pages/admin/components/PagesEdit.jsx:260/\n/modules/users/admin/components/UsersEdit.jsx:171
+msgid "Yes"
+msgstr "Да"
+
+#: modules/pages/admin/components/Translations.jsx:8
+msgid "pages"
+msgstr "Контент"
+
+#: modules/users/admin/components/Translations.jsx:8
+msgid "users"
+msgstr "Пользователи"
+
+#: modules/pages/admin/components/DialogFolder.jsx:193/\n/modules/pages/admin/components/DialogFolderEdit.jsx:105/\n/modules/pages/admin/components/PagesEdit.jsx:259/\n/modules/users/admin/components/UsersEdit.jsx:170
+msgid "will be deleted. Are you sure?"
+msgstr "будут удалены. Вы уверены?"

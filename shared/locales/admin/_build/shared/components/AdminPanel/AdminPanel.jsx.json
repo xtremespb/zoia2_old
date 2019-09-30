@@ -1,0 +1,26 @@
+{
+  "Log Out": {
+    "origin": [
+      [
+        "shared/components/AdminPanel/AdminPanel.jsx",
+        109
+      ]
+    ]
+  },
+  "Loading site configuration...": {
+    "origin": [
+      [
+        "shared/components/AdminPanel/AdminPanel.jsx",
+        151
+      ]
+    ]
+  },
+  "Could not load site configuration. Please try to reload the page to try again.": {
+    "origin": [
+      [
+        "shared/components/AdminPanel/AdminPanel.jsx",
+        155
+      ]
+    ]
+  }
+}

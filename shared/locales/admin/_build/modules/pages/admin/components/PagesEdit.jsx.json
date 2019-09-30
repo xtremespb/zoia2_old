@@ -1,0 +1,190 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        56
+      ]
+    ]
+  },
+  "Duplicate page, check filename and path": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        64
+      ]
+    ]
+  },
+  "Could not save a page": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        70
+      ],
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        76
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        131
+      ],
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        140
+      ],
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        258
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        162
+      ],
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        257
+      ]
+    ]
+  },
+  "Title": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        182
+      ]
+    ]
+  },
+  "Displayed in browser window": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        184
+      ]
+    ]
+  },
+  "Path": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        190
+      ]
+    ]
+  },
+  "Filename": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        197
+      ]
+    ]
+  },
+  "Latin characters, numbers, _, - (length: 0-64)": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        198
+      ]
+    ]
+  },
+  "Content": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        204
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        225
+      ],
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        261
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        231
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        254
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        255
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        256
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        259
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        260
+      ]
+    ]
+  },
+  "Edit Page": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        295
+      ]
+    ]
+  },
+  "New Page": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        295
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        297
+      ]
+    ]
+  }
+}

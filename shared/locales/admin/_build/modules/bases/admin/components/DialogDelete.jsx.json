@@ -1,0 +1,26 @@
+{
+  "The following base(s) will be permanently deleted:": {
+    "origin": [
+      [
+        "modules/bases/admin/components/DialogDelete.jsx",
+        49
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/bases/admin/components/DialogDelete.jsx",
+        53
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/bases/admin/components/DialogDelete.jsx",
+        54
+      ]
+    ]
+  }
+}

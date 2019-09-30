@@ -1,0 +1,222 @@
+{
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        51
+      ]
+    ]
+  },
+  "Username": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        70
+      ]
+    ]
+  },
+  "Latin chars/_/-, length: 4-32": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        71
+      ]
+    ]
+  },
+  "E-mail": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        78
+      ]
+    ]
+  },
+  "Example: username@zoiajs.org": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        79
+      ]
+    ]
+  },
+  "Status": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        84
+      ]
+    ]
+  },
+  "Inactive": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        89
+      ]
+    ]
+  },
+  "Active": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        90
+      ]
+    ]
+  },
+  "Permissions": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        96
+      ]
+    ]
+  },
+  "Normal User": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        100
+      ]
+    ]
+  },
+  "Administrator": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        101
+      ]
+    ]
+  },
+  "Password": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        109
+      ]
+    ]
+  },
+  "Repeat Password": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        115
+      ]
+    ]
+  },
+  "Only enter a new password in case you wish to change it for the current user. Password should be at least 8 characters long.": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        121
+      ]
+    ]
+  },
+  "Password is required when creating a new user, should be at least 8 characters long.": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        121
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        134
+      ],
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        172
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        140
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        165
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        166
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        167
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        168
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        169
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        170
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        171
+      ]
+    ]
+  },
+  "Edit User": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        206
+      ]
+    ]
+  },
+  "Create User": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        206
+      ]
+    ]
+  },
+  "Could not load data from server. Please check your URL or try to <0>reload</0> data.": {
+    "origin": [
+      [
+        "modules/users/admin/components/UsersEdit.jsx",
+        208
+      ]
+    ]
+  }
+}

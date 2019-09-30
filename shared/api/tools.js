@@ -35,13 +35,13 @@ const options = commandLineArgs(optionDefinitions);
 
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
-    ['user', 'admin'].map(t => {
+    ['admin'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
-        const locales = fs.readdirSync(`${__dirname}/../shared/locales/combined/${t}`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
             console.log(`${colors.green(' * ')} Processing locale: ${locale}`);
             const transModules = {};
-            const input = fs.readFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`);
+            const input = fs.readFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`);
             const po = gettextParser.po.parse(input);
             const trans = po.translations[''];
             Object.keys(trans).map(i => {
@@ -83,20 +83,20 @@ const splitLocales = () => {
     });
 };
 
-const combieLocales = () => {
+const combineLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Combining locales...`);
-    ['user', 'admin'].map(t => {
+    ['admin'].map(t => {
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/core`);
         locales.filter(l => l !== '_build').map(locale => {
             const messagesCore = fs.readFileSync(`${__dirname}/../shared/locales/core/${locale}/messages.po`);
             const messagesCorePo = gettextParser.po.parse(messagesCore);
             const messagesCoreTrans = messagesCorePo.translations[''];
             modules.map(m => {
-                if (!fs.existsSync(`${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`)) {
+                if (!fs.existsSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`)) {
                     return;
                 }
-                const messagesModule = fs.readFileSync(`${__dirname}/../../modules/${m}/locales/${t}/${locale}/messages.po`);
+                const messagesModule = fs.readFileSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`);
                 const messagesModulePo = gettextParser.po.parse(messagesModule);
                 const messagesModuleTrans = messagesModulePo.translations[''];
                 Object.keys(messagesModuleTrans).map(mmt => {
@@ -112,7 +112,7 @@ const combieLocales = () => {
                     '': messagesCoreTrans
                 }
             });
-            fs.writeFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`, data);
+            fs.writeFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`, data);
         });
     });
 };
@@ -120,12 +120,12 @@ const combieLocales = () => {
 const cleanupLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Cleaning up combined locales...`);
-    ['user', 'admin'].map(t => {
+    ['admin'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
-        const locales = fs.readdirSync(`${__dirname}/../shared/locales/combined/${t}`);
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
             console.log(`${colors.green(' * ')} Processing locale: ${locale}`);
-            const input = fs.readFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`);
+            const input = fs.readFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`);
             const po = gettextParser.po.parse(input);
             const trans = cloneDeep(po.translations['']);
             Object.keys(trans).map(item => {
@@ -149,7 +149,7 @@ const cleanupLocales = () => {
                 headers: po.headers,
                 translations: po.translations
             });
-            fs.writeFileSync(`${__dirname}/../shared/locales/combined/${t}/${locale}/messages.po`, data);
+            fs.writeFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`, data);
         });
     });
 };
@@ -194,7 +194,7 @@ const install = async () => {
                                 indexesAsc,
                                 indexesDesc
                             } = moduleDatabaseConfig.collections[c];
-                            const languages = fs.readdirSync(`${__dirname}/../shared/locales/combined/admin`).filter(i => i !== '_build');
+                            const languages = fs.readdirSync(`${__dirname}/../shared/locales/admin`).filter(i => i !== '_build');
                             if (indexesAsc && indexesAsc.length) {
                                 console.log(`${colors.green(' * ')} Creating ASC indexes for collection: ${c}...`);
                                 const indexes = {};
@@ -277,7 +277,7 @@ if (options.split) {
 
 // Do we need to combine locales?
 if (options.combine) {
-    combieLocales();
+    combineLocales();
     console.log(`${colors.green(' * ')} Done`);
     process.exit(0);
 }

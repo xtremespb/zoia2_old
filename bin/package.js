@@ -15,8 +15,12 @@ output.on('close', () => {
     console.log(`${archive.pointer()} total bytes`);
 });
 archive.pipe(output);
-['package.json', 'package-lock.json', 'README.md', 'LICENSE'].map(f => archive.file(`${__dirname}/../${f}`, { name: f }));
-['config.json', 'secure.json.map(f => archive.file(`${__dirname}/../etc/${f}`, { name: `etc/${f}` }));
+['package.json', 'package-lock.json', 'README.md', 'LICENSE'].map(f => archive.file(`${__dirname}/../${f}`, {
+    name: f
+}));
+['config.json', 'secure.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
+    name: `etc/${f}`
+}));
 archive.directory(`${__dirname}/../bin`, 'bin');
 archive.directory(`${__dirname}/../static`, 'static');
 archive.finalize();
