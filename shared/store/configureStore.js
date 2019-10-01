@@ -5,7 +5,11 @@ import {
 } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
+import {
+    CookieStorage
+} from 'redux-persist-cookie-storage';
+import cookies from 'cookies-js';
 import {
     persistStore,
     persistCombineReducers
@@ -23,11 +27,18 @@ import site from '../../etc/site.json';
 
 export const history = createBrowserHistory();
 
+// const persistConfig = {
+//     key: `${site.id}_root`,
+//     storage,
+//     whitelist: ['appData']
+// };
+
 const persistConfig = {
     key: `${site.id}_root`,
-    storage,
+    storage: new CookieStorage(cookies, site.cookieOptions),
     whitelist: ['appData']
 };
+
 const middlewares = [thunk, routerMiddleware(history)];
 if (config.development) {
     middlewares.push(logger);

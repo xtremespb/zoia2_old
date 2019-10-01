@@ -5,7 +5,8 @@ import { t } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { remove as removeCookie } from 'es-cookie';
+// import { remove as removeCookie } from 'es-cookie';
+import cookies from 'cookies-js';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { history } from '../../../../shared/store/configureStore';
@@ -44,7 +45,8 @@ class PagesList extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        removeCookie(`${site.id}_auth`);
+        // removeCookie(`${site.id}_auth`);
+        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/pages`);
     }
 

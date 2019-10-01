@@ -3,7 +3,8 @@
 import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-import { remove as removeCookie } from 'es-cookie';
+// import { remove as removeCookie } from 'es-cookie';
+import cookies from 'cookies-js';
 import axios from 'axios';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
@@ -36,7 +37,8 @@ class UsersEdit extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        removeCookie(`${site.id}_auth`);
+        // removeCookie(`${site.id}_auth`);
+        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/users`);
     }
 

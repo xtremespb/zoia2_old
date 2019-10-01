@@ -1,0 +1,5 @@
+{
+    "browser": {
+        "./uikit-node.js": "./uikit-browser.js"
+    }
+}

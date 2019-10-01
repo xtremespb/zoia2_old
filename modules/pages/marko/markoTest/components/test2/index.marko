@@ -1,0 +1,20 @@
+import UIkit from '../../../../../../shared/utils/uikit-node'
+
+class {
+  onCreate() {
+    this.state = {
+      count: 0
+    };
+  }
+
+  onMount() {
+    console.log("Mounted in the browser! (2)");
+    console.log(UIkit);
+  }
+
+  increment() {
+    this.state.count++;
+  }
+}
+
+<button type="button" on-click("increment")>Click me - Count: ${state.count}</button>

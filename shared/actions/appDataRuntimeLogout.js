@@ -1,7 +1,8 @@
 import axios from 'axios';
-import {
-    remove as removeCookie
-} from 'es-cookie';
+// import {
+//     remove as removeCookie
+// } from 'es-cookie';
+import cookies from 'cookies-js';
 import api from '../../etc/api.json';
 import site from '../../etc/site.json';
 import {
@@ -22,7 +23,8 @@ export default token => dispatch => {
                 type: APP_DATA_SET_USER,
                 payload: {}
             });
-            removeCookie(`${site.id}_auth`);
+            // removeCookie(`${site.id}_auth`);
+            cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
             window.location.href = '/';
         }
     }).catch(() => {

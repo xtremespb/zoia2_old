@@ -2,12 +2,13 @@
 
 import React, { lazy, Component } from 'react';
 import { I18nProvider, I18n } from '@lingui/react';
-import { Trans, t } from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { set as setCookie } from 'es-cookie';
+// import { set as setCookie } from 'es-cookie';
+import cookies from 'cookies-js';
 import appDataRuntimeGetConfig from '../../../../shared/actions/appDataRuntimeGetConfig';
 import UIkit from '../../../../shared/utils/uikit';
 
@@ -84,7 +85,8 @@ class UserAuth extends Component {
             this.props.appDataRuntimeSetToken(response.data.token);
             this.props.appDataSetUserAction(response.data.user);
             document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
-            setCookie(`${site.id}_auth`, response.data.token, this.props.appDataRuntime.config.cookieOptions);
+            // setCookie(`${site.id}_auth`, response.data.token, site.cookieOptions);
+            cookies.set(`${site.id}_auth`, response.data.token, site.cookieOptions);            
             return history.push(this.query.redirect || '/');
         }
         if (response.data.statusCode === 403) {
