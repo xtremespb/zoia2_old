@@ -3,7 +3,7 @@ import {
     ObjectId
 } from 'mongodb';
 import fs from 'fs-extra';
-import auth from '../../../shared/api/auth';
+import auth from '../../../shared/lib/auth';
 
 const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
 

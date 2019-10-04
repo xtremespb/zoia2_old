@@ -35,7 +35,16 @@ export const history = createBrowserHistory();
 
 const persistConfig = {
     key: `${site.id}_root`,
-    storage: new CookieStorage(cookies, site.cookieOptions),
+    storage: new CookieStorage(cookies, {
+        expiration: {
+            default: site.cookieOptions.expires
+        },
+        setCookieOptions: {
+            path: site.cookieOptions.path,
+            domain: site.cookieOptions.domain,
+            secure: site.cookieOptions.secure
+        }
+    }),
     whitelist: ['appData']
 };
 

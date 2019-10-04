@@ -1,12 +1,13 @@
 /* eslint-disable import/order */
 import security from '../../../etc/secure.json';
-import logger from '../../api/logger';
+import logger from '../../lib/logger';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
 import fastifyCORS from 'fastify-cors';
 import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
+import fastifyCookie from 'fastify-cookie';
 import modules from '../../build/modules.json';
 import {
     MongoClient
@@ -33,6 +34,7 @@ const fastify = Fastify({
         addToBody: true
     });
     fastify.register(fastifyURLData);
+    fastify.register(fastifyCookie);
     fastify.register(fastifyMongo, {
         client: mongoClient,
         database: security.mongo.dbName
@@ -50,7 +52,7 @@ const fastify = Fastify({
         secret: security.secret
     });
     await Promise.all(Object.keys(modules).map(async m => {
-        const module = await import(`../../../modules/${m}/marko/index.js`);
+        const module = await import(`../../../modules/${m}/user/index.js`);
         module.default(fastify);
     }));
     log.info('Starting Web server...');

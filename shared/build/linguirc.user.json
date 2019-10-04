@@ -1,0 +1,10 @@
+{
+  "localeDir": "shared/locales/user",
+  "srcPathDirs": [
+    "modules/admin/user/",
+    "modules/pages/user/",
+    "modules/registry/user/",
+    "modules/users/user/"
+  ],
+  "format": "po"
+}

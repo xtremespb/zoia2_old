@@ -13,8 +13,6 @@ import configureStore, { history } from '../store/configureStore';
 import Error from './Error/Error.jsx';
 import ErrorBoundary from './Error/ErrorBoundary.jsx';
 
-const site = require(`../../etc/site.json`);
-const engineTranslations = require(`../locales/core/${Object.keys(site.languages)[0]}/engine.json`);
 const ERR_NO_ROUTES_MESSAGE = 'Could not load website. Please try to refresh the page.';
 
 (async () => {
@@ -25,7 +23,7 @@ const ERR_NO_ROUTES_MESSAGE = 'Could not load website. Please try to refresh the
     const getNoMatchComponent = () => (<Error code="404" />);
     const errorMessage = (<div className="uk-flex uk-flex-center uk-flex-middle uk-flex-column" style={{ height: '100%' }}>
         <div className="uk-text-small">
-            {engineTranslations[ERR_NO_ROUTES_MESSAGE] || ERR_NO_ROUTES_MESSAGE}
+            {ERR_NO_ROUTES_MESSAGE}
         </div>
     </div>);
     try {

@@ -1,7 +1,7 @@
 import {
     ObjectId
 } from 'mongodb';
-import auth from '../../../shared/api/auth';
+import auth from '../../../shared/lib/auth';
 
 export default fastify => ({
     schema: {

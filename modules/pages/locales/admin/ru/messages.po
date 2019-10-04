@@ -13,109 +13,58 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/bases/admin/components/Translations.jsx:14
-#: modules/boats/admin/components/Translations.jsx:14
-#: modules/countries/admin/components/Translations.jsx:14
-#: modules/destinations/admin/components/Translations.jsx:14
-#: modules/pages/admin/components/PagesList.jsx:162
+#: modules/pages/admin/components/PagesList.jsx:164
 #: modules/pages/admin/components/Translations.jsx:14
 #: modules/users/admin/components/Translations.jsx:15
 msgid "Actions"
 msgstr "Действия"
 
-#: modules/boats/admin/components/BoatsEdit.jsx:259
-#: modules/boats/admin/components/BoatsEdit.jsx:262
-#: modules/boats/admin/components/BoatsEdit.jsx:274
-#: modules/boats/admin/components/BoatsEdit.jsx:277
-#: modules/boats/admin/components/BoatsEdit.jsx:389
-#: modules/boats/admin/components/BoatsEdit.jsx:392
-#: modules/boats/admin/components/BoatsEdit.jsx:415
-#: modules/boats/admin/components/BoatsEdit.jsx:419
 #: modules/pages/admin/components/DialogFolder.jsx:178
 msgid "Add"
 msgstr "Добавить"
 
-#: modules/bases/admin/components/BasesEdit.jsx:180
-#: modules/bases/admin/components/BasesEdit.jsx:218
-#: modules/bases/admin/components/DialogDelete.jsx:53
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:302
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:424
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:89
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:148
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:123
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:191
-#: modules/boats/admin/components/BoatPricesDialog.jsx:119
-#: modules/boats/admin/components/BoatPricesDialog.jsx:187
-#: modules/boats/admin/components/BoatsEdit.jsx:482
-#: modules/boats/admin/components/BoatsEdit.jsx:589
-#: modules/boats/admin/components/DialogDelete.jsx:53
-#: modules/countries/admin/components/CountriesEdit.jsx:140
-#: modules/countries/admin/components/CountriesEdit.jsx:178
-#: modules/countries/admin/components/DialogDelete.jsx:53
-#: modules/destinations/admin/components/DestinationsEdit.jsx:91
-#: modules/destinations/admin/components/DestinationsEdit.jsx:129
-#: modules/destinations/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogFolder.jsx:195
 #: modules/pages/admin/components/DialogFolder.jsx:211
 #: modules/pages/admin/components/DialogFolderEdit.jsx:107
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
-#: modules/pages/admin/components/PagesEdit.jsx:225
-#: modules/pages/admin/components/PagesEdit.jsx:261
+#: modules/pages/admin/components/PagesEdit.jsx:227
+#: modules/pages/admin/components/PagesEdit.jsx:263
 #: modules/users/admin/components/DialogDelete.jsx:53
-#: modules/users/admin/components/UsersEdit.jsx:134
-#: modules/users/admin/components/UsersEdit.jsx:172
+#: modules/users/admin/components/UsersEdit.jsx:136
+#: modules/users/admin/components/UsersEdit.jsx:174
 msgid "Cancel"
 msgstr "Отмена"
 
-#: modules/pages/admin/components/PagesList.jsx:112
-#: modules/pages/admin/components/PagesList.jsx:116
+#: modules/pages/admin/components/PagesList.jsx:114
+#: modules/pages/admin/components/PagesList.jsx:118
 msgid "Cannot delete one or more pages"
 msgstr "Ошибка во время удаления одной или нескольких страниц"
 
-#: modules/bases/admin/components/Translations.jsx:9
-#: modules/countries/admin/components/Translations.jsx:9
-#: modules/destinations/admin/components/Translations.jsx:9
 #: modules/pages/admin/components/Translations.jsx:9
 #: modules/users/admin/components/Translations.jsx:9
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:204
+#: modules/pages/admin/components/PagesEdit.jsx:206
 msgid "Content"
 msgstr "Контент"
 
-#: modules/bases/admin/components/BasesList.jsx:180
-#: modules/boats/admin/components/BoatsList.jsx:200
-#: modules/countries/admin/components/CountriesList.jsx:180
-#: modules/destinations/admin/components/DestinationsList.jsx:180
-#: modules/pages/admin/components/PagesList.jsx:187
-#: modules/users/admin/components/UsersList.jsx:198
+#: modules/pages/admin/components/PagesList.jsx:189
+#: modules/users/admin/components/UsersList.jsx:200
 msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
-#: modules/bases/admin/components/BasesEdit.jsx:214
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:298
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:85
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:119
-#: modules/boats/admin/components/BoatPricesDialog.jsx:115
-#: modules/boats/admin/components/BoatsEdit.jsx:585
-#: modules/countries/admin/components/CountriesEdit.jsx:174
-#: modules/destinations/admin/components/DestinationsEdit.jsx:125
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
-#: modules/pages/admin/components/PagesEdit.jsx:162
-#: modules/pages/admin/components/PagesEdit.jsx:257
-#: modules/users/admin/components/UsersEdit.jsx:168
+#: modules/pages/admin/components/PagesEdit.jsx:164
+#: modules/pages/admin/components/PagesEdit.jsx:259
+#: modules/users/admin/components/UsersEdit.jsx:170
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/bases/admin/components/BasesEdit.jsx:256
-#: modules/boats/admin/components/BoatsEdit.jsx:723
-#: modules/countries/admin/components/CountriesEdit.jsx:216
-#: modules/destinations/admin/components/DestinationsEdit.jsx:165
-#: modules/pages/admin/components/PagesEdit.jsx:297
-#: modules/users/admin/components/UsersEdit.jsx:208
+#: modules/pages/admin/components/PagesEdit.jsx:299
+#: modules/users/admin/components/UsersEdit.jsx:210
 msgid ""
 "Could not load data from server. Please check your URL or try to "
 "<0>reload</0> data."
@@ -123,84 +72,48 @@ msgstr ""
 "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или "
 "попробуйте <0>обновить</0> данные."
 
-#: modules/pages/admin/components/PagesEdit.jsx:70
-#: modules/pages/admin/components/PagesEdit.jsx:76
+#: modules/pages/admin/components/PagesEdit.jsx:72
+#: modules/pages/admin/components/PagesEdit.jsx:78
 msgid "Could not save a page"
 msgstr "Ошибка во время сохранения страницы"
 
-#: modules/bases/admin/components/BasesEdit.jsx:215
-#: modules/bases/admin/components/BasesList.jsx:71
-#: modules/bases/admin/components/BasesList.jsx:74
-#: modules/bases/admin/components/BasesList.jsx:181
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:299
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:86
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:120
-#: modules/boats/admin/components/BoatPricesDialog.jsx:116
-#: modules/boats/admin/components/BoatsEdit.jsx:586
-#: modules/boats/admin/components/BoatsList.jsx:71
-#: modules/boats/admin/components/BoatsList.jsx:74
-#: modules/boats/admin/components/BoatsList.jsx:201
-#: modules/countries/admin/components/CountriesEdit.jsx:175
-#: modules/countries/admin/components/CountriesList.jsx:71
-#: modules/countries/admin/components/CountriesList.jsx:74
-#: modules/countries/admin/components/CountriesList.jsx:181
-#: modules/destinations/admin/components/DestinationsEdit.jsx:126
-#: modules/destinations/admin/components/DestinationsList.jsx:71
-#: modules/destinations/admin/components/DestinationsList.jsx:74
-#: modules/destinations/admin/components/DestinationsList.jsx:181
 #: modules/pages/admin/components/DialogFolder.jsx:192
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
-#: modules/pages/admin/components/PagesEdit.jsx:131
-#: modules/pages/admin/components/PagesEdit.jsx:140
-#: modules/pages/admin/components/PagesEdit.jsx:258
-#: modules/pages/admin/components/PagesList.jsx:71
-#: modules/pages/admin/components/PagesList.jsx:74
-#: modules/pages/admin/components/PagesList.jsx:188
-#: modules/users/admin/components/UsersEdit.jsx:169
-#: modules/users/admin/components/UsersList.jsx:71
-#: modules/users/admin/components/UsersList.jsx:74
-#: modules/users/admin/components/UsersList.jsx:199
+#: modules/pages/admin/components/PagesEdit.jsx:133
+#: modules/pages/admin/components/PagesEdit.jsx:142
+#: modules/pages/admin/components/PagesEdit.jsx:260
+#: modules/pages/admin/components/PagesList.jsx:73
+#: modules/pages/admin/components/PagesList.jsx:76
+#: modules/pages/admin/components/PagesList.jsx:190
+#: modules/users/admin/components/UsersEdit.jsx:171
+#: modules/users/admin/components/UsersList.jsx:73
+#: modules/users/admin/components/UsersList.jsx:76
+#: modules/users/admin/components/UsersList.jsx:201
 msgid "Could not save data"
 msgstr "Ошибка во время сохранения данных"
 
-#: modules/pages/admin/components/PagesList.jsx:147
+#: modules/pages/admin/components/PagesList.jsx:149
 msgid "Create new page"
 msgstr "Созать страницу"
 
-#: modules/bases/admin/components/BasesEdit.jsx:57
-#: modules/boats/admin/components/BoatsEdit.jsx:61
-#: modules/countries/admin/components/CountriesEdit.jsx:57
-#: modules/destinations/admin/components/DestinationsEdit.jsx:51
-#: modules/pages/admin/components/PagesEdit.jsx:56
-#: modules/users/admin/components/UsersEdit.jsx:51
+#: modules/pages/admin/components/PagesEdit.jsx:58
+#: modules/users/admin/components/UsersEdit.jsx:53
 msgid "Data has been saved successfully"
 msgstr "Данные успешно сохранены"
 
-#: modules/bases/admin/components/BasesList.jsx:122
-#: modules/bases/admin/components/DialogDelete.jsx:54
-#: modules/boats/admin/components/BoatsEdit.jsx:263
-#: modules/boats/admin/components/BoatsEdit.jsx:278
-#: modules/boats/admin/components/BoatsEdit.jsx:393
-#: modules/boats/admin/components/BoatsEdit.jsx:420
-#: modules/boats/admin/components/BoatsList.jsx:140
-#: modules/boats/admin/components/DialogDelete.jsx:54
-#: modules/countries/admin/components/CountriesList.jsx:122
-#: modules/countries/admin/components/DialogDelete.jsx:54
-#: modules/destinations/admin/components/DestinationsList.jsx:122
-#: modules/destinations/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogFolder.jsx:180
-#: modules/pages/admin/components/PagesList.jsx:122
+#: modules/pages/admin/components/PagesList.jsx:124
 #: modules/users/admin/components/DialogDelete.jsx:54
-#: modules/users/admin/components/UsersList.jsx:176
+#: modules/users/admin/components/UsersList.jsx:178
 msgid "Delete"
 msgstr "Удаление"
 
-#: modules/pages/admin/components/PagesList.jsx:147
+#: modules/pages/admin/components/PagesList.jsx:149
 msgid "Delete selected pages"
 msgstr "Удалить выбранные страницы"
 
-#: modules/pages/admin/components/PagesEdit.jsx:184
+#: modules/pages/admin/components/PagesEdit.jsx:186
 msgid "Displayed in browser window"
 msgstr "Отображается в окне браузера"
 
@@ -208,47 +121,31 @@ msgstr "Отображается в окне браузера"
 msgid "Duplicate page"
 msgstr "Страница уже существует"
 
-#: modules/pages/admin/components/PagesEdit.jsx:64
+#: modules/pages/admin/components/PagesEdit.jsx:66
 msgid "Duplicate page, check filename and path"
 msgstr "Страница уже существует, проверьте имя файла и путь"
 
-#: modules/bases/admin/components/BasesList.jsx:120
-#: modules/boats/admin/components/BoatsList.jsx:138
-#: modules/countries/admin/components/CountriesList.jsx:120
-#: modules/destinations/admin/components/DestinationsList.jsx:120
 #: modules/pages/admin/components/DialogFolder.jsx:179
-#: modules/pages/admin/components/PagesList.jsx:120
-#: modules/users/admin/components/UsersList.jsx:176
+#: modules/pages/admin/components/PagesList.jsx:122
+#: modules/users/admin/components/UsersList.jsx:178
 msgid "Edit"
 msgstr "Редактирование"
 
-#: modules/pages/admin/components/PagesEdit.jsx:295
+#: modules/pages/admin/components/PagesEdit.jsx:297
 msgid "Edit Page"
 msgstr "Редактирование страницы"
 
-#: modules/bases/admin/components/BasesEdit.jsx:211
-#: modules/bases/admin/components/BasesList.jsx:182
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:295
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:82
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:116
-#: modules/boats/admin/components/BoatPricesDialog.jsx:112
-#: modules/boats/admin/components/BoatsEdit.jsx:582
-#: modules/boats/admin/components/BoatsList.jsx:202
-#: modules/countries/admin/components/CountriesEdit.jsx:171
-#: modules/countries/admin/components/CountriesList.jsx:182
-#: modules/destinations/admin/components/DestinationsEdit.jsx:122
-#: modules/destinations/admin/components/DestinationsList.jsx:182
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
-#: modules/pages/admin/components/PagesEdit.jsx:254
-#: modules/pages/admin/components/PagesList.jsx:189
-#: modules/users/admin/components/UserAuth.jsx:150
-#: modules/users/admin/components/UsersEdit.jsx:165
-#: modules/users/admin/components/UsersList.jsx:200
+#: modules/pages/admin/components/PagesEdit.jsx:256
+#: modules/pages/admin/components/PagesList.jsx:191
+#: modules/users/admin/components/UserAuth.jsx:152
+#: modules/users/admin/components/UsersEdit.jsx:167
+#: modules/users/admin/components/UsersList.jsx:202
 msgid "Field is required"
 msgstr "Обязательное поле"
 
-#: modules/pages/admin/components/PagesEdit.jsx:197
+#: modules/pages/admin/components/PagesEdit.jsx:199
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -256,71 +153,42 @@ msgstr "Имя файла"
 msgid "ID"
 msgstr "ID"
 
-#: modules/bases/admin/components/BasesEdit.jsx:212
-#: modules/bases/admin/components/BasesList.jsx:68
-#: modules/bases/admin/components/BasesList.jsx:183
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:296
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:83
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:117
-#: modules/boats/admin/components/BoatPricesDialog.jsx:113
-#: modules/boats/admin/components/BoatsEdit.jsx:583
-#: modules/boats/admin/components/BoatsList.jsx:68
-#: modules/boats/admin/components/BoatsList.jsx:203
-#: modules/countries/admin/components/CountriesEdit.jsx:172
-#: modules/countries/admin/components/CountriesList.jsx:68
-#: modules/countries/admin/components/CountriesList.jsx:183
-#: modules/destinations/admin/components/DestinationsEdit.jsx:123
-#: modules/destinations/admin/components/DestinationsList.jsx:68
-#: modules/destinations/admin/components/DestinationsList.jsx:183
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
-#: modules/pages/admin/components/PagesEdit.jsx:255
-#: modules/pages/admin/components/PagesList.jsx:68
-#: modules/pages/admin/components/PagesList.jsx:190
-#: modules/users/admin/components/UserAuth.jsx:151
-#: modules/users/admin/components/UsersEdit.jsx:166
-#: modules/users/admin/components/UsersList.jsx:68
-#: modules/users/admin/components/UsersList.jsx:201
+#: modules/pages/admin/components/PagesEdit.jsx:257
+#: modules/pages/admin/components/PagesList.jsx:70
+#: modules/pages/admin/components/PagesList.jsx:192
+#: modules/users/admin/components/UserAuth.jsx:153
+#: modules/users/admin/components/UsersEdit.jsx:168
+#: modules/users/admin/components/UsersList.jsx:70
+#: modules/users/admin/components/UsersList.jsx:203
 msgid "Invalid format"
 msgstr "Неверный формат"
 
-#: modules/pages/admin/components/PagesEdit.jsx:198
+#: modules/pages/admin/components/PagesEdit.jsx:200
 msgid "Latin characters, numbers, _, - (length: 0-64)"
 msgstr "Лат. символы/_/-, длина: 0-64"
 
-#: modules/bases/admin/components/BasesList.jsx:178
-#: modules/boats/admin/components/BoatsList.jsx:198
-#: modules/countries/admin/components/CountriesList.jsx:178
-#: modules/destinations/admin/components/DestinationsList.jsx:178
-#: modules/pages/admin/components/PagesList.jsx:185
-#: modules/users/admin/components/UsersList.jsx:196
+#: modules/pages/admin/components/PagesList.jsx:187
+#: modules/users/admin/components/UsersList.jsx:198
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: modules/pages/admin/components/PagesEdit.jsx:295
+#: modules/pages/admin/components/PagesEdit.jsx:297
 msgid "New Page"
 msgstr "Новая страница"
 
-#: modules/bases/admin/components/BasesList.jsx:179
-#: modules/boats/admin/components/BoatsList.jsx:199
-#: modules/countries/admin/components/CountriesList.jsx:179
-#: modules/destinations/admin/components/DestinationsList.jsx:179
-#: modules/pages/admin/components/PagesList.jsx:186
-#: modules/users/admin/components/UsersList.jsx:197
+#: modules/pages/admin/components/PagesList.jsx:188
+#: modules/users/admin/components/UsersList.jsx:199
 msgid "No records to display"
 msgstr "Нет записей для отображения"
 
-#: modules/bases/admin/components/BasesList.jsx:115
-#: modules/boats/admin/components/BoatsList.jsx:117
-#: modules/boats/admin/components/BoatsList.jsx:133
-#: modules/countries/admin/components/CountriesList.jsx:115
-#: modules/destinations/admin/components/DestinationsList.jsx:115
-#: modules/pages/admin/components/PagesList.jsx:115
-#: modules/users/admin/components/UsersList.jsx:114
+#: modules/pages/admin/components/PagesList.jsx:117
+#: modules/users/admin/components/UsersList.jsx:116
 msgid "Operation complete"
 msgstr "Операция выполнена"
 
-#: modules/pages/admin/components/PagesList.jsx:150
+#: modules/pages/admin/components/PagesList.jsx:152
 msgid "Page"
 msgstr "Страница"
 
@@ -328,28 +196,20 @@ msgstr "Страница"
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: modules/pages/admin/components/PagesList.jsx:136
 #: modules/pages/admin/components/PagesList.jsx:138
+#: modules/pages/admin/components/PagesList.jsx:140
 msgid "Pages"
 msgstr "Контент"
 
-#: modules/bases/admin/components/BasesEdit.jsx:213
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:297
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:84
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:118
-#: modules/boats/admin/components/BoatPricesDialog.jsx:114
-#: modules/boats/admin/components/BoatsEdit.jsx:584
-#: modules/countries/admin/components/CountriesEdit.jsx:173
-#: modules/destinations/admin/components/DestinationsEdit.jsx:124
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
-#: modules/pages/admin/components/PagesEdit.jsx:256
-#: modules/users/admin/components/UsersEdit.jsx:167
+#: modules/pages/admin/components/PagesEdit.jsx:258
+#: modules/users/admin/components/UsersEdit.jsx:169
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
 
-#: modules/pages/admin/components/PagesEdit.jsx:190
-#: modules/pages/admin/components/PagesList.jsx:156
+#: modules/pages/admin/components/PagesEdit.jsx:192
+#: modules/pages/admin/components/PagesList.jsx:158
 msgid "Path"
 msgstr "Путь"
 
@@ -357,28 +217,16 @@ msgstr "Путь"
 msgid "Please select an item first"
 msgstr "Пожалуйста, выберите элемент из списка"
 
-#: modules/bases/admin/components/BasesList.jsx:65
-#: modules/boats/admin/components/BoatsList.jsx:65
-#: modules/countries/admin/components/CountriesList.jsx:65
-#: modules/destinations/admin/components/DestinationsList.jsx:65
-#: modules/pages/admin/components/PagesList.jsx:65
-#: modules/users/admin/components/UsersList.jsx:65
+#: modules/pages/admin/components/PagesList.jsx:67
+#: modules/users/admin/components/UsersList.jsx:67
 msgid "Record with the entered value already exists"
 msgstr "Запись с таким значением уже существует"
 
-#: modules/bases/admin/components/BasesList.jsx:147
-#: modules/boats/admin/components/BoatsList.jsx:167
-#: modules/countries/admin/components/CountriesList.jsx:147
-#: modules/destinations/admin/components/DestinationsList.jsx:147
-#: modules/pages/admin/components/PagesList.jsx:147
-#: modules/users/admin/components/UsersList.jsx:140
+#: modules/pages/admin/components/PagesList.jsx:149
+#: modules/users/admin/components/UsersList.jsx:142
 msgid "Refresh"
 msgstr "Обновить"
 
-#: modules/bases/admin/components/Translations.jsx:13
-#: modules/boats/admin/components/Translations.jsx:13
-#: modules/countries/admin/components/Translations.jsx:13
-#: modules/destinations/admin/components/Translations.jsx:13
 #: modules/pages/admin/components/Translations.jsx:13
 #: modules/users/admin/components/Translations.jsx:14
 msgid "Required"
@@ -388,17 +236,9 @@ msgstr "Обязательное поле"
 msgid "Root"
 msgstr "Корневая папка"
 
-#: modules/bases/admin/components/BasesEdit.jsx:186
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:425
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:149
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:192
-#: modules/boats/admin/components/BoatPricesDialog.jsx:188
-#: modules/boats/admin/components/BoatsEdit.jsx:488
-#: modules/countries/admin/components/CountriesEdit.jsx:146
-#: modules/destinations/admin/components/DestinationsEdit.jsx:97
 #: modules/pages/admin/components/DialogFolderEdit.jsx:132
-#: modules/pages/admin/components/PagesEdit.jsx:231
-#: modules/users/admin/components/UsersEdit.jsx:140
+#: modules/pages/admin/components/PagesEdit.jsx:233
+#: modules/users/admin/components/UsersEdit.jsx:142
 msgid "Save"
 msgstr "Сохранить"
 
@@ -411,31 +251,19 @@ msgid "The following page(s) will be permanently deleted:"
 msgstr "Следующие страницы будут удалены навсегда:"
 
 #: modules/pages/admin/components/DialogFolderEdit.jsx:94
-#: modules/pages/admin/components/PagesEdit.jsx:182
+#: modules/pages/admin/components/PagesEdit.jsx:184
 msgid "Title"
 msgstr "Заголовок"
 
-#: modules/bases/admin/components/Translations.jsx:12
-#: modules/boats/admin/components/Translations.jsx:12
-#: modules/countries/admin/components/Translations.jsx:12
-#: modules/destinations/admin/components/Translations.jsx:12
 #: modules/pages/admin/components/Translations.jsx:12
 #: modules/users/admin/components/Translations.jsx:13
 msgid "Too short"
 msgstr "Слишком корокий"
 
-#: modules/bases/admin/components/BasesEdit.jsx:217
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:301
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:88
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:122
-#: modules/boats/admin/components/BoatPricesDialog.jsx:118
-#: modules/boats/admin/components/BoatsEdit.jsx:588
-#: modules/countries/admin/components/CountriesEdit.jsx:177
-#: modules/destinations/admin/components/DestinationsEdit.jsx:128
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolderEdit.jsx:106
-#: modules/pages/admin/components/PagesEdit.jsx:260
-#: modules/users/admin/components/UsersEdit.jsx:171
+#: modules/pages/admin/components/PagesEdit.jsx:262
+#: modules/users/admin/components/UsersEdit.jsx:173
 msgid "Yes"
 msgstr "Да"
 
@@ -443,17 +271,9 @@ msgstr "Да"
 msgid "pages"
 msgstr "Контент"
 
-#: modules/bases/admin/components/BasesEdit.jsx:216
-#: modules/boats/admin/components/BoatAvailabilityDialog.jsx:300
-#: modules/boats/admin/components/BoatBlocksDialog.jsx:87
-#: modules/boats/admin/components/BoatExtrasDialog.jsx:121
-#: modules/boats/admin/components/BoatPricesDialog.jsx:117
-#: modules/boats/admin/components/BoatsEdit.jsx:587
-#: modules/countries/admin/components/CountriesEdit.jsx:176
-#: modules/destinations/admin/components/DestinationsEdit.jsx:127
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
-#: modules/pages/admin/components/PagesEdit.jsx:259
-#: modules/users/admin/components/UsersEdit.jsx:170
+#: modules/pages/admin/components/PagesEdit.jsx:261
+#: modules/users/admin/components/UsersEdit.jsx:172
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

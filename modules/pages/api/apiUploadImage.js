@@ -2,7 +2,7 @@
 import fs from 'fs-extra';
 import uuid from 'uuid/v1';
 import Jimp from 'jimp';
-import auth from '../../../shared/api/auth';
+import auth from '../../../shared/lib/auth';
 
 export default fastify => ({
     async handler(req, rep) {

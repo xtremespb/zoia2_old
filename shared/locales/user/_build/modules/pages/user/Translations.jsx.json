@@ -1,0 +1,18 @@
+{
+  "Test": {
+    "origin": [
+      [
+        "modules/pages/user/Translations.jsx",
+        8
+      ]
+    ]
+  },
+  "Another Test": {
+    "origin": [
+      [
+        "modules/pages/user/Translations.jsx",
+        9
+      ]
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
 import security from '../../etc/secure.json';
-import logger from './logger';
+import logger from '../lib/logger';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
 import fastifyCORS from 'fastify-cors';

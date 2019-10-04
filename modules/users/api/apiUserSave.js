@@ -4,7 +4,7 @@ import {
 } from 'mongodb';
 import crypto from 'crypto';
 import security from '../../../etc/secure.json';
-import auth from '../../../shared/api/auth';
+import auth from '../../../shared/lib/auth';
 
 const ajv = new Ajv();
 

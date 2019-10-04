@@ -35,7 +35,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
-    ['admin'].map(t => {
+    ['admin', 'user'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
@@ -53,7 +53,7 @@ const splitLocales = () => {
                         const refArr = reference.split(/\n/);
                         refArr.map(m => {
                             const ms = m.split(/\//);
-                            const area = ms.length >= 2 && ms[0] === 'modules' ? ms[1] : '_core';
+                            const area = ms[1];
                             if (!transModules[area]) {
                                 transModules[area] = {};
                             }
@@ -63,12 +63,9 @@ const splitLocales = () => {
                 }
             });
             Object.keys(transModules).map(m => {
-                if (m === '_core') {
-                    return;
-                }
                 console.log(`${colors.green(' * ')} Processing module: ${m}`);
-                const dir = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}` : `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
-                const filename = m === '_core' ? `${__dirname}/../shared/locales/core/${locale}/messages.po` : `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
+                const dir = `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
+                const filename = `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
@@ -86,30 +83,32 @@ const splitLocales = () => {
 const combineLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Combining locales...`);
-    ['admin'].map(t => {
-        const locales = fs.readdirSync(`${__dirname}/../shared/locales/core`);
+    ['admin', 'user'].map(t => {
+        const locales = fs.readdirSync(`${__dirname}/../shared/locales/admin`);
+        let charset;
+        let headers;
         locales.filter(l => l !== '_build').map(locale => {
-            const messagesCore = fs.readFileSync(`${__dirname}/../shared/locales/core/${locale}/messages.po`);
-            const messagesCorePo = gettextParser.po.parse(messagesCore);
-            const messagesCoreTrans = messagesCorePo.translations[''];
+            const messagesTrans = {};
             modules.map(m => {
                 if (!fs.existsSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`)) {
                     return;
                 }
                 const messagesModule = fs.readFileSync(`${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`);
                 const messagesModulePo = gettextParser.po.parse(messagesModule);
+                charset = charset || messagesModulePo.charset;
+                headers = headers || messagesModulePo.headers;
                 const messagesModuleTrans = messagesModulePo.translations[''];
                 Object.keys(messagesModuleTrans).map(mmt => {
-                    if (!messagesCoreTrans[mmt]) {
-                        messagesCoreTrans[mmt] = messagesModuleTrans[mmt];
+                    if (!messagesTrans[mmt]) {
+                        messagesTrans[mmt] = messagesModuleTrans[mmt];
                     }
                 });
             });
             const data = gettextParser.po.compile({
-                charset: messagesCorePo.charset,
-                headers: messagesCorePo.headers,
+                charset,
+                headers,
                 translations: {
-                    '': messagesCoreTrans
+                    '': messagesTrans
                 }
             });
             fs.writeFileSync(`${__dirname}/../shared/locales/${t}/${locale}/messages.po`, data);
@@ -120,7 +119,7 @@ const combineLocales = () => {
 const cleanupLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Cleaning up combined locales...`);
-    ['admin'].map(t => {
+    ['admin', 'user'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {

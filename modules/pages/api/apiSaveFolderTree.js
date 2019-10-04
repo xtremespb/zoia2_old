@@ -1,5 +1,5 @@
 /* eslint no-param-reassign:0 */
-import auth from '../../../shared/api/auth';
+import auth from '../../../shared/lib/auth';
 
 const loop = (data, callback) => {
     data.forEach((item, index, arr) => {

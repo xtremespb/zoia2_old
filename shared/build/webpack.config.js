@@ -263,8 +263,11 @@ const configWebClient = {
                 ]
             },
             {
-                test: /\.svg/,
-                loader: 'svg-url-loader'
+                test: /\.(jpg|jpeg|gif|png)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: '../../static/data_user/assets'
+                }
             }
         ]
     },
@@ -329,6 +332,13 @@ const configWebServer = {
                     'sass-loader',
                 ],
             },
+            {
+                test: /\.(jpg|jpeg|gif|png)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: '../../static/data_user/assets'
+                }
+            }
         ]
     },
     target: 'node',
@@ -414,7 +424,15 @@ const linguiAdmin = {
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
 console.log('Writing linguirc.admin.json...');
-fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
+const linguiUser = {
+    localeDir: 'shared/locales/user',
+    srcPathDirs: [],
+    format: 'po'
+};
+const linguiPathsArrUser = modules.map(module => `modules/${module}/user/`);
+linguiUser.srcPathDirs = [...linguiPathsArrUser];
+console.log('Writing linguirc.user.json...');
+fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
     spaces: 2
 });
 console.log('Staring Webpack...');
