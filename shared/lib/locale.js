@@ -5,7 +5,7 @@ const languages = Object.keys(site.languages);
 
 export default {
     getLocaleFromURL: req => {
-        if (req) {
+        if (req && req.urlData()) {
             const url = req.urlData().path;
             const urlParts = url.split(/\//);
             if (urlParts.length > 1) {
@@ -17,5 +17,20 @@ export default {
         }
         return languages[0];
     },
-    getSiteTitle: language => config.siteTitle[language]
+    getSiteTitle: language => config.siteTitle[language],
+    getLocaleURL: (language, req) => {
+        let newURL = req && req.urlData() ? req.urlData().path : null;
+        if (req && req.urlData()) {
+            const url = req.urlData().path;
+            const urlParts = url.split(/\//);
+            if (urlParts.length > 1) {
+                const firstPartOfURL = urlParts[1];
+                if (languages.indexOf(firstPartOfURL) > -1) {
+                    newURL = url.replace(`^/${firstPartOfURL}`, `/${language}`).replace(`^/${languages[0]}`, '');
+                    newURL = newURL.length ? newURL : '/';
+                }
+            }
+        }
+        return newURL;
+    }
 };

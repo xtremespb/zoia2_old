@@ -13,11 +13,14 @@ export default {
         const language = locale.getLocaleFromURL(req);
         const t = catalogs(language);
         const title = locale.getSiteTitle(language);
+        const languagesURL = {};
+        languagesArr.map(lang => languagesURL[lang] = locale.getLocaleURL(lang, req));
         return {
             user,
             language,
             languages,
             languagesArr,
+            languagesURL,
             t,
             title
         };
