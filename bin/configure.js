@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const colors = require('colors/safe');
 const crypto = require('crypto');
 const uuid = require('uuid/v1');
+const path = require('path');
 
 const install = async () => {
     const config = require('../shared/templates/config.json');
@@ -32,7 +33,7 @@ const install = async () => {
             type: 'input',
             name: 'portWeb',
             message: 'Which port should WebServer listen to?',
-            default: security.wevServer.port,
+            default: security.webServer.port,
         },
         {
             type: 'input',
@@ -75,19 +76,19 @@ const install = async () => {
         security.loglevel = data.loglevel;
         security.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
         console.log(`${colors.green(' * ')} Saving configuration to config.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/config.json`, config, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/config.json`), config, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to secure.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/secure.json`, security, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), security, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to api.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/api.json`, api, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/api.json`), api, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);
-        fs.writeJSONSync(`${__dirname}/../etc/site.json`, site, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/site.json`), site, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done`);
