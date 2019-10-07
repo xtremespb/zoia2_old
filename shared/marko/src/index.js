@@ -9,6 +9,8 @@ import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
 import fastifyCookie from 'fastify-cookie';
 import modules from '../../build/modules.json';
+import error404 from '../error404/index.marko';
+import site from '../../lib/site';
 import {
     MongoClient
 } from 'mongodb';
@@ -55,6 +57,18 @@ const fastify = Fastify({
         const module = await import(`../../../modules/${m}/user/index.js`);
         module.default(fastify);
     }));
+    fastify.setNotFoundHandler(async (req, rep) => {
+        const siteData = await site.getSiteData(req, fastify);
+        siteData.title = `${siteData.t['Page not found']} | ${siteData.title}`;
+        const render = await error404.render({
+            error: siteData.t['Page not found'],
+            $global: {
+                siteData,
+                t: siteData.t
+            }
+        });
+        rep.code(404).type('text/html').send(render.out.stream.str);
+    });
     log.info('Starting Web server...');
     fastify.listen(security.webServer.port, security.webServer.ip);
 })().catch(err => {

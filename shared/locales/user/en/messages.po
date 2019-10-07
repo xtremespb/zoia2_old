@@ -13,12 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/pages/user/Translations.jsx:9
-msgid "Another Test"
-msgstr ""
-
 #: modules/users/user/Translations.jsx:8
 msgid "Log Out"
+msgstr ""
+
+#: modules/pages/user/Translations.jsx:8
+msgid "Page not found"
 msgstr ""
 
 #: modules/users/user/Translations.jsx:9
@@ -27,8 +27,4 @@ msgstr ""
 
 #: modules/users/user/Translations.jsx:10
 msgid "Sign Up"
-msgstr ""
-
-#: modules/pages/user/Translations.jsx:8
-msgid "Test"
 msgstr ""

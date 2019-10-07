@@ -23,7 +23,7 @@ export default {
     },
     getUserData: async (req, fastify, db) => {
         try {
-            if (req.cookies[`${site.id}_auth`]) {
+            if (req.cookies[`${site.id}_auth`] && db) {
                 const token = req.cookies[`${site.id}_auth`];
                 const decodedToken = fastify.jwt.decode(token);
                 if (!decodedToken || !decodedToken.userId || !decodedToken.sessionId || Math.floor(Date.now() / 1000) > decodedToken.exp) {

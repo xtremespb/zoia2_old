@@ -5,7 +5,6 @@ import { Trans } from '@lingui/macro';
 
 export default () => (
     <>
-        <Trans>Test</Trans>
-        <Trans>Another Test</Trans>
+        <Trans>Page not found</Trans>
     </>
 );

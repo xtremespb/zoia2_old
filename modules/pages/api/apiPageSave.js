@@ -149,12 +149,13 @@ export default fastify => ({
                     };
                 }
             });
+            pageData.fullPath = `${pageData.path.length > 1 ? pageData.path : ''}/${pageData.filename}`;
             // Update page
             const update = await this.mongo.db.collection('pages').updateOne(id ? {
                 _id: new ObjectId(id)
             } : {
                 filename: pageData.filename,
-                path: pageData.path
+                path: pageData.path,
             }, {
                 $set: pageData
             }, {

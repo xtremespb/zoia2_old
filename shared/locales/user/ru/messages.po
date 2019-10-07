@@ -13,22 +13,18 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/pages/user/Translations.jsx:9
-msgid "Another Test"
-msgstr "Ещё тест"
-
 #: modules/users/user/Translations.jsx:8
 msgid "Log Out"
-msgstr ""
+msgstr "Выйти"
+
+#: modules/pages/user/Translations.jsx:8
+msgid "Page not found"
+msgstr "Страница не найдена"
 
 #: modules/users/user/Translations.jsx:9
 msgid "Sign In"
-msgstr ""
+msgstr "Войти"
 
 #: modules/users/user/Translations.jsx:10
 msgid "Sign Up"
-msgstr ""
-
-#: modules/pages/user/Translations.jsx:8
-msgid "Test"
-msgstr "Тест"
+msgstr "Регистрация"
