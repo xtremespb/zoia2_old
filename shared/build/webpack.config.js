@@ -375,13 +375,13 @@ const configWebServer = {
 const webpackConfig = [];
 
 const cleanUpAdmin = () => {
-    console.log('\nCleaning up static/data_admin...');
+    console.log('\nCleaning up static/data_admin…');
     fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
     fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
 };
 
 const cleanUpWeb = () => {
-    console.log('\nCleaning up static/data_user...');
+    console.log('\nCleaning up static/data_user…');
     fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
     fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
 };
@@ -410,11 +410,11 @@ if (process.argv.indexOf('--build:admin') > -1) {
 }
 
 fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'uploads'));
-console.log('Getting modules info...');
+console.log('Getting modules info…');
 const modules = fs.readdirSync(path.join(__dirname, '..', '..', 'modules'));
 const modulesInfo = {};
 modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', '..', 'modules', module, 'module.json')));
-console.log('Writing modules.json...');
+console.log('Writing modules.json…');
 fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
 const linguiAdmin = {
     localeDir: 'shared/locales/admin',
@@ -423,7 +423,7 @@ const linguiAdmin = {
 };
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
-console.log('Writing linguirc.admin.json...');
+console.log('Writing linguirc.admin.json…');
 const linguiUser = {
     localeDir: 'shared/locales/user',
     srcPathDirs: [],
@@ -431,10 +431,10 @@ const linguiUser = {
 };
 const linguiPathsArrUser = modules.map(module => `modules/${module}/user/`);
 linguiUser.srcPathDirs = [...linguiPathsArrUser];
-console.log('Writing linguirc.user.json...');
+console.log('Writing linguirc.user.json…');
 fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
     spaces: 2
 });
-console.log('Staring Webpack...');
+console.log('Staring Webpack…');
 
 module.exports = webpackConfig;

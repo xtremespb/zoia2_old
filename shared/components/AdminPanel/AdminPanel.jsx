@@ -87,7 +87,7 @@ class AdminPanel extends Component {
             return null;
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
-            {Object.keys(this.props.appDataRuntime.config).length ? (<><div>
+            {Object.keys(this.props.appDataRuntime.config).length > 1 ? (<><div>
                 <nav className="uk-navbar-container za-admin-navbar uk-dark" uk-navbar="true" uk-sticky="true">
                     <div className="uk-navbar-left za-admin-navbar-left">
                         <div className="uk-navbar-item uk-logo">
@@ -148,7 +148,7 @@ class AdminPanel extends Component {
                             </ul>
                         </div>
                     </div>
-                </div></>) : !this.props.appDataRuntime.configError ? <div className="uk-margin-left uk-margin-top"><div className="uk-margin-small-right" uk-spinner="ratio:0.5" /><Trans>Loading site configuration...</Trans></div> : null}
+                </div></>) : !this.props.appDataRuntime.configError ? <div className="uk-margin-left uk-margin-top"><div className="uk-margin-small-right" uk-spinner="ratio:0.5" /><Trans>Loading site configuration…</Trans></div> : null}
             {
                 this.props.appDataRuntime.configError ? <div className="uk-alert-danger" uk-alert="true">
                     <a className="uk-alert-close" uk-close="true" />

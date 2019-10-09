@@ -1,9 +1,33 @@
 {
-  "Page not found": {
+  "Not Found": {
     "origin": [
       [
         "modules/pages/user/Translations.jsx",
         8
+      ]
+    ]
+  },
+  "Resource could not be not found. Please check the URL and try again.": {
+    "origin": [
+      [
+        "modules/pages/user/Translations.jsx",
+        9
+      ]
+    ]
+  },
+  "Internal Server Error": {
+    "origin": [
+      [
+        "modules/pages/user/Translations.jsx",
+        10
+      ]
+    ]
+  },
+  "The server encountered an unexpected condition which prevented it from fulfilling the request.": {
+    "origin": [
+      [
+        "modules/pages/user/Translations.jsx",
+        11
       ]
     ]
   }

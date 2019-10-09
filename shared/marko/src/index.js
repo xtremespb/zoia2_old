@@ -10,6 +10,7 @@ import fastifyMultipart from 'fastify-multipart';
 import fastifyCookie from 'fastify-cookie';
 import modules from '../../build/modules.json';
 import error404 from '../error404/index.marko';
+import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 import {
     MongoClient
@@ -59,15 +60,25 @@ const fastify = Fastify({
     }));
     fastify.setNotFoundHandler(async (req, rep) => {
         const siteData = await site.getSiteData(req, fastify);
-        siteData.title = `${siteData.t['Page not found']} | ${siteData.title}`;
+        siteData.title = `${siteData.t['Not Found']} | ${siteData.title}`;
         const render = await error404.render({
-            error: siteData.t['Page not found'],
             $global: {
                 siteData,
                 t: siteData.t
             }
         });
         rep.code(404).type('text/html').send(render.out.stream.str);
+    });
+    fastify.setErrorHandler(async (err, req, rep) => {
+        const siteData = await site.getSiteData(req, fastify);
+        siteData.title = `${siteData.t['Internal Server Error']} | ${siteData.title}`;
+        const render = await error500.render({
+            $global: {
+                siteData,
+                t: siteData.t
+            }
+        });
+        rep.code(500).type('text/html').send(render.out.stream.str);
     });
     log.info('Starting Web server...');
     fastify.listen(security.webServer.port, security.webServer.ip);

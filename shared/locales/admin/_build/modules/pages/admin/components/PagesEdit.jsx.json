@@ -39,7 +39,7 @@
       ],
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        260
+        272
       ]
     ]
   },
@@ -51,7 +51,7 @@
       ],
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        259
+        271
       ]
     ]
   },
@@ -99,7 +99,23 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        206
+        220
+      ]
+    ]
+  },
+  "Upload image": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        225
+      ]
+    ]
+  },
+  "Could not upload an image": {
+    "origin": [
+      [
+        "modules/pages/admin/components/PagesEdit.jsx",
+        226
       ]
     ]
   },
@@ -107,11 +123,11 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        227
+        239
       ],
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        263
+        275
       ]
     ]
   },
@@ -119,7 +135,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        233
+        245
       ]
     ]
   },
@@ -127,7 +143,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        256
+        268
       ]
     ]
   },
@@ -135,7 +151,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        257
+        269
       ]
     ]
   },
@@ -143,7 +159,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        258
+        270
       ]
     ]
   },
@@ -151,7 +167,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        261
+        273
       ]
     ]
   },
@@ -159,7 +175,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        262
+        274
       ]
     ]
   },
@@ -167,7 +183,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        297
+        309
       ]
     ]
   },
@@ -175,7 +191,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        297
+        309
       ]
     ]
   },
@@ -183,7 +199,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesEdit.jsx",
-        299
+        311
       ]
     ]
   }

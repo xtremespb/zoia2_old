@@ -26,6 +26,7 @@ export default class ZTablePagination extends Component {
         }
         (this.props.page === 1) ? range.unshift(<li className="uk-active ztable-page-active" key="page_1">1</li>) : range.unshift(<li key="page_1"><a onClick={this.handleChange} data-page="1" href="#">1</a></li>);
         range.push(this.props.page === this.props.totalPages ? <li className="uk-active ztable-page-active" key={`page_${this.props.totalPages}`}>{this.props.totalPages}</li> : <li key={`page_${this.props.totalPages}`}><a href="#" onClick={this.handleChange} data-page={this.props.totalPages}>{this.props.totalPages}</a></li>);
+
         return range;
     }
 

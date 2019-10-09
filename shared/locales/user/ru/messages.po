@@ -13,13 +13,21 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: modules/pages/user/Translations.jsx:10
+msgid "Internal Server Error"
+msgstr "Внутренняя ошибка сервера"
+
 #: modules/users/user/Translations.jsx:8
 msgid "Log Out"
 msgstr "Выйти"
 
 #: modules/pages/user/Translations.jsx:8
-msgid "Page not found"
-msgstr "Страница не найдена"
+msgid "Not Found"
+msgstr "Не найдено"
+
+#: modules/pages/user/Translations.jsx:9
+msgid "Resource could not be not found. Please check the URL and try again."
+msgstr "Запрошенная страница не найдена. Пожалуйста, проверьте URL и попробуйте снова."
 
 #: modules/users/user/Translations.jsx:9
 msgid "Sign In"
@@ -28,3 +36,7 @@ msgstr "Войти"
 #: modules/users/user/Translations.jsx:10
 msgid "Sign Up"
 msgstr "Регистрация"
+
+#: modules/pages/user/Translations.jsx:11
+msgid "The server encountered an unexpected condition which prevented it from fulfilling the request."
+msgstr "Во время выполнения запроса возникла непредвиденная ошибка. Пожалуйста, попробуйте обновить страницу через некоторое время."

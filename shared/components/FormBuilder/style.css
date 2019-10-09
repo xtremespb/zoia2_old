@@ -193,6 +193,14 @@
     margin-top: 50px;
 }
 
+.ace_editor {
+    border: 1px solid #e5e5e5;
+}
+
+.ace_scroller.ace_scroll-left {
+    box-shadow: unset;
+}
+
 /* @media (max-width: 680px) {
     .ck-editor {
         max-width: 87%;

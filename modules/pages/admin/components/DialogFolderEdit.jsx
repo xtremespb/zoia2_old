@@ -31,15 +31,15 @@ class DialogFolderEdit extends Component {
     show = async item => {
         this.resetEditForm();
         await this.editFoldersForm.current.hideErrors();
+        this.editkey = null;
         if (item) {
             const data = cloneDeep(item);
+            this.editKey = data.key;
             delete data.key;
             delete data.title;
             delete data.children;
             Object.keys(data.data).map(i => data[i] = data.data[i]);
             delete data.data;
-            this.editKey = item.key;
-            this.editChildren = item.children;
             this.editFoldersForm.current.deserializeData(data);
         }
         await this.dialogFolderEdit.show();
@@ -62,7 +62,7 @@ class DialogFolderEdit extends Component {
             return;
         }
         data.key = data.key || this.editKey || uuid().replace(/-/gm, '');
-        data.children = data.children || this.editChildren;
+        // data.children = data.children || this.editChildren;
         if (this.props.onSaveButtonClickHandler && typeof this.props.onSaveButtonClickHandler === 'function') {
             this.props.onSaveButtonClickHandler(data);
         }

@@ -177,7 +177,7 @@ class UserList extends Component {
                                 cssRow: 'uk-table-shrink uk-text-nowrap ztable-noselect',
                                 process: (val, row) => (<><Link to={`/admin/users/edit/${row._id}`} className="uk-icon-button" uk-icon="pencil" uk-tooltip={`title: ${i18n._(t`Edit`)}`} />&nbsp;<a href="" className="uk-icon-button" uk-icon="trash" uk-tooltip={`title: ${i18n._(t`Delete`)}`} onClick={e => this.onDeleteRecord(row._id, e)} /></>)
                             }]}
-                            itemsPerPage={this.props.appDataRuntime.config.commonItemsLimit}
+                            itemsPerPage={this.props.appDataRuntime.config.commonItemsLimit || 10}
                             source={{
                                 url: `${api.url}/api/users/list`,
                                 method: 'POST',

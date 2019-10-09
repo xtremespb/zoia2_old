@@ -26,16 +26,13 @@ export default fastify => ({
                         t: siteData.t
                     }
                 });
+                // throw new Error('Ooops');
                 return rep.code(200).type('text/html').send(render.out.stream.str);
             }
             rep.callNotFound();
             return rep.code(204);
         } catch (e) {
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e.message
-            }));
+            return Promise.reject(e);
         }
     }
 });

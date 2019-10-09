@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 // import { remove as removeCookie } from 'es-cookie';
 import cookies from 'cookies-js';
 import axios from 'axios';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
@@ -199,19 +199,31 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Filename`)}:`,
                     helpText: i18n._(t`Latin characters, numbers, _, - (length: 0-64)`)
                 }],
+                // {
+                //     id: 'content',
+                //     type: 'ckeditor5',
+                //     css: 'uk-form-width-large',
+                //     label: `${i18n._(t`Content`)}:`,
+                //     CKEditorInstance: CKEditor,
+                //     EditorInstance: ClassicEditor,
+                //     languages: Object.keys(site.languages),
+                //     language: this.props.appData.language,
+                //     imageUploadURL: `${api.url}/api/pages/image/upload`,
+                //     imageUploadExtras: {
+                //         token: this.props.appDataRuntime.token
+                //     }
+                // },
                 {
                     id: 'content',
-                    type: 'ckeditor5',
+                    type: 'ace',
                     css: 'uk-form-width-large',
                     label: `${i18n._(t`Content`)}:`,
-                    CKEditorInstance: CKEditor,
-                    EditorInstance: ClassicEditor,
-                    languages: Object.keys(site.languages),
-                    language: this.props.appData.language,
                     imageUploadURL: `${api.url}/api/pages/image/upload`,
                     imageUploadExtras: {
                         token: this.props.appDataRuntime.token
-                    }
+                    },
+                    imageUploadLabel: t`Upload image`,
+                    imageUploadErrorLabel: t`Could not upload an image`
                 },
                 {
                     id: 'divider1',
@@ -260,7 +272,7 @@ class PagesEdit extends Component {
             ERR_SAVE: t`Could not save data`,
             WILL_BE_DELETED: t`will be deleted. Are you sure?`,
             YES: t`Yes`,
-            CANCEL: t`Cancel`
+            CANCEL: t`Cancel`,
         }}
         save={{
             url: `${api.url}/api/pages/save`,

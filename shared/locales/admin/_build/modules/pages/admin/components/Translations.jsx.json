@@ -1,6 +1,5 @@
 {
-  "pages": {
-    "defaults": "Pages",
+  "Cannot update database record": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
@@ -8,7 +7,7 @@
       ]
     ]
   },
-  "Cannot update database record": {
+  "Duplicate page": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
@@ -16,7 +15,7 @@
       ]
     ]
   },
-  "Duplicate page": {
+  "Page not found": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
@@ -24,7 +23,7 @@
       ]
     ]
   },
-  "Page not found": {
+  "Too short": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
@@ -32,7 +31,7 @@
       ]
     ]
   },
-  "Too short": {
+  "Required": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
@@ -40,19 +39,11 @@
       ]
     ]
   },
-  "Required": {
-    "origin": [
-      [
-        "modules/pages/admin/components/Translations.jsx",
-        13
-      ]
-    ]
-  },
   "Actions": {
     "origin": [
       [
         "modules/pages/admin/components/Translations.jsx",
-        14
+        13
       ]
     ]
   }

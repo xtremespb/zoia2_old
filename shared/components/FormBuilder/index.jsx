@@ -23,6 +23,7 @@ import ZWrap from './ZWrap.jsx';
 import ZLoading from './ZLoading.jsx';
 import ZMessage from './ZMessage.jsx';
 import ZDatePicker from './ZDatePicker.jsx';
+import ZAce from './ZAce.jsx';
 // Import styles
 import './style.css';
 
@@ -94,7 +95,7 @@ export default class ZFormBuilder extends Component {
             FILE_ATTACH: 'Attach file(s) by dropping them here',
             FILE_ORSELECT: 'or selecting one',
             FILE_IMAGE_ATTACH: 'Attach image(s) by dropping them here',
-            FILE_IMAGE_ORSELECT: 'or selecting one'
+            FILE_IMAGE_ORSELECT: 'or selecting one',
         },
         save: {
             url: null,
@@ -599,6 +600,31 @@ export default class ZFormBuilder extends Component {
                     value={this.state.dataStorage[this.state.tab][item.id] || ''}
                     onValueChanged={this.onGenericFieldValueChanged}
                     disabled={this.state.loading}
+                />);
+            case 'ace':
+                return (<ZAce
+                    ref={input => { this.fields[item.id] = input; }}
+                    originalId={item.id}
+                    id={`field_${this.props.prefix}_${item.id}`}
+                    key={`field_${this.props.prefix}_${item.id}`}
+                    css={item.css}
+                    label={itemProps ? itemProps.label : item.label || ''}
+                    cname={cname}
+                    lang={this.props.lang}
+                    mandatory={this.props.validation && this.props.validation[item.id] && this.props.validation[item.id].mandatory}
+                    helpText={itemProps ? itemProps.helpText : item.helpText || ''}
+                    error={this.state.errors[this.state.tab] && this.state.errors[this.state.tab][item.id]}
+                    errorMessage={this.state.errorMessages[this.state.tab] && this.state.errorMessages[this.state.tab][item.id] ? this.state.errorMessages[this.state.tab][item.id] : null}
+                    value={this.state.dataStorage[this.state.tab][item.id] || ''}
+                    onValueChanged={this.onGenericFieldValueChanged}
+                    disabled={this.state.loading}
+                    imageUploadURL={item.imageUploadURL}
+                    imageUploadExtras={item.imageUploadExtras}
+                    imageUploadLabel={item.imageUploadLabel}
+                    imageUploadErrorLabel={item.imageUploadErrorLabel}
+                    axios={this.props.axios}
+                    i18n={this.props.i18n}
+                    UIkit={this.props.UIkit}
                 />);
             case 'button':
                 return (<ZButton
