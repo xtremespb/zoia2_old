@@ -1,0 +1,11 @@
+{
+  "nav": {
+    "defaults": "Navigation",
+    "origin": [
+      [
+        "modules/nav/admin/components/Translations.jsx",
+        8
+      ]
+    ]
+  }
+}

@@ -26,12 +26,26 @@ style {
       <nav class="uk-navbar-container uk-navbar za-navbar" uk-navbar="offset:0;mode:click">
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
-            <li class="uk-active">
-              <a href="#">Active</a>
-            </li>
-            <li>
-              <a href="#">Hello World</a>
-            </li>
+            <for|item, index| of=out.global.siteData.navTree>
+              <li>
+                <a href="" key=item.key>
+                  ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>
+                    &nbsp;<span uk-icon="icon:triangle-down;ratio:0.6"/>
+                  </if>
+                </a>
+                <if(item.children && item.children.length)>
+                  <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                      <for|child, index| of=item.children>
+                        <li>
+                          <a href="" key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                        </li>
+                      </for>
+                    </ul>
+                  </div>
+                </if>
+              </li>
+            </for>
           </ul>
         </div>
         <div class="uk-navbar-right">
@@ -77,40 +91,20 @@ style {
     <div id="za_mobile_nav" uk-offcanvas="overlay: true">
       <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
-          <li class="uk-active">
-            <a href="#">Active</a>
-          </li>
-          <li class="uk-parent">
-            <a href="#">Parent</a>
-            <ul class="uk-nav-sub">
-              <li>
-                <a href="#">Sub item</a>
-              </li>
-              <li>
-                <a href="#">Sub item</a>
-              </li>
-            </ul>
-          </li>
-          <li class="uk-nav-header">Header</li>
-          <li>
-            <a href="#">
-              <span class="uk-margin-small-right" uk-icon="icon: table"/>
-              Item
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="uk-margin-small-right" uk-icon="icon: thumbnails"/>
-              Item
-            </a>
-          </li>
-          <li class="uk-nav-divider"/>
-          <li>
-            <a href="#">
-              <span class="uk-margin-small-right" uk-icon="icon: trash"/>
-              Item
-            </a>
-          </li>
+          <for|item, index| of=out.global.siteData.navTree>
+            <li class=`${item.children ? "uk-parent" : ""}`>
+              <a href="" key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
+              <if(item.children && item.children.length)>
+                <ul class="uk-nav-sub">
+                  <for|child, index| of=item.children>
+                    <li>
+                      <a href="" key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                    </li>
+                  </for>
+                </ul>
+              </if>
+            </li>
+          </for>
         </ul>
       </div>
     </div>

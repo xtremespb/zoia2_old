@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: modules/pages/admin/components/PagesList.jsx:164
-#: modules/pages/admin/components/Translations.jsx:13
+#: modules/pages/admin/components/Translations.jsx:14
 #: modules/users/admin/components/Translations.jsx:15
 msgid "Actions"
 msgstr ""
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Cannot delete one or more users"
 msgstr ""
 
-#: modules/pages/admin/components/Translations.jsx:8
+#: modules/pages/admin/components/Translations.jsx:9
 #: modules/users/admin/components/Translations.jsx:9
 msgid "Cannot update database record"
 msgstr ""
@@ -163,7 +163,7 @@ msgstr ""
 msgid "Duplicate e-mail"
 msgstr ""
 
-#: modules/pages/admin/components/Translations.jsx:9
+#: modules/pages/admin/components/Translations.jsx:10
 msgid "Duplicate page"
 msgstr ""
 
@@ -264,6 +264,11 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
+#: modules/nav/admin/components/Nav.jsx:47
+#: modules/nav/admin/components/Nav.jsx:49
+msgid "Navigation"
+msgstr ""
+
 #: modules/pages/admin/components/PagesEdit.jsx:309
 msgid "New Page"
 msgstr ""
@@ -294,7 +299,7 @@ msgstr ""
 msgid "Page not Found"
 msgstr ""
 
-#: modules/pages/admin/components/Translations.jsx:10
+#: modules/pages/admin/components/Translations.jsx:11
 msgid "Page not found"
 msgstr ""
 
@@ -346,7 +351,7 @@ msgstr ""
 msgid "Repeat Password"
 msgstr ""
 
-#: modules/pages/admin/components/Translations.jsx:12
+#: modules/pages/admin/components/Translations.jsx:13
 #: modules/users/admin/components/Translations.jsx:14
 msgid "Required"
 msgstr ""
@@ -382,7 +387,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: modules/pages/admin/components/Translations.jsx:11
+#: modules/pages/admin/components/Translations.jsx:12
 #: modules/users/admin/components/Translations.jsx:13
 msgid "Too short"
 msgstr ""
@@ -412,9 +417,13 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: modules/nav/admin/components/Translations.jsx:8
+msgid "nav"
+msgstr "Navigation"
+
 #: modules/pages/admin/components/Translations.jsx:8
-#~ msgid "pages"
-#~ msgstr "Pages"
+msgid "pages"
+msgstr "Pages"
 
 #: modules/users/admin/components/Translations.jsx:8
 msgid "users"

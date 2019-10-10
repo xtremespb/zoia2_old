@@ -424,6 +424,9 @@ const linguiAdmin = {
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
 console.log('Writing linguirc.admin.json…');
+fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
+    spaces: 2
+});
 const linguiUser = {
     localeDir: 'shared/locales/user',
     srcPathDirs: [],

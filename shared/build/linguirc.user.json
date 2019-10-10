@@ -2,6 +2,7 @@
   "localeDir": "shared/locales/user",
   "srcPathDirs": [
     "modules/admin/user/",
+    "modules/nav/user/",
     "modules/pages/user/",
     "modules/registry/user/",
     "modules/users/user/"

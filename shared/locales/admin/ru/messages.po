@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: modules/pages/admin/components/PagesList.jsx:164
-#: modules/pages/admin/components/Translations.jsx:13
+#: modules/pages/admin/components/Translations.jsx:14
 #: modules/users/admin/components/Translations.jsx:15
 msgid "Actions"
 msgstr "Действия"
@@ -59,7 +59,7 @@ msgstr "Ошибка во время удаления одной или неск
 msgid "Cannot delete one or more users"
 msgstr "Ошибка во время удаления одного или нескольких пользователей"
 
-#: modules/pages/admin/components/Translations.jsx:8
+#: modules/pages/admin/components/Translations.jsx:9
 #: modules/users/admin/components/Translations.jsx:9
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
@@ -163,7 +163,7 @@ msgstr "Отображается в окне браузера"
 msgid "Duplicate e-mail"
 msgstr "E-mail уже существует"
 
-#: modules/pages/admin/components/Translations.jsx:9
+#: modules/pages/admin/components/Translations.jsx:10
 msgid "Duplicate page"
 msgstr "Страница уже существует"
 
@@ -260,6 +260,11 @@ msgstr "Загрузка конфигурации сайта…"
 msgid "Log Out"
 msgstr "Выход"
 
+#: modules/nav/admin/components/Nav.jsx:47
+#: modules/nav/admin/components/Nav.jsx:49
+msgid "Navigation"
+msgstr "Навигация"
+
 #: modules/pages/admin/components/PagesEdit.jsx:309
 msgid "New Page"
 msgstr "Новая страница"
@@ -290,7 +295,7 @@ msgstr "Страница"
 msgid "Page not Found"
 msgstr "Страница не найдена"
 
-#: modules/pages/admin/components/Translations.jsx:10
+#: modules/pages/admin/components/Translations.jsx:11
 msgid "Page not found"
 msgstr "Страница не найдена"
 
@@ -342,7 +347,7 @@ msgstr "Обновить"
 msgid "Repeat Password"
 msgstr "Повтор пароля"
 
-#: modules/pages/admin/components/Translations.jsx:12
+#: modules/pages/admin/components/Translations.jsx:13
 #: modules/users/admin/components/Translations.jsx:14
 msgid "Required"
 msgstr "Обязательное поле"
@@ -378,7 +383,7 @@ msgstr "Следующие пользователи будут удалены н
 msgid "Title"
 msgstr "Заголовок"
 
-#: modules/pages/admin/components/Translations.jsx:11
+#: modules/pages/admin/components/Translations.jsx:12
 #: modules/users/admin/components/Translations.jsx:13
 msgid "Too short"
 msgstr "Слишком корокий"
@@ -407,6 +412,14 @@ msgstr "Пользователи"
 #: modules/users/admin/components/UsersEdit.jsx:173
 msgid "Yes"
 msgstr "Да"
+
+#: modules/nav/admin/components/Translations.jsx:8
+msgid "nav"
+msgstr "Навигация"
+
+#: modules/pages/admin/components/Translations.jsx:8
+msgid "pages"
+msgstr "Контент"
 
 #: modules/users/admin/components/Translations.jsx:8
 msgid "users"

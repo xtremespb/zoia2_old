@@ -59,7 +59,7 @@ const fastify = Fastify({
         module.default(fastify);
     }));
     fastify.setNotFoundHandler(async (req, rep) => {
-        const siteData = await site.getSiteData(req, fastify);
+        const siteData = await site.getSiteData(req, fastify, fastify.mongo.db);
         siteData.title = `${siteData.t['Not Found']} | ${siteData.title}`;
         const render = await error404.render({
             $global: {
@@ -69,8 +69,8 @@ const fastify = Fastify({
         });
         rep.code(404).type('text/html').send(render.out.stream.str);
     });
-    fastify.setErrorHandler(async (err, req, rep) => {
-        const siteData = await site.getSiteData(req, fastify);
+    fastify.setErrorHandler(async (err, req, rep) => {        
+        const siteData = await site.getSiteData(req, fastify, fastify.mongo.db);
         siteData.title = `${siteData.t['Internal Server Error']} | ${siteData.title}`;
         const render = await error500.render({
             $global: {
