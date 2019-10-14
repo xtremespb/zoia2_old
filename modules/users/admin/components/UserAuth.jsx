@@ -2,7 +2,7 @@
 
 import React, { lazy, Component } from 'react';
 import { I18nProvider, I18n } from '@lingui/react';
-import { t } from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import { connect } from 'react-redux';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
-const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/components/FormBuilder/index.jsx'));
+const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
 import(/* webpackChunkName: "UserAuth" */ './UserAuth.css');
 
@@ -86,7 +86,7 @@ class UserAuth extends Component {
             this.props.appDataSetUserAction(response.data.user);
             document.getElementById('app').classList.remove('uk-flex', 'uk-flex-center', 'uk-flex-middle', 'za-ua-appTheme');
             // setCookie(`${site.id}_auth`, response.data.token, site.cookieOptions);
-            cookies.set(`${site.id}_auth`, response.data.token, site.cookieOptions);            
+            cookies.set(`${site.id}_auth`, response.data.token, site.cookieOptions);
             return history.push(this.query.redirect || '/');
         }
         if (response.data.statusCode === 403) {
@@ -102,65 +102,74 @@ class UserAuth extends Component {
         }
         return (<I18nProvider language={this.props.appData.language} catalogs={this.state.catalogs}>
             <I18n>{({ i18n }) => {
-                this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Authorize`), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
-                return (<div className="uk-card uk-card-default uk-card-body uk-card-small">
-                    <FormBuilder
-                        prefix="za_users_authForm"
-                        simple={true}
-                        UIkit={UIkit}
-                        axios={axios}
-                        i18n={i18n}
-                        data={
-                            [{
-                                id: 'username',
-                                type: 'text',
-                                css: 'uk-width-1-1',
-                                label: `${i18n._(t`Username`)}:`,
-                                autofocus: true
-                            },
-                            {
-                                id: 'password',
-                                type: 'password',
-                                css: 'uk-width-1-1',
-                                label: `${i18n._(t`Password`)}:`,
-                            },
-                            {
-                                id: 'divider1',
-                                type: 'divider',
-                                css: 'za-users-auth-form-divider'
-                            },
-                            {
-                                id: 'btnLogin',
-                                type: 'button',
-                                buttonType: 'submit',
-                                css: 'uk-button-primary uk-width-1-1 uk-button-large',
-                                label: i18n._(t`Authorize`)
-                            }]
-                        }
-                        validation={
-                            {
-                                username: {
-                                    mandatory: true,
-                                    regexp: /^[a-zA-Z0-9_-]+$/
+                if (Object.keys(this.props.appDataRuntime.config).length > 1) {
+                    this.props.appDataRuntimeSetDocumentTitleAction(i18n._(t`Authorize`), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
+                    return (<div className="uk-card uk-card-default uk-card-body uk-card-small">
+                        <FormBuilder
+                            prefix="za_users_authForm"
+                            simple={true}
+                            UIkit={UIkit}
+                            axios={axios}
+                            i18n={i18n}
+                            data={
+                                [{
+                                    id: 'username',
+                                    type: 'text',
+                                    css: 'uk-width-1-1',
+                                    label: `${i18n._(t`Username`)}:`,
+                                    autofocus: true
                                 },
-                                password: {
-                                    mandatory: true
+                                {
+                                    id: 'password',
+                                    type: 'password',
+                                    css: 'uk-width-1-1',
+                                    label: `${i18n._(t`Password`)}:`,
+                                },
+                                {
+                                    id: 'divider1',
+                                    type: 'divider',
+                                    css: 'za-users-auth-form-divider'
+                                },
+                                {
+                                    id: 'btnLogin',
+                                    type: 'button',
+                                    buttonType: 'submit',
+                                    css: 'uk-button-primary uk-width-1-1 uk-button-large',
+                                    label: i18n._(t`Authorize`)
+                                }]
+                            }
+                            validation={
+                                {
+                                    username: {
+                                        mandatory: true,
+                                        regexp: /^[a-zA-Z0-9_-]+$/
+                                    },
+                                    password: {
+                                        mandatory: true
+                                    }
                                 }
                             }
-                        }
-                        lang={{
-                            ERR_VMANDATORY: i18n._(t`Field is required`),
-                            ERR_VFORMAT: i18n._(t`Invalid format`),
-                            ERR_SAVE: i18n._(t`Could not authorize on server`),
-                        }}
-                        save={{
-                            url: `${api.url}/api/users/login`,
-                            method: 'POST'
-                        }}
-                        onSaveSuccess={response => this.onSaveSuccessHandler(response, i18n)}
-                    />
-                </div>
-                );
+                            lang={{
+                                ERR_VMANDATORY: i18n._(t`Field is required`),
+                                ERR_VFORMAT: i18n._(t`Invalid format`),
+                                ERR_SAVE: i18n._(t`Could not authorize on server`),
+                            }}
+                            save={{
+                                url: `${api.url}/api/users/login`,
+                                method: 'POST'
+                            }}
+                            onSaveSuccess={response => this.onSaveSuccessHandler(response, i18n)}
+                        />
+                    </div>
+                    );
+                }
+                if (!this.props.appDataRuntime.configError) {
+                    return (<div className="uk-margin-left uk-margin-top"><div className="uk-margin-small-right" uk-spinner="ratio:0.5" /><Trans>Loading site configuration…</Trans></div>);
+                }
+                return (<div className="uk-alert-danger uk-box-shadow-small" uk-alert="true">
+                    <a className="uk-alert-close" uk-close="true" />
+                    <p><Trans>Could not load site configuration. Please try to reload the page to try again.</Trans>&nbsp;&nbsp;&nbsp;</p>
+                </div>);
             }}</I18n>
         </I18nProvider>);
     };

@@ -3,6 +3,20 @@ body {
     background: #F5F5F5;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 100px;
+}
+
 .uk-navbar-container:not(.uk-navbar-transparent) {
     background: #E0E0E0;
     z-index: 10;
@@ -46,6 +60,7 @@ body {
     padding: 20px 20px 20px 20px;
     box-shadow: 0px 1px 2px #ddd;
     z-index: 20;
+    min-height: calc(100vh - 50px);
 }
 
 .za-logo-wrap {
@@ -57,6 +72,10 @@ body {
     float: left;
     cursor: pointer;
     display: none;
+}
+
+@media (min-width: 1200px) {
+    .za-footer {}
 }
 
 @media (max-width: 1200px) {

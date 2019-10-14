@@ -18,8 +18,8 @@ import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRu
 import UIkit from '../../../../shared/utils/uikit';
 import DialogFolder from './DialogFolder.jsx';
 
-const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/components/AdminPanel/AdminPanel.jsx'));
-const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/components/FormBuilder/index.jsx'));
+const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
+const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
 class PagesEdit extends Component {
     constructor(props) {

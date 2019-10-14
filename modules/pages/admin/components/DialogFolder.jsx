@@ -8,7 +8,7 @@ import UIkit from '../../../../shared/utils/uikit';
 import DialogFolderEdit from './DialogFolderEdit.jsx';
 import site from '../../../../etc/site.json';
 
-const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/components/FormBuilder/index.jsx'));
+const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
 class DialogFolder extends Component {
     constructor(props) {
@@ -47,6 +47,18 @@ class DialogFolder extends Component {
         });
     }
 
+    setTreeValues = (tree = [], selected = [], checked = []) => this.editFoldersForm.current.setValue('folders', { tree, selected, checked });
+
+    onRootButtonClick = e => {
+        e.preventDefault();
+        const folders = this.editFoldersForm.current.getValue('folders');
+        folders.selected = [];
+        if (this.props.onSaveButtonClickHandler && typeof this.props.onSaveButtonClickHandler === 'function') {
+            this.props.onSaveButtonClickHandler(folders);
+        }
+        this.hide();
+    }
+
     loopFilter = (data, key) => data.filter(item => {
         if (item.children) {
             item.children = this.loopFilter(item.children, key);
@@ -79,18 +91,6 @@ class DialogFolder extends Component {
         this.hide();
     }
 
-    onRootButtonClick = e => {
-        e.preventDefault();
-        const folders = this.editFoldersForm.current.getValue('folders');
-        folders.selected = [];
-        if (this.props.onSaveButtonClickHandler && typeof this.props.onSaveButtonClickHandler === 'function') {
-            this.props.onSaveButtonClickHandler(folders);
-        }
-        this.hide();
-    }
-
-    setTreeValues = (tree = [], selected = [], checked = []) => this.editFoldersForm.current.setValue('folders', { tree, selected, checked });
-
     onAddTreeItemButtonClick = e => {
         e.preventDefault();
         this.dialogFolderEdit.current.show();
@@ -109,7 +109,7 @@ class DialogFolder extends Component {
     onDeleteTreeItemButtonClick = async e => {
         e.preventDefault();
         const folders = this.editFoldersForm.current.getValue('folders');
-        folders.checked.map(key => folders.tree = this.loopFilter(folders.tree, key));
+        (folders.selected && folders.selected.length ? folders.selected || [] : folders.checked.checked || []).map(key => folders.tree = this.loopFilter(folders.tree, key));
         folders.checked = [];
         folders.selected = [];
         await this.editFoldersForm.current.setValue('folders', []);

@@ -20,8 +20,8 @@ import site from '../../../../etc/site.json';
 import usersListTableSetState from '../actions/usersListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
-const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/components/AdminPanel/AdminPanel.jsx'));
-const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../shared/components/Table/index.jsx'));
+const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
+const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../shared/react/Table/index.jsx'));
 const DialogDelete = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "UsersDialogDelete" */ './DialogDelete.jsx'));
 
 class UserList extends Component {

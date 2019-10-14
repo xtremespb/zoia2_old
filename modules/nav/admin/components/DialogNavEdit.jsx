@@ -10,14 +10,14 @@ import site from '../../../../etc/site.json';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
-class DialogFolderEdit extends Component {
+class DialogNavEdit extends Component {
     constructor(props) {
         super(props);
         this.editFoldersForm = React.createRef();
     }
 
     componentDidMount = () => {
-        this.dialogFolderEdit = UIkit.modal(`#dialogFolderEdit_${this.props.id}`, {
+        this.dialogNavEdit = UIkit.modal(`#dialogNavEdit_${this.props.id}`, {
             bgClose: false,
             escClose: true,
             stack: true
@@ -25,7 +25,7 @@ class DialogFolderEdit extends Component {
     }
 
     componentWillUnmount = () => {
-        this.dialogFolderEdit.$destroy(true);
+        this.dialogNavEdit.$destroy(true);
     }
 
     show = async item => {
@@ -42,12 +42,12 @@ class DialogFolderEdit extends Component {
             delete data.data;
             this.editFoldersForm.current.deserializeData(data);
         }
-        await this.dialogFolderEdit.show();
+        await this.dialogNavEdit.show();
         this.editFoldersForm.current.setFocusOnFields();
     }
 
     hide = () => {
-        this.dialogFolderEdit.hide();
+        this.dialogNavEdit.hide();
     }
 
     resetEditForm = () => this.editFoldersForm.current.resetValuesToDefault();
@@ -62,7 +62,6 @@ class DialogFolderEdit extends Component {
             return;
         }
         data.key = data.key || this.editKey || uuid().replace(/-/gm, '');
-        // data.children = data.children || this.editChildren;
         if (this.props.onSaveButtonClickHandler && typeof this.props.onSaveButtonClickHandler === 'function') {
             this.props.onSaveButtonClickHandler(data);
         }
@@ -76,24 +75,22 @@ class DialogFolderEdit extends Component {
         axios={axios}
         i18n={i18n}
         tabs={site.languages}
-        commonFields={['id']}
+        commonFields={['url']}
         data={
             [
-                [
-                    {
-                        id: 'id',
-                        type: 'text',
-                        css: 'uk-form-width-small',
-                        label: `${i18n._(t`ID`)}:`,
-                        autofocus: true
-                    },
-                    {
-                        id: 'title',
-                        type: 'text',
-                        css: 'uk-form-width-medium',
-                        label: `${i18n._(t`Title`)}:`
-                    }
-                ]
+                {
+                    id: 'url',
+                    type: 'text',
+                    css: 'uk-form-width-medium',
+                    label: `${i18n._(t`URL`)}:`,
+                    autofocus: true
+                },
+                {
+                    id: 'title',
+                    type: 'text',
+                    css: 'uk-form-width-large',
+                    label: `${i18n._(t`Title`)}:`
+                }
             ]
         }
         lang={{
@@ -108,13 +105,14 @@ class DialogFolderEdit extends Component {
         }}
         validation={
             {
-                id: {
+                url: {
                     mandatory: true,
-                    regexp: /^[a-zA-Z0-9_-]{1,32}$/
+                    maxLength: 2000,
+                    regexp: /([-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b)?([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
                 },
                 title: {
                     mandatory: true,
-                    maxLength: 64
+                    maxLength: 128
                 }
             }
         }
@@ -122,7 +120,7 @@ class DialogFolderEdit extends Component {
     />);
 
     render = () => (<div>
-        <div id={`dialogFolderEdit_${this.props.id}`} style={{ display: 'none' }}>
+        <div id={`dialogNavEdit_${this.props.id}`} style={{ display: 'none' }}>
             <div className="uk-modal-dialog">
                 <div className="uk-modal-body">
                     {this.getEditForm(this.props.i18n)}
@@ -140,4 +138,4 @@ export default connect(store => ({
     appData: store.appData,
     appDataRuntime: store.appDataRuntime
 }),
-    () => ({}), null, { forwardRef: true })(DialogFolderEdit);
+    () => ({}), null, { forwardRef: true })(DialogNavEdit);

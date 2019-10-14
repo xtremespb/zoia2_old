@@ -25,7 +25,7 @@ msgstr "Активен"
 
 #: modules/pages/admin/components/DialogFolder.jsx:178
 msgid "Add"
-msgstr "Добавить"
+msgstr "Добавление"
 
 #: modules/users/admin/components/UsersEdit.jsx:103
 msgid "Administrator"
@@ -94,7 +94,7 @@ msgstr "Ошибка во время загрузки данных"
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или попробуйте <0>обновить</0> данные."
 
-#: shared/components/AdminPanel/AdminPanel.jsx:155
+#: shared/react/AdminPanel/AdminPanel.jsx:155
 msgid "Could not load site configuration. Please try to reload the page to try again."
 msgstr "Ошибка во время загрузки конфигурации сайта. Пожалуйста, попробуйте обновить страницу.  "
 
@@ -153,7 +153,7 @@ msgstr "Удалить выбранные страницы"
 
 #: modules/users/admin/components/UsersList.jsx:142
 msgid "Delete selected users"
-msgstr "Удаление выбранных"
+msgstr "Удаление пользователей"
 
 #: modules/pages/admin/components/PagesEdit.jsx:186
 msgid "Displayed in browser window"
@@ -183,11 +183,11 @@ msgstr "E-mail"
 #: modules/pages/admin/components/PagesList.jsx:122
 #: modules/users/admin/components/UsersList.jsx:178
 msgid "Edit"
-msgstr "Редактирование"
+msgstr "Правка"
 
 #: modules/pages/admin/components/PagesEdit.jsx:309
 msgid "Edit Page"
-msgstr "Редактирование страницы"
+msgstr "Правка страницы"
 
 #: modules/users/admin/components/UsersEdit.jsx:208
 msgid "Edit User"
@@ -219,7 +219,7 @@ msgstr "ID"
 msgid "Inactive"
 msgstr "Неактивен"
 
-#: shared/components/Error/Error.jsx:59
+#: shared/react/Error/Error.jsx:59
 msgid "Internal Error"
 msgstr "Внутренняя ошибка"
 
@@ -252,11 +252,11 @@ msgstr "Лат. символы/_/-, длина: 4-32"
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: shared/components/AdminPanel/AdminPanel.jsx:151
+#: shared/react/AdminPanel/AdminPanel.jsx:151
 msgid "Loading site configuration…"
 msgstr "Загрузка конфигурации сайта…"
 
-#: shared/components/AdminPanel/AdminPanel.jsx:109
+#: shared/react/AdminPanel/AdminPanel.jsx:109
 msgid "Log Out"
 msgstr "Выход"
 
@@ -291,7 +291,7 @@ msgstr "Операция выполнена"
 msgid "Page"
 msgstr "Страница"
 
-#: shared/components/Error/Error.jsx:59
+#: shared/react/Error/Error.jsx:59
 msgid "Page not Found"
 msgstr "Страница не найдена"
 

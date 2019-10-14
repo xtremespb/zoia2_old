@@ -91,7 +91,7 @@ msgstr "Удаление"
 #: modules/pages/admin/components/PagesList.jsx:122
 #: modules/users/admin/components/UsersList.jsx:178
 msgid "Edit"
-msgstr "Редактирование"
+msgstr "Правка"
 
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
@@ -213,7 +213,7 @@ msgstr "Добавление пользователя"
 
 #: modules/users/admin/components/UsersList.jsx:142
 msgid "Delete selected users"
-msgstr "Удаление выбранных"
+msgstr "Удаление пользователей"
 
 #: modules/users/admin/components/Translations.jsx:10
 msgid "Duplicate e-mail"

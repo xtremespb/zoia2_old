@@ -27,24 +27,26 @@ style {
         <div class="uk-navbar-left">
           <ul class="uk-navbar-nav">
             <for|item, index| of=out.global.siteData.navTree>
-              <li>
-                <a href="" key=item.key>
-                  ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>
-                    &nbsp;<span uk-icon="icon:triangle-down;ratio:0.6"/>
+              <if(item.data[out.global.siteData.language] && item.data[out.global.siteData.language].title)>
+                <li>
+                  <a href=item.url key=item.key>
+                    ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>&nbsp;&#x25BE;</if>
+                  </a>
+                  <if(item.children && item.children.length)>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <for|child, index| of=item.children>
+                          <if(child.data[out.global.siteData.language] && child.data[out.global.siteData.language].title)>
+                            <li>
+                              <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                            </li>
+                          </if>
+                        </for>
+                      </ul>
+                    </div>
                   </if>
-                </a>
-                <if(item.children && item.children.length)>
-                  <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                      <for|child, index| of=item.children>
-                        <li>
-                          <a href="" key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
-                        </li>
-                      </for>
-                    </ul>
-                  </div>
-                </if>
-              </li>
+                </li>
+              </if>
             </for>
           </ul>
         </div>
@@ -52,9 +54,7 @@ style {
           <ul class="uk-navbar-nav">
             <if(out.global.siteData.user.username)>
               <li>
-                <a href="#">
-                  ${out.global.siteData.user.username}&nbsp;<span uk-icon="icon:triangle-down;ratio:0.6"/>
-                </a>
+                <a href="#">${out.global.siteData.user.username}&nbsp;&#x25BE;</a>
                 <div class="uk-navbar-dropdown">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
                     <li>
@@ -87,18 +87,24 @@ style {
         <${input.renderBody}/>
       </div>
     </div>
+    <div class="uk-container">
+      <div class="uk-text-muted uk-text-small uk-margin-top uk-margin-bottom za-footer">
+        Zoia &copy;2019 Michael A. Matveev,
+        <a href="https://opensource.org/licenses/MIT" class="uk-link-text" target="_blank">MIT license</a>.
+      </div>
+    </div>
     <!-- Mobile Navigation Start -->
     <div id="za_mobile_nav" uk-offcanvas="overlay: true">
       <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
           <for|item, index| of=out.global.siteData.navTree>
             <li class=`${item.children ? "uk-parent" : ""}`>
-              <a href="" key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
+              <a href=item.url key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
               <if(item.children && item.children.length)>
                 <ul class="uk-nav-sub">
                   <for|child, index| of=item.children>
                     <li>
-                      <a href="" key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                      <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
                     </li>
                   </for>
                 </ul>

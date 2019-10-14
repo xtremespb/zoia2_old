@@ -501,6 +501,7 @@ export default class ZFormBuilder extends Component {
                     deleteItemButtonLabel={item.deleteItemButtonLabel}
                     onDeleteItemButtonClick={item.onDeleteItemButtonClick}
                     onValueChanged={this.onTreeFieldValueChanged}
+                    noItemsLabel={item.noItemsLabel}
                     draggable={item.draggable || false}
                     checkable={item.checkable || false}
                     selectable={item.selectable || false}
@@ -858,10 +859,13 @@ export default class ZFormBuilder extends Component {
                     return;
                 }
                 this.deserializeData(response.data.data);
-                this.props.onLoadSuccess(response.data);
+                if (this.props.onLoadSuccess && typeof this.props.onLoadSuccess === 'function') {
+                    this.props.onLoadSuccess(response.data);
+                }
                 this.setFocusOnFields();
-            }).catch(() => {
+            }).catch(e => {
                 // eslint-disable-next-line no-console
+                console.error(e);
                 this.setState({ loading: false });
                 if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
                     this.props.onLoadError();

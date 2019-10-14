@@ -107,7 +107,7 @@ export default class ZTree extends Component {
                 <button type="button" className="uk-icon-button uk-button-danger uk-margin-small-right" uk-icon="trash" onClick={this.onDeleteItemButtonClick} uk-tooltip={this.props.deleteItemButtonLabel} />
             </div>
             <div className="uk-margin-top">
-                <Tree
+                {this.props.tree.length ? (<Tree
                     expandedKeys={this.props.expanded}
                     autoExpandParent={this.state.autoExpandParent}
                     treeData={this.props.tree}
@@ -122,7 +122,8 @@ export default class ZTree extends Component {
                     onSelect={this.onSelect}
                     checkedKeys={this.props.checked}
                     onCheck={this.onCheck}
-                />
+                    checkStrictly={true}
+                />) : (<div className="uk-text-small uk-text-muted">{this.props.noItemsLabel}</div>)}
             </div>
         </div>
     </div>);

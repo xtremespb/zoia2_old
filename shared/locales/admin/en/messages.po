@@ -94,7 +94,7 @@ msgstr ""
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:155
+#: shared/react/AdminPanel/AdminPanel.jsx:155
 msgid "Could not load site configuration. Please try to reload the page to try again."
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: shared/components/Error/Error.jsx:59
+#: shared/react/Error/Error.jsx:59
 msgid "Internal Error"
 msgstr ""
 
@@ -252,15 +252,15 @@ msgstr ""
 msgid "Loading data, please wait…"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:151
+#: shared/react/AdminPanel/AdminPanel.jsx:151
 #~ msgid "Loading site configuration..."
 #~ msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:151
+#: shared/react/AdminPanel/AdminPanel.jsx:151
 msgid "Loading site configuration…"
 msgstr ""
 
-#: shared/components/AdminPanel/AdminPanel.jsx:109
+#: shared/react/AdminPanel/AdminPanel.jsx:109
 msgid "Log Out"
 msgstr ""
 
@@ -295,7 +295,7 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: shared/components/Error/Error.jsx:59
+#: shared/react/Error/Error.jsx:59
 msgid "Page not Found"
 msgstr ""
 

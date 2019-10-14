@@ -71,7 +71,7 @@ const configTools = {
 const configAdmin = {
     name: 'Admin Panel (React)',
     entry: {
-        app: path.resolve(__dirname, '..', 'components', 'entrypoint.jsx')
+        app: path.resolve(__dirname, '..', 'react', 'entrypoint.jsx')
     },
     devtool: 'source-map',
     output: {
