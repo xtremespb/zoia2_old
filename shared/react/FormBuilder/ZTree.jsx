@@ -102,7 +102,7 @@ export default class ZTree extends Component {
         <label className="uk-form-label" htmlFor={this.props.id}>{this.props.label}{this.props.mandatory ? <span className="zform-mandatory">*</span> : null}</label>
         <div className="uk-form-controls">
             <div>
-                <button type="button" className="uk-icon-button uk-margin-small-right" uk-icon="plus" onClick={this.onAddItemButtonClick} uk-tooltip={this.props.addItemButtonLabel} />
+                <button type="button" className="uk-icon-button uk-button-primary uk-margin-small-right" uk-icon="plus" onClick={this.onAddItemButtonClick} uk-tooltip={this.props.addItemButtonLabel} />
                 <button type="button" className="uk-icon-button uk-margin-small-right" uk-icon="pencil" onClick={this.onEditItemButtonClick} uk-tooltip={this.props.editItemButtonLabel} />
                 <button type="button" className="uk-icon-button uk-button-danger uk-margin-small-right" uk-icon="trash" onClick={this.onDeleteItemButtonClick} uk-tooltip={this.props.deleteItemButtonLabel} />
             </div>

@@ -3,6 +3,9 @@ import {
     ObjectId
 } from 'mongodb';
 import fs from 'fs-extra';
+import {
+    minify
+} from 'html-minifier';
 import auth from '../../../shared/lib/auth';
 
 const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
@@ -146,10 +149,19 @@ export default fastify => ({
                     pageData.data[language] = {
                         title: formData[language].title,
                         content: formData[language].content,
+                        contentCompiled: minify(formData[language].content, {
+                            caseSensitive: true,
+                            decodeEntities: true,
+                            html5: true,
+                            collapseWhitespace: true,
+                            removeComments: true,
+                            removeRedundantAttributes: true
+                        })
                     };
                 }
             });
             pageData.fullPath = `${pageData.path.length > 1 ? pageData.path : ''}/${pageData.filename}`;
+            pageData.fullPath = pageData.fullPath.length > 1 ? pageData.fullPath.replace(/\/$/, '') : pageData.fullPath;
             // Update page
             const update = await this.mongo.db.collection('pages').updateOne(id ? {
                 _id: new ObjectId(id)
@@ -178,7 +190,7 @@ export default fastify => ({
                 ip: req.ip,
                 path: req.urlData().path,
                 query: req.urlData().query,
-                error: e
+                error: e.message || e
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

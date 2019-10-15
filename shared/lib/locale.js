@@ -39,6 +39,7 @@ export default {
             }
             newURL = urlParts.join('/') || '/';
         }
+        newURL = newURL.length > 1 ? newURL.replace(/\/$/, '') : newURL;
         return newURL;
     },
     getNonLocalizedURL: req => {
@@ -54,6 +55,7 @@ export default {
                     [data.language] = languages;
                 }
                 data.url = urlParts.join('/') || '/';
+                data.url = data.url.length > 1 ? data.url.replace(/\/$/, '') : data.url;
             }
         }
         return data;

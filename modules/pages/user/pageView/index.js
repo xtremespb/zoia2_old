@@ -17,17 +17,17 @@ export default fastify => ({
                     rep.callNotFound();
                     return rep.code(204);
                 }
-                const siteData = await site.getSiteData(req, fastify, this.mongo.db);
+                const siteData = await site.getSiteData(req, fastify, this.mongo.db, page);
                 siteData.title = `${page.data[language].title} | ${siteData.title}`;
-                const render = await template.render({
-                    content: page.data[language].content,
+                const render = (await template.render({
+                    content: page.data[language].contentCompiled,
                     $global: {
                         siteData,
                         t: siteData.t
                     }
-                });
-                // throw new Error('Ooops');
-                return rep.code(200).type('text/html').send(render.out.stream.str);
+                }));
+                const html = render.out.stream.str.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);
+                return rep.code(200).type('text/html').send(html);
             }
             rep.callNotFound();
             return rep.code(204);
