@@ -3,6 +3,7 @@ import auth from './auth';
 import locale from './locale';
 import catalogs from '../utils/lingui-catalogs-node';
 import site from '../../etc/site.json';
+import config from '../../etc/config.json';
 
 const loopPath = (data, keyPath, language, callback, path = [], pathData = []) => data.forEach(item => {
     path.push(item.id);
@@ -74,7 +75,8 @@ export default {
             t,
             title,
             breadcrumbsHTML,
-            useUIkitOnFrontend: site.useUIkitOnFrontend || false
+            useUIkitOnFrontend: site.useUIkitOnFrontend || false,
+            allowRegistration: config.allowRegistration
         };
     }
 };

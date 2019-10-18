@@ -13,14 +13,21 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+# ~ msgid "Log Out"
+# ~ msgstr ""
 #: modules/users/user/Translations.jsx:8
-msgid "Log Out"
+#: modules/pages/user/Translations.jsx:8
+msgid "Not Found"
 msgstr ""
 
+# ~ msgid "Sign In"
+# ~ msgstr ""
+# ~ msgid "Sign Up"
+# ~ msgstr ""
 #: modules/users/user/Translations.jsx:9
-msgid "Sign In"
-msgstr ""
-
 #: modules/users/user/Translations.jsx:10
-msgid "Sign Up"
+#: modules/pages/user/Translations.jsx:11
+msgid ""
+"The server encountered an unexpected condition which prevented it from "
+"fulfilling the request."
 msgstr ""

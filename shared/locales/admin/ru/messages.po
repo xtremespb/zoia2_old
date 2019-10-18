@@ -23,6 +23,7 @@ msgstr "Действия"
 msgid "Active"
 msgstr "Активен"
 
+#: modules/nav/admin/components/Nav.jsx:169
 #: modules/pages/admin/components/DialogFolder.jsx:178
 msgid "Add"
 msgstr "Добавление"
@@ -31,18 +32,25 @@ msgstr "Добавление"
 msgid "Administrator"
 msgstr "Администратор"
 
-#: modules/users/admin/components/UserAuth.jsx:105
-#: modules/users/admin/components/UserAuth.jsx:137
+#: modules/pages/admin/components/PagesEdit.jsx:232
+msgid "Apply typography transformation on displayed content"
+msgstr "Выполнить трансформацию типографики в контенте, отображаемом пользователю"
+
+#: modules/users/admin/components/UserAuth.jsx:106
+#: modules/users/admin/components/UserAuth.jsx:138
 msgid "Authorize"
 msgstr "Авторизация"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:104
+#: modules/nav/admin/components/DialogNavEdit.jsx:129
+#: modules/nav/admin/components/Nav.jsx:216
 #: modules/pages/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogFolder.jsx:195
 #: modules/pages/admin/components/DialogFolder.jsx:211
 #: modules/pages/admin/components/DialogFolderEdit.jsx:107
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
-#: modules/pages/admin/components/PagesEdit.jsx:239
-#: modules/pages/admin/components/PagesEdit.jsx:275
+#: modules/pages/admin/components/PagesEdit.jsx:247
+#: modules/pages/admin/components/PagesEdit.jsx:283
 #: modules/users/admin/components/DialogDelete.jsx:53
 #: modules/users/admin/components/UsersEdit.jsx:136
 #: modules/users/admin/components/UsersEdit.jsx:174
@@ -64,7 +72,8 @@ msgstr "Ошибка во время удаления одного или нес
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:220
+#: modules/pages/admin/components/PagesEdit.jsx:205
+#: modules/pages/admin/components/PagesEdit.jsx:218
 msgid "Content"
 msgstr "Контент"
 
@@ -72,7 +81,7 @@ msgstr "Контент"
 msgid "Could not authorize"
 msgstr "Ошибка во время авторизации"
 
-#: modules/users/admin/components/UserAuth.jsx:154
+#: modules/users/admin/components/UserAuth.jsx:155
 msgid "Could not authorize on server"
 msgstr "Ошибка во время авторизации на сервере"
 
@@ -81,33 +90,38 @@ msgstr "Ошибка во время авторизации на сервере"
 msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:100
+#: modules/nav/admin/components/Nav.jsx:212
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
-#: modules/pages/admin/components/PagesEdit.jsx:164
-#: modules/pages/admin/components/PagesEdit.jsx:271
+#: modules/pages/admin/components/PagesEdit.jsx:163
+#: modules/pages/admin/components/PagesEdit.jsx:279
 #: modules/users/admin/components/UsersEdit.jsx:170
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:311
+#: modules/pages/admin/components/PagesEdit.jsx:319
 #: modules/users/admin/components/UsersEdit.jsx:210
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr "Ошибка во время загрузки данных с сервера. Пожалуйста, проверьте ссылку или попробуйте <0>обновить</0> данные."
 
-#: shared/react/AdminPanel/AdminPanel.jsx:155
+#: modules/users/admin/components/UserAuth.jsx:171
 msgid "Could not load site configuration. Please try to reload the page to try again."
 msgstr "Ошибка во время загрузки конфигурации сайта. Пожалуйста, попробуйте обновить страницу.  "
 
-#: modules/pages/admin/components/PagesEdit.jsx:72
-#: modules/pages/admin/components/PagesEdit.jsx:78
+#: modules/pages/admin/components/PagesEdit.jsx:71
+#: modules/pages/admin/components/PagesEdit.jsx:77
 msgid "Could not save a page"
 msgstr "Ошибка во время сохранения страницы"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:101
+#: modules/nav/admin/components/Nav.jsx:149
+#: modules/nav/admin/components/Nav.jsx:213
 #: modules/pages/admin/components/DialogFolder.jsx:192
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
-#: modules/pages/admin/components/PagesEdit.jsx:133
-#: modules/pages/admin/components/PagesEdit.jsx:142
-#: modules/pages/admin/components/PagesEdit.jsx:272
+#: modules/pages/admin/components/PagesEdit.jsx:132
+#: modules/pages/admin/components/PagesEdit.jsx:141
+#: modules/pages/admin/components/PagesEdit.jsx:280
 #: modules/pages/admin/components/PagesList.jsx:73
 #: modules/pages/admin/components/PagesList.jsx:76
 #: modules/pages/admin/components/PagesList.jsx:190
@@ -118,7 +132,7 @@ msgstr "Ошибка во время сохранения страницы"
 msgid "Could not save data"
 msgstr "Ошибка во время сохранения данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:226
+#: modules/pages/admin/components/PagesEdit.jsx:224
 msgid "Could not upload an image"
 msgstr "Ошибка во время загрузки изображения"
 
@@ -134,11 +148,13 @@ msgstr "Созать страницу"
 msgid "Create new user"
 msgstr "Добавление пользователя"
 
-#: modules/pages/admin/components/PagesEdit.jsx:58
+#: modules/nav/admin/components/Nav.jsx:144
+#: modules/pages/admin/components/PagesEdit.jsx:57
 #: modules/users/admin/components/UsersEdit.jsx:53
 msgid "Data has been saved successfully"
 msgstr "Данные успешно сохранены"
 
+#: modules/nav/admin/components/Nav.jsx:171
 #: modules/pages/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogFolder.jsx:180
 #: modules/pages/admin/components/PagesList.jsx:124
@@ -155,7 +171,7 @@ msgstr "Удалить выбранные страницы"
 msgid "Delete selected users"
 msgstr "Удаление пользователей"
 
-#: modules/pages/admin/components/PagesEdit.jsx:186
+#: modules/pages/admin/components/PagesEdit.jsx:185
 msgid "Displayed in browser window"
 msgstr "Отображается в окне браузера"
 
@@ -167,7 +183,7 @@ msgstr "E-mail уже существует"
 msgid "Duplicate page"
 msgstr "Страница уже существует"
 
-#: modules/pages/admin/components/PagesEdit.jsx:66
+#: modules/pages/admin/components/PagesEdit.jsx:65
 msgid "Duplicate page, check filename and path"
 msgstr "Страница уже существует, проверьте имя файла и путь"
 
@@ -179,13 +195,14 @@ msgstr "Имя пользователя уже существует"
 msgid "E-mail"
 msgstr "E-mail"
 
+#: modules/nav/admin/components/Nav.jsx:170
 #: modules/pages/admin/components/DialogFolder.jsx:179
 #: modules/pages/admin/components/PagesList.jsx:122
 #: modules/users/admin/components/UsersList.jsx:178
 msgid "Edit"
 msgstr "Правка"
 
-#: modules/pages/admin/components/PagesEdit.jsx:309
+#: modules/pages/admin/components/PagesEdit.jsx:317
 msgid "Edit Page"
 msgstr "Правка страницы"
 
@@ -197,17 +214,23 @@ msgstr "Редактирование пользователя"
 msgid "Example: username@zoiajs.org"
 msgstr "Пример: username@zoiajs.org"
 
+#: modules/pages/admin/components/PagesEdit.jsx:229
+msgid "Extras"
+msgstr "Дополнительно"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:97
+#: modules/nav/admin/components/Nav.jsx:209
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
-#: modules/pages/admin/components/PagesEdit.jsx:268
+#: modules/pages/admin/components/PagesEdit.jsx:276
 #: modules/pages/admin/components/PagesList.jsx:191
-#: modules/users/admin/components/UserAuth.jsx:152
+#: modules/users/admin/components/UserAuth.jsx:153
 #: modules/users/admin/components/UsersEdit.jsx:167
 #: modules/users/admin/components/UsersList.jsx:202
 msgid "Field is required"
 msgstr "Обязательное поле"
 
-#: modules/pages/admin/components/PagesEdit.jsx:199
+#: modules/pages/admin/components/PagesEdit.jsx:198
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -220,15 +243,17 @@ msgid "Inactive"
 msgstr "Неактивен"
 
 #: shared/react/Error/Error.jsx:59
-msgid "Internal Error"
-msgstr "Внутренняя ошибка"
+#~ msgid "Internal Error"
+#~ msgstr "Внутренняя ошибка"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:98
+#: modules/nav/admin/components/Nav.jsx:210
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
-#: modules/pages/admin/components/PagesEdit.jsx:269
+#: modules/pages/admin/components/PagesEdit.jsx:277
 #: modules/pages/admin/components/PagesList.jsx:70
 #: modules/pages/admin/components/PagesList.jsx:192
-#: modules/users/admin/components/UserAuth.jsx:153
+#: modules/users/admin/components/UserAuth.jsx:154
 #: modules/users/admin/components/UsersEdit.jsx:168
 #: modules/users/admin/components/UsersList.jsx:70
 #: modules/users/admin/components/UsersList.jsx:203
@@ -239,7 +264,7 @@ msgstr "Неверный формат"
 msgid "Invalid username or password"
 msgstr "Неверное имя пользователя или пароль"
 
-#: modules/pages/admin/components/PagesEdit.jsx:200
+#: modules/pages/admin/components/PagesEdit.jsx:199
 msgid "Latin characters, numbers, _, - (length: 0-64)"
 msgstr "Лат. символы/_/-, длина: 0-64"
 
@@ -252,23 +277,28 @@ msgstr "Лат. символы/_/-, длина: 4-32"
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: shared/react/AdminPanel/AdminPanel.jsx:151
+#: modules/users/admin/components/UserAuth.jsx:167
 msgid "Loading site configuration…"
 msgstr "Загрузка конфигурации сайта…"
 
 #: shared/react/AdminPanel/AdminPanel.jsx:109
-msgid "Log Out"
-msgstr "Выход"
+#~ msgid "Log Out"
+#~ msgstr "Выход"
 
-#: modules/nav/admin/components/Nav.jsx:47
-#: modules/nav/admin/components/Nav.jsx:49
+#: modules/pages/admin/components/PagesEdit.jsx:231
+msgid "Minifiy the HTML code displayed to the user"
+msgstr "Минификация кода HTML, отображаемого пользователю"
+
+#: modules/nav/admin/components/Nav.jsx:225
+#: modules/nav/admin/components/Nav.jsx:232
 msgid "Navigation"
 msgstr "Навигация"
 
-#: modules/pages/admin/components/PagesEdit.jsx:309
+#: modules/pages/admin/components/PagesEdit.jsx:317
 msgid "New Page"
 msgstr "Новая страница"
 
+#: modules/nav/admin/components/Nav.jsx:172
 #: modules/pages/admin/components/PagesList.jsx:188
 #: modules/users/admin/components/UsersList.jsx:199
 msgid "No records to display"
@@ -292,8 +322,8 @@ msgid "Page"
 msgstr "Страница"
 
 #: shared/react/Error/Error.jsx:59
-msgid "Page not Found"
-msgstr "Страница не найдена"
+#~ msgid "Page not Found"
+#~ msgstr "Страница не найдена"
 
 #: modules/pages/admin/components/Translations.jsx:11
 msgid "Page not found"
@@ -304,7 +334,7 @@ msgstr "Страница не найдена"
 msgid "Pages"
 msgstr "Контент"
 
-#: modules/users/admin/components/UserAuth.jsx:125
+#: modules/users/admin/components/UserAuth.jsx:126
 #: modules/users/admin/components/UsersEdit.jsx:111
 msgid "Password"
 msgstr "Пароль"
@@ -313,14 +343,16 @@ msgstr "Пароль"
 msgid "Password is required when creating a new user, should be at least 8 characters long."
 msgstr "Пароль требуется при создании нового пользователя, должен быть не менее 8 символов."
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:99
+#: modules/nav/admin/components/Nav.jsx:211
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
-#: modules/pages/admin/components/PagesEdit.jsx:270
+#: modules/pages/admin/components/PagesEdit.jsx:278
 #: modules/users/admin/components/UsersEdit.jsx:169
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
 
-#: modules/pages/admin/components/PagesEdit.jsx:192
+#: modules/pages/admin/components/PagesEdit.jsx:191
 #: modules/pages/admin/components/PagesList.jsx:158
 msgid "Path"
 msgstr "Путь"
@@ -329,7 +361,7 @@ msgstr "Путь"
 msgid "Permissions"
 msgstr "Права"
 
-#: modules/pages/admin/components/DialogFolder.jsx:71
+#: modules/pages/admin/components/DialogFolder.jsx:83
 msgid "Please select an item first"
 msgstr "Пожалуйста, выберите элемент из списка"
 
@@ -356,8 +388,10 @@ msgstr "Обязательное поле"
 msgid "Root"
 msgstr "/"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:130
+#: modules/nav/admin/components/Nav.jsx:187
 #: modules/pages/admin/components/DialogFolderEdit.jsx:132
-#: modules/pages/admin/components/PagesEdit.jsx:245
+#: modules/pages/admin/components/PagesEdit.jsx:253
 #: modules/users/admin/components/UsersEdit.jsx:142
 msgid "Save"
 msgstr "Сохранить"
@@ -378,8 +412,9 @@ msgstr "Следующие страницы будут удалены навсе
 msgid "The following user(s) will be permanently deleted:"
 msgstr "Следующие пользователи будут удалены навсегда:"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:92
 #: modules/pages/admin/components/DialogFolderEdit.jsx:94
-#: modules/pages/admin/components/PagesEdit.jsx:184
+#: modules/pages/admin/components/PagesEdit.jsx:183
 msgid "Title"
 msgstr "Заголовок"
 
@@ -388,7 +423,11 @@ msgstr "Заголовок"
 msgid "Too short"
 msgstr "Слишком корокий"
 
-#: modules/pages/admin/components/PagesEdit.jsx:225
+#: modules/nav/admin/components/DialogNavEdit.jsx:85
+msgid "URL"
+msgstr "Ссылка"
+
+#: modules/pages/admin/components/PagesEdit.jsx:223
 msgid "Upload image"
 msgstr "Загрузка изображения"
 
@@ -396,7 +435,7 @@ msgstr "Загрузка изображения"
 msgid "User not found"
 msgstr "Не найден"
 
-#: modules/users/admin/components/UserAuth.jsx:118
+#: modules/users/admin/components/UserAuth.jsx:119
 #: modules/users/admin/components/UsersEdit.jsx:72
 msgid "Username"
 msgstr "Имя пользователя"
@@ -406,9 +445,11 @@ msgstr "Имя пользователя"
 msgid "Users"
 msgstr "Пользователи"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:103
+#: modules/nav/admin/components/Nav.jsx:215
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolderEdit.jsx:106
-#: modules/pages/admin/components/PagesEdit.jsx:274
+#: modules/pages/admin/components/PagesEdit.jsx:282
 #: modules/users/admin/components/UsersEdit.jsx:173
 msgid "Yes"
 msgstr "Да"
@@ -425,9 +466,11 @@ msgstr "Контент"
 msgid "users"
 msgstr "Пользователи"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:102
+#: modules/nav/admin/components/Nav.jsx:214
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
-#: modules/pages/admin/components/PagesEdit.jsx:273
+#: modules/pages/admin/components/PagesEdit.jsx:281
 #: modules/users/admin/components/UsersEdit.jsx:172
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

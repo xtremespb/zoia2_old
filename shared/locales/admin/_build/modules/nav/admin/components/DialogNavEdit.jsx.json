@@ -1,0 +1,94 @@
+{
+  "URL": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        85
+      ]
+    ]
+  },
+  "Title": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        92
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        97
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        98
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        99
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        100
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        101
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        102
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        103
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        104
+      ],
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        129
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/nav/admin/components/DialogNavEdit.jsx",
+        130
+      ]
+    ]
+  }
+}

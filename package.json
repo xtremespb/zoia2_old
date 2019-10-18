@@ -125,6 +125,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "extract-css-chunks-webpack-plugin": "^4.6.0",
+    "file-loader": "^4.2.0",
     "install-peers": "^1.0.3",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",

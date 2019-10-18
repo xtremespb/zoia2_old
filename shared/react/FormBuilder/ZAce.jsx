@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 
-import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/webpack-resolver';
+import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-github';
 
 export default class ZAce extends Component {

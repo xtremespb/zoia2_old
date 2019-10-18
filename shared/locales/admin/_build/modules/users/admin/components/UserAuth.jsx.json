@@ -19,11 +19,11 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        105
+        106
       ],
       [
         "modules/users/admin/components/UserAuth.jsx",
-        137
+        138
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        118
+        119
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        125
+        126
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        152
+        153
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        153
+        154
       ]
     ]
   },
@@ -63,7 +63,23 @@
     "origin": [
       [
         "modules/users/admin/components/UserAuth.jsx",
-        154
+        155
+      ]
+    ]
+  },
+  "Loading site configuration…": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        167
+      ]
+    ]
+  },
+  "Could not load site configuration. Please try to reload the page to try again.": {
+    "origin": [
+      [
+        "modules/users/admin/components/UserAuth.jsx",
+        171
       ]
     ]
   }

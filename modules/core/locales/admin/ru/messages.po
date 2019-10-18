@@ -13,26 +13,33 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: shared/react/AdminPanel/AdminPanel.jsx:155
-msgid ""
-"Could not load site configuration. Please try to reload the page to try "
-"again."
-msgstr ""
-"Ошибка во время загрузки конфигурации сайта. Пожалуйста, попробуйте "
-"обновить страницу.  "
-
+# ~ msgid "Internal Error"
+# ~ msgstr "Внутренняя ошибка"
 #: shared/react/Error/Error.jsx:59
-msgid "Internal Error"
-msgstr "Внутренняя ошибка"
+#: modules/nav/admin/components/DialogNavEdit.jsx:98
+#: modules/nav/admin/components/Nav.jsx:210
+#: modules/pages/admin/components/DialogFolder.jsx:189
+#: modules/pages/admin/components/DialogFolderEdit.jsx:101
+#: modules/pages/admin/components/PagesEdit.jsx:277
+#: modules/pages/admin/components/PagesList.jsx:70
+#: modules/pages/admin/components/PagesList.jsx:192
+#: modules/users/admin/components/UserAuth.jsx:154
+#: modules/users/admin/components/UsersEdit.jsx:168
+#: modules/users/admin/components/UsersList.jsx:70
+#: modules/users/admin/components/UsersList.jsx:203
+msgid "Invalid format"
+msgstr "Неверный формат"
 
-#: shared/react/AdminPanel/AdminPanel.jsx:151
-msgid "Loading site configuration…"
-msgstr "Загрузка конфигурации сайта…"
-
+# ~ msgid "Log Out"
+# ~ msgstr "Выход"
 #: shared/react/AdminPanel/AdminPanel.jsx:109
-msgid "Log Out"
-msgstr "Выход"
+#: modules/pages/admin/components/PagesEdit.jsx:231
+msgid "Minifiy the HTML code displayed to the user"
+msgstr "Минификация кода HTML, отображаемого пользователю"
 
+# ~ msgid "Page not Found"
+# ~ msgstr "Страница не найдена"
 #: shared/react/Error/Error.jsx:59
-msgid "Page not Found"
+#: modules/pages/admin/components/Translations.jsx:11
+msgid "Page not found"
 msgstr "Страница не найдена"

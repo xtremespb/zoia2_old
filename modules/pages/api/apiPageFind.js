@@ -1,25 +1,23 @@
-import {
-    ObjectId
-} from 'mongodb';
-import auth from '../../../shared/lib/auth';
 import secure from '../../../etc/secure.json';
 
-export default fastify => ({
+export default () => ({
     schema: {
         body: {
             type: 'object',
             properties: {
-                token: {
-                    type: 'string'
-                },
-                id: {
+                url: {
                     type: 'string',
-                    minLength: 24,
-                    maxLength: 24,
-                    pattern: '^[a-f0-9]+$'
+                    maxLength: 2000,
+                    pattern: '([-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b)?([-a-zA-Z0-9()@:%_+.~#?&//=]*)?'
+                },
+                language: {
+                    type: 'string',
+                    minLength: 2,
+                    maxLength: 2,
+                    pattern: '^[a-z]+$'
                 }
             },
-            required: ['token', 'id']
+            required: ['url', 'language']
         }
     },
     attachValidation: true,
@@ -35,33 +33,18 @@ export default fastify => ({
             return rep.code(400).send(JSON.stringify(req.validationError));
         }
         // End of Validation
-        // Check permissions
-        const user = await auth.verifyToken(req.body.token, fastify, this.mongo.db);
-        if (!user || !user.admin) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: 'Authentication failed'
-            });
-            return rep.code(403).send(JSON.stringify({
-                statusCode: 403,
-                error: 'Authentication failed'
-            }));
-        }
-        // End of check permissions
         try {
-            // Find page with given ID
+            // Find page with given URL
             const pageRecord = await this.mongo.db.collection('pages').findOne({
-                _id: new ObjectId(req.body.id)
+                fullPath: req.body.url
             });
-            if (!pageRecord) {
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: 'Non-existent record'
+            if (!pageRecord || !pageRecord.data || !pageRecord.data[req.body.language]) {
+                return rep.code(200).send(JSON.stringify({
+                    statusCode: 404,
+                    error: 'Non-existent record or missing locale'
                 }));
             }
-            Object.keys(pageRecord.data).map(language => pageRecord[language] = pageRecord.data[language]);
+            pageRecord.page = pageRecord.data[req.body.language];
             delete pageRecord.data;
             // Send response
             return rep.code(200)

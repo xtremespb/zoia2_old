@@ -69,7 +69,7 @@ const fastify = Fastify({
         });
         rep.code(404).type('text/html').send(render.out.stream.str);
     });
-    fastify.setErrorHandler(async (err, req, rep) => {        
+    fastify.setErrorHandler(async (err, req, rep) => {
         const siteData = await site.getSiteData(req, fastify, fastify.mongo.db);
         siteData.title = `${siteData.t['Internal Server Error']} | ${siteData.title}`;
         const render = await error500.render({
@@ -77,6 +77,13 @@ const fastify = Fastify({
                 siteData,
                 t: siteData.t
             }
+        });
+        req.log.error({
+            ip: req.ip,
+            path: req.urlData().path,
+            query: req.urlData().query,
+            error: err && err.message ? err.message : 'Internal Server Error',
+            stack: secure.stackTrace && err.stack ? err.stack : null
         });
         rep.code(500).type('text/html').send(render.out.stream.str);
     });

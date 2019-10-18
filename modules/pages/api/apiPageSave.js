@@ -6,7 +6,9 @@ import fs from 'fs-extra';
 import {
     minify
 } from 'html-minifier';
+import Typograf from 'typograf';
 import auth from '../../../shared/lib/auth';
+import secure from '../../../etc/secure.json';
 
 const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
 
@@ -146,17 +148,31 @@ export default fastify => ({
             }
             Object.keys(site.languages).map(language => {
                 if (formData[language]) {
-                    pageData.data[language] = {
-                        title: formData[language].title,
-                        content: formData[language].content,
-                        contentCompiled: minify(formData[language].content, {
+                    let contentCompiled = formData[language].content;
+                    if (formData[language].extras.indexOf('typo') > -1) {
+                        const locale = [];
+                        if (language !== 'en') {
+                            locale.push(language);
+                        }
+                        locale.push('en-US');
+                        contentCompiled = new Typograf({
+                            locale
+                        }).execute(formData[language].content);
+                    }
+                    if (formData[language].extras.indexOf('minify') > -1) {
+                        contentCompiled = minify(contentCompiled, {
                             caseSensitive: true,
                             decodeEntities: true,
                             html5: true,
                             collapseWhitespace: true,
                             removeComments: true,
                             removeRedundantAttributes: true
-                        })
+                        });
+                    }
+                    pageData.data[language] = {
+                        title: formData[language].title,
+                        content: formData[language].content,
+                        contentCompiled
                     };
                 }
             });
@@ -190,12 +206,13 @@ export default fastify => ({
                 ip: req.ip,
                 path: req.urlData().path,
                 query: req.urlData().query,
-                error: e.message || e
+                error: e && e.message ? e.message : 'Internal Server Error',
+                stack: secure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,
                 error: 'Internal server error',
-                message: e.message
+                message: e && e.message ? e.message : null
             }));
         }
     }

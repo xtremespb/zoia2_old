@@ -1,4 +1,5 @@
 import fs from 'fs-extra';
+import secure from '../../../etc/secure.json';
 
 const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
 
@@ -15,12 +16,13 @@ export default () => ({
                 ip: req.ip,
                 path: req.urlData().path,
                 query: req.urlData().query,
-                error: e
+                error: e && e.message ? e.message : 'Internal Server Error',
+                stack: secure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,
                 error: 'Internal server error',
-                message: e.message
+                message: e && e.message ? e.message : null
             }));
         }
     }

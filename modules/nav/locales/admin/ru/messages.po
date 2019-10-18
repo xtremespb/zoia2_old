@@ -13,11 +13,162 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: modules/nav/admin/components/Nav.jsx:47
-#: modules/nav/admin/components/Nav.jsx:49
+#: modules/nav/admin/components/Nav.jsx:169
+#: modules/pages/admin/components/DialogFolder.jsx:178
+msgid "Add"
+msgstr "Добавление"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:104
+#: modules/nav/admin/components/DialogNavEdit.jsx:129
+#: modules/nav/admin/components/Nav.jsx:216
+#: modules/pages/admin/components/DialogDelete.jsx:53
+#: modules/pages/admin/components/DialogFolder.jsx:195
+#: modules/pages/admin/components/DialogFolder.jsx:211
+#: modules/pages/admin/components/DialogFolderEdit.jsx:107
+#: modules/pages/admin/components/DialogFolderEdit.jsx:131
+#: modules/pages/admin/components/PagesEdit.jsx:247
+#: modules/pages/admin/components/PagesEdit.jsx:283
+#: modules/users/admin/components/DialogDelete.jsx:53
+#: modules/users/admin/components/UsersEdit.jsx:136
+#: modules/users/admin/components/UsersEdit.jsx:174
+msgid "Cancel"
+msgstr "Отмена"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:100
+#: modules/nav/admin/components/Nav.jsx:212
+#: modules/pages/admin/components/DialogFolder.jsx:191
+#: modules/pages/admin/components/DialogFolderEdit.jsx:103
+#: modules/pages/admin/components/PagesEdit.jsx:163
+#: modules/pages/admin/components/PagesEdit.jsx:279
+#: modules/users/admin/components/UsersEdit.jsx:170
+msgid "Could not load data from server"
+msgstr "Ошибка во время загрузки данных"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:101
+#: modules/nav/admin/components/Nav.jsx:149
+#: modules/nav/admin/components/Nav.jsx:213
+#: modules/pages/admin/components/DialogFolder.jsx:192
+#: modules/pages/admin/components/DialogFolderEdit.jsx:104
+#: modules/pages/admin/components/PagesEdit.jsx:132
+#: modules/pages/admin/components/PagesEdit.jsx:141
+#: modules/pages/admin/components/PagesEdit.jsx:280
+#: modules/pages/admin/components/PagesList.jsx:73
+#: modules/pages/admin/components/PagesList.jsx:76
+#: modules/pages/admin/components/PagesList.jsx:190
+#: modules/users/admin/components/UsersEdit.jsx:171
+#: modules/users/admin/components/UsersList.jsx:73
+#: modules/users/admin/components/UsersList.jsx:76
+#: modules/users/admin/components/UsersList.jsx:201
+msgid "Could not save data"
+msgstr "Ошибка во время сохранения данных"
+
+#: modules/nav/admin/components/Nav.jsx:144
+#: modules/pages/admin/components/PagesEdit.jsx:57
+#: modules/users/admin/components/UsersEdit.jsx:53
+msgid "Data has been saved successfully"
+msgstr "Данные успешно сохранены"
+
+#: modules/nav/admin/components/Nav.jsx:171
+#: modules/pages/admin/components/DialogDelete.jsx:54
+#: modules/pages/admin/components/DialogFolder.jsx:180
+#: modules/pages/admin/components/PagesList.jsx:124
+#: modules/users/admin/components/DialogDelete.jsx:54
+#: modules/users/admin/components/UsersList.jsx:178
+msgid "Delete"
+msgstr "Удаление"
+
+#: modules/nav/admin/components/Nav.jsx:170
+#: modules/pages/admin/components/DialogFolder.jsx:179
+#: modules/pages/admin/components/PagesList.jsx:122
+#: modules/users/admin/components/UsersList.jsx:178
+msgid "Edit"
+msgstr "Правка"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:97
+#: modules/nav/admin/components/Nav.jsx:209
+#: modules/pages/admin/components/DialogFolder.jsx:188
+#: modules/pages/admin/components/DialogFolderEdit.jsx:100
+#: modules/pages/admin/components/PagesEdit.jsx:276
+#: modules/pages/admin/components/PagesList.jsx:191
+#: modules/users/admin/components/UserAuth.jsx:153
+#: modules/users/admin/components/UsersEdit.jsx:167
+#: modules/users/admin/components/UsersList.jsx:202
+msgid "Field is required"
+msgstr "Обязательное поле"
+
+# ~ msgid "Internal Error"
+# ~ msgstr "Внутренняя ошибка"
+#: shared/react/Error/Error.jsx:59
+#: modules/nav/admin/components/DialogNavEdit.jsx:98
+#: modules/nav/admin/components/Nav.jsx:210
+#: modules/pages/admin/components/DialogFolder.jsx:189
+#: modules/pages/admin/components/DialogFolderEdit.jsx:101
+#: modules/pages/admin/components/PagesEdit.jsx:277
+#: modules/pages/admin/components/PagesList.jsx:70
+#: modules/pages/admin/components/PagesList.jsx:192
+#: modules/users/admin/components/UserAuth.jsx:154
+#: modules/users/admin/components/UsersEdit.jsx:168
+#: modules/users/admin/components/UsersList.jsx:70
+#: modules/users/admin/components/UsersList.jsx:203
+msgid "Invalid format"
+msgstr "Неверный формат"
+
+#: modules/nav/admin/components/Nav.jsx:225
+#: modules/nav/admin/components/Nav.jsx:232
 msgid "Navigation"
 msgstr "Навигация"
+
+#: modules/nav/admin/components/Nav.jsx:172
+#: modules/pages/admin/components/PagesList.jsx:188
+#: modules/users/admin/components/UsersList.jsx:199
+msgid "No records to display"
+msgstr "Нет записей для отображения"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:99
+#: modules/nav/admin/components/Nav.jsx:211
+#: modules/pages/admin/components/DialogFolder.jsx:190
+#: modules/pages/admin/components/DialogFolderEdit.jsx:102
+#: modules/pages/admin/components/PagesEdit.jsx:278
+#: modules/users/admin/components/UsersEdit.jsx:169
+msgid "Passwords do not match"
+msgstr "Пароль не совпадает"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:130
+#: modules/nav/admin/components/Nav.jsx:187
+#: modules/pages/admin/components/DialogFolderEdit.jsx:132
+#: modules/pages/admin/components/PagesEdit.jsx:253
+#: modules/users/admin/components/UsersEdit.jsx:142
+msgid "Save"
+msgstr "Сохранить"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:92
+#: modules/pages/admin/components/DialogFolderEdit.jsx:94
+#: modules/pages/admin/components/PagesEdit.jsx:183
+msgid "Title"
+msgstr "Заголовок"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:85
+msgid "URL"
+msgstr "Ссылка"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:103
+#: modules/nav/admin/components/Nav.jsx:215
+#: modules/pages/admin/components/DialogFolder.jsx:194
+#: modules/pages/admin/components/DialogFolderEdit.jsx:106
+#: modules/pages/admin/components/PagesEdit.jsx:282
+#: modules/users/admin/components/UsersEdit.jsx:173
+msgid "Yes"
+msgstr "Да"
 
 #: modules/nav/admin/components/Translations.jsx:8
 msgid "nav"
 msgstr "Навигация"
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:102
+#: modules/nav/admin/components/Nav.jsx:214
+#: modules/pages/admin/components/DialogFolder.jsx:193
+#: modules/pages/admin/components/DialogFolderEdit.jsx:105
+#: modules/pages/admin/components/PagesEdit.jsx:281
+#: modules/users/admin/components/UsersEdit.jsx:172
+msgid "will be deleted. Are you sure?"
+msgstr "будут удалены. Вы уверены?"

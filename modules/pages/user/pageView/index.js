@@ -20,7 +20,7 @@ export default fastify => ({
                 const siteData = await site.getSiteData(req, fastify, this.mongo.db, page);
                 siteData.title = `${page.data[language].title} | ${siteData.title}`;
                 const render = (await template.render({
-                    content: page.data[language].contentCompiled,
+                    content: page.data[language].contentCompiled || page.data[language].content,
                     $global: {
                         siteData,
                         t: siteData.t,

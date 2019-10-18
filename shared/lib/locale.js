@@ -50,7 +50,7 @@ export default {
             if (urlParts.length > 1) {
                 const firstPartOfURL = urlParts[1];
                 if (languages.indexOf(firstPartOfURL) > -1) {
-                    data.language = urlParts.splice(1, 1);
+                    [data.language] = urlParts.splice(1, 1);
                 } else {
                     [data.language] = languages;
                 }

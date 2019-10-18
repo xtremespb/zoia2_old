@@ -17,6 +17,9 @@ msgstr ""
 msgid "Internal Server Error"
 msgstr "Внутренняя ошибка сервера"
 
+# ~ msgid "Log Out"
+# ~ msgstr "Выйти"
+#: modules/users/user/Translations.jsx:8
 #: modules/pages/user/Translations.jsx:8
 msgid "Not Found"
 msgstr "Не найдено"
@@ -27,6 +30,12 @@ msgstr ""
 "Запрошенная страница не найдена. Пожалуйста, проверьте URL и попробуйте "
 "снова."
 
+# ~ msgid "Sign In"
+# ~ msgstr "Войти"
+# ~ msgid "Sign Up"
+# ~ msgstr "Регистрация"
+#: modules/users/user/Translations.jsx:9
+#: modules/users/user/Translations.jsx:10
 #: modules/pages/user/Translations.jsx:11
 msgid ""
 "The server encountered an unexpected condition which prevented it from "

@@ -17,6 +17,9 @@ msgstr ""
 msgid "Internal Server Error"
 msgstr ""
 
+# ~ msgid "Log Out"
+# ~ msgstr ""
+#: modules/users/user/Translations.jsx:8
 #: modules/pages/user/Translations.jsx:8
 msgid "Not Found"
 msgstr ""
@@ -25,6 +28,12 @@ msgstr ""
 msgid "Resource could not be not found. Please check the URL and try again."
 msgstr ""
 
+# ~ msgid "Sign In"
+# ~ msgstr ""
+# ~ msgid "Sign Up"
+# ~ msgstr ""
+#: modules/users/user/Translations.jsx:9
+#: modules/users/user/Translations.jsx:10
 #: modules/pages/user/Translations.jsx:11
 msgid ""
 "The server encountered an unexpected condition which prevented it from "

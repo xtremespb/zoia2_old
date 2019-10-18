@@ -5,4 +5,5 @@
     },
     "commonItemsLimit": 12,
     "allowRegistration": true
+	"wysiwyg": true
 }

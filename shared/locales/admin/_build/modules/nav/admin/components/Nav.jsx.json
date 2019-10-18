@@ -1,13 +1,129 @@
 {
+  "Data has been saved successfully": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        144
+      ]
+    ]
+  },
+  "Could not save data": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        149
+      ],
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        213
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        169
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        170
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        171
+      ]
+    ]
+  },
+  "No records to display": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        172
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        187
+      ]
+    ]
+  },
+  "Field is required": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        209
+      ]
+    ]
+  },
+  "Invalid format": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        210
+      ]
+    ]
+  },
+  "Passwords do not match": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        211
+      ]
+    ]
+  },
+  "Could not load data from server": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        212
+      ]
+    ]
+  },
+  "will be deleted. Are you sure?": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        214
+      ]
+    ]
+  },
+  "Yes": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        215
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        216
+      ]
+    ]
+  },
   "Navigation": {
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        47
+        225
       ],
       [
         "modules/nav/admin/components/Nav.jsx",
-        49
+        232
       ]
     ]
   }

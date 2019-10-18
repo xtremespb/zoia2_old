@@ -3,11 +3,10 @@
 import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-// import { remove as removeCookie } from 'es-cookie';
 import cookies from 'cookies-js';
 import axios from 'axios';
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
@@ -199,31 +198,40 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Filename`)}:`,
                     helpText: i18n._(t`Latin characters, numbers, _, - (length: 0-64)`)
                 }],
-                // {
-                //     id: 'content',
-                //     type: 'ckeditor5',
-                //     css: 'uk-form-width-large',
-                //     label: `${i18n._(t`Content`)}:`,
-                //     CKEditorInstance: CKEditor,
-                //     EditorInstance: ClassicEditor,
-                //     languages: Object.keys(site.languages),
-                //     language: this.props.appData.language,
-                //     imageUploadURL: `${api.url}/api/pages/image/upload`,
-                //     imageUploadExtras: {
-                //         token: this.props.appDataRuntime.token
-                //     }
-                // },
-                {
+                this.props.appDataRuntime.config.wysiwyg ? {
                     id: 'content',
-                    type: 'ace',
+                    type: 'ckeditor5',
                     css: 'uk-form-width-large',
                     label: `${i18n._(t`Content`)}:`,
+                    CKEditorInstance: CKEditor,
+                    EditorInstance: ClassicEditor,
+                    languages: Object.keys(site.languages),
+                    language: this.props.appData.language,
                     imageUploadURL: `${api.url}/api/pages/image/upload`,
                     imageUploadExtras: {
                         token: this.props.appDataRuntime.token
+                    }
+                } : {
+                        id: 'content',
+                        type: 'ace',
+                        css: 'uk-form-width-large',
+                        label: `${i18n._(t`Content`)}:`,
+                        imageUploadURL: `${api.url}/api/pages/image/upload`,
+                        imageUploadExtras: {
+                            token: this.props.appDataRuntime.token
+                        },
+                        imageUploadLabel: t`Upload image`,
+                        imageUploadErrorLabel: t`Could not upload an image`
                     },
-                    imageUploadLabel: t`Upload image`,
-                    imageUploadErrorLabel: t`Could not upload an image`
+                {
+                    id: 'extras',
+                    type: 'checkbox',
+                    label: `${i18n._(t`Extras`)}:`,
+                    values: {
+                        minify: i18n._(t`Minifiy the HTML code displayed to the user`),
+                        typo: i18n._(t`Apply typography transformation on displayed content`)
+                    },
+                    defaultValue: { minify: true, typo: true }
                 },
                 {
                     id: 'divider1',

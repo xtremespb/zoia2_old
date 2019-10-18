@@ -17,6 +17,7 @@
     },
     "development": false,
     "loglevel": "info",
+    "stackTrace": false,
     "user": "zoia",
     "group": "zoia",
     "serverName": ""

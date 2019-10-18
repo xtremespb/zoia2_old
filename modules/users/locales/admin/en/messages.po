@@ -27,18 +27,21 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: modules/users/admin/components/UserAuth.jsx:105
-#: modules/users/admin/components/UserAuth.jsx:137
+#: modules/users/admin/components/UserAuth.jsx:106
+#: modules/users/admin/components/UserAuth.jsx:138
 msgid "Authorize"
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:104
+#: modules/nav/admin/components/DialogNavEdit.jsx:129
+#: modules/nav/admin/components/Nav.jsx:216
 #: modules/pages/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogFolder.jsx:195
 #: modules/pages/admin/components/DialogFolder.jsx:211
 #: modules/pages/admin/components/DialogFolderEdit.jsx:107
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
-#: modules/pages/admin/components/PagesEdit.jsx:239
-#: modules/pages/admin/components/PagesEdit.jsx:275
+#: modules/pages/admin/components/PagesEdit.jsx:247
+#: modules/pages/admin/components/PagesEdit.jsx:283
 #: modules/users/admin/components/DialogDelete.jsx:53
 #: modules/users/admin/components/UsersEdit.jsx:136
 #: modules/users/admin/components/UsersEdit.jsx:174
@@ -59,7 +62,7 @@ msgstr ""
 msgid "Could not authorize"
 msgstr ""
 
-#: modules/users/admin/components/UserAuth.jsx:154
+#: modules/users/admin/components/UserAuth.jsx:155
 msgid "Could not authorize on server"
 msgstr ""
 
@@ -68,26 +71,37 @@ msgstr ""
 msgid "Could not load data"
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:100
+#: modules/nav/admin/components/Nav.jsx:212
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
-#: modules/pages/admin/components/PagesEdit.jsx:164
-#: modules/pages/admin/components/PagesEdit.jsx:271
+#: modules/pages/admin/components/PagesEdit.jsx:163
+#: modules/pages/admin/components/PagesEdit.jsx:279
 #: modules/users/admin/components/UsersEdit.jsx:170
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/pages/admin/components/PagesEdit.jsx:311
+#: modules/pages/admin/components/PagesEdit.jsx:319
 #: modules/users/admin/components/UsersEdit.jsx:210
 msgid ""
 "Could not load data from server. Please check your URL or try to "
 "<0>reload</0> data."
 msgstr ""
 
+#: modules/users/admin/components/UserAuth.jsx:171
+msgid ""
+"Could not load site configuration. Please try to reload the page to try "
+"again."
+msgstr ""
+
+#: modules/nav/admin/components/DialogNavEdit.jsx:101
+#: modules/nav/admin/components/Nav.jsx:149
+#: modules/nav/admin/components/Nav.jsx:213
 #: modules/pages/admin/components/DialogFolder.jsx:192
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
-#: modules/pages/admin/components/PagesEdit.jsx:133
-#: modules/pages/admin/components/PagesEdit.jsx:142
-#: modules/pages/admin/components/PagesEdit.jsx:272
+#: modules/pages/admin/components/PagesEdit.jsx:132
+#: modules/pages/admin/components/PagesEdit.jsx:141
+#: modules/pages/admin/components/PagesEdit.jsx:280
 #: modules/pages/admin/components/PagesList.jsx:73
 #: modules/pages/admin/components/PagesList.jsx:76
 #: modules/pages/admin/components/PagesList.jsx:190
@@ -106,11 +120,13 @@ msgstr ""
 msgid "Create new user"
 msgstr ""
 
-#: modules/pages/admin/components/PagesEdit.jsx:58
+#: modules/nav/admin/components/Nav.jsx:144
+#: modules/pages/admin/components/PagesEdit.jsx:57
 #: modules/users/admin/components/UsersEdit.jsx:53
 msgid "Data has been saved successfully"
 msgstr ""
 
+#: modules/nav/admin/components/Nav.jsx:171
 #: modules/pages/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogFolder.jsx:180
 #: modules/pages/admin/components/PagesList.jsx:124
@@ -135,6 +151,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
+#: modules/nav/admin/components/Nav.jsx:170
 #: modules/pages/admin/components/DialogFolder.jsx:179
 #: modules/pages/admin/components/PagesList.jsx:122
 #: modules/users/admin/components/UsersList.jsx:178
@@ -149,11 +166,13 @@ msgstr ""
 msgid "Example: username@zoiajs.org"
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:97
+#: modules/nav/admin/components/Nav.jsx:209
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
-#: modules/pages/admin/components/PagesEdit.jsx:268
+#: modules/pages/admin/components/PagesEdit.jsx:276
 #: modules/pages/admin/components/PagesList.jsx:191
-#: modules/users/admin/components/UserAuth.jsx:152
+#: modules/users/admin/components/UserAuth.jsx:153
 #: modules/users/admin/components/UsersEdit.jsx:167
 #: modules/users/admin/components/UsersList.jsx:202
 msgid "Field is required"
@@ -163,12 +182,17 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
+# ~ msgid "Internal Error"
+# ~ msgstr ""
+#: shared/react/Error/Error.jsx:59
+#: modules/nav/admin/components/DialogNavEdit.jsx:98
+#: modules/nav/admin/components/Nav.jsx:210
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
-#: modules/pages/admin/components/PagesEdit.jsx:269
+#: modules/pages/admin/components/PagesEdit.jsx:277
 #: modules/pages/admin/components/PagesList.jsx:70
 #: modules/pages/admin/components/PagesList.jsx:192
-#: modules/users/admin/components/UserAuth.jsx:153
+#: modules/users/admin/components/UserAuth.jsx:154
 #: modules/users/admin/components/UsersEdit.jsx:168
 #: modules/users/admin/components/UsersList.jsx:70
 #: modules/users/admin/components/UsersList.jsx:203
@@ -188,6 +212,14 @@ msgstr ""
 msgid "Loading data, please wait…"
 msgstr ""
 
+# ~ msgid "Loading site configuration..."
+# ~ msgstr ""
+#: shared/react/AdminPanel/AdminPanel.jsx:151
+#: modules/users/admin/components/UserAuth.jsx:167
+msgid "Loading site configuration…"
+msgstr ""
+
+#: modules/nav/admin/components/Nav.jsx:172
 #: modules/pages/admin/components/PagesList.jsx:188
 #: modules/users/admin/components/UsersList.jsx:199
 msgid "No records to display"
@@ -208,7 +240,7 @@ msgstr ""
 msgid "Operation complete"
 msgstr ""
 
-#: modules/users/admin/components/UserAuth.jsx:125
+#: modules/users/admin/components/UserAuth.jsx:126
 #: modules/users/admin/components/UsersEdit.jsx:111
 msgid "Password"
 msgstr ""
@@ -219,9 +251,11 @@ msgid ""
 "characters long."
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:99
+#: modules/nav/admin/components/Nav.jsx:211
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
-#: modules/pages/admin/components/PagesEdit.jsx:270
+#: modules/pages/admin/components/PagesEdit.jsx:278
 #: modules/users/admin/components/UsersEdit.jsx:169
 msgid "Passwords do not match"
 msgstr ""
@@ -249,8 +283,10 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:130
+#: modules/nav/admin/components/Nav.jsx:187
 #: modules/pages/admin/components/DialogFolderEdit.jsx:132
-#: modules/pages/admin/components/PagesEdit.jsx:245
+#: modules/pages/admin/components/PagesEdit.jsx:253
 #: modules/users/admin/components/UsersEdit.jsx:142
 msgid "Save"
 msgstr ""
@@ -272,7 +308,7 @@ msgstr ""
 msgid "User not found"
 msgstr ""
 
-#: modules/users/admin/components/UserAuth.jsx:118
+#: modules/users/admin/components/UserAuth.jsx:119
 #: modules/users/admin/components/UsersEdit.jsx:72
 msgid "Username"
 msgstr ""
@@ -282,9 +318,11 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:103
+#: modules/nav/admin/components/Nav.jsx:215
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolderEdit.jsx:106
-#: modules/pages/admin/components/PagesEdit.jsx:274
+#: modules/pages/admin/components/PagesEdit.jsx:282
 #: modules/users/admin/components/UsersEdit.jsx:173
 msgid "Yes"
 msgstr ""
@@ -293,9 +331,11 @@ msgstr ""
 msgid "users"
 msgstr "Users"
 
+#: modules/nav/admin/components/DialogNavEdit.jsx:102
+#: modules/nav/admin/components/Nav.jsx:214
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
-#: modules/pages/admin/components/PagesEdit.jsx:273
+#: modules/pages/admin/components/PagesEdit.jsx:281
 #: modules/users/admin/components/UsersEdit.jsx:172
 msgid "will be deleted. Are you sure?"
 msgstr ""
