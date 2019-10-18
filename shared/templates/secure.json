@@ -16,5 +16,8 @@
         "port": 3001
     },
     "development": false,
-    "loglevel": "info"
+    "loglevel": "info",
+    "user": "zoia",
+    "group": "zoia",
+    "serverName": ""
 }

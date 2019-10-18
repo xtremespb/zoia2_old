@@ -31,7 +31,7 @@ class DialogFolderEdit extends Component {
     show = async item => {
         this.resetEditForm();
         await this.editFoldersForm.current.hideErrors();
-        this.editkey = null;
+        this.editKey = null;
         if (item) {
             const data = cloneDeep(item);
             this.editKey = data.key;

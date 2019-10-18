@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
 
-import 'brace/mode/html';
-import 'brace/theme/github';
+import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/theme-github';
 
 export default class ZAce extends Component {
     constructor(props) {
@@ -38,7 +38,9 @@ export default class ZAce extends Component {
             }
             // Error
         }).catch(async err => {
-            // Error
+            // TODO: Display an Error
+            // eslint-disable-next-line no-console
+            console.error(err);
         });
     }
 

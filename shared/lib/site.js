@@ -73,7 +73,8 @@ export default {
             languagesURL,
             t,
             title,
-            breadcrumbsHTML
+            breadcrumbsHTML,
+            useUIkitOnFrontend: site.useUIkitOnFrontend || false
         };
     }
 };

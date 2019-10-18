@@ -1,5 +1,5 @@
 {
-	"id": "registry",
+	"id": "core",
 	"icon": "",
 	"admin": false,
 	"adminRoute": ""

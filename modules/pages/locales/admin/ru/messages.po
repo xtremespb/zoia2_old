@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: ru\n"
+"Language: en\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -28,8 +28,8 @@ msgstr "Добавление"
 #: modules/pages/admin/components/DialogFolder.jsx:211
 #: modules/pages/admin/components/DialogFolderEdit.jsx:107
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
-#: modules/pages/admin/components/PagesEdit.jsx:227
-#: modules/pages/admin/components/PagesEdit.jsx:263
+#: modules/pages/admin/components/PagesEdit.jsx:239
+#: modules/pages/admin/components/PagesEdit.jsx:275
 #: modules/users/admin/components/DialogDelete.jsx:53
 #: modules/users/admin/components/UsersEdit.jsx:136
 #: modules/users/admin/components/UsersEdit.jsx:174
@@ -46,7 +46,7 @@ msgstr "Ошибка во время удаления одной или неск
 msgid "Cannot update database record"
 msgstr "Ошибка во время обновления базы данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:206
+#: modules/pages/admin/components/PagesEdit.jsx:220
 msgid "Content"
 msgstr "Контент"
 
@@ -58,12 +58,12 @@ msgstr "Ошибка во время загрузки данных с серве
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
 #: modules/pages/admin/components/PagesEdit.jsx:164
-#: modules/pages/admin/components/PagesEdit.jsx:259
+#: modules/pages/admin/components/PagesEdit.jsx:271
 #: modules/users/admin/components/UsersEdit.jsx:170
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:299
+#: modules/pages/admin/components/PagesEdit.jsx:311
 #: modules/users/admin/components/UsersEdit.jsx:210
 msgid ""
 "Could not load data from server. Please check your URL or try to "
@@ -81,7 +81,7 @@ msgstr "Ошибка во время сохранения страницы"
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
 #: modules/pages/admin/components/PagesEdit.jsx:133
 #: modules/pages/admin/components/PagesEdit.jsx:142
-#: modules/pages/admin/components/PagesEdit.jsx:260
+#: modules/pages/admin/components/PagesEdit.jsx:272
 #: modules/pages/admin/components/PagesList.jsx:73
 #: modules/pages/admin/components/PagesList.jsx:76
 #: modules/pages/admin/components/PagesList.jsx:190
@@ -91,6 +91,10 @@ msgstr "Ошибка во время сохранения страницы"
 #: modules/users/admin/components/UsersList.jsx:201
 msgid "Could not save data"
 msgstr "Ошибка во время сохранения данных"
+
+#: modules/pages/admin/components/PagesEdit.jsx:226
+msgid "Could not upload an image"
+msgstr "Ошибка во время загрузки изображения"
 
 #: modules/pages/admin/components/PagesList.jsx:149
 msgid "Create new page"
@@ -107,7 +111,7 @@ msgstr "Данные успешно сохранены"
 #: modules/users/admin/components/DialogDelete.jsx:54
 #: modules/users/admin/components/UsersList.jsx:178
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Удаление"
 
 #: modules/pages/admin/components/PagesList.jsx:149
 msgid "Delete selected pages"
@@ -131,13 +135,13 @@ msgstr "Страница уже существует, проверьте имя 
 msgid "Edit"
 msgstr "Правка"
 
-#: modules/pages/admin/components/PagesEdit.jsx:297
+#: modules/pages/admin/components/PagesEdit.jsx:309
 msgid "Edit Page"
 msgstr "Правка страницы"
 
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
-#: modules/pages/admin/components/PagesEdit.jsx:256
+#: modules/pages/admin/components/PagesEdit.jsx:268
 #: modules/pages/admin/components/PagesList.jsx:191
 #: modules/users/admin/components/UserAuth.jsx:152
 #: modules/users/admin/components/UsersEdit.jsx:167
@@ -155,7 +159,7 @@ msgstr "ID"
 
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
-#: modules/pages/admin/components/PagesEdit.jsx:257
+#: modules/pages/admin/components/PagesEdit.jsx:269
 #: modules/pages/admin/components/PagesList.jsx:70
 #: modules/pages/admin/components/PagesList.jsx:192
 #: modules/users/admin/components/UserAuth.jsx:153
@@ -174,7 +178,7 @@ msgstr "Лат. символы/_/-, длина: 0-64"
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: modules/pages/admin/components/PagesEdit.jsx:297
+#: modules/pages/admin/components/PagesEdit.jsx:309
 msgid "New Page"
 msgstr "Новая страница"
 
@@ -203,7 +207,7 @@ msgstr "Контент"
 
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
-#: modules/pages/admin/components/PagesEdit.jsx:258
+#: modules/pages/admin/components/PagesEdit.jsx:270
 #: modules/users/admin/components/UsersEdit.jsx:169
 msgid "Passwords do not match"
 msgstr "Пароль не совпадает"
@@ -234,10 +238,10 @@ msgstr "Обязательное поле"
 
 #: modules/pages/admin/components/DialogFolder.jsx:212
 msgid "Root"
-msgstr "Корневая папка"
+msgstr "/"
 
 #: modules/pages/admin/components/DialogFolderEdit.jsx:132
-#: modules/pages/admin/components/PagesEdit.jsx:233
+#: modules/pages/admin/components/PagesEdit.jsx:245
 #: modules/users/admin/components/UsersEdit.jsx:142
 msgid "Save"
 msgstr "Сохранить"
@@ -260,9 +264,13 @@ msgstr "Заголовок"
 msgid "Too short"
 msgstr "Слишком корокий"
 
+#: modules/pages/admin/components/PagesEdit.jsx:225
+msgid "Upload image"
+msgstr "Загрузка изображения"
+
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolderEdit.jsx:106
-#: modules/pages/admin/components/PagesEdit.jsx:262
+#: modules/pages/admin/components/PagesEdit.jsx:274
 #: modules/users/admin/components/UsersEdit.jsx:173
 msgid "Yes"
 msgstr "Да"
@@ -273,7 +281,7 @@ msgstr "Контент"
 
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
-#: modules/pages/admin/components/PagesEdit.jsx:261
+#: modules/pages/admin/components/PagesEdit.jsx:273
 #: modules/users/admin/components/UsersEdit.jsx:172
 msgid "will be deleted. Are you sure?"
 msgstr "будут удалены. Вы уверены?"

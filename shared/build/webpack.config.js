@@ -11,6 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
+const site = require(`${__dirname}/../../etc/site.json`);
 const markoPlugin = new MarkoPlugin();
 
 const configTools = {
@@ -168,8 +169,7 @@ const configAdmin = {
         }),
         new HtmlWebpackPlugin({
             chunksSortMode: 'none',
-            filename: path.resolve(__dirname, '..', '..', 'static', 'admin.html'),
-            // chunks: ['app', 'styles', 'vendors'],
+            filename: path.resolve(__dirname, '..', '..', 'static', 'data_admin', 'admin.html'),
             template: path.resolve(__dirname, '..', 'templates', 'admin.html'),
             minify: {
                 collapseWhitespace: true,
@@ -375,15 +375,25 @@ const configWebServer = {
 const webpackConfig = [];
 
 const cleanUpAdmin = () => {
-    console.log('\nCleaning up static/data_admin…');
+    console.log('Cleaning up static/data_admin...');
     fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
     fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
 };
 
 const cleanUpWeb = () => {
-    console.log('\nCleaning up static/data_user…');
+    console.log('Cleaning up static/data_user...');
     fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
     fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
+};
+
+const rebuildMarkoTemplates = () => {
+    console.log('Re-building Marko templates...');
+    const error404 = `<!-- This file is auto-generated, do not modify -->\n${fs.readFileSync(path.resolve(`${__dirname}/../templates/error404.marko`), 'utf8').replace(/<!-- <default_template> -->/gm, `<${site.templates[0]}>`).replace(/<!-- <\/default_template> -->/gm, `</${site.templates[0]}>`)}`;
+    const error500 = `<!-- This file is auto-generated, do not modify -->\n${fs.readFileSync(path.resolve(`${__dirname}/../templates/error500.marko`), 'utf8').replace(/<!-- <default_template> -->/gm, `<${site.templates[0]}>`).replace(/<!-- <\/default_template> -->/gm, `</${site.templates[0]}>`)}`;
+    const root = `<!-- This file is auto-generated, do not modify -->\n${site.templates.map(t => `<if(out.global.template === "${t}")><${t}><\${input.renderBody}/></${t}></if>\n`).join('')}`; // ${site.useUIkitOnFrontend ? 'style.scss { @import "../../styles/uikit.scss"; }\n' : ''}
+    fs.writeFileSync(path.resolve(`${__dirname}/../marko/error404/index.marko`), error404);
+    fs.writeFileSync(path.resolve(`${__dirname}/../marko/error500/index.marko`), error500);
+    fs.writeFileSync(path.resolve(`${__dirname}/../marko/template/index.marko`), root);
 };
 
 console.log(`This tool will build Zoia for you.`);
@@ -398,6 +408,7 @@ if (process.argv.indexOf('--build:admin') > -1) {
 } else if (process.argv.indexOf('--build:web') > -1) {
     console.log('Building Web Server only.');
     cleanUpWeb();
+    rebuildMarkoTemplates();
     webpackConfig.push(configWebServer, configWebClient);
 } else if (process.argv.indexOf('--build:tools') > -1) {
     console.log('Building Tools only.');
@@ -406,15 +417,16 @@ if (process.argv.indexOf('--build:admin') > -1) {
     console.log('Building everything.');
     cleanUpAdmin();
     cleanUpWeb();
+    rebuildMarkoTemplates();
     webpackConfig.push(configAPI, configAdmin, configTools, configWebClient, configWebServer);
 }
 
 fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'uploads'));
-console.log('Getting modules info…');
+console.log('Getting modules info...');
 const modules = fs.readdirSync(path.join(__dirname, '..', '..', 'modules'));
 const modulesInfo = {};
 modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', '..', 'modules', module, 'module.json')));
-console.log('Writing modules.json…');
+console.log('Writing modules.json...');
 fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
 const linguiAdmin = {
     localeDir: 'shared/locales/admin',
@@ -423,7 +435,7 @@ const linguiAdmin = {
 };
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
 linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
-console.log('Writing linguirc.admin.json…');
+console.log('Writing linguirc.admin.json...');
 fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
     spaces: 2
 });
@@ -434,10 +446,10 @@ const linguiUser = {
 };
 const linguiPathsArrUser = modules.map(module => `modules/${module}/user/`);
 linguiUser.srcPathDirs = [...linguiPathsArrUser];
-console.log('Writing linguirc.user.json…');
+console.log('Writing linguirc.user.json...');
 fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
     spaces: 2
 });
-console.log('Staring Webpack…');
+console.log('Staring Webpack...');
 
 module.exports = webpackConfig;

@@ -63,9 +63,10 @@ const splitLocales = () => {
                 }
             });
             Object.keys(transModules).map(m => {
-                console.log(`${colors.green(' * ')} Processing module: ${m}`);
-                const dir = `${__dirname}/../modules/${m}/locales/${t}/${locale}`;
-                const filename = `${__dirname}/../modules/${m}/locales/${t}/${locale}/messages.po`;
+                const module = m === 'react' ? 'core' : m;
+                console.log(`${colors.green(' * ')} Processing module: ${module}`);
+                const dir = `${__dirname}/../modules/${module}/locales/${t}/${locale}`;
+                const filename = `${__dirname}/../modules/${module}/locales/${t}/${locale}/messages.po`;
                 fs.ensureDirSync(dir);
                 const data = gettextParser.po.compile({
                     charset: po.charset,
@@ -154,7 +155,7 @@ const cleanupLocales = () => {
 };
 
 const install = async () => {
-    const security = require('../../etc/secure.json');
+    const secure = require('../../etc/secure.json');
     const modules = Object.keys(require('../build/modules.json'));
     const questions = [{
         type: 'rawlist',
@@ -169,12 +170,12 @@ const install = async () => {
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
-        const mongoClient = new MongoClient(security.mongo.url, {
+        const mongoClient = new MongoClient(secure.mongo.url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
         await mongoClient.connect();
-        db = mongoClient.db(security.mongo.dbName);
+        db = mongoClient.db(secure.mongo.dbName);
         if (data.install !== 'None') {
             await Promise.all((data.install === 'All' ? modules : [data.install]).map(async m => {
                 console.log(`${colors.green(' * ')} Processing module: ${m}...`);

@@ -354,7 +354,7 @@ msgstr "Обязательное поле"
 
 #: modules/pages/admin/components/DialogFolder.jsx:212
 msgid "Root"
-msgstr "Корневая папка"
+msgstr "/"
 
 #: modules/pages/admin/components/DialogFolderEdit.jsx:132
 #: modules/pages/admin/components/PagesEdit.jsx:245

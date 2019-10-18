@@ -1,6 +1,4 @@
-import {
-    get as getCookie
-} from 'es-cookie';
+import cookies from 'cookies-js';
 
 import site from '../../etc/site.json';
 import {
@@ -10,7 +8,7 @@ import {
 } from '../constants/core';
 
 const initialState = {
-    token: getCookie(`${site.id}_auth`) || null,
+    token: cookies.get(`${site.id}_auth`) || null,
     config: {
         siteTitle: {}
     },

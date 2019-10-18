@@ -8,32 +8,32 @@ const path = require('path');
 
 const install = async () => {
     const config = require('../shared/templates/config.json');
-    const security = require('../shared/templates/secure.json');
+    const secure = require('../shared/templates/secure.json');
     const api = require('../shared/templates/api.json');
     const site = require('../shared/templates/site.json');
     const questions = [{
             type: 'input',
             name: 'ipAPI',
             message: 'Which IP address should API listen to?',
-            default: security.apiServer.ip,
+            default: secure.apiServer.ip,
         },
         {
             type: 'input',
             name: 'portAPI',
             message: 'Which port should API listen to?',
-            default: security.apiServer.port,
+            default: secure.apiServer.port,
         },
         {
             type: 'input',
             name: 'ipWeb',
             message: 'Which IP address should Web Server listen to?',
-            default: security.webServer.ip,
+            default: secure.webServer.ip,
         },
         {
             type: 'input',
             name: 'portWeb',
             message: 'Which port should WebServer listen to?',
-            default: security.webServer.port,
+            default: secure.webServer.port,
         },
         {
             type: 'input',
@@ -43,22 +43,40 @@ const install = async () => {
         },
         {
             type: 'input',
+            name: 'user',
+            message: 'User to run systemd startup script?',
+            default: secure.user,
+        },
+        {
+            type: 'input',
+            name: 'group',
+            message: 'Group to run systemd startup script?',
+            default: secure.group,
+        },
+        {
+            type: 'input',
             name: 'mongourl',
             message: 'Mongo server URL?',
-            default: security.mongo.url,
+            default: secure.mongo.url,
         },
         {
             type: 'input',
             name: 'mongodb',
             message: 'Mongo database name?',
-            default: security.mongo.dbName,
+            default: secure.mongo.dbName,
+        },
+        {
+            type: 'input',
+            name: 'serverName',
+            message: 'Host name(s) for NGINX config?',
+            default: secure.serverName,
         },
         {
             type: 'rawlist',
             name: 'loglevel',
-            message: 'Loglevel?',
+            message: 'Which Log level to use?',
             choices: ['info', 'warn', 'error'],
-            default: security.loglevel,
+            default: secure.loglevel,
         }
     ];
     try {
@@ -66,21 +84,23 @@ const install = async () => {
         console.log('');
         const data = await inquirer.prompt(questions);
         console.log('');
-        security.apiServer.ip = data.ipAPI;
-        security.apiServer.port = data.portAPI;
-        security.webServer.ip = data.ipWeb;
-        security.webServer.port = data.portWeb;
+        secure.apiServer.ip = data.ipAPI;
+        secure.apiServer.port = data.portAPI;
+        secure.webServer.ip = data.ipWeb;
+        secure.webServer.port = data.portWeb;
         api.url = data.apiURL;
-        security.mongo.url = data.mongourl;
-        security.mongo.dbName = data.mongodb;
-        security.loglevel = data.loglevel;
-        security.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
+        secure.mongo.url = data.mongourl;
+        secure.mongo.dbName = data.mongodb;
+        secure.loglevel = data.loglevel;
+        secure.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
+        secure.user = data.user;
+        secure.group = data.group;
         console.log(`${colors.green(' * ')} Saving configuration to config.json file...`);
         fs.writeJSONSync(path.resolve(`${__dirname}/../etc/config.json`), config, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to secure.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), security, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), secure, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to api.json file...`);
@@ -91,7 +111,7 @@ const install = async () => {
         fs.writeJSONSync(path.resolve(`${__dirname}/../etc/site.json`), site, {
             spaces: 2
         });
-        console.log(`${colors.green(' * ')} Done`);
+        console.log(`${colors.green(' * ')} Done\n`);
     } catch (e) {
         console.log('');
         console.log(colors.red(e));

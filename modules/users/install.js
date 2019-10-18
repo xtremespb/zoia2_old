@@ -2,11 +2,11 @@
 import crypto from 'crypto';
 import colors from 'colors';
 
-const security = require('../../etc/secure.json');
+const secure = require('../../etc/secure.json');
 
 const install = async db => {
     console.log(`${colors.green(' * ')} Inserting or updating default user (admin)...`);
-    const passwordHash = crypto.createHmac('sha512', security.secret).update('password').digest('hex');
+    const passwordHash = crypto.createHmac('sha512', secure.secret).update('password').digest('hex');
     await db.collection('users').updateOne({
         username: 'admin'
     }, {

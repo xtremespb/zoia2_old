@@ -33,3 +33,5 @@ node_modules/
 /static/uploads
 /static/data_admin
 /static/data_user
+/shared/marko/error404/index.marko
+/shared/marko/error500/index.marko

@@ -4,10 +4,12 @@
         "en": "English",
         "ru": "Русский"
     },
-	"cookieOptions": {
+    "cookieOptions": {
         "expires": 604800,
         "path": "/",
         "domain": "",
         "secure": false
-    }
+    },
+    "useUIkitOnFrontend": true,
+    "templates": ["zoia"]
 }

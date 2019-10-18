@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import security from '../../etc/secure.json';
+import secure from '../../etc/secure.json';
 import logger from '../lib/logger';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
@@ -15,15 +15,15 @@ import Pino from 'pino';
 import Fastify from 'fastify';
 
 const log = Pino({
-    level: security.loglevel
+    level: secure.loglevel
 });
 const fastify = Fastify({
     logger,
-    trustProxy: security.trustProxy
+    trustProxy: secure.trustProxy
 });
 
 (async () => {
-    const mongoClient = new MongoClient(security.mongo.url, {
+    const mongoClient = new MongoClient(secure.mongo.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -35,26 +35,26 @@ const fastify = Fastify({
     fastify.register(fastifyURLData);
     fastify.register(fastifyMongo, {
         client: mongoClient,
-        database: security.mongo.dbName
+        database: secure.mongo.dbName
     }).register((ff, opts, next) => {
-        ff.mongo.client.db(security.mongo.dbName).on('close', () => {
+        ff.mongo.client.db(secure.mongo.dbName).on('close', () => {
             log.error('Connection to MongoDB is broken');
             process.exit(1);
         });
         next();
     });
     fastify.register(fastifyCORS, {
-        origin: security.originCORS
+        origin: secure.originCORS
     });
     fastify.register(fastifyJWT, {
-        secret: security.secret
+        secret: secure.secret
     });
     await Promise.all(Object.keys(modules).map(async m => {
         const module = await import(`../../modules/${m}/api/index.js`);
         module.default(fastify);
     }));
     log.info('Starting API server...');
-    fastify.listen(security.apiServer.port, security.apiServer.ip);
+    fastify.listen(secure.apiServer.port, secure.apiServer.ip);
 })().catch(err => {
     log.error(err);
     process.exit(1);

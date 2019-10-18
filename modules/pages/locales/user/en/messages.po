@@ -12,3 +12,21 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+
+#: modules/pages/user/Translations.jsx:10
+msgid "Internal Server Error"
+msgstr ""
+
+#: modules/pages/user/Translations.jsx:8
+msgid "Not Found"
+msgstr ""
+
+#: modules/pages/user/Translations.jsx:9
+msgid "Resource could not be not found. Please check the URL and try again."
+msgstr ""
+
+#: modules/pages/user/Translations.jsx:11
+msgid ""
+"The server encountered an unexpected condition which prevented it from "
+"fulfilling the request."
+msgstr ""

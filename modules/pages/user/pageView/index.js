@@ -23,7 +23,8 @@ export default fastify => ({
                     content: page.data[language].contentCompiled,
                     $global: {
                         siteData,
-                        t: siteData.t
+                        t: siteData.t,
+                        template: 'zoia',
                     }
                 }));
                 const html = render.out.stream.str.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);

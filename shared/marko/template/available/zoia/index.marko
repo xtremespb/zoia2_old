@@ -1,0 +1,119 @@
+style.scss {
+  @import "../../../../styles/uikit.scss";
+}
+
+style {
+  @import "./zoia.css";
+}
+
+<!DOCTYPE html>
+<html class="za-html">
+  <head>
+    <title>${out.global.siteData.title}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style type="text/css">html,body{height:100%}@font-face{font-family:'Source Sans Pro';src:local('Source Sans Pro'),local(SourceSansPro-Regular),url(/zoia/fonts/sourcesanspro.woff2) format("woff2"),url(/zoia/fonts/sourcesanspro.woff) format("woff");font-weight:400;font-style:normal}@font-face{font-family:'Source Sans Pro';src:local('Source Sans Pro'),local(SourceSansPro-Bold),url(/zoia/fonts/sourcesansprobold.woff2) format("woff2"),url(/zoia/fonts/sourcesansprobold.woff) format("woff");font-weight:700;font-style:normal}@font-face{font-family:'Source Sans Pro';src:local('Source Sans Pro Light'),local(SourceSansPro-Light),url(/zoia/fonts/sourcesansprolight.woff2) format("woff2"),url(/zoia/fonts/sourcesansprolight.woff) format("woff");font-weight:300;font-style:normal}@font-face{font-family:'Source Sans Pro';src:local('Source Sans Pro ExtraLight'),local(SourceSansPro-ExtraLight),url(/zoia/fonts/sourcesansproextralight.woff2) format("woff2"),url(/zoia/fonts/sourcesansproextralight.woff) format("woff");font-weight:200;font-style:normal}</style>
+    <link rel="shortcut icon" type="image/ico" href="/zoia/favicon.ico"/>
+    <link rel="icon" href="/zoia/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="za-body">
+    <if(out.global.siteData.useUIkitOnFrontend)>
+      <uikit/>
+    </if>
+    <div class="uk-container za-container za-wrap">
+      <div class="za-logo-wrap">
+        <span uk-icon="icon:menu;ratio:1.6" class="za-offcanvas-toggle" uk-toggle="target:#za_mobile_nav"/>
+        <a href="/">
+          <img src="/zoia/logo_dark_small.png" class="uk-margin-top uk-margin-bottom"/>
+        </a>
+      </div>
+      <nav class="uk-navbar-container za-navbar-container uk-navbar za-navbar" uk-navbar="offset:0;mode:click">
+        <div class="uk-navbar-left za-navbar-left">
+          <ul class="uk-navbar-nav za-navbar-nav">
+            <for|item, index| of=out.global.siteData.navTree>
+              <if(item.data[out.global.siteData.language] && item.data[out.global.siteData.language].title)>
+                <li>
+                  <a href=item.url key=item.key>
+                    ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>&nbsp;&#x25BE;</if>
+                  </a>
+                  <if(item.children && item.children.length)>
+                    <div class="uk-navbar-dropdown">
+                      <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <for|child, index| of=item.children>
+                          <if(child.data[out.global.siteData.language] && child.data[out.global.siteData.language].title)>
+                            <li>
+                              <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                            </li>
+                          </if>
+                        </for>
+                      </ul>
+                    </div>
+                  </if>
+                </li>
+              </if>
+            </for>
+          </ul>
+        </div>
+        <div class="uk-navbar-right za-navbar-right">
+          <ul class="uk-navbar-nav za-navbar-nav">
+            <if(out.global.siteData.user.username)>
+              <li>
+                <a href="#">${out.global.siteData.user.username}&nbsp;&#x25BE;</a>
+                <div class="uk-navbar-dropdown">
+                  <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li>
+                      <a href="#">${out.global.t["Log Out"]}</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </if>
+            <li>
+              <a href="#">
+                <span uk-icon="icon: world;ratio:0.95"/>
+              </a>
+              <div class="uk-navbar-dropdown">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <for|language, index| of=out.global.siteData.languagesArr>
+                    <li>
+                      <a href=out.global.siteData.languagesURL[language]>${out.global.siteData.languages[language]}</a>
+                    </li>
+                  </for>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="za-content">
+        <${input.renderBody}/>
+      </div>
+      <div class="uk-text-muted uk-text-small uk-margin-top uk-margin-bottom za-footer">
+        Zoia &copy;2019 Michael A. Matveev,
+        <a href="https://opensource.org/licenses/MIT" class="uk-link-text" target="_blank">MIT license</a>.
+      </div>
+    </div>
+    <!-- Mobile Navigation Start -->
+    <div id="za_mobile_nav" uk-offcanvas="overlay: true">
+      <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-default">
+          <for|item, index| of=out.global.siteData.navTree>
+            <li class=`${item.children ? "uk-parent" : ""}`>
+              <a href=item.url key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
+              <if(item.children && item.children.length)>
+                <ul class="uk-nav-sub">
+                  <for|child, index| of=item.children>
+                    <li>
+                      <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                    </li>
+                  </for>
+                </ul>
+              </if>
+            </li>
+          </for>
+        </ul>
+      </div>
+    </div>
+    <!-- Mobile Navigation End -->
+  </body>
+</html>

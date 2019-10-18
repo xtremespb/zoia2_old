@@ -1,51 +1,49 @@
-html,
-body {
+.za-html,
+.za-body {
     background: #F5F5F5;
 }
 
-html {
+.za-html {
     height: 100%;
 }
 
-body {
+.za-body {
     min-height: 100%;
 }
 
-.uk-navbar-container:not(.uk-navbar-transparent) {
+.za-navbar-container:not(.uk-navbar-transparent) {
     background: #E0E0E0;
     z-index: 10;
 }
 
-.uk-navbar-nav>li.uk-active>a,
-.uk-navbar-nav>li>a:active {
+.za-navbar-nav>li.uk-active>a,
+.za-navbar-nav>li>a:active {
     color: #222;
 }
 
-.uk-navbar-item,
-.uk-navbar-nav>li>a,
-.uk-navbar-toggle {
+.za-navbar-nav>li>a,
+.za-navbar-toggle {
     min-width: 40px;
     color: #555;
 }
 
-.uk-navbar-container {
+.za-navbar-container {
     min-height: 40px;
 }
 
-.uk-navbar-nav>li>a,
-.uk-navbar-left>.uk-navbar-nav>li>a,
-.uk-navbar-right>.uk-navbar-nav>li>a {
+.za-navbar-nav>li>a,
+.za-navbar-left>.uk-navbar-nav>li>a,
+.za-navbar-right>.uk-navbar-nav>li>a {
     text-transform: none;
 }
 
-.uk-navbar-nav {
+.za-navbar-nav {
     min-height: 40px;
     padding: 0 0;
 }
 
-.uk-navbar-item,
-.uk-navbar-nav>li>a,
-.uk-navbar-toggle {
+.za-navbar-nav>li>a,
+.za-navbar-toggle {
     min-height: 40px;
 }
 
@@ -82,7 +80,7 @@ body {
         box-shadow: unset;
     }
 
-    .uk-container {
+    .za-container {
         padding-left: 0;
         padding-right: 0;
     }
