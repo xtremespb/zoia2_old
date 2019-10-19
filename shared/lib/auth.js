@@ -1,7 +1,9 @@
+import fs from 'fs-extra';
 import {
     ObjectId
 } from 'mongodb';
-import site from '../../etc/site.json';
+
+const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 
 export default {
     verifyToken: async (token, fastify, db) => {
@@ -23,8 +25,8 @@ export default {
     },
     getUserData: async (req, fastify, db) => {
         try {
-            if (req.cookies[`${site.id}_auth`] && db) {
-                const token = req.cookies[`${site.id}_auth`];
+            if (req.cookies[`${config.id}_auth`] && db) {
+                const token = req.cookies[`${config.id}_auth`];
                 const decodedToken = fastify.jwt.decode(token);
                 if (!decodedToken || !decodedToken.userId || !decodedToken.sessionId || Math.floor(Date.now() / 1000) > decodedToken.exp) {
                     return {};

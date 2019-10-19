@@ -21,33 +21,30 @@ import {
 } from 'connected-react-router';
 
 import rootReducer from '../reducers';
-import config from '../../etc/config.json';
-import site from '../../etc/site.json';
 
 export const history = createBrowserHistory();
 
-const persistConfig = {
-    key: `${site.id}_root`,
-    storage: new CookieStorage(cookies, {
-        expiration: {
-            default: site.cookieOptions.expires
-        },
-        setCookieOptions: {
-            path: site.cookieOptions.path,
-            domain: site.cookieOptions.domain,
-            secure: site.cookieOptions.secure
-        }
-    }),
-    whitelist: ['appData']
-};
+export default (preloadedState, config) => {
+    const persistConfig = {
+        key: `${config.id}_root`,
+        storage: new CookieStorage(cookies, {
+            expiration: {
+                default: config.cookieOptions.expires
+            },
+            setCookieOptions: {
+                path: config.cookieOptions.path,
+                domain: config.cookieOptions.domain,
+                secure: config.cookieOptions.secure
+            }
+        }),
+        whitelist: ['appData']
+    };
 
-const middlewares = [thunk, routerMiddleware(history)];
-if (config.development) {
-    middlewares.push(logger);
-}
-const persistedReducers = persistCombineReducers(persistConfig, rootReducer(history));
-
-export default preloadedState => {
+    const middlewares = [thunk, routerMiddleware(history)];
+    if (config.development) {
+        middlewares.push(logger);
+    }
+    const persistedReducers = persistCombineReducers(persistConfig, rootReducer(history));
     const store = createStore(
         persistedReducers,
         preloadedState,

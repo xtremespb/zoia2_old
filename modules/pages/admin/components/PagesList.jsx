@@ -15,7 +15,6 @@ import UIkit from '../../../../shared/utils/uikit';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../static/etc/api.json';
 import pagesListTableSetState from '../actions/pagesListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
@@ -44,7 +43,7 @@ class PagesList extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.config.id}_auth`, undefined, this.props.appDataRuntime.config.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/pages`);
     }
 
@@ -103,7 +102,7 @@ class PagesList extends Component {
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
         this.pagesListTable.current.setLoading(true);
-        axios.post(`${api.url}/api/pages/delete`, {
+        axios.post(`${this.props.appDataRuntime.config.api.url}/api/pages/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
@@ -165,7 +164,7 @@ class PagesList extends Component {
                             }]}
                             itemsPerPage={this.props.appDataRuntime.config.commonItemsLimit}
                             source={{
-                                url: `${api.url}/api/pages/list`,
+                                url: `${this.props.appDataRuntime.config.api.url}/api/pages/list`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token,
@@ -173,7 +172,7 @@ class PagesList extends Component {
                                 }
                             }}
                             save={{
-                                url: `${api.url}/api/pages/saveField`,
+                                url: `${this.props.appDataRuntime.config.api.url}/api/pages/saveField`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token

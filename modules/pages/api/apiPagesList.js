@@ -2,8 +2,7 @@ import fs from 'fs-extra';
 import auth from '../../../shared/lib/auth';
 import secure from '../../../etc/secure.json';
 
-const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
-const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
+const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 const sortColumns = ['title', 'path'];
 
 export default fastify => ({
@@ -33,7 +32,7 @@ export default fastify => ({
                 },
                 language: {
                     type: 'string',
-                    pattern: `^(${Object.keys(site.languages).join('|')})$`
+                    pattern: `^(${Object.keys(config.languages).join('|')})$`
                 }
             },
             required: ['token', 'page', 'sortColumn', 'sortDirection', 'language']
@@ -74,7 +73,7 @@ export default fastify => ({
             };
             const query = {};
             if (req.body.search) {
-                query.$or = [...Object.keys(site.languages).map(language => {
+                query.$or = [...Object.keys(config.languages).map(language => {
                     const sr = {};
                     sr[`data.${language}.title`] = {
                         $regex: req.body.search,
@@ -101,7 +100,7 @@ export default fastify => ({
                 path: 1,
                 filename: 1
             };
-            Object.keys(site.languages).map(language => options.projection[`data.${language}.title`] = 1);
+            Object.keys(config.languages).map(language => options.projection[`data.${language}.title`] = 1);
             options.sort[req.body.sortColumn] = req.body.sortDirection === 'asc' ? 1 : -1;
             if (req.body.sortColumn === 'path') {
                 options.sort.filename = req.body.sortDirection === 'asc' ? 1 : -1;
@@ -111,7 +110,7 @@ export default fastify => ({
                     _id: p._id,
                     path: `${p.path === '/' ? '' : p.path}${p.filename ? `/${p.filename}` : ''}` || '/'
                 };
-                const defaultLanguage = Object.keys(site.languages)[0];
+                const defaultLanguage = Object.keys(config.languages)[0];
                 page.title = p.data[req.body.language] && p.data[req.body.language].title ? p.data[req.body.language].title : null || p.data[defaultLanguage] ? p.data[defaultLanguage].title : '';
                 return page;
             });

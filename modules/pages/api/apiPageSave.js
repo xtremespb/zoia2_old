@@ -10,7 +10,7 @@ import Typograf from 'typograf';
 import auth from '../../../shared/lib/auth';
 import secure from '../../../etc/secure.json';
 
-const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
+const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 
 const ajv = new Ajv();
 
@@ -151,7 +151,7 @@ export default fastify => ({
                         error: 'Page with such path or filename already exists'
                     }));
             }
-            Object.keys(site.languages).map(language => {
+            Object.keys(config.languages).map(language => {
                 if (formData[language]) {
                     let contentCompiled = formData[language].content;
                     if (formData[language].extras.indexOf('typo') > -1) {

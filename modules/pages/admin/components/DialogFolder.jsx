@@ -152,7 +152,7 @@ class DialogFolder extends Component {
             folders.expanded.push(data.key);
         }
         this.loopEach(folders.tree, i => {
-            const defaultTitle = i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]] ? i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]].title : '';
+            const defaultTitle = i.data[Object.keys(this.props.appDataRuntime.config.languages)[0]] ? i.data[Object.keys(this.props.appDataRuntime.config.languages)[0]].title : '';
             const title = i.data[this.props.appData.language] ? i.data[this.props.appData.language].title : defaultTitle;
             i.title = title;
         });

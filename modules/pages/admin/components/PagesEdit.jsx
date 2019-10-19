@@ -11,7 +11,6 @@ import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../static/etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../shared/utils/uikit';
 import DialogFolder from './DialogFolder.jsx';
@@ -40,7 +39,7 @@ class PagesEdit extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         // removeCookie(`${site.id}_auth`);
-        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.config.id}_auth`, undefined, this.props.appDataRuntime.config.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/pages`);
     }
 
@@ -80,7 +79,7 @@ class PagesEdit extends Component {
     }
 
     loadFoldersData = () => new Promise((resolve, reject) => {
-        axios.post(`${api.url}/api/pages/folders/load`, {
+        axios.post(`${this.props.appDataRuntime.config.api.url}/api/pages/folders/load`, {
             token: this.props.appDataRuntime.token,
             language: this.props.appData.language
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
@@ -120,7 +119,7 @@ class PagesEdit extends Component {
     });
 
     onSaveFolderHandler = (i18n, folders) => {
-        axios.post(`${api.url}/api/pages/folders/save`, {
+        axios.post(`${this.props.appDataRuntime.config.api.url}/api/pages/folders/save`, {
             token: this.props.appDataRuntime.token,
             folders: folders.tree
         }, { headers: { 'content-type': 'application/json' } }).then(async res => {
@@ -167,7 +166,7 @@ class PagesEdit extends Component {
 
     getTemplatesObject = () => {
         const templates = {};
-        this.props.appDataRuntime.site.templates.map(tp => templates[tp] = tp);
+        this.props.appDataRuntime.config.templates.map(tp => templates[tp] = tp);
         return templates;
     }
 
@@ -178,7 +177,7 @@ class PagesEdit extends Component {
         axios={axios}
         i18n={i18n}
         commonFields={['path', 'filename', 'template']}
-        tabs={this.props.appDataRuntime.site.languages}
+        tabs={this.props.appDataRuntime.config.languages}
         data={
             [
                 [{
@@ -210,9 +209,9 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Content`)}:`,
                     CKEditorInstance: CKEditor,
                     EditorInstance: ClassicEditor,
-                    languages: Object.keys(this.props.appDataRuntime.site.languages),
+                    languages: Object.keys(this.props.appDataRuntime.config.languages),
                     language: this.props.appData.language,
-                    imageUploadURL: `${api.url}/api/pages/image/upload`,
+                    imageUploadURL: `${this.props.appDataRuntime.config.api.url}/api/pages/image/upload`,
                     imageUploadExtras: {
                         token: this.props.appDataRuntime.token
                     }
@@ -221,7 +220,7 @@ class PagesEdit extends Component {
                         type: 'ace',
                         css: 'uk-form-width-large',
                         label: `${i18n._(t`Content`)}:`,
-                        imageUploadURL: `${api.url}/api/pages/image/upload`,
+                        imageUploadURL: `${this.props.appDataRuntime.config.api.url}/api/pages/image/upload`,
                         imageUploadExtras: {
                             token: this.props.appDataRuntime.token
                         },
@@ -233,7 +232,7 @@ class PagesEdit extends Component {
                     type: 'select',
                     label: `${i18n._(t`Template`)}:`,
                     css: 'uk-form-width-small',
-                    defaultValue: this.props.appDataRuntime.site.templates[0],
+                    defaultValue: this.props.appDataRuntime.config.templates[0],
                     updateFromProps: true,
                     values: this.getTemplatesObject()
                 },
@@ -297,7 +296,7 @@ class PagesEdit extends Component {
             CANCEL: t`Cancel`,
         }}
         save={{
-            url: `${api.url}/api/pages/save`,
+            url: `${this.props.appDataRuntime.config.api.url}/api/pages/save`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
@@ -305,7 +304,7 @@ class PagesEdit extends Component {
             }
         }}
         load={this.props.match.params.id ? {
-            url: `${api.url}/api/pages/load`,
+            url: `${this.props.appDataRuntime.config.api.url}/api/pages/load`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,

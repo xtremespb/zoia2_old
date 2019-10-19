@@ -10,7 +10,6 @@ import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../static/etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../shared/utils/uikit';
 
@@ -37,7 +36,7 @@ class UsersEdit extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         // removeCookie(`${site.id}_auth`);
-        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.config.id}_auth`, undefined, this.props.appDataRuntime.config.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/users`);
     }
 
@@ -173,7 +172,7 @@ class UsersEdit extends Component {
             CANCEL: t`Cancel`
         }}
         save={{
-            url: `${api.url}/api/users/save`,
+            url: `${this.props.appDataRuntime.config.api.url}/api/users/save`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,
@@ -181,7 +180,7 @@ class UsersEdit extends Component {
             }
         }}
         load={this.props.match.params.id ? {
-            url: `${api.url}/api/users/load`,
+            url: `${this.props.appDataRuntime.config.api.url}/api/users/load`,
             method: 'POST',
             extras: {
                 id: this.props.match.params.id,

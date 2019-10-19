@@ -1,4 +1,4 @@
-import site from '../../etc/site.json';
+import config from '../../static/etc/config.json';
 
 import {
     APP_DATA_SET_LANGUAGE,
@@ -6,7 +6,7 @@ import {
 } from '../constants/core';
 
 const initialState = {
-    language: Object.keys(site.languages)[0],
+    language: Object.keys(config.languages)[0],
     user: {}
 };
 

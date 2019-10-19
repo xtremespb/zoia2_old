@@ -9,8 +9,6 @@ const path = require('path');
 const install = async () => {
     const config = require('../shared/templates/config.json');
     const secure = require('../shared/templates/secure.json');
-    const api = require('../static/etc/api.json');
-    const site = require('../shared/templates/site.json');
     const questions = [{
             type: 'input',
             name: 'ipAPI',
@@ -39,7 +37,7 @@ const install = async () => {
             type: 'input',
             name: 'apiURL',
             message: 'Which Zoia API URL to use?',
-            default: api.url,
+            default: config.api.url,
         },
         {
             type: 'input',
@@ -88,27 +86,19 @@ const install = async () => {
         secure.apiServer.port = data.portAPI;
         secure.webServer.ip = data.ipWeb;
         secure.webServer.port = data.portWeb;
-        api.url = data.apiURL;
+        config.api.url = data.apiURL;
         secure.mongo.url = data.mongourl;
         secure.mongo.dbName = data.mongodb;
         secure.loglevel = data.loglevel;
         secure.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
         secure.user = data.user;
         secure.group = data.group;
-        console.log(`${colors.green(' * ')} Saving configuration to config.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/config.json`), config, {
+        console.log(`${colors.green(' * ')} Saving configuration to static/etc/config.json file...`);
+        fs.writeJSONSync(path.resolve(`${__dirname}/../static/etc/config.json`), config, {
             spaces: 2
         });
-        console.log(`${colors.green(' * ')} Saving configuration to secure.json file...`);
+        console.log(`${colors.green(' * ')} Saving configuration to etc/secure.json file...`);
         fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), secure, {
-            spaces: 2
-        });
-        console.log(`${colors.green(' * ')} Saving configuration to api.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../static/etc/api.json`), api, {
-            spaces: 2
-        });
-        console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/site.json`), site, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done\n`);

@@ -8,7 +8,6 @@ import { t } from '@lingui/macro';
 import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
 import appDataRuntimeSetDocumentTitle from '../../actions/appDataRuntimeSetDocumentTitle';
-import appDataRuntimeGetConfig from '../../actions/appDataRuntimeGetConfig';
 
 class AdminPanel extends Component {
     state = {
@@ -19,10 +18,6 @@ class AdminPanel extends Component {
     constructor(props) {
         super(props);
         this.loadCatalog(this.state.language);
-    }
-
-    componentDidMount = () => {
-        this.props.appDataRuntimeGetConfigAction();
     }
 
     loadCatalog = async (language) => {
@@ -78,5 +73,4 @@ export default connect(store => ({
         appDataSetLanguageAction: language => dispatch(appDataSetLanguage(language)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle)),
-        appDataRuntimeGetConfigAction: () => dispatch(appDataRuntimeGetConfig())
     }))(AdminPanel);

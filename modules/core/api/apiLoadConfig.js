@@ -1,8 +1,7 @@
 import fs from 'fs-extra';
 import secure from '../../../etc/secure.json';
 
-const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
-const site = fs.readJSONSync(`${__dirname}/../etc/site.json`);
+const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 
 export default () => ({
     async handler(req, rep) {
@@ -11,7 +10,6 @@ export default () => ({
                 .send(JSON.stringify({
                     statusCode: 200,
                     config,
-                    site
                 }));
         } catch (e) {
             req.log.error({

@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import auth from '../../../shared/lib/auth';
 import secure from '../../../etc/secure.json';
 
-const config = fs.readJSONSync(`${__dirname}/../etc/config.json`);
+const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 const sortColumns = ['username', 'email', 'active'];
 const searchColumns = ['username', 'email'];
 

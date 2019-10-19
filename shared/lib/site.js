@@ -2,8 +2,6 @@
 import auth from './auth';
 import locale from './locale';
 import catalogs from '../utils/lingui-catalogs-node';
-import site from '../../etc/site.json';
-import config from '../../etc/config.json';
 
 const loopPath = (data, keyPath, language, callback, path = [], pathData = []) => data.forEach(item => {
     path.push(item.id);
@@ -21,14 +19,14 @@ const loopPath = (data, keyPath, language, callback, path = [], pathData = []) =
 });
 
 export default {
-    getSiteData: async (req, fastify, db, page) => {
+    getSiteData: async (req, fastify, db, page, config) => {
         const user = await auth.getUserData(req, fastify, db);
-        const languagesArr = Object.keys(site.languages);
+        const languagesArr = Object.keys(config.languages);
         const {
             languages
-        } = site;
+        } = config;
         const language = locale.getLocaleFromURL(req);
-        const languagePrefixURL = language === Object.keys(site.languages)[0] ? '' : `/${language}`;
+        const languagePrefixURL = language === Object.keys(config.languages)[0] ? '' : `/${language}`;
         const t = catalogs(language);
         const title = locale.getSiteTitle(language);
         const languagesURL = {};
@@ -75,7 +73,7 @@ export default {
             t,
             title,
             breadcrumbsHTML,
-            useUIkitOnFrontend: site.useUIkitOnFrontend || false,
+            useUIkitOnFrontend: config.useUIkitOnFrontend || false,
             allowRegistration: config.allowRegistration
         };
     }

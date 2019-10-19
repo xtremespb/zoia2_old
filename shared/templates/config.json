@@ -1,9 +1,25 @@
 {
+    "id": "zoia2",
+    "languages": {
+        "en": "English",
+        "ru": "Русский"
+    },
+    "useUIkitOnFrontend": true,
+    "templates": ["zoia"],
     "siteTitle": {
         "en": "Example Website",
         "ru": "Тестовый веб-сайт"
     },
     "commonItemsLimit": 12,
     "allowRegistration": true,
-	"wysiwyg": true
+    "wysiwyg": true,
+    "api": {
+        "url": "http://127.0.0.1:3000"
+    },
+    "cookieOptions": {
+        "expires": 604800,
+        "path": "/",
+        "domain": "",
+        "secure": false
+    }
 }

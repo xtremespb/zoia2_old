@@ -15,7 +15,6 @@ import UIkit from '../../../../shared/utils/uikit';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../static/etc/api.json';
 import usersListTableSetState from '../actions/usersListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
@@ -44,7 +43,7 @@ class UserList extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.config.id}_auth`, undefined, this.props.appDataRuntime.config.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/users`);
     }
 
@@ -102,7 +101,7 @@ class UserList extends Component {
     onDeleteButtonClick = (ids, i18n) => {
         this.dialogDelete.current.hide();
         this.usersListTable.current.setLoading(true);
-        axios.post(`${api.url}/api/users/delete`, {
+        axios.post(`${this.props.appDataRuntime.config.api.url}/api/users/delete`, {
             token: this.props.appDataRuntime.token,
             ids
         }, { headers: { 'content-type': 'application/json' } }).then(res => {
@@ -177,14 +176,14 @@ class UserList extends Component {
                             }]}
                             itemsPerPage={this.props.appDataRuntime.config.commonItemsLimit || 10}
                             source={{
-                                url: `${api.url}/api/users/list`,
+                                url: `${this.props.appDataRuntime.config.api.url}/api/users/list`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token
                                 }
                             }}
                             save={{
-                                url: `${api.url}/api/users/save/field`,
+                                url: `${this.props.appDataRuntime.config.api.url}/api/users/save/field`,
                                 method: 'POST',
                                 extras: {
                                     token: this.props.appDataRuntime.token

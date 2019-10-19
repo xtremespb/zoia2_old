@@ -3,15 +3,14 @@ import axios from 'axios';
 //     remove as removeCookie
 // } from 'es-cookie';
 import cookies from 'cookies-js';
-import api from '../../static/etc/api.json';
-import site from '../../etc/site.json';
+import config from '../../static/etc/config.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
     APP_DATA_SET_USER
 } from '../constants/core';
 
 export default token => dispatch => {
-    axios.post(`${api.url}/api/users/logout`, {
+    axios.post(`${config.api.url}/api/users/logout`, {
         token
     }).then(res => {
         if (res.data.statusCode === 200) {
@@ -23,7 +22,7 @@ export default token => dispatch => {
                 type: APP_DATA_SET_USER,
                 payload: {}
             });
-            cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
+            cookies.expire(`${config.id}_auth`, undefined, config.cookieOptions);
             window.location.href = '/';
         }
     }).catch(() => {

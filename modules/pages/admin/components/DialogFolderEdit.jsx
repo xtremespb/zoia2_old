@@ -74,7 +74,7 @@ class DialogFolderEdit extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        tabs={this.props.appDataRuntime.site.languages}
+        tabs={this.props.appDataRuntime.config.languages}
         commonFields={['id']}
         data={
             [
