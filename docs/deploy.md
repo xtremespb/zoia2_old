@@ -10,7 +10,7 @@ There is a script which will help you to generate the required configuration fil
 
 To generate a set of configuration files and a package to upload to your server, you may execute the following script:
 
-* `node bin/package`
+`node bin/package`
 
 The following configuration files are generated:
 

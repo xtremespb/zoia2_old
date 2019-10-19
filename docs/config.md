@@ -1,5 +1,9 @@
 # Configuration files
 
+To generate configuration files, you may run the following command:
+
+* `npm run configure`
+
 Zoia can be configured using different configuration files:
 
 * *api.json*: API-related configuration
