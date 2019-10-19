@@ -37,3 +37,4 @@ node_modules/
 /shared/marko/error500/index.marko
 /dist/zoia/*.zip
 /shared/marko/template/index.marko
+/static/etc/api.json

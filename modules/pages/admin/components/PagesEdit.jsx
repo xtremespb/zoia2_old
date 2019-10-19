@@ -11,8 +11,7 @@ import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../etc/api.json';
-import site from '../../../../etc/site.json';
+import api from '../../../../static/etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../shared/utils/uikit';
 import DialogFolder from './DialogFolder.jsx';
@@ -41,7 +40,7 @@ class PagesEdit extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         // removeCookie(`${site.id}_auth`);
-        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/pages`);
     }
 
@@ -168,7 +167,7 @@ class PagesEdit extends Component {
 
     getTemplatesObject = () => {
         const templates = {};
-        site.templates.map(tp => templates[tp] = tp);
+        this.props.appDataRuntime.site.templates.map(tp => templates[tp] = tp);
         return templates;
     }
 
@@ -179,7 +178,7 @@ class PagesEdit extends Component {
         axios={axios}
         i18n={i18n}
         commonFields={['path', 'filename', 'template']}
-        tabs={site.languages}
+        tabs={this.props.appDataRuntime.site.languages}
         data={
             [
                 [{
@@ -211,7 +210,7 @@ class PagesEdit extends Component {
                     label: `${i18n._(t`Content`)}:`,
                     CKEditorInstance: CKEditor,
                     EditorInstance: ClassicEditor,
-                    languages: Object.keys(site.languages),
+                    languages: Object.keys(this.props.appDataRuntime.site.languages),
                     language: this.props.appData.language,
                     imageUploadURL: `${api.url}/api/pages/image/upload`,
                     imageUploadExtras: {
@@ -234,7 +233,7 @@ class PagesEdit extends Component {
                     type: 'select',
                     label: `${i18n._(t`Template`)}:`,
                     css: 'uk-form-width-small',
-                    defaultValue: site.templates[0],
+                    defaultValue: this.props.appDataRuntime.site.templates[0],
                     updateFromProps: true,
                     values: this.getTemplatesObject()
                 },

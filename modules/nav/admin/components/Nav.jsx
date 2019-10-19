@@ -12,8 +12,7 @@ import UIkit from '../../../../shared/utils/uikit';
 import { history } from '../../../../shared/store/configureStore';
 import DialogNavEdit from './DialogNavEdit.jsx';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
-import site from '../../../../etc/site.json';
-import api from '../../../../etc/api.json';
+import api from '../../../../static/etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
@@ -35,7 +34,7 @@ class Nav extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/nav`);
     }
 
@@ -130,7 +129,7 @@ class Nav extends Component {
             folders.expanded.push(data.key);
         }
         this.loopEach(folders.tree, i => {
-            const defaultTitle = i.data[Object.keys(site.languages)[0]] ? i.data[Object.keys(site.languages)[0]].title : '';
+            const defaultTitle = i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]] ? i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]].title : '';
             const title = i.data[this.props.appData.language] ? i.data[this.props.appData.language].title : defaultTitle;
             i.title = title;
         });

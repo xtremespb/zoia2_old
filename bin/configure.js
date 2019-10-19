@@ -9,7 +9,7 @@ const path = require('path');
 const install = async () => {
     const config = require('../shared/templates/config.json');
     const secure = require('../shared/templates/secure.json');
-    const api = require('../shared/templates/api.json');
+    const api = require('../static/etc/api.json');
     const site = require('../shared/templates/site.json');
     const questions = [{
             type: 'input',
@@ -104,7 +104,7 @@ const install = async () => {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to api.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/api.json`), api, {
+        fs.writeJSONSync(path.resolve(`${__dirname}/../static/etc/api.json`), api, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Saving configuration to site.json file...`);

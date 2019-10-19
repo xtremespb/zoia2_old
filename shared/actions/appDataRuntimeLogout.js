@@ -3,7 +3,7 @@ import axios from 'axios';
 //     remove as removeCookie
 // } from 'es-cookie';
 import cookies from 'cookies-js';
-import api from '../../etc/api.json';
+import api from '../../static/etc/api.json';
 import site from '../../etc/site.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
@@ -23,12 +23,10 @@ export default token => dispatch => {
                 type: APP_DATA_SET_USER,
                 payload: {}
             });
-            // removeCookie(`${site.id}_auth`);
             cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
             window.location.href = '/';
         }
     }).catch(() => {
-        // TODO Display an error?
         window.location.href = '/';
     });
 };

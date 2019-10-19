@@ -12,6 +12,7 @@ const initialState = {
     config: {
         siteTitle: {}
     },
+    site: {},
     configError: false,
     routes: []
 };
@@ -26,7 +27,8 @@ export default ((state = initialState, action) => {
     case APP_DATA_RUNTIME_SET_CONFIG:
         return {
             ...state,
-            config: action.payload
+            config: action.payload.config,
+            site: action.payload.site
         };
     case APP_DATA_RUNTIME_SET_CONFIG_ERROR:
         return {

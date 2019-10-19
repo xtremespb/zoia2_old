@@ -10,8 +10,7 @@ import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../etc/api.json';
-import site from '../../../../etc/site.json';
+import api from '../../../../static/etc/api.json';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../shared/utils/uikit';
 
@@ -38,7 +37,7 @@ class UsersEdit extends Component {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
         // removeCookie(`${site.id}_auth`);
-        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/users`);
     }
 

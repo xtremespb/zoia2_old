@@ -17,7 +17,7 @@ archive.pipe(output);
 ['package.json', 'package-lock.json', 'README.md', 'LICENSE'].map(f => archive.file(`${__dirname}/../${f}`, {
     name: f
 }));
-['config.json', 'secure.json', 'api.json', 'site.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
+['config.json', 'secure.json', 'site.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
     name: `etc/${f}`
 }));
 ['web.js', 'api.js', 'tools.js'].map(f => archive.file(`${__dirname}/../bin/${f}`, {

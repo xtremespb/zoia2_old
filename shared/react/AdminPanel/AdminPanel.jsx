@@ -9,7 +9,6 @@ import appDataSetLanguage from '../../actions/appDataSetLanguage';
 import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
 import appDataRuntimeGetConfig from '../../actions/appDataRuntimeGetConfig';
 import UIkit from '../../utils/uikit';
-import site from '../../../etc/site.json';
 import modulesData from '../../build/modules.json';
 
 import './AdminPanel.css';
@@ -79,7 +78,7 @@ class AdminPanel extends Component {
         this.props.appDataSetLanguageAction(e.currentTarget.dataset.lang);
     }
 
-    getLanguagesList = prefix => Object.keys(site.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{site.languages[lang]}</a></li>));
+    getLanguagesList = prefix => Object.keys(this.props.appDataRuntime.site.languages).map(lang => (<li key={`${prefix}_${lang}`}><a href="#" data-lang={lang} onClick={this.onLanguageClick}><span className={`flag-icon flag-icon-${lang}`} />&nbsp;&nbsp;{this.props.appDataRuntime.site.languages[lang]}</a></li>));
 
     render = () => {
         const { catalogs, language } = this.state;

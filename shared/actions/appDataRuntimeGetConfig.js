@@ -1,5 +1,5 @@
 import axios from 'axios';
-import api from '../../etc/api.json';
+import api from '../../static/etc/api.json';
 import {
     APP_DATA_RUNTIME_SET_CONFIG,
     APP_DATA_RUNTIME_SET_CONFIG_ERROR
@@ -12,7 +12,7 @@ export default () => async (dispatch, getState) => {
             if (res && res.data && res.data.statusCode === 200 && res.data.config) {
                 dispatch({
                     type: APP_DATA_RUNTIME_SET_CONFIG,
-                    payload: res.data.config
+                    payload: res.data
                 });
                 return;
             }

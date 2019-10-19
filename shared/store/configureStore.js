@@ -5,7 +5,6 @@ import {
 } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-// import storage from 'redux-persist/lib/storage';
 import {
     CookieStorage
 } from 'redux-persist-cookie-storage';
@@ -26,12 +25,6 @@ import config from '../../etc/config.json';
 import site from '../../etc/site.json';
 
 export const history = createBrowserHistory();
-
-// const persistConfig = {
-//     key: `${site.id}_root`,
-//     storage,
-//     whitelist: ['appData']
-// };
 
 const persistConfig = {
     key: `${site.id}_root`,

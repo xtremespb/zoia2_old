@@ -6,7 +6,6 @@ import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import UIkit from '../../../../shared/utils/uikit';
 import DialogFolderEdit from './DialogFolderEdit.jsx';
-import site from '../../../../etc/site.json';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
@@ -153,7 +152,7 @@ class DialogFolder extends Component {
             folders.expanded.push(data.key);
         }
         this.loopEach(folders.tree, i => {
-            const defaultTitle = i.data[Object.keys(site.languages)[0]] ? i.data[Object.keys(site.languages)[0]].title : '';
+            const defaultTitle = i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]] ? i.data[Object.keys(this.props.appDataRuntime.site.languages)[0]].title : '';
             const title = i.data[this.props.appData.language] ? i.data[this.props.appData.language].title : defaultTitle;
             i.title = title;
         });

@@ -15,8 +15,7 @@ import UIkit from '../../../../shared/utils/uikit';
 import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import api from '../../../../etc/api.json';
-import site from '../../../../etc/site.json';
+import api from '../../../../static/etc/api.json';
 import usersListTableSetState from '../actions/usersListTableSetState';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 
@@ -45,8 +44,7 @@ class UserList extends Component {
     deauthorize = () => {
         this.props.appDataRuntimeSetTokenAction(null);
         this.props.appDataSetUserAction({});
-        // removeCookie(`${site.id}_auth`);
-        cookies.expire(`${site.id}_auth`, undefined, site.cookieOptions);
+        cookies.expire(`${this.props.appDataRuntime.site.id}_auth`, undefined, this.props.appDataRuntime.site.cookieOptions);
         history.push(`/admin/users/auth?redirect=/admin/users`);
     }
 

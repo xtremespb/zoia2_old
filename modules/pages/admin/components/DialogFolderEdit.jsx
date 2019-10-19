@@ -6,7 +6,6 @@ import { t } from '@lingui/macro';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import UIkit from '../../../../shared/utils/uikit';
-import site from '../../../../etc/site.json';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
@@ -75,7 +74,7 @@ class DialogFolderEdit extends Component {
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        tabs={site.languages}
+        tabs={this.props.appDataRuntime.site.languages}
         commonFields={['id']}
         data={
             [
