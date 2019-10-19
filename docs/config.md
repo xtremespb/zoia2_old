@@ -4,6 +4,8 @@ To generate configuration files, you may run the following command:
 
 * `npm run configure`
 
+The files are saved to the *etc* directory.
+
 Zoia can be configured using different configuration files:
 
 * *api.json*: API-related configuration

@@ -1,4 +1,4 @@
-# Zoia 2
+# Zoia CMS
 
 Zoia is the content management system based on Fastify, React, Redux, Marko, UIkit and MongoDB. It has the following features:
 
