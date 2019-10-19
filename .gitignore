@@ -36,3 +36,4 @@ node_modules/
 /shared/marko/error404/index.marko
 /shared/marko/error500/index.marko
 /dist/zoia/*.zip
+/shared/marko/template/index.marko

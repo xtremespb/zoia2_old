@@ -4,6 +4,6 @@
         "ru": "Тестовый веб-сайт"
     },
     "commonItemsLimit": 12,
-    "allowRegistration": true
+    "allowRegistration": true,
 	"wysiwyg": true
 }

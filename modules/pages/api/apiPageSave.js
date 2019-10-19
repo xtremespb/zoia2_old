@@ -24,6 +24,10 @@ const formValidate = ajv.compile({
         filename: {
             type: 'string',
             maxLength: 128
+        },
+        template: {
+            type: 'string',
+            maxLength: 64
         }
     },
     required: ['path', 'filename']
@@ -109,6 +113,7 @@ export default fastify => ({
             const pageData = {
                 filename: formData.filename,
                 path: formData.path,
+                template: formData.template,
                 data: {}
             };
             // Check for duplicates

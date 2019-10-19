@@ -166,13 +166,19 @@ class PagesEdit extends Component {
         }
     }
 
+    getTemplatesObject = () => {
+        const templates = {};
+        site.templates.map(tp => templates[tp] = tp);
+        return templates;
+    }
+
     getEditForm = i18n => (<FormBuilder
         ref={this.editPagesForm}
         prefix="editPagesForm"
         UIkit={UIkit}
         axios={axios}
         i18n={i18n}
-        commonFields={['path', 'filename']}
+        commonFields={['path', 'filename', 'template']}
         tabs={site.languages}
         data={
             [
@@ -223,6 +229,15 @@ class PagesEdit extends Component {
                         imageUploadLabel: t`Upload image`,
                         imageUploadErrorLabel: t`Could not upload an image`
                     },
+                {
+                    id: 'template',
+                    type: 'select',
+                    label: `${i18n._(t`Template`)}:`,
+                    css: 'uk-form-width-small',
+                    defaultValue: site.templates[0],
+                    updateFromProps: true,
+                    values: this.getTemplatesObject()
+                },
                 {
                     id: 'extras',
                     type: 'checkbox',
