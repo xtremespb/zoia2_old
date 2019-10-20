@@ -1,16 +1,18 @@
-import config from '../../static/etc/config.json';
-
 import {
     APP_DATA_SET_LANGUAGE,
     APP_DATA_SET_USER
 } from '../constants/core';
 
 const initialState = {
-    language: Object.keys(config.languages)[0],
+    language: '',
     user: {}
 };
 
-export default ((state = initialState, action) => {
+export default ((state = initialState, action, config) => {
+    if (!action && config) {
+        [initialState.language] = Object.keys(config.languages);
+        return {};
+    }
     switch (action.type) {
     case APP_DATA_SET_LANGUAGE:
         return {

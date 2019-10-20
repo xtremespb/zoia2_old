@@ -7,7 +7,7 @@ import appDataRuntimeLogout from '../../../../shared/actions/appDataRuntimeLogou
 
 class UserLogout extends Component {
     componentDidMount = () => {
-        this.props.appDataRuntimeLogoutAction(this.props.appDataRuntime.token);
+        this.props.appDataRuntimeLogoutAction(this.props.appDataRuntime.token, this.props.appDataRuntime.config);
     }
 
     render = () => (<></>)
@@ -17,5 +17,5 @@ export default connect(store => ({
     appDataRuntime: store.appDataRuntime,
 }),
     dispatch => ({
-        appDataRuntimeLogoutAction: token => dispatch(appDataRuntimeLogout(token))
+        appDataRuntimeLogoutAction: (token, config) => dispatch(appDataRuntimeLogout(token, config))
     }))(UserLogout);

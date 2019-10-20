@@ -44,7 +44,7 @@ export default (preloadedState, config) => {
     if (config.development) {
         middlewares.push(logger);
     }
-    const persistedReducers = persistCombineReducers(persistConfig, rootReducer(history));
+    const persistedReducers = persistCombineReducers(persistConfig, rootReducer(history, config));
     const store = createStore(
         persistedReducers,
         preloadedState,

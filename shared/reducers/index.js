@@ -7,20 +7,25 @@ import appDataRuntime from './appDataRuntime';
 import appLingui from './appLingui';
 import modules from '../build/modules.json';
 
-let moduleReducers = {};
-// eslint-disable-next-line global-require
-Object.keys(modules).map(m => {
-    const reducers = require(`../../modules/${m}/admin/reducers/index.js`).default();
-    moduleReducers = {
+export default (history, config) => {
+    let moduleReducers = {};
+    // eslint-disable-next-line global-require
+    Object.keys(modules).map(m => {
+        const reducers = require(`../../modules/${m}/admin/reducers/index.js`).default();
+        moduleReducers = {
+            ...moduleReducers,
+            ...reducers
+        };
+    });
+    // Set defaults in reducers
+    appData(null, null, config);
+    appDataRuntime(null, null, config);
+    // Return
+    return {
         ...moduleReducers,
-        ...reducers
+        router: connectRouter(history),
+        appData,
+        appDataRuntime,
+        appLingui
     };
-});
-
-export default history => ({
-    ...moduleReducers,
-    router: connectRouter(history),
-    appData,
-    appDataRuntime,
-    appLingui
-});
+};

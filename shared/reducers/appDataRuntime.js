@@ -1,13 +1,12 @@
 import cookies from 'cookies-js';
 
-import config from '../../static/etc/config.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
     APP_DATA_RUNTIME_SET_CONFIG,
 } from '../constants/core';
 
 const initialState = {
-    token: cookies.get(`${config.id}_auth`) || null,
+    token: null,
     config: {
         siteTitle: {}
     },
@@ -15,7 +14,11 @@ const initialState = {
     routes: []
 };
 
-export default ((state = initialState, action) => {
+export default ((state = initialState, action, config) => {
+    if (!action && config) {
+        initialState.token = cookies.get(`${config.id}_auth`) || null;
+        return {};
+    }
     switch (action.type) {
     case APP_DATA_RUNTIME_SET_TOKEN:
         return {

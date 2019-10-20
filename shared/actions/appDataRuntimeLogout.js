@@ -1,15 +1,11 @@
 import axios from 'axios';
-// import {
-//     remove as removeCookie
-// } from 'es-cookie';
 import cookies from 'cookies-js';
-import config from '../../static/etc/config.json';
 import {
     APP_DATA_RUNTIME_SET_TOKEN,
     APP_DATA_SET_USER
 } from '../constants/core';
 
-export default token => dispatch => {
+export default (token, config) => dispatch => {
     axios.post(`${config.api.url}/api/users/logout`, {
         token
     }).then(res => {
