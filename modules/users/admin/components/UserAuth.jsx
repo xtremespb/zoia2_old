@@ -6,7 +6,7 @@ import { t } from '@lingui/macro';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import queryString from 'query-string';
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 import UIkit from '../../../../shared/utils/uikit';
 
 import { history } from '../../../../shared/store/configureStore';

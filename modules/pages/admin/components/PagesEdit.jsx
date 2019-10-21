@@ -3,7 +3,7 @@
 import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 import axios from 'axios';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';

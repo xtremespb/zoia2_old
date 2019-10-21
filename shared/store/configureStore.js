@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import {
     CookieStorage
 } from 'redux-persist-cookie-storage';
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 import {
     persistStore,
     persistCombineReducers
@@ -34,7 +34,8 @@ export default (preloadedState, config) => {
             setCookieOptions: {
                 path: config.cookieOptions.path,
                 domain: config.cookieOptions.domain,
-                secure: config.cookieOptions.secure
+                secure: config.cookieOptions.secure,
+                sameSite: config.cookieOptions.sameSite
             }
         }),
         whitelist: ['appData']

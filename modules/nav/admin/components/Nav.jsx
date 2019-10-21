@@ -6,7 +6,7 @@ import { t } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 import axios from 'axios';
 import UIkit from '../../../../shared/utils/uikit';
 import { history } from '../../../../shared/store/configureStore';

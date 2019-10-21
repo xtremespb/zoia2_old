@@ -1,4 +1,4 @@
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 
 import {
     APP_DATA_RUNTIME_SET_TOKEN,

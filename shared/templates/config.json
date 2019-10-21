@@ -19,6 +19,7 @@
         "expires": 604800,
         "path": "/",
         "domain": "",
-        "secure": false
+        "secure": false,
+        "sameSite": true
     }
 }

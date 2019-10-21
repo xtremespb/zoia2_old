@@ -3,8 +3,7 @@
 import React, { lazy, Component } from 'react';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
-// import { remove as removeCookie } from 'es-cookie';
-import cookies from 'cookies-js';
+import cookies from 'zoia-cookies';
 import axios from 'axios';
 import { Trans, t } from '@lingui/macro';
 import { history } from '../../../../shared/store/configureStore';
