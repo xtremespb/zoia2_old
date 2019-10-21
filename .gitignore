@@ -38,3 +38,4 @@ node_modules/
 /dist/zoia/*.zip
 /shared/marko/template/index.marko
 /static/etc/config.json
+/etc/templates.json
