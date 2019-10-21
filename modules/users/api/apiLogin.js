@@ -1,6 +1,5 @@
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
-import secure from '../../../etc/secure.json';
 
 export default fastify => ({
     schema: {
@@ -37,7 +36,7 @@ export default fastify => ({
         // End of Validation
         // Processing
         try {
-            const passwordHash = crypto.createHmac('sha512', secure.secret).update(req.body.password).digest('hex');
+            const passwordHash = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(req.body.password).digest('hex');
             const user = await this.mongo.db.collection('users').findOne({
                 username: req.body.username
             });
@@ -61,7 +60,7 @@ export default fastify => ({
                 userId,
                 sessionId
             }, {
-                expiresIn: secure.authTokenExpiresIn
+                expiresIn: fastify.zoiaConfigSecureauthTokenExpiresIn
             });
             // Update database and set session ID
             await this.mongo.db.collection('users').updateOne({
@@ -87,7 +86,7 @@ export default fastify => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

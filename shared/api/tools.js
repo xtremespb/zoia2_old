@@ -1,4 +1,5 @@
 /* eslint no-console:0 */
+import path from 'path';
 import inquirer from 'inquirer';
 import commandLineArgs from 'command-line-args';
 import colors from 'colors/safe';
@@ -15,8 +16,8 @@ const optionDefinitions = [{
     alias: 'i',
     type: Boolean
 }, {
-    name: 'modify',
-    alias: 'm',
+    name: 'defaults',
+    alias: 'r',
     type: Boolean
 }, {
     name: 'split',
@@ -155,7 +156,7 @@ const cleanupLocales = () => {
 };
 
 const install = async () => {
-    const secure = require('../../etc/secure.json');
+    const secure = fs.readJsonSync(path.resolve(`${__dirname}/../etc/secure.json`));
     const modules = Object.keys(require('../build/modules.json'));
     const questions = [{
         type: 'rawlist',
@@ -264,8 +265,51 @@ const install = async () => {
     }
 };
 
+const defaults = async () => {
+    const secure = fs.readJsonSync(path.resolve(`${__dirname}/../etc/secure.json`));
+    const modules = Object.keys(require('../build/modules.json'));
+    const questions = [{
+        type: 'rawlist',
+        name: 'install',
+        message: 'Which modules to process?',
+        choices: ['All', 'None', ...modules],
+        default: 'All'
+    }];
+    try {
+        console.log(`This tool will set default values and settings for modules.`);
+        console.log(`Modules available: ${modules.join(', ')}`);
+        console.log('');
+        const data = await inquirer.prompt(questions);
+        console.log('');
+        const mongoClient = new MongoClient(secure.mongo.url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        await mongoClient.connect();
+        db = mongoClient.db(secure.mongo.dbName);
+        if (data.install !== 'None') {
+            await Promise.all((data.install === 'All' ? modules : [data.install]).map(async m => {
+                console.log(`${colors.green(' * ')} Processing module: ${m}...`);
+                try {
+                    console.log(`${colors.green(' * ')} Running defaults script for module: ${m}...`);
+                    const installScript = require(`../../modules/${m}/defaults.js`);
+                    await installScript.default(db);
+                } catch (e) {
+                    // Ignore
+                }
+            }));
+        }
+        console.log(`${colors.green(' * ')} Done`);
+        mongoClient.close();
+    } catch (e) {
+        console.log('');
+        console.log(colors.red(e));
+        process.exit(1);
+    }
+};
+
 console.log(colors.green.inverse('\n                                      '));
-console.log(colors.green.inverse(' Zoia 2 Helper Scripts                '));
+console.log(colors.green.inverse(' Zoia Helper Scripts                  '));
 console.log(colors.green.inverse('                                      \n'));
 
 // Do we need to split locales?
@@ -288,9 +332,12 @@ if (options.cleanup) {
     console.log(`${colors.green(' * ')} Done`);
     process.exit(0);
 }
+
 // Do we need to install?
 if (options.install) {
     install();
+} else if (options.defaults) {
+    defaults();
 } else {
-    console.log('Usage: node tools <--install (--modify)|--split|--combine|--cleanup>\n\n --install (-i): run Zoia installation, use --modify (-m) to modify existing config.json file\n --split (-s): split locales from shared directory to modules\n --combine locales from modules to shared directory\n --cleanup (-d): remove unused locale entries from shared directory');
+    console.log('Usage: node tools --install|--defaults|--split|--combine|--cleanup\n\n --install (-i): run Zoia installation\n --defaults(-r): set default values and settings for a module\n --split (-s): split locales from shared directory to module directories\n --combine locales from module directories to shared directory\n --cleanup (-d): remove unused locale entries from shared directory');
 }

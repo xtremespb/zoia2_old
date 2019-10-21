@@ -1,6 +1,4 @@
-import secure from '../../../etc/secure.json';
-
-export default () => ({
+export default fastify => ({
     schema: {
         body: {
             type: 'object',
@@ -80,7 +78,7 @@ export default () => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

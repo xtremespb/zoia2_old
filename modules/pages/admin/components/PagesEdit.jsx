@@ -14,6 +14,7 @@ import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
 import UIkit from '../../../../shared/utils/uikit';
 import DialogFolder from './DialogFolder.jsx';
+import templates from '../../../../etc/templates.json';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
@@ -165,9 +166,9 @@ class PagesEdit extends Component {
     }
 
     getTemplatesObject = () => {
-        const templates = {};
-        this.props.appDataRuntime.config.templates.map(tp => templates[tp] = tp);
-        return templates;
+        const templatesObject = {};
+        templates.available.map(tp => templatesObject[tp] = tp);
+        return templatesObject;
     }
 
     getEditForm = i18n => (<FormBuilder
@@ -232,7 +233,7 @@ class PagesEdit extends Component {
                     type: 'select',
                     label: `${i18n._(t`Template`)}:`,
                     css: 'uk-form-width-small',
-                    defaultValue: this.props.appDataRuntime.config.templates[0],
+                    defaultValue: templates.available[0],
                     updateFromProps: true,
                     values: this.getTemplatesObject()
                 },

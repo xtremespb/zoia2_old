@@ -1,6 +1,5 @@
-/* eslint-disable import/order */
-import secure from '../../../etc/secure.json';
-import logger from '../../lib/logger';
+import path from 'path';
+import fs from 'fs-extra';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
 import fastifyCORS from 'fastify-cors';
@@ -8,25 +7,31 @@ import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
 import fastifyCookie from 'fastify-cookie';
-import modules from '../../build/modules.json';
-import error404 from '../error404/index.marko';
-import error500 from '../error500/index.marko';
-import site from '../../lib/site';
 import {
     MongoClient
 } from 'mongodb';
 import Pino from 'pino';
 import Fastify from 'fastify';
-
-const log = Pino({
-    level: secure.loglevel
-});
-const fastify = Fastify({
-    logger,
-    trustProxy: secure.trustProxy
-});
+import logger from '../../lib/logger';
+import modules from '../../build/modules.json';
+import error404 from '../error404/index.marko';
+import error500 from '../error500/index.marko';
+import site from '../../lib/site';
 
 (async () => {
+    const secure = await fs.readJSON(path.resolve(`../etc/secure.json`));
+    const config = await fs.readJSON(path.resolve(`../static/etc/config.json`));
+    const log = Pino({
+        level: secure.loglevel
+    });
+    const fastify = Fastify({
+        logger,
+        trustProxy: secure.trustProxy
+    });
+    fastify.decorate('zoiaConfig', config);
+    fastify.decorate('zoiaConfigSecure', secure);
+    fastify.decorateRequest('zoiaConfig', config);
+    fastify.decorateRequest('zoiaConfigSecure', secure);
     const mongoClient = new MongoClient(secure.mongo.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -87,9 +92,9 @@ const fastify = Fastify({
         });
         rep.code(500).type('text/html').send(render.out.stream.str);
     });
-    log.info('Starting Web server...');
     fastify.listen(secure.webServer.port, secure.webServer.ip);
-})().catch(err => {
-    log.error(err);
+})().catch(e => {
+    // eslint-disable-next-line no-console
+    console.error(e);
     process.exit(1);
 });

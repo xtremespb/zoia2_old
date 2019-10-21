@@ -1,28 +1,33 @@
-/* eslint-disable import/order */
-import secure from '../../etc/secure.json';
-import logger from '../lib/logger';
+import path from 'path';
+import fs from 'fs-extra';
 import fastifyMongo from 'fastify-mongodb';
 import fastifyURLData from 'fastify-url-data';
 import fastifyCORS from 'fastify-cors';
 import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
-import modules from '../build/modules.json';
 import {
     MongoClient
 } from 'mongodb';
 import Pino from 'pino';
 import Fastify from 'fastify';
-
-const log = Pino({
-    level: secure.loglevel
-});
-const fastify = Fastify({
-    logger,
-    trustProxy: secure.trustProxy
-});
+import modules from '../build/modules.json';
+import logger from '../lib/logger';
 
 (async () => {
+    const secure = await fs.readJSON(path.resolve(`../etc/secure.json`));
+    const config = await fs.readJSON(path.resolve(`../static/etc/config.json`));
+    const log = Pino({
+        level: secure.loglevel
+    });
+    const fastify = Fastify({
+        logger,
+        trustProxy: secure.trustProxy
+    });
+    fastify.decorate('zoiaConfig', config);
+    fastify.decorate('zoiaConfigSecure', secure);
+    fastify.decorateRequest('zoiaConfig', config);
+    fastify.decorateRequest('zoiaConfigSecure', secure);
     const mongoClient = new MongoClient(secure.mongo.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -53,9 +58,9 @@ const fastify = Fastify({
         const module = await import(`../../modules/${m}/api/index.js`);
         module.default(fastify);
     }));
-    log.info('Starting API server...');
     fastify.listen(secure.apiServer.port, secure.apiServer.ip);
-})().catch(err => {
-    log.error(err);
+})().catch(e => {
+    // eslint-disable-next-line no-console
+    console.error(e);
     process.exit(1);
 });

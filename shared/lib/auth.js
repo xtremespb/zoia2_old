@@ -1,9 +1,6 @@
-import fs from 'fs-extra';
 import {
     ObjectId
 } from 'mongodb';
-
-const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 
 export default {
     verifyToken: async (token, fastify, db) => {
@@ -25,8 +22,8 @@ export default {
     },
     getUserData: async (req, fastify, db) => {
         try {
-            if (req.cookies[`${config.id}_auth`] && db) {
-                const token = req.cookies[`${config.id}_auth`];
+            if (req.cookies[`${fastify.zoiaConfigid}_auth`] && db) {
+                const token = req.cookies[`${fastify.zoiaConfigid}_auth`];
                 const decodedToken = fastify.jwt.decode(token);
                 if (!decodedToken || !decodedToken.userId || !decodedToken.sessionId || Math.floor(Date.now() / 1000) > decodedToken.exp) {
                     return {};

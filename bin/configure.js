@@ -9,6 +9,7 @@ const path = require('path');
 const install = async () => {
     const config = require('../shared/templates/config.json');
     const secure = require('../shared/templates/secure.json');
+    const templates = require('../shared/templates/templates.json');
     const questions = [{
             type: 'input',
             name: 'ipAPI',
@@ -101,6 +102,10 @@ const install = async () => {
         fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), secure, {
             spaces: 2
         });
+        console.log(`${colors.green(' * ')} Saving configuration to etc/templates.json file...`);
+        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/templates.json`), templates, {
+            spaces: 2
+        });
         console.log(`${colors.green(' * ')} Done\n`);
     } catch (e) {
         console.log('');
@@ -110,7 +115,7 @@ const install = async () => {
 };
 
 console.log(colors.green.inverse('\n                                      '));
-console.log(colors.green.inverse(' Zoia 2 Configurator                  '));
+console.log(colors.green.inverse(' Zoia Configurator                    '));
 console.log(colors.green.inverse('                                      \n'));
 
 install();

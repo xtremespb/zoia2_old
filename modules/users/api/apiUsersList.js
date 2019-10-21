@@ -1,8 +1,5 @@
-import fs from 'fs-extra';
 import auth from '../../../shared/lib/auth';
-import secure from '../../../etc/secure.json';
 
-const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 const sortColumns = ['username', 'email', 'active'];
 const searchColumns = ['username', 'email'];
 
@@ -80,8 +77,8 @@ export default fastify => ({
                 });
             }
             const count = await this.mongo.db.collection('users').find(query, options).count();
-            options.limit = config.commonItemsLimit;
-            options.skip = (req.body.page - 1) * config.commonItemsLimit;
+            options.limit = req.zoiaConfig.commonItemsLimit;
+            options.skip = (req.body.page - 1) * req.zoiaConfig.commonItemsLimit;
             options.projection = {
                 _id: 1,
                 username: 1,
@@ -103,7 +100,7 @@ export default fastify => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

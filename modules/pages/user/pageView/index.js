@@ -1,6 +1,7 @@
 import template from './template.marko';
 import site from '../../../../shared/lib/site';
 import locale from '../../../../shared/lib/locale';
+import templates from '../../../../etc/templates.json';
 
 export default fastify => ({
     async handler(req, rep) {
@@ -24,7 +25,7 @@ export default fastify => ({
                     $global: {
                         siteData,
                         t: siteData.t,
-                        template: page.template,
+                        template: page.template || templates.available[0],
                     }
                 }));
                 const html = render.out.stream.str.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);

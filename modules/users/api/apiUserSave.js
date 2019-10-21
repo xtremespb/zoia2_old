@@ -3,7 +3,6 @@ import {
     ObjectId
 } from 'mongodb';
 import crypto from 'crypto';
-import secure from '../../../etc/secure.json';
 import auth from '../../../shared/lib/auth';
 
 const ajv = new Ajv();
@@ -144,7 +143,7 @@ export default fastify => ({
                             }
                         }));
                 }
-                passwordUpdate.password = crypto.createHmac('sha512', secure.secret).update(formData.default.password).digest('hex');
+                passwordUpdate.password = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(formData.default.password).digest('hex');
             }
             // Check if such user exists
             if (formData.id) {
@@ -239,7 +238,7 @@ export default fastify => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

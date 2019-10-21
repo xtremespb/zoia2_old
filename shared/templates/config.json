@@ -5,7 +5,6 @@
         "ru": "Русский"
     },
     "useUIkitOnFrontend": true,
-    "templates": ["zoia"],
     "siteTitle": {
         "en": "Example Website",
         "ru": "Тестовый веб-сайт"

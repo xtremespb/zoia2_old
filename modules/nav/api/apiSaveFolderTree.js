@@ -1,6 +1,5 @@
 import Ajv from 'ajv';
 import auth from '../../../shared/lib/auth';
-import secure from '../../../etc/secure.json';
 
 const ajv = new Ajv();
 
@@ -124,7 +123,7 @@ export default fastify => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

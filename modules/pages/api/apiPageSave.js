@@ -2,15 +2,11 @@ import Ajv from 'ajv';
 import {
     ObjectId
 } from 'mongodb';
-import fs from 'fs-extra';
 import {
     minify
 } from 'html-minifier';
 import Typograf from 'typograf';
 import auth from '../../../shared/lib/auth';
-import secure from '../../../etc/secure.json';
-
-const config = fs.readJSONSync(`${__dirname}/../static/etc/config.json`);
 
 const ajv = new Ajv();
 
@@ -151,7 +147,7 @@ export default fastify => ({
                         error: 'Page with such path or filename already exists'
                     }));
             }
-            Object.keys(config.languages).map(language => {
+            Object.keys(req.zoiaConfig.languages).map(language => {
                 if (formData[language]) {
                     let contentCompiled = formData[language].content;
                     if (formData[language].extras.indexOf('typo') > -1) {
@@ -212,7 +208,7 @@ export default fastify => ({
                 path: req.urlData().path,
                 query: req.urlData().query,
                 error: e && e.message ? e.message : 'Internal Server Error',
-                stack: secure.stackTrace && e.stack ? e.stack : null
+                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
             });
             return rep.code(500).send(JSON.stringify({
                 statusCode: 500,

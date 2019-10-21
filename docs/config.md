@@ -4,21 +4,22 @@ To generate configuration files, you may run the following command:
 
 * `npm run configure`
 
-The files are saved to the *etc* directory.
+The files are saved to the *etc* and to the *static/etc directories.
 
 Zoia can be configured using different configuration files:
 
-* *api.json*: API-related configuration
 * *config.json*: common configuration file (exposed to the public)
 * *secure.json*: server-related configuration file (not exposed to the public)
-* *site.json*: configuration which is related to a specific website
-
-## api.json
-
-* *url*: URL where the API Server can be reached
+* *templates.json*: frontend template settings
 
 ## config.json
 
+* *id*: uniquie Zoia instance ID
+* *languages[]*: an array of Zoia languages available
+* *cookieOptions*: cookie options
+* *useUIkitOnFrontend*: set to *true* if your frontend template uses UIkit CSS framework
+* *templates[]*: an array of templates available
+* *url*: URL where the API Server can be reached
 * *siteTitle*: a title of your website which is used to display in a browser window
 * *commonItemsLimit*: how many items to display in all generic dynamic tables (admin area)
 * *allowRegistration*: allow new user sign ups
@@ -43,10 +44,8 @@ Zoia can be configured using different configuration files:
 * *group*: a group which will be used to run Zoia (useful for systemd configuration) - optional
 * *serverName*: server name(s) which are used for NGINX configuration - optional
 
-## site.json
+## templates.json
 
-* *id*: uniquie Zoia instance ID
-* *languages[]*: an array of Zoia languages available
-* *cookieOptions*: cookie options
-* *useUIkitOnFrontend*: set to *true* if your frontend template uses UIkit CSS framework
-* *templates[]*: an array of templates available
+This configuration file is built-in into both Web and API servers processed by Webpack, so after each change in this configuration file you will need to re-build Zoia using Webpack scripts.
+
+* *available[]*: an list of all available templates

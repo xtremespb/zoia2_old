@@ -19,16 +19,16 @@ const loopPath = (data, keyPath, language, callback, path = [], pathData = []) =
 });
 
 export default {
-    getSiteData: async (req, fastify, db, page, config) => {
+    getSiteData: async (req, fastify, db, page) => {
         const user = await auth.getUserData(req, fastify, db);
-        const languagesArr = Object.keys(config.languages);
+        const languagesArr = Object.keys(fastify.zoiaConfig.languages);
         const {
             languages
-        } = config;
+        } = fastify.zoiaConfig;
         const language = locale.getLocaleFromURL(req);
-        const languagePrefixURL = language === Object.keys(config.languages)[0] ? '' : `/${language}`;
+        const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '' : `/${language}`;
         const t = catalogs(language);
-        const title = locale.getSiteTitle(language);
+        const title = locale.getSiteTitle(language, req);
         const languagesURL = {};
         const navDB = await db.collection('registry').findOne({
             _id: 'nav_folder_tree'
@@ -73,8 +73,8 @@ export default {
             t,
             title,
             breadcrumbsHTML,
-            useUIkitOnFrontend: config.useUIkitOnFrontend || false,
-            allowRegistration: config.allowRegistration
+            useUIkitOnFrontend: fastify.zoiaConfig.useUIkitOnFrontend || false,
+            allowRegistration: fastify.zoiaConfig.allowRegistration
         };
     }
 };
