@@ -60,7 +60,7 @@ export default fastify => ({
                 userId,
                 sessionId
             }, {
-                expiresIn: fastify.zoiaConfigSecureauthTokenExpiresIn
+                expiresIn: fastify.zoiaConfigSecure.authTokenExpiresIn
             });
             // Update database and set session ID
             await this.mongo.db.collection('users').updateOne({
