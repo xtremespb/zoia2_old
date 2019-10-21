@@ -11,4 +11,4 @@ Zoia is the content management system based on Fastify, React, Redux, Marko, UIk
 * Distributed Web and API servers
 * Built using Webpack
 
-Continue reading on how to [configure](docs/config.md), [install](docs/install.md) and [deploy](docs/deploy.md) Zoia on your server.
+Read the [documentation](docs/index.md) on how to configure, install etc.
