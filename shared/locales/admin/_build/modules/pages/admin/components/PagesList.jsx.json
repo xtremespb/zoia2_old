@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        64
+        63
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        67
+        66
       ],
       [
         "modules/pages/admin/components/PagesList.jsx",
-        189
+        188
       ]
     ]
   },
@@ -23,15 +23,15 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        70
+        69
       ],
       [
         "modules/pages/admin/components/PagesList.jsx",
-        73
+        72
       ],
       [
         "modules/pages/admin/components/PagesList.jsx",
-        187
+        186
       ]
     ]
   },
@@ -39,11 +39,11 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        111
+        110
       ],
       [
         "modules/pages/admin/components/PagesList.jsx",
-        115
+        114
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        114
+        113
       ]
     ]
   },
@@ -59,7 +59,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        119
+        118
       ]
     ]
   },
@@ -67,7 +67,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        121
+        120
       ]
     ]
   },
@@ -75,11 +75,11 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        135
+        134
       ],
       [
         "modules/pages/admin/components/PagesList.jsx",
-        137
+        136
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        146
+        145
       ]
     ]
   },
@@ -95,7 +95,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        146
+        145
       ]
     ]
   },
@@ -103,7 +103,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        146
+        145
       ]
     ]
   },
@@ -111,7 +111,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        149
+        148
       ]
     ]
   },
@@ -119,7 +119,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        155
+        154
       ]
     ]
   },
@@ -127,7 +127,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        161
+        160
       ]
     ]
   },
@@ -135,7 +135,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        184
+        183
       ]
     ]
   },
@@ -143,7 +143,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        185
+        184
       ]
     ]
   },
@@ -151,7 +151,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        186
+        185
       ]
     ]
   },
@@ -159,7 +159,7 @@
     "origin": [
       [
         "modules/pages/admin/components/PagesList.jsx",
-        188
+        187
       ]
     ]
   }

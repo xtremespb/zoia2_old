@@ -39,3 +39,5 @@ node_modules/
 /shared/marko/template/index.marko
 /static/etc/config.json
 /etc/templates.json
+/shared/marko/template/available/tverichanin
+/static/custom

@@ -20,6 +20,6 @@
         "path": "/",
         "domain": "",
         "secure": false,
-        "sameSite": true
+        "sameSite": "strict"
     }
 }

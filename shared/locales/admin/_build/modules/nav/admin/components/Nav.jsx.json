@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        142
+        148
       ]
     ]
   },
@@ -11,11 +11,19 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        147
+        153
       ],
       [
         "modules/nav/admin/components/Nav.jsx",
-        211
+        223
+      ]
+    ]
+  },
+  "Navigation will be displayed in a template of your website.": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        171
       ]
     ]
   },
@@ -23,7 +31,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        167
+        179
       ]
     ]
   },
@@ -31,7 +39,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        168
+        180
       ]
     ]
   },
@@ -39,7 +47,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        169
+        181
       ]
     ]
   },
@@ -47,7 +55,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        170
+        182
       ]
     ]
   },
@@ -55,7 +63,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        185
+        197
       ]
     ]
   },
@@ -63,7 +71,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        207
+        219
       ]
     ]
   },
@@ -71,7 +79,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        208
+        220
       ]
     ]
   },
@@ -79,7 +87,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        209
+        221
       ]
     ]
   },
@@ -87,7 +95,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        210
+        222
       ]
     ]
   },
@@ -95,7 +103,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        212
+        224
       ]
     ]
   },
@@ -103,7 +111,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        213
+        225
       ]
     ]
   },
@@ -111,7 +119,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        214
+        226
       ]
     ]
   },
@@ -119,11 +127,11 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        223
+        235
       ],
       [
         "modules/nav/admin/components/Nav.jsx",
-        230
+        242
       ]
     ]
   }

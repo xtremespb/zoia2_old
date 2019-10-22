@@ -14,7 +14,7 @@
         "build-admin-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js --build:admin",
         "build-web": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js --build:web",
         "build-web-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js --build:web",
-        "build-api": "webpack ---display minimal -progress --mode production --config ./shared/build/webpack.config.js --build:api",
+        "build-api": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js --build:api",
         "build-api-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js --build:api",
         "build-tools": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js --build:tools",
         "build-tools-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js --build:tools",

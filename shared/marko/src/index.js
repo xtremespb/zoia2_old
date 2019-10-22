@@ -19,8 +19,8 @@ import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 
 (async () => {
-    const secure = await fs.readJSON(path.resolve(`../etc/secure.json`));
-    const config = await fs.readJSON(path.resolve(`../static/etc/config.json`));
+    const secure = await fs.readJSON(path.resolve(`${__dirname}/../etc/secure.json`));
+    const config = await fs.readJSON(path.resolve(`${__dirname}/../static/etc/config.json`));
     const log = Pino({
         level: secure.loglevel
     });

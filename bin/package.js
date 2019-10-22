@@ -38,7 +38,7 @@ output.on('close', () => {
         .replace(/{siteid}/igm, config.id)
         .replace(/{user}/igm, secure.user)
         .replace(/{group}/igm, secure.group)
-        .replace(/{path}/igm, path.resolve(`${__dirname}/../bin/api.js`).replace(/\\/gm, '/'));
+        .replace(/{path}/igm, path.resolve(`${__dirname}/../bin/web.js`).replace(/\\/gm, '/'));
     const rsyslogAPI = fs.readFileSync(`${__dirname}/../shared/templates/rsyslog.conf`, 'utf8')
         .replace(/{siteid}/igm, config.id)
         .replace(/{prefix}/igm, 'api')

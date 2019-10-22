@@ -8,6 +8,8 @@ const install = async db => {
     }, {
         $set: {
             path: '/',
+            filename: '',
+            fullPath: '/',
             data: {
                 en: {
                     title: 'Home Page',

@@ -292,6 +292,14 @@ const configWebClient = {
                 }
             }
         },
+        minimizer: [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: false,
+                extractComments: false,
+            })
+        ]
     },
     output: {
         filename: '[name].[contenthash:8].js',
@@ -359,6 +367,9 @@ const configWebServer = {
         path: path.join(__dirname, '../../bin'),
         filename: 'web.js',
         publicPath: '/data_user/',
+    },
+    node: {
+        __dirname: false
     },
     plugins: [
         new webpack.DefinePlugin({

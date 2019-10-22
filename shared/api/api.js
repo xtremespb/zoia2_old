@@ -15,8 +15,8 @@ import modules from '../build/modules.json';
 import logger from '../lib/logger';
 
 (async () => {
-    const secure = await fs.readJSON(path.resolve(`../etc/secure.json`));
-    const config = await fs.readJSON(path.resolve(`../static/etc/config.json`));
+    const secure = await fs.readJSON(path.resolve(`${__dirname}/../etc/secure.json`));
+    const config = await fs.readJSON(path.resolve(`${__dirname}/../static/etc/config.json`));
     const log = Pino({
         level: secure.loglevel
     });

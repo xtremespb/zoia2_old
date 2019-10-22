@@ -71,6 +71,9 @@ class Nav extends Component {
     onEditTreeItemButtonClick = e => {
         e.preventDefault();
         const folders = this.editNavForm.current.getValue('nav');
+        if (!folders || !folders.tree || !Object.keys(folders.tree).length) {
+            return;
+        }
         let item;
         this.loop(folders.tree, folders.selected[0], i => item = i);
         if (item) {
@@ -81,6 +84,9 @@ class Nav extends Component {
     onDeleteTreeItemButtonClick = async e => {
         e.preventDefault();
         const folders = this.editNavForm.current.getValue('nav');
+        if (!folders || !folders.tree || !Object.keys(folders.tree).length) {
+            return;
+        }
         (folders.selected && folders.selected.length ? folders.selected || [] : folders.checked.checked || []).map(key => folders.tree = this.loopFilter(folders.tree, key));
         folders.checked = [];
         folders.selected = [];
@@ -158,6 +164,12 @@ class Nav extends Component {
         i18n={i18n}
         data={
             [
+                {
+                    id: 'help',
+                    type: 'message',
+                    css: 'uk-margin-top uk-text-small',
+                    text: i18n._(t`Navigation will be displayed in a template of your website.`)
+                },
                 {
                     id: 'nav',
                     type: 'tree',
