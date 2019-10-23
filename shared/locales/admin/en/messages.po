@@ -238,9 +238,9 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: shared/react/Error/Error.jsx:59
-#~ msgid "Internal Error"
-#~ msgstr ""
+#: shared/react/Error/Error.jsx:54
+msgid "Internal Error"
+msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:97
 #: modules/nav/admin/components/Nav.jsx:220
@@ -271,6 +271,10 @@ msgstr ""
 #: modules/pages/admin/components/PagesList.jsx:183
 #: modules/users/admin/components/UsersList.jsx:194
 msgid "Loading data, please wait…"
+msgstr ""
+
+#: shared/react/AdminPanel/AdminPanel.jsx:106
+msgid "Log Out"
 msgstr ""
 
 #: modules/pages/admin/components/PagesEdit.jsx:245
@@ -311,6 +315,10 @@ msgstr ""
 
 #: modules/pages/admin/components/PagesList.jsx:148
 msgid "Page"
+msgstr ""
+
+#: shared/react/Error/Error.jsx:54
+msgid "Page not Found"
 msgstr ""
 
 #: modules/pages/admin/components/Translations.jsx:11

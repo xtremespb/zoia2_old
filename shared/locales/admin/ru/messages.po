@@ -238,9 +238,9 @@ msgstr "ID"
 msgid "Inactive"
 msgstr "Неактивен"
 
-#: shared/react/Error/Error.jsx:59
-#~ msgid "Internal Error"
-#~ msgstr "Внутренняя ошибка"
+#: shared/react/Error/Error.jsx:54
+msgid "Internal Error"
+msgstr "Внутренняя ошибка"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:97
 #: modules/nav/admin/components/Nav.jsx:220
@@ -272,6 +272,10 @@ msgstr "Лат. символы/_/-, длина: 4-32"
 #: modules/users/admin/components/UsersList.jsx:194
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
+
+#: shared/react/AdminPanel/AdminPanel.jsx:106
+msgid "Log Out"
+msgstr "Выйти"
 
 #: modules/pages/admin/components/PagesEdit.jsx:245
 msgid "Minifiy the HTML code displayed to the user"
@@ -313,9 +317,9 @@ msgstr "Операция выполнена"
 msgid "Page"
 msgstr "Страница"
 
-#: shared/react/Error/Error.jsx:59
-#~ msgid "Page not Found"
-#~ msgstr "Страница не найдена"
+#: shared/react/Error/Error.jsx:54
+msgid "Page not Found"
+msgstr "Страница не найдена"
 
 #: modules/pages/admin/components/Translations.jsx:11
 msgid "Page not found"
@@ -398,7 +402,7 @@ msgstr "Статус"
 
 #: modules/pages/admin/components/PagesEdit.jsx:234
 msgid "Template"
-msgstr ""
+msgstr "Шаблон"
 
 #: modules/pages/admin/components/DialogDelete.jsx:49
 msgid "The following page(s) will be permanently deleted:"

@@ -7,9 +7,9 @@ const uuid = require('uuid/v1');
 const path = require('path');
 
 const install = async () => {
-    const config = require('../shared/templates/config.json');
-    const secure = require('../shared/templates/secure.json');
-    const templates = require('../shared/templates/templates.json');
+    const config = require('../etc/source/config.json');
+    const secure = require('../etc/source/secure.json');
+    const templates = require('../etc/source/templates.json');
     const questions = [{
             type: 'input',
             name: 'ipAPI',

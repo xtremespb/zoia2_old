@@ -445,7 +445,7 @@ const linguiAdmin = {
     format: 'po'
 };
 const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
-linguiAdmin.srcPathDirs = ['shared/components/', ...linguiPathsArrAdmin];
+linguiAdmin.srcPathDirs = ['shared/react/', ...linguiPathsArrAdmin];
 console.log('Writing linguirc.admin.json...');
 fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
     spaces: 2

@@ -1,7 +1,7 @@
 {
   "localeDir": "shared/locales/admin",
   "srcPathDirs": [
-    "shared/components/",
+    "shared/react/",
     "modules/admin/admin/components/",
     "modules/core/admin/components/",
     "modules/nav/admin/components/",
