@@ -261,13 +261,6 @@ const configWebClient = {
                         loader: 'sass-loader'
                     }
                 ]
-            },
-            {
-                test: /\.(jpg|jpeg|gif|png)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: '../../static/data_user/assets'
-                }
             }
         ]
     },
@@ -339,13 +332,6 @@ const configWebServer = {
                     'css-loader',
                     'sass-loader',
                 ],
-            },
-            {
-                test: /\.(jpg|jpeg|gif|png)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: '../../static/data_user/assets'
-                }
             }
         ]
     },
