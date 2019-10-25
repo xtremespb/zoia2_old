@@ -41,3 +41,5 @@ node_modules/
 /etc/templates.json
 /shared/marko/template/available/tverichanin
 /static/custom
+/etc/server
+/dist
