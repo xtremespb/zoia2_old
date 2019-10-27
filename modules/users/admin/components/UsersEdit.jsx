@@ -203,6 +203,7 @@ class UsersEdit extends Component {
                     this.props.appDataRuntimeSetDocumentTitleAction(i18n._(this.props.match.params.id ? 'Edit User' : 'Create User'), this.props.appData.language, this.props.appDataRuntime.config.siteTitle);
                     return (<>
                         <div className="uk-title-head uk-margin-bottom">{this.props.match.params.id ? <Trans>Edit User</Trans> : <Trans>Create User</Trans>}</div>
+                        {this.props.appDataRuntime.config ? <div className="uk-alert-warning" uk-alert="true"><Trans>This website is currently running in demo mode. Your changes to the <strong>admin</strong> user account, root page, navigation etc. won&apos;t be actually saved to the database, and you won&apos;t get any errors because of that. File or image uploads are disabled, too.</Trans></div> : null}
                         {this.state.loadingError ? <div className="uk-alert-danger" uk-alert="true">
                             <Trans>Could not load data from server. Please check your URL or try to <a href="" onClick={this.reloadEditFormData}>reload</a> data.</Trans>
                         </div> : this.getEditForm(i18n)}

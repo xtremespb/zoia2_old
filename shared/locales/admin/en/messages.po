@@ -101,7 +101,7 @@ msgid "Could not load data from server"
 msgstr ""
 
 #: modules/pages/admin/components/PagesEdit.jsx:333
-#: modules/users/admin/components/UsersEdit.jsx:207
+#: modules/users/admin/components/UsersEdit.jsx:208
 msgid "Could not load data from server. Please check your URL or try to <0>reload</0> data."
 msgstr ""
 
@@ -410,6 +410,10 @@ msgstr ""
 
 #: modules/users/admin/components/DialogDelete.jsx:49
 msgid "The following user(s) will be permanently deleted:"
+msgstr ""
+
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid "This website is currently running in demo mode. Your changes to the <0>admin</0> user account, root page, navigation etc. won't be actually saved to the database, and you won't get any errors because of that. File or image uploads are disabled, too."
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:91

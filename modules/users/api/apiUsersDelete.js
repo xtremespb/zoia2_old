@@ -57,6 +57,19 @@ export default fastify => ({
             const query = req.body.ids.map(id => ({
                 _id: new ObjectId(id)
             }));
+            if (fastify.zoiaConfig.demo) {
+                const users = await this.mongo.db.collection('users').find({
+                    $or: query
+                }).toArray();
+                let thereIsAdmin;
+                users.map(u => thereIsAdmin = thereIsAdmin || u.username.match(/admin/i));
+                if (thereIsAdmin) {
+                    return rep.code(200)
+                        .send(JSON.stringify({
+                            statusCode: 200
+                        }));
+                }
+            }
             const result = await this.mongo.db.collection('users').deleteMany({
                 $or: query
             });

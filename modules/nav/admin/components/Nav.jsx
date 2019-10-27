@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { lazy, Component } from 'react';
-import { t } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { I18n } from '@lingui/react';
 import { connect } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
@@ -240,6 +240,7 @@ class Nav extends Component {
                             onSaveButtonClickHandler={this.onSaveFolderClickHandler}
                         />
                         <div className="uk-title-head uk-margin-bottom">{i18n._(t`Navigation`)}</div>
+                        {this.props.appDataRuntime.config ? <div className="uk-alert-warning" uk-alert="true"><Trans>This website is currently running in demo mode. Your changes to the <strong>admin</strong> user account, root page, navigation etc. won&apos;t be actually saved to the database, and you won&apos;t get any errors because of that. File or image uploads are disabled, too.</Trans></div> : null}
                         <div className="uk-margin-top">{this.getEditForm(i18n)}</div>
                     </>);
                 }}

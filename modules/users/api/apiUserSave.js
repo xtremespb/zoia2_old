@@ -204,6 +204,12 @@ export default fastify => ({
                         }
                     }));
             }
+            if (fastify.zoiaConfig.demo) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 200
+                    }));
+            }
             // Update database
             const update = await this.mongo.db.collection('users').updateOne(formData.id ? {
                 _id: new ObjectId(formData.id)

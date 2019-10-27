@@ -179,6 +179,12 @@ export default fastify => ({
             });
             pageData.fullPath = `${pageData.path.length > 1 ? pageData.path : ''}/${pageData.filename}`;
             pageData.fullPath = pageData.fullPath.length > 1 ? pageData.fullPath.replace(/\/$/, '') : pageData.fullPath;
+            if (fastify.zoiaConfig.demo && pageData.fullPath === '/') {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 200
+                    }));
+            }
             // Update page
             const update = await this.mongo.db.collection('pages').updateOne(id ? {
                 _id: new ObjectId(id)

@@ -390,7 +390,7 @@ const rebuildMarkoTemplates = () => {
     const root = `<!-- This file is auto-generated, do not modify -->\n${templates.available.map(t => `<if(out.global.template === "${t}")><${t}><\${input.renderBody}/></${t}></if>\n`).join('')}`; // ${config.useUIkitOnFrontend ? 'style.scss { @import "../../styles/uikit.scss"; }\n' : ''}
     fs.writeFileSync(path.resolve(`${__dirname}/../marko/error404/index.marko`), error404);
     fs.writeFileSync(path.resolve(`${__dirname}/../marko/error500/index.marko`), error500);
-    fs.writeFileSync(path.resolve(`${__dirname}/../marko/template/index.marko`), root);
+    fs.writeFileSync(path.resolve(`${__dirname}/../marko/templates/index.marko`), root);
 };
 
 console.log(`This tool will build Zoia for you.`);

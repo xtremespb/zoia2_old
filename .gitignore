@@ -36,10 +36,10 @@ node_modules/
 /shared/marko/error404/index.marko
 /shared/marko/error500/index.marko
 /dist/zoia/*.zip
-/shared/marko/template/index.marko
+/shared/marko/templates/index.marko
 /static/etc/config.json
 /etc/templates.json
-/shared/marko/template/available/tverichanin
+/shared/marko/templates/available/tverichanin
 /static/custom
 /etc/server
 /dist

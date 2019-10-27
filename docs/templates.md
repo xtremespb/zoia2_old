@@ -2,7 +2,7 @@
 
 Zoia uses Marko as a templating system. All frontend pages are rendered on a server-side so your website will be fully parseable by search engines.
 
-The default template ("zoia") is a good example on how to build your own templates. To add a new template, create a directory under *shared/marko/template/available* and put at least the following files there:
+The default template ("zoia") is a good example on how to build your own templates. To add a new template, create a directory under *shared/marko/templates/available* and put at least the following files there:
 
 * *index.marko*: a main file of your template
 * *marko.json*: a JSON file which contains settings to build Marko templates, e.g.:

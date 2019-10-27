@@ -96,6 +96,12 @@ export default fastify => ({
             } = formData.default.nav;
             // eslint-disable-next-line no-param-reassign
             loop(tree, item => delete item.title);
+            if (fastify.zoiaConfig.demo) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 200
+                    }));
+            }
             const update = await this.mongo.db.collection('registry').updateOne({
                 _id: 'nav_folder_tree'
             }, {

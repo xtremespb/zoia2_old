@@ -36,6 +36,13 @@ export default fastify => ({
         }
         // End of check permissions
         try {
+            if (fastify.zoiaConfig.demo) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 200,
+                        url: `/zoia/logo_dark.png`
+                    }));
+            }
             await fs.ensureDir(`${__dirname}/../static/uploads`);
             const filename = uuid();
             const img = await Jimp.read(req.body.upload[0].data);
