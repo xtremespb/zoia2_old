@@ -122,6 +122,13 @@ export default fastify => ({
                     }));
                 }
             }
+            if (fastify.zoiaConfig.demo && userRecord[req.body.columnId].match(/admin/i)) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 200,
+                        value: 'admin'
+                    }));
+            }
             // Update if value mismatches
             if (userRecord[req.body.columnId] !== value) {
                 const update = {};

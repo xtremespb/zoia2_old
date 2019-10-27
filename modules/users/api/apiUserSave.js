@@ -147,10 +147,10 @@ export default fastify => ({
             }
             // Check if such user exists
             if (formData.id) {
-                const username = await this.mongo.db.collection('users').findOne({
+                const userDB = await this.mongo.db.collection('users').findOne({
                     _id: new ObjectId(formData.id)
                 });
-                if (!username) {
+                if (!userDB) {
                     return rep.code(200)
                         .send(JSON.stringify({
                             statusCode: 400,
@@ -159,6 +159,12 @@ export default fastify => ({
                                     username: 'User not found'
                                 }
                             }
+                        }));
+                }
+                if (fastify.zoiaConfig.demo && userDB.username.match(/admin/i)) {
+                    return rep.code(200)
+                        .send(JSON.stringify({
+                            statusCode: 200
                         }));
                 }
             }
@@ -202,12 +208,6 @@ export default fastify => ({
                                 email: 'Duplicate e-mail'
                             }
                         }
-                    }));
-            }
-            if (fastify.zoiaConfig.demo) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 200
                     }));
             }
             // Update database
