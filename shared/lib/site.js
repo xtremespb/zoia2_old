@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import auth from './auth';
 import locale from './locale';
 import catalogs from '../utils/lingui-catalogs-node';
 
@@ -19,8 +18,8 @@ const loopPath = (data, keyPath, language, callback, path = [], pathData = []) =
 });
 
 export default {
-    getSiteData: async (req, fastify, db, page) => {
-        const user = await auth.getUserData(req, fastify, db);
+    getSiteData: async (req, fastify, page, folders, nav) => {
+        // const user = await auth.getUserData(req, fastify, db);
         const languagesArr = Object.keys(fastify.zoiaConfig.languages);
         const {
             languages
@@ -30,14 +29,8 @@ export default {
         const t = catalogs(language);
         const title = locale.getSiteTitle(language, req);
         const languagesURL = {};
-        const navDB = await db.collection('registry').findOne({
-            _id: 'nav_folder_tree'
-        });
-        const pagesFolderDB = await db.collection('registry').findOne({
-            _id: 'pages_folder_tree'
-        });
         let breadcrumbsHTML = '';
-        if (pagesFolderDB && pagesFolderDB.data && page) {
+        if (folders && folders.data && page) {
             const {
                 url
             } = locale.getNonLocalizedURL(req);
@@ -45,7 +38,7 @@ export default {
             if (page.filename && urlParts.length && urlParts[urlParts.length - 1] === page.filename) {
                 urlParts.pop();
             }
-            loopPath(pagesFolderDB.data, urlParts.join('/'), language, breadcrumbsData => {
+            loopPath(folders.data, urlParts.join('/'), language, breadcrumbsData => {
                 let breadcrumbsCurrentPath = '';
                 breadcrumbsHTML = breadcrumbsData.map(b => {
                     const bu = b;
@@ -56,7 +49,7 @@ export default {
             });
         }
         breadcrumbsHTML = `<li><a href="${languagePrefixURL || '/'}">${title}</a></li>${breadcrumbsHTML}`;
-        const navTree = (navDB ? navDB.data || [] : []).map(i => {
+        const navTree = (nav ? nav.data || [] : []).map(i => {
             const item = i;
             item.url = item.url.match(/^http/) ? item : `${languagePrefixURL}${item.url}`;
             return item;
@@ -64,7 +57,6 @@ export default {
         languagesArr.map(lang => languagesURL[lang] = locale.getLocaleURL(lang, req));
         return {
             navTree,
-            user,
             language,
             languagePrefixURL,
             languages,

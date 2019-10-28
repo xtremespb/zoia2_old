@@ -22,8 +22,8 @@ export default {
     },
     getUserData: async (req, fastify, db) => {
         try {
-            if (req.cookies[`${fastify.zoiaConfigid}_auth`] && db) {
-                const token = req.cookies[`${fastify.zoiaConfigid}_auth`];
+            if (req.cookies[`${fastify.zoiaConfig.id}_auth`] && db) {
+                const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
                 const decodedToken = fastify.jwt.decode(token);
                 if (!decodedToken || !decodedToken.userId || !decodedToken.sessionId || Math.floor(Date.now() / 1000) > decodedToken.exp) {
                     return {};

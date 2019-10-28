@@ -1,3 +1,4 @@
+import axios from 'axios';
 import template from './template.marko';
 import site from '../../../../shared/lib/site';
 import locale from '../../../../shared/lib/locale';
@@ -11,17 +12,35 @@ export default fastify => ({
                     url,
                     language
                 } = locale.getNonLocalizedURL(req);
-                const page = await this.mongo.db.collection('pages').findOne({
-                    fullPath: url
+                const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
+                const apiDataQuery = {
+                    url,
+                    token,
+                    language,
+                    folders: true,
+                    nav: true,
+                    user: true
+                };
+                const apiData = await axios.post(`${fastify.zoiaConfig.api.url}/api/page/find`, apiDataQuery, {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
                 });
-                if (!page || !page.data || !page.data[language]) {
+                if (!apiData || !apiData.data || !apiData.data.page || apiData.data.statusCode !== 200) {
                     rep.callNotFound();
                     return rep.code(204);
                 }
-                const siteData = await site.getSiteData(req, fastify, this.mongo.db, page);
-                siteData.title = `${page.data[language].title} | ${siteData.title}`;
+                const {
+                    page,
+                    nav,
+                    folders,
+                    user
+                } = apiData.data;
+                const siteData = await site.getSiteData(req, fastify, page, folders, nav);
+                siteData.title = `${page.current.title} | ${siteData.title}`;
+                siteData.user = user || {};
                 const render = (await template.render({
-                    content: page.data[language].contentCompiled || page.data[language].content,
+                    content: page.current.contentCompiled || page.current.content,
                     $global: {
                         siteData,
                         t: siteData.t,
@@ -34,6 +53,7 @@ export default fastify => ({
             rep.callNotFound();
             return rep.code(204);
         } catch (e) {
+            console.log(e);
             return Promise.reject(e);
         }
     }

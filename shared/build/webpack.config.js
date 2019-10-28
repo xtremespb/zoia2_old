@@ -14,6 +14,8 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const templates = require(`${__dirname}/../../etc/templates.json`);
 const markoPlugin = new MarkoPlugin();
 
+const config = require('../../static/etc/config.json');
+
 const configTools = {
     name: 'Tools',
     entry: {
@@ -385,11 +387,7 @@ const cleanUpWeb = () => {
 
 const rebuildMarkoTemplates = () => {
     console.log('Re-building Marko templates...');
-    const error404 = `<!-- This file is auto-generated, do not modify -->\n${fs.readFileSync(path.resolve(`${__dirname}/../templates/error404.marko`), 'utf8').replace(/<!-- <default_template> -->/gm, `<${templates.available[0]}>`).replace(/<!-- <\/default_template> -->/gm, `</${templates.available[0]}>`)}`;
-    const error500 = `<!-- This file is auto-generated, do not modify -->\n${fs.readFileSync(path.resolve(`${__dirname}/../templates/error500.marko`), 'utf8').replace(/<!-- <default_template> -->/gm, `<${templates.available[0]}>`).replace(/<!-- <\/default_template> -->/gm, `</${templates.available[0]}>`)}`;
-    const root = `<!-- This file is auto-generated, do not modify -->\n${templates.available.map(t => `<if(out.global.template === "${t}")><${t}><\${input.renderBody}/></${t}></if>\n`).join('')}`; // ${config.useUIkitOnFrontend ? 'style.scss { @import "../../styles/uikit.scss"; }\n' : ''}
-    fs.writeFileSync(path.resolve(`${__dirname}/../marko/error404/index.marko`), error404);
-    fs.writeFileSync(path.resolve(`${__dirname}/../marko/error500/index.marko`), error500);
+    const root = `<!-- This file is auto-generated, do not modify -->\n${config.useUIkitOnFrontend ? 'style.scss { @import "../../styles/uikit.scss"; }\n' : ''}${templates.available.map(t => `<if(out.global.template === "${t}")><${t}><\${input.renderBody}/></${t}></if>\n`).join('')}`;
     fs.writeFileSync(path.resolve(`${__dirname}/../marko/templates/index.marko`), root);
 };
 

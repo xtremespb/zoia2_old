@@ -1,5 +1,5 @@
 import apiPageView from './apiPageView';
-// import apiPageFind from './apiPageFind';
+import apiPageFind from './apiPageFind';
 import apiPageLoad from './apiPageLoad';
 import apiPageSave from './apiPageSave';
 import apiPagesDelete from './apiPagesDelete';
@@ -9,7 +9,7 @@ import apiSaveFolderTree from './apiSaveFolderTree';
 import apiUploadImage from './apiUploadImage';
 
 export default fastify => {
-    // fastify.post('/api/page/find', apiPageFind(fastify));
+    fastify.post('/api/page/find', apiPageFind(fastify));
     fastify.post('/api/page/view', apiPageView(fastify));
     fastify.post('/api/pages/list', apiPagesList(fastify));
     fastify.post('/api/pages/load', apiPageLoad(fastify));
