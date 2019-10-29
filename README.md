@@ -12,3 +12,5 @@ Zoia is the content management system based on Fastify, React, Redux, Marko, UIk
 * Built using Webpack
 
 Read the [documentation](docs/index.md) on how to configure, install etc.
+
+Demo (*is being reset to defaults every single hour!*): [https://demo.zoiajs.org](https://demo.zoiajs.org), Admin panel: [https://demo.zoiajs.org/admin](https://demo.zoiajs.org/admin) (use admin/password to authorize).
