@@ -13,40 +13,14 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-# ~ msgid "Internal Error"
-# ~ msgstr ""
-#: shared/react/Error/Error.jsx:59
-#: modules/nav/admin/components/DialogNavEdit.jsx:98
-#: modules/nav/admin/components/Nav.jsx:210
-#: modules/pages/admin/components/DialogFolder.jsx:189
-#: modules/pages/admin/components/DialogFolderEdit.jsx:101
-#: modules/pages/admin/components/PagesEdit.jsx:277
-#: modules/pages/admin/components/PagesList.jsx:70
-#: modules/pages/admin/components/PagesList.jsx:192
-#: modules/users/admin/components/UserAuth.jsx:154
-#: modules/users/admin/components/UsersEdit.jsx:168
-#: modules/users/admin/components/UsersList.jsx:70
-#: modules/users/admin/components/UsersList.jsx:203
-msgid "Invalid format"
+#: shared/react/Error/Error.jsx:54
+msgid "Internal Error"
 msgstr ""
 
-# ~ msgid "Loading site configuration..."
-# ~ msgstr ""
-#: shared/react/AdminPanel/AdminPanel.jsx:151
-#: modules/users/admin/components/UserAuth.jsx:167
-msgid "Loading site configuration…"
+#: shared/react/AdminPanel/AdminPanel.jsx:106
+msgid "Log Out"
 msgstr ""
 
-# ~ msgid "Log Out"
-# ~ msgstr ""
-#: shared/react/AdminPanel/AdminPanel.jsx:109
-#: modules/pages/admin/components/PagesEdit.jsx:231
-msgid "Minifiy the HTML code displayed to the user"
-msgstr ""
-
-# ~ msgid "Page not Found"
-# ~ msgstr ""
-#: shared/react/Error/Error.jsx:59
-#: modules/pages/admin/components/Translations.jsx:11
-msgid "Page not found"
+#: shared/react/Error/Error.jsx:54
+msgid "Page not Found"
 msgstr ""

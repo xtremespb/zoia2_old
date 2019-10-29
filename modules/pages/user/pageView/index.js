@@ -53,7 +53,6 @@ export default fastify => ({
             rep.callNotFound();
             return rep.code(204);
         } catch (e) {
-            console.log(e);
             return Promise.reject(e);
         }
     }

@@ -31,6 +31,10 @@ const optionDefinitions = [{
     name: 'cleanup',
     alias: 'd',
     type: Boolean
+}, {
+    name: 'silent',
+    alias: 'f',
+    type: Boolean
 }];
 const options = commandLineArgs(optionDefinitions);
 
@@ -169,7 +173,9 @@ const install = async () => {
         console.log(`This tool will run the module installation scripts.`);
         console.log(`Modules available: ${modules.join(', ')}`);
         console.log('');
-        const data = await inquirer.prompt(questions);
+        const data = options.silent ? {
+            install: 'All'
+        } : (await inquirer.prompt(questions));
         console.log('');
         const mongoClient = new MongoClient(secure.mongo.url, {
             useNewUrlParser: true,
@@ -279,7 +285,9 @@ const defaults = async () => {
         console.log(`This tool will set default values and settings for modules.`);
         console.log(`Modules available: ${modules.join(', ')}`);
         console.log('');
-        const data = await inquirer.prompt(questions);
+        const data = options.silent ? {
+            install: 'All'
+        } : (await inquirer.prompt(questions));
         console.log('');
         const mongoClient = new MongoClient(secure.mongo.url, {
             useNewUrlParser: true,
