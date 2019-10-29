@@ -868,7 +868,7 @@ export default class ZFormBuilder extends Component {
                 console.error(e);
                 this.setState({ loading: false });
                 if (this.props.onLoadError && typeof this.props.onLoadError === 'function') {
-                    this.props.onLoadError();
+                    this.props.onLoadError(e && e.response ? e.response : null);
                 } else {
                     this.props.UIkit.notification(this.props.i18n._(this.props.lang.ERR_LOAD), { status: 'danger' });
                 }

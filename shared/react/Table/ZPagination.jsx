@@ -6,6 +6,7 @@ export default class ZTablePagination extends Component {
     handleChange = event => {
         event.preventDefault();
         const page = parseInt(event.currentTarget.getAttribute('data-page'), 10);
+        // eslint-disable-next-line no-console
         this.props.pageClickHandler && typeof this.props.pageClickHandler === 'function' ? this.props.pageClickHandler(page) : console.log('No handleChange() for Pagination component is set');
     }
 

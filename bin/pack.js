@@ -32,6 +32,8 @@ const packAPI = () => {
     ['templates.json', 'secure.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
         name: `etc/${f}`
     }));
+    archive.directory(`${__dirname}/../logs`, 'logs');
+    archive.directory(`${__dirname}/../etc/source`, 'etc/source');
     archive.directory(`${__dirname}/../static/etc`, 'static/etc');
     archive.directory(`${__dirname}/../static/uploads`, 'static/uploads');
     ['api.js', 'tools.js', 'server-config.js'].map(f => archive.file(`${__dirname}/../bin/${f}`, {
@@ -63,6 +65,8 @@ const packAdmin = () => {
     ['templates.json', 'secure.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
         name: `etc/${f}`
     }));
+    archive.directory(`${__dirname}/../logs`, 'logs');
+    archive.directory(`${__dirname}/../etc/source`, 'etc/source');
     archive.directory(`${__dirname}/../static/data_admin`, 'static/data_admin');
     archive.directory(`${__dirname}/../static/etc`, 'static/etc');
     archive.directory(`${__dirname}/../static/zoia`, 'static/zoia');
@@ -89,6 +93,8 @@ const packWeb = () => {
     ['templates.json', 'secure.json'].map(f => archive.file(`${__dirname}/../etc/${f}`, {
         name: `etc/${f}`
     }));
+    archive.directory(`${__dirname}/../logs`, 'logs');
+    archive.directory(`${__dirname}/../etc/source`, 'etc/source');
     archive.directory(`${__dirname}/../static/data_user`, 'static/data_user');
     archive.directory(`${__dirname}/../static/etc`, 'static/etc');
     archive.directory(`${__dirname}/../static/zoia`, 'static/zoia');

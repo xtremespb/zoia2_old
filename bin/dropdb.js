@@ -40,12 +40,12 @@ const dropDb = async () => {
         const db = mongoClient.db(secure.mongo.dbName);
         const collections = await db.listCollections().toArray();
         if (!collections || !collections.length) {
-            console.log('\nNo collections found.')
+            console.log('\nNo collections found.');
         }
         await Promise.all(collections.map(async c => {
             console.log(`Dropping collection ${c.name}...`);
             await db.collection(c.name).drop();
-            console.log(`Collection ${c.name} is dropped.`)
+            console.log(`Collection ${c.name} is dropped.`);
         }));
         console.log('All done.');
         mongoClient.close();

@@ -6,7 +6,6 @@ export default {
     verifyToken: async (token, fastify, db) => {
         try {
             const decodedToken = fastify.jwt.verify(token);
-            console.log(decodedToken);
             if (!decodedToken || !decodedToken.userId || !decodedToken.sessionId || Math.floor(Date.now() / 1000) > decodedToken.exp) {
                 return null;
             }

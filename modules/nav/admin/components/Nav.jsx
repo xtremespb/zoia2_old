@@ -13,6 +13,8 @@ import { history } from '../../../../shared/store/configureStore';
 import DialogNavEdit from './DialogNavEdit.jsx';
 import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
 import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../shared/actions/appDataSetUser';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
@@ -226,6 +228,16 @@ class Nav extends Component {
             CANCEL: t`Cancel`
         }}
         onSaveSuccess={res => this.onSaveSuccessHandler(res, i18n)}
+        onLoadError={res => {
+            if (res && res.data && res.data.statusCode === 403) {
+                this.deauthorize();
+            } else {
+                UIkit.notification({
+                    message: i18n._(t`Could not load data from server`),
+                    status: 'danger'
+                });
+            }
+        }}
     />);
 
     render = () => (
@@ -240,7 +252,7 @@ class Nav extends Component {
                             onSaveButtonClickHandler={this.onSaveFolderClickHandler}
                         />
                         <div className="uk-title-head uk-margin-bottom">{i18n._(t`Navigation`)}</div>
-                        {this.props.appDataRuntime.config ? <div className="uk-alert-warning" uk-alert="true"><Trans>This website is currently running in demo mode. Your changes to the <strong>admin</strong> user account, root page, navigation etc. won&apos;t be actually saved to the database, and you won&apos;t get any errors because of that. File or image uploads are disabled, too.</Trans></div> : null}
+                        {this.props.appDataRuntime.config.demo ? <div className="uk-alert-warning" uk-alert="true"><Trans>This website is currently running in demo mode. Your changes to the <strong>admin</strong> user account, root page, navigation etc. won&apos;t be actually saved to the database, and you won&apos;t get any errors because of that. File or image uploads are disabled, too.</Trans></div> : null}
                         <div className="uk-margin-top">{this.getEditForm(i18n)}</div>
                     </>);
                 }}
@@ -256,6 +268,8 @@ export default connect(store => ({
     usersList: store.usersList
 }),
     dispatch => ({
+        appDataSetUserAction: user => dispatch(appDataSetUser(user)),
+        appDataRuntimeSetTokenAction: token => dispatch(appDataRuntimeSetToken(token)),
         appLinguiSetCatalogAction: (language, catalog) => dispatch(appLinguiSetCatalog(language, catalog)),
         appDataRuntimeSetDocumentTitleAction: (documentTitle, language, siteTitle) => dispatch(appDataRuntimeSetDocumentTitle(documentTitle, language, siteTitle))
     }))(Nav);

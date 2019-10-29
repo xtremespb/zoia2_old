@@ -1,6 +1,6 @@
 {
   "name": "zoia2",
-  "version": "1.0.0",
+  "version": "2.0.4",
   "description": "Zoia CMS",
   "main": "bin/api.js",
   "repository": {
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js",
+    "release": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js --do:release",
     "build-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js",
     "build-admin": "webpack --display minimal --progress --mode production --config ./shared/build/webpack.config.js --build:admin",
     "build-admin-dev": "webpack --display minimal --progress --mode development --config ./shared/build/webpack.config.js --build:admin",
