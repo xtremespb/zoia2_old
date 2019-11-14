@@ -1,5 +1,5 @@
-// import markoTest from './markoTest';
+import auth from './auth';
 
-export default () => { // fastify
-    // fastify.post('/', markoTest(fastify));
+export default fastify => {
+    fastify.get('/users/auth', auth(fastify));
 };

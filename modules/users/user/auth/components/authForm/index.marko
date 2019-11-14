@@ -1,0 +1,47 @@
+class {
+  onSaveError(res) {
+    this.getComponent("zf1").setErrorMessage("Could not authorize");
+  }
+}
+
+<div>
+  <zoiaForm key="zf1" data=[
+    [
+      {
+        id: "username",
+        type: "text",
+        label: `${input.t["Username"]}:`,
+        css: "uk-input uk-form-width-medium",
+        helpText: input.t["Latin characters and numbers"],
+        mandatory: true,
+        pattern: "^[a-zA-Z0-9_-]{4,32}$",
+        autoFocus: true
+      },
+      {
+        id: "password",
+        type: "text",
+        label: input.t["Password"],
+        css: "uk-input uk-form-width-medium",
+        textType: "password",
+        pattern: "^(.){8,64}$",
+        mandatory: true
+      }
+    ],
+    {
+      id: "btn1",
+      type: "button",
+      label: "Button 1",
+      buttonType: "submit",
+      css: "uk-button uk-button-primary"
+    }
+  ] i18n={
+    ERR_MANDATORY: "Mandatory field",
+    ERR_FORMAT: "Invalid format",
+    ERR_SHOULD_MATCH: "Does not match"
+  } save={
+    url: "http://127.0.0.1:3000/api/users/login",
+    extras: {
+      hello: "World"
+    }
+  }/>
+</div>

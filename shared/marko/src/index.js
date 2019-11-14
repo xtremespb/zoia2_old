@@ -78,9 +78,8 @@ import templates from '../../../etc/templates.json';
                 // Ignore
             }
             const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
-            siteData.user = siteMeta.user;
+            siteData.user = siteMeta.user || {};
             siteData.title = `${siteData.t['Not Found']} | ${siteData.title}`;
-            siteData.user = {};
             const render = await error404.render({
                 $global: {
                     siteData,

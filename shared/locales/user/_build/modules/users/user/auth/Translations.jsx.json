@@ -1,0 +1,34 @@
+{
+  "Authorize": {
+    "origin": [
+      [
+        "modules/users/user/auth/Translations.jsx",
+        8
+      ]
+    ]
+  },
+  "Latin characters and numbers": {
+    "origin": [
+      [
+        "modules/users/user/auth/Translations.jsx",
+        9
+      ]
+    ]
+  },
+  "Username": {
+    "origin": [
+      [
+        "modules/users/user/auth/Translations.jsx",
+        10
+      ]
+    ]
+  },
+  "Password": {
+    "origin": [
+      [
+        "modules/users/user/auth/Translations.jsx",
+        11
+      ]
+    ]
+  }
+}

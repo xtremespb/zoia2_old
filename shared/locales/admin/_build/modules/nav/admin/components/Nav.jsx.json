@@ -3,7 +3,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        148
+        150
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        153
+        155
       ],
       [
         "modules/nav/admin/components/Nav.jsx",
-        223
+        225
       ]
     ]
   },
@@ -23,7 +23,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        171
+        173
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        179
+        181
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        180
+        182
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        181
+        183
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        182
+        184
       ]
     ]
   },
@@ -63,7 +63,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        197
+        199
       ]
     ]
   },
@@ -71,7 +71,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        219
+        221
       ]
     ]
   },
@@ -79,7 +79,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        220
+        222
       ]
     ]
   },
@@ -87,7 +87,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        221
+        223
       ]
     ]
   },
@@ -95,7 +95,11 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        222
+        224
+      ],
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        236
       ]
     ]
   },
@@ -103,7 +107,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        224
+        226
       ]
     ]
   },
@@ -111,7 +115,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        225
+        227
       ]
     ]
   },
@@ -119,7 +123,7 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        226
+        228
       ]
     ]
   },
@@ -127,11 +131,19 @@
     "origin": [
       [
         "modules/nav/admin/components/Nav.jsx",
-        235
+        247
       ],
       [
         "modules/nav/admin/components/Nav.jsx",
-        242
+        254
+      ]
+    ]
+  },
+  "This website is currently running in demo mode. Your changes to the <0>admin</0> user account, root page, navigation etc. won't be actually saved to the database, and you won't get any errors because of that. File or image uploads are disabled, too.": {
+    "origin": [
+      [
+        "modules/nav/admin/components/Nav.jsx",
+        255
       ]
     ]
   }

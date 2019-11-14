@@ -26,28 +26,30 @@ style {
       <nav class="uk-navbar-container za-navbar-container uk-navbar za-navbar" uk-navbar="offset:0;mode:click">
         <div class="uk-navbar-left za-navbar-left">
           <ul class="uk-navbar-nav za-navbar-nav">
-            <for|item, index| of=out.global.siteData.navTree>
-              <if(item.data[out.global.siteData.language] && item.data[out.global.siteData.language].title)>
-                <li>
-                  <a href=item.url key=item.key>
-                    ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>&nbsp;&#x25BE;</if>
-                  </a>
-                  <if(item.children && item.children.length)>
-                    <div class="uk-navbar-dropdown">
-                      <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <for|child, index| of=item.children>
-                          <if(child.data[out.global.siteData.language] && child.data[out.global.siteData.language].title)>
-                            <li>
-                              <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
-                            </li>
-                          </if>
-                        </for>
-                      </ul>
-                    </div>
-                  </if>
-                </li>
-              </if>
-            </for>
+            <if(out.global.siteData.navTree)>
+              <for|item, index| of=out.global.siteData.navTree>
+                <if(item.data[out.global.siteData.language] && item.data[out.global.siteData.language].title)>
+                  <li>
+                    <a href=item.url key=item.key>
+                      ${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}<if(item.children && item.children.length)>&nbsp;&#x25BE;</if>
+                    </a>
+                    <if(item.children && item.children.length)>
+                      <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                          <for|child, index| of=item.children>
+                            <if(child.data[out.global.siteData.language] && child.data[out.global.siteData.language].title)>
+                              <li>
+                                <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                              </li>
+                            </if>
+                          </for>
+                        </ul>
+                      </div>
+                    </if>
+                  </li>
+                </if>
+              </for>
+            </if>
           </ul>
         </div>
         <div class="uk-navbar-right za-navbar-right">
@@ -70,11 +72,13 @@ style {
               </a>
               <div class="uk-navbar-dropdown">
                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                  <for|language, index| of=out.global.siteData.languagesArr>
-                    <li>
-                      <a href=out.global.siteData.languagesURL[language]>${out.global.siteData.languages[language]}</a>
-                    </li>
-                  </for>
+                  <if(out.global.siteData.languagesArr)>
+                    <for|language, index| of=out.global.siteData.languagesArr>
+                      <li>
+                        <a href=out.global.siteData.languagesURL[language]>${out.global.siteData.languages[language]}</a>
+                      </li>
+                    </for>
+                  </if>
                 </ul>
               </div>
             </li>
@@ -85,7 +89,8 @@ style {
         <${input.renderBody}/>
       </div>
       <div class="uk-text-muted uk-text-small uk-margin-top uk-margin-bottom za-footer">
-        <a href="https://github.com/xtremespb/zoia2" class="uk-link-text" target="_blank">Zoia CMS</a> &copy; 2019 Michael A. Matveev,
+        <a href="https://github.com/xtremespb/zoia2" class="uk-link-text" target="_blank">Zoia CMS</a>
+        &copy; 2019 Michael A. Matveev,
         <a href="https://opensource.org/licenses/MIT" class="uk-link-text" target="_blank">MIT license</a>.
       </div>
     </div>
@@ -93,26 +98,30 @@ style {
     <div id="za_mobile_nav" uk-offcanvas="overlay: true">
       <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
-          <for|language, index| of=out.global.siteData.languagesArr>
-            <li>
-              <a href=out.global.siteData.languagesURL[language]>${out.global.siteData.languages[language]}</a>
-            </li>
-          </for>
+          <if(out.global.siteData.languagesArr)>
+            <for|language, index| of=out.global.siteData.languagesArr>
+              <li>
+                <a href=out.global.siteData.languagesURL[language]>${out.global.siteData.languages[language]}</a>
+              </li>
+            </for>
+          </if>
           <li class="uk-nav-divider"/>
-          <for|item, index| of=out.global.siteData.navTree>
-            <li class=`${item.children ? "uk-parent" : ""}`>
-              <a href=item.url key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
-              <if(item.children && item.children.length)>
-                <ul class="uk-nav-sub">
-                  <for|child, index| of=item.children>
-                    <li>
-                      <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
-                    </li>
-                  </for>
-                </ul>
-              </if>
-            </li>
-          </for>
+          <if(out.global.siteData.navTree)>
+            <for|item, index| of=out.global.siteData.navTree>
+              <li class=`${item.children ? "uk-parent" : ""}`>
+                <a href=item.url key=item.key>${item.data[out.global.siteData.language] ? item.data[out.global.siteData.language].title : ""}</a>
+                <if(item.children && item.children.length)>
+                  <ul class="uk-nav-sub">
+                    <for|child, index| of=item.children>
+                      <li>
+                        <a href=child.url key=child.key>${child.data[out.global.siteData.language] ? child.data[out.global.siteData.language].title : ""}</a>
+                      </li>
+                    </for>
+                  </ul>
+                </if>
+              </li>
+            </for>
+          </if>
         </ul>
       </div>
     </div>

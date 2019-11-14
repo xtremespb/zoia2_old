@@ -13,8 +13,16 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: modules/users/user/auth/Translations.jsx:8
+msgid "Authorize"
+msgstr ""
+
 #: modules/pages/user/Translations.jsx:10
 msgid "Internal Server Error"
+msgstr ""
+
+#: modules/users/user/auth/Translations.jsx:9
+msgid "Latin characters and numbers"
 msgstr ""
 
 #: modules/users/user/Translations.jsx:8
@@ -23,6 +31,10 @@ msgstr ""
 
 #: modules/pages/user/Translations.jsx:8
 msgid "Not Found"
+msgstr ""
+
+#: modules/users/user/auth/Translations.jsx:11
+msgid "Password"
 msgstr ""
 
 #: modules/pages/user/Translations.jsx:9
@@ -40,3 +52,11 @@ msgstr ""
 #: modules/pages/user/Translations.jsx:11
 msgid "The server encountered an unexpected condition which prevented it from fulfilling the request."
 msgstr ""
+
+#: modules/users/user/auth/Translations.jsx:10
+msgid "Username"
+msgstr ""
+
+#: modules/users/user/auth/Translations.jsx:8
+#~ msgid "nav"
+#~ msgstr ""

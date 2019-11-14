@@ -1,0 +1,198 @@
+import axios from 'axios'
+
+style {
+  .za-zf-wrap {
+    position: relative;
+  }
+  .za-zf-loading {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 200;
+  }
+}
+
+class {
+  onCreate(input) {
+    this.superTestFunction = this.onTestButtonClick;
+    const state = {};
+    if (input.data) {
+      input.data.map(i => {
+        if (Array.isArray(i)) {
+          i.map(ai => (state[ai.id] = ai.defaultValue || null));
+        } else {
+          state[i.id] = i.defaultValue || null;
+        }
+      });
+    }
+    this.state = state;
+    this.typesToSerialize = ["text", "select"];
+    this.setErrorMessage = this.intSetErrorMessage;
+  }
+  onMount() {
+    const autoFocusField = this.input.data.flat().find(i => i.autoFocus);
+    if (autoFocusField) {
+      this.getComponent(autoFocusField.id).focus();
+    }
+  }
+  focus(id) {
+    this.getEls("fields")
+      .find(i => i.id === id)
+      .focus();
+  }
+  validate(data) {
+    let error = false;
+    let focus;
+    // Clean up errors
+    data.map(i => this.setState(`error__${i.id}`, null));
+    this.setState("errorMessage", null);
+    // Validate
+    data.map(i => {
+      // Check if it's mandatory
+      if (i.mandatory && !this.state[i.id]) {
+        this.setState(`error__${i.id}`, this.input.i18n.ERR_MANDATORY);
+        if (!focus) {
+          this.getComponent(i.id).setFocus();
+          focus = true;
+        }
+        error = true;
+        return;
+      }
+      // If not mandatory and empty, stop
+      if (!i.mandatory && !this.state[i.id]) {
+        return;
+      }
+      // Validate only if string
+      if (typeof this.state[i.id] === "string") {
+        // Trim value
+        const value = this.state[i.id].trim();
+        // Get "shoudMatch" value and trim it, too
+        const valueSM = i.shouldMatch ? this.state[i.shouldMatch].trim() : null;
+        // Check Regex pattern
+        if (i.pattern) {
+          if (this.state[i.id] && typeof this.state[i.id] === "string") {
+            const rx = new RegExp(i.pattern);
+            if (!value.match(rx)) {
+              this.setState(`error__${i.id}`, this.input.i18n.ERR_FORMAT);
+              if (!focus) {
+                this.getComponent(i.id).setFocus();
+                focus = true;
+              }
+              error = true;
+              return;
+            }
+          }
+        }
+        // Perform "shoudMatch" check
+        if (i.shouldMatch && value !== valueSM) {
+          this.setState(`error__${i.id}`, this.input.i18n.ERR_SHOULD_MATCH);
+          this.setState(`error__${i.shouldMatch}`, this.input.i18n.ERR_SHOULD_MATCH);
+          if (!focus) {
+            this.getComponent(i.id).setFocus();
+            focus = true;
+          }
+          error = true;
+          return;
+        }
+      }
+    });
+    return error;
+  }
+  async save(dataSerialized) {
+    if (!this.input.save) {
+      return;
+    }
+    this.disableAll();
+    this.setLoading(true);
+    try {
+      const data = Object.assign(dataSerialized, this.input.save.extras);
+      const res = await axios.post(this.input.save.url, data);
+      this.enableAll();
+      this.setLoading(false);
+      if (res && res.data && res.data.statusCode === 200) {
+        this.emit("save-success", { res });
+      } else {
+        this.emit("save-error", { res });
+      }
+    } catch (e) {
+      this.enableAll();
+      this.setLoading(false);
+      this.emit("save-error", { res: e.response });
+    }
+  }
+  serialize(input) {
+    const data = {};
+    // Serialize data from input to a key-value pairs object
+    input.map(i => {
+      if (this.typesToSerialize.indexOf(i.type) > -1) {
+        data[i.id] = this.state[i.id];
+      }
+    });
+    // No need to serialize fields where "shouldMatch" points to
+    this.input.data.flat().map(i => {
+      if (i.shouldMatch) {
+        delete data[i.shouldMatch];
+      }
+    });
+    // Return
+    return data;
+  }
+  enableAll() {
+    this.input.data.flat().map(i => this.setState(`disabled__${i.id}`, null));
+  }
+  disableAll() {
+    this.input.data.flat().map(i => this.setState(`disabled__${i.id}`, true));
+  }
+  setLoading(flag) {
+    this.setState("loading", flag);
+  }
+  intSetErrorMessage(msg) {
+    this.setState("errorMessage", msg);
+  }
+  async onFormSubmit(e) {
+    e.preventDefault();
+    const data = this.input.data.flat();
+    const errors = this.validate(data);
+    if (errors) {
+      return;
+    }
+    const dataSerialized = this.serialize(data);
+    await this.save(dataSerialized);
+  }
+  onFieldValueChanged(data) {
+    this.setState(data.id, data.value);
+  }
+}
+
+<div class="za-zf-wrap">
+  <form on-submit("onFormSubmit")>
+    <if(state.errorMessage)>
+      <div class="uk-alert uk-alert-danger" uk-alert>
+        <p>${state.errorMessage}</p>
+      </div>
+    </if>
+    <for|item, index| of=input.data>
+      <if(typeof item === "object")>
+        <div class="uk-margin-small-bottom">
+          <itemSelector key=item.id item=item value=state[item.id] error=state[`error__${item.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${item.id}`]/>
+        </div>
+      </if>
+      <if(Array.isArray(item))>
+        <div class="uk-flex uk-flex-wrap uk-margin-small-bottom">
+          <for|sitem, sindex| of=item>
+            <itemSelector key=sitem.id item=sitem inlineFlag=true value=state[sitem.id] error=state[`error__${sitem.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${sitem.id}`]/>
+          </for>
+        </div>
+      </if>
+    </for>
+    <if(state.loading)>
+      <div class="za-zf-loading uk-flex uk-flex-center uk-flex-middle">
+        <span uk-spinner="ratio:2"/>
+      </div>
+    </if>
+  </form>
+</div>
