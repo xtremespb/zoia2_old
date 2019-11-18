@@ -444,17 +444,6 @@ console.log('Writing linguirc.admin.json...');
 fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
     spaces: 2
 });
-const linguiUser = {
-    localeDir: 'shared/locales/user',
-    srcPathDirs: [],
-    format: 'po'
-};
-const linguiPathsArrUser = modules.map(module => `modules/${module}/user/`);
-linguiUser.srcPathDirs = [...linguiPathsArrUser];
-console.log('Writing linguirc.user.json...');
-fs.writeJSONSync(`${__dirname}/linguirc.user.json`, linguiUser, {
-    spaces: 2
-});
 console.log('Staring Webpack...');
 
 module.exports = webpackConfig;

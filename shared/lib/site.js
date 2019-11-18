@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import locale from './locale';
-import catalogs from '../utils/lingui-catalogs-node';
 
 const loopPath = (data, keyPath, language, callback, path = [], pathData = []) => data.forEach(item => {
     path.push(item.id);
@@ -26,7 +25,6 @@ export default {
         } = fastify.zoiaConfig;
         const language = locale.getLocaleFromURL(req);
         const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '' : `/${language}`;
-        const t = catalogs(language);
         const title = locale.getSiteTitle(language, req);
         const languagesURL = {};
         let breadcrumbsHTML = '';
@@ -62,11 +60,11 @@ export default {
             languages,
             languagesArr,
             languagesURL,
-            t,
             title,
             breadcrumbsHTML,
             useUIkitOnFrontend: fastify.zoiaConfig.useUIkitOnFrontend || false,
-            allowRegistration: fastify.zoiaConfig.allowRegistration
+            allowRegistration: fastify.zoiaConfig.allowRegistration,
+            siteId: fastify.zoiaConfig.id
         };
     }
 };

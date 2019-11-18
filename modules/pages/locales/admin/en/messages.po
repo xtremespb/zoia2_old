@@ -19,7 +19,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: modules/nav/admin/components/Nav.jsx:179
+#: modules/nav/admin/components/Nav.jsx:181
 #: modules/pages/admin/components/DialogFolder.jsx:177
 msgid "Add"
 msgstr ""
@@ -30,7 +30,7 @@ msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:103
 #: modules/nav/admin/components/DialogNavEdit.jsx:128
-#: modules/nav/admin/components/Nav.jsx:226
+#: modules/nav/admin/components/Nav.jsx:228
 #: modules/pages/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolder.jsx:210
@@ -65,7 +65,8 @@ msgid "Could not load data"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:99
-#: modules/nav/admin/components/Nav.jsx:222
+#: modules/nav/admin/components/Nav.jsx:224
+#: modules/nav/admin/components/Nav.jsx:236
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
 #: modules/pages/admin/components/PagesEdit.jsx:162
@@ -74,7 +75,7 @@ msgstr ""
 msgid "Could not load data from server"
 msgstr ""
 
-#: modules/pages/admin/components/PagesEdit.jsx:333
+#: modules/pages/admin/components/PagesEdit.jsx:334
 #: modules/users/admin/components/UsersEdit.jsx:208
 msgid ""
 "Could not load data from server. Please check your URL or try to "
@@ -87,8 +88,8 @@ msgid "Could not save a page"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:100
-#: modules/nav/admin/components/Nav.jsx:153
-#: modules/nav/admin/components/Nav.jsx:223
+#: modules/nav/admin/components/Nav.jsx:155
+#: modules/nav/admin/components/Nav.jsx:225
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
 #: modules/pages/admin/components/PagesEdit.jsx:131
@@ -112,13 +113,13 @@ msgstr ""
 msgid "Create new page"
 msgstr ""
 
-#: modules/nav/admin/components/Nav.jsx:148
+#: modules/nav/admin/components/Nav.jsx:150
 #: modules/pages/admin/components/PagesEdit.jsx:56
 #: modules/users/admin/components/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
 msgstr ""
 
-#: modules/nav/admin/components/Nav.jsx:181
+#: modules/nav/admin/components/Nav.jsx:183
 #: modules/pages/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogFolder.jsx:179
 #: modules/pages/admin/components/PagesList.jsx:120
@@ -143,7 +144,7 @@ msgstr ""
 msgid "Duplicate page, check filename and path"
 msgstr ""
 
-#: modules/nav/admin/components/Nav.jsx:180
+#: modules/nav/admin/components/Nav.jsx:182
 #: modules/pages/admin/components/DialogFolder.jsx:178
 #: modules/pages/admin/components/PagesList.jsx:118
 #: modules/users/admin/components/UsersList.jsx:174
@@ -159,7 +160,7 @@ msgid "Extras"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:96
-#: modules/nav/admin/components/Nav.jsx:219
+#: modules/nav/admin/components/Nav.jsx:221
 #: modules/pages/admin/components/DialogFolder.jsx:187
 #: modules/pages/admin/components/DialogFolderEdit.jsx:99
 #: modules/pages/admin/components/PagesEdit.jsx:290
@@ -179,7 +180,7 @@ msgid "ID"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:97
-#: modules/nav/admin/components/Nav.jsx:220
+#: modules/nav/admin/components/Nav.jsx:222
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
 #: modules/pages/admin/components/PagesEdit.jsx:291
@@ -209,7 +210,7 @@ msgstr ""
 msgid "New Page"
 msgstr ""
 
-#: modules/nav/admin/components/Nav.jsx:182
+#: modules/nav/admin/components/Nav.jsx:184
 #: modules/pages/admin/components/PagesList.jsx:184
 #: modules/users/admin/components/UsersList.jsx:195
 msgid "No records to display"
@@ -234,7 +235,7 @@ msgid "Pages"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:98
-#: modules/nav/admin/components/Nav.jsx:221
+#: modules/nav/admin/components/Nav.jsx:223
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
 #: modules/pages/admin/components/PagesEdit.jsx:292
@@ -271,7 +272,7 @@ msgid "Root"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:129
-#: modules/nav/admin/components/Nav.jsx:197
+#: modules/nav/admin/components/Nav.jsx:199
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
 #: modules/pages/admin/components/PagesEdit.jsx:267
 #: modules/users/admin/components/UsersEdit.jsx:139
@@ -290,6 +291,16 @@ msgstr ""
 msgid "The following page(s) will be permanently deleted:"
 msgstr ""
 
+#: modules/nav/admin/components/Nav.jsx:255
+#: modules/pages/admin/components/PagesEdit.jsx:332
+#: modules/users/admin/components/UsersEdit.jsx:206
+msgid ""
+"This website is currently running in demo mode. Your changes to the "
+"<0>admin</0> user account, root page, navigation etc. won't be actually "
+"saved to the database, and you won't get any errors because of that. File "
+"or image uploads are disabled, too."
+msgstr ""
+
 #: modules/nav/admin/components/DialogNavEdit.jsx:91
 #: modules/pages/admin/components/DialogFolderEdit.jsx:93
 #: modules/pages/admin/components/PagesEdit.jsx:188
@@ -306,7 +317,7 @@ msgid "Upload image"
 msgstr ""
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:102
-#: modules/nav/admin/components/Nav.jsx:225
+#: modules/nav/admin/components/Nav.jsx:227
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
 #: modules/pages/admin/components/PagesEdit.jsx:296
@@ -319,7 +330,7 @@ msgid "pages"
 msgstr "Pages"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:101
-#: modules/nav/admin/components/Nav.jsx:224
+#: modules/nav/admin/components/Nav.jsx:226
 #: modules/pages/admin/components/DialogFolder.jsx:192
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
 #: modules/pages/admin/components/PagesEdit.jsx:295

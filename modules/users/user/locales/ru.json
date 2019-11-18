@@ -1,0 +1,12 @@
+{
+	"Authorize": "Авторизация",
+	"Username": "Имя пользователя",
+	"Password": "Пароль",
+	"Invalid username or password": "Неверное имя пользователя или пароль",
+	"Could not authorize": "Ошибка во время авторизации",
+	"Latin characters and numbers": "Латинские символы и цифры",
+	"Mandatory field": "Обязательное поле",
+	"Invalid format": "Неверный формат",
+	"Does not match": "Не совпадает",
+	"Sign in": "Войти"
+}

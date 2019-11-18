@@ -41,3 +41,4 @@ node_modules/
 /static/custom
 /etc/server
 /dist
+locale/_build/

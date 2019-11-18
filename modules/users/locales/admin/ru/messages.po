@@ -34,7 +34,7 @@ msgstr "Авторизация"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:103
 #: modules/nav/admin/components/DialogNavEdit.jsx:128
-#: modules/nav/admin/components/Nav.jsx:226
+#: modules/nav/admin/components/Nav.jsx:228
 #: modules/pages/admin/components/DialogDelete.jsx:53
 #: modules/pages/admin/components/DialogFolder.jsx:194
 #: modules/pages/admin/components/DialogFolder.jsx:210
@@ -72,7 +72,8 @@ msgid "Could not load data"
 msgstr "Ошибка во время загрузки данных с сервера"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:99
-#: modules/nav/admin/components/Nav.jsx:222
+#: modules/nav/admin/components/Nav.jsx:224
+#: modules/nav/admin/components/Nav.jsx:236
 #: modules/pages/admin/components/DialogFolder.jsx:190
 #: modules/pages/admin/components/DialogFolderEdit.jsx:102
 #: modules/pages/admin/components/PagesEdit.jsx:162
@@ -81,7 +82,7 @@ msgstr "Ошибка во время загрузки данных с серве
 msgid "Could not load data from server"
 msgstr "Ошибка во время загрузки данных"
 
-#: modules/pages/admin/components/PagesEdit.jsx:333
+#: modules/pages/admin/components/PagesEdit.jsx:334
 #: modules/users/admin/components/UsersEdit.jsx:208
 msgid ""
 "Could not load data from server. Please check your URL or try to "
@@ -91,8 +92,8 @@ msgstr ""
 "попробуйте <0>обновить</0> данные."
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:100
-#: modules/nav/admin/components/Nav.jsx:153
-#: modules/nav/admin/components/Nav.jsx:223
+#: modules/nav/admin/components/Nav.jsx:155
+#: modules/nav/admin/components/Nav.jsx:225
 #: modules/pages/admin/components/DialogFolder.jsx:191
 #: modules/pages/admin/components/DialogFolderEdit.jsx:103
 #: modules/pages/admin/components/PagesEdit.jsx:131
@@ -116,13 +117,13 @@ msgstr "Добавление пользователя"
 msgid "Create new user"
 msgstr "Добавление пользователя"
 
-#: modules/nav/admin/components/Nav.jsx:148
+#: modules/nav/admin/components/Nav.jsx:150
 #: modules/pages/admin/components/PagesEdit.jsx:56
 #: modules/users/admin/components/UsersEdit.jsx:50
 msgid "Data has been saved successfully"
 msgstr "Данные успешно сохранены"
 
-#: modules/nav/admin/components/Nav.jsx:181
+#: modules/nav/admin/components/Nav.jsx:183
 #: modules/pages/admin/components/DialogDelete.jsx:54
 #: modules/pages/admin/components/DialogFolder.jsx:179
 #: modules/pages/admin/components/PagesList.jsx:120
@@ -147,7 +148,7 @@ msgstr "Имя пользователя уже существует"
 msgid "E-mail"
 msgstr "E-mail"
 
-#: modules/nav/admin/components/Nav.jsx:180
+#: modules/nav/admin/components/Nav.jsx:182
 #: modules/pages/admin/components/DialogFolder.jsx:178
 #: modules/pages/admin/components/PagesList.jsx:118
 #: modules/users/admin/components/UsersList.jsx:174
@@ -163,7 +164,7 @@ msgid "Example: username@zoiajs.org"
 msgstr "Пример: username@zoiajs.org"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:96
-#: modules/nav/admin/components/Nav.jsx:219
+#: modules/nav/admin/components/Nav.jsx:221
 #: modules/pages/admin/components/DialogFolder.jsx:187
 #: modules/pages/admin/components/DialogFolderEdit.jsx:99
 #: modules/pages/admin/components/PagesEdit.jsx:290
@@ -179,7 +180,7 @@ msgid "Inactive"
 msgstr "Неактивен"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:97
-#: modules/nav/admin/components/Nav.jsx:220
+#: modules/nav/admin/components/Nav.jsx:222
 #: modules/pages/admin/components/DialogFolder.jsx:188
 #: modules/pages/admin/components/DialogFolderEdit.jsx:100
 #: modules/pages/admin/components/PagesEdit.jsx:291
@@ -205,7 +206,7 @@ msgstr "Лат. символы/_/-, длина: 4-32"
 msgid "Loading data, please wait…"
 msgstr "Загрузка данных, пожалуйста, подождите…"
 
-#: modules/nav/admin/components/Nav.jsx:182
+#: modules/nav/admin/components/Nav.jsx:184
 #: modules/pages/admin/components/PagesList.jsx:184
 #: modules/users/admin/components/UsersList.jsx:195
 msgid "No records to display"
@@ -242,7 +243,7 @@ msgstr ""
 "символов."
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:98
-#: modules/nav/admin/components/Nav.jsx:221
+#: modules/nav/admin/components/Nav.jsx:223
 #: modules/pages/admin/components/DialogFolder.jsx:189
 #: modules/pages/admin/components/DialogFolderEdit.jsx:101
 #: modules/pages/admin/components/PagesEdit.jsx:292
@@ -274,7 +275,7 @@ msgid "Required"
 msgstr "Обязательное поле"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:129
-#: modules/nav/admin/components/Nav.jsx:197
+#: modules/nav/admin/components/Nav.jsx:199
 #: modules/pages/admin/components/DialogFolderEdit.jsx:131
 #: modules/pages/admin/components/PagesEdit.jsx:267
 #: modules/users/admin/components/UsersEdit.jsx:139
@@ -289,6 +290,8 @@ msgstr "Статус"
 msgid "The following user(s) will be permanently deleted:"
 msgstr "Следующие пользователи будут удалены навсегда:"
 
+#: modules/nav/admin/components/Nav.jsx:255
+#: modules/pages/admin/components/PagesEdit.jsx:332
 #: modules/users/admin/components/UsersEdit.jsx:206
 msgid ""
 "This website is currently running in demo mode. Your changes to the "
@@ -321,7 +324,7 @@ msgid "Users"
 msgstr "Пользователи"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:102
-#: modules/nav/admin/components/Nav.jsx:225
+#: modules/nav/admin/components/Nav.jsx:227
 #: modules/pages/admin/components/DialogFolder.jsx:193
 #: modules/pages/admin/components/DialogFolderEdit.jsx:105
 #: modules/pages/admin/components/PagesEdit.jsx:296
@@ -334,7 +337,7 @@ msgid "users"
 msgstr "Пользователи"
 
 #: modules/nav/admin/components/DialogNavEdit.jsx:101
-#: modules/nav/admin/components/Nav.jsx:224
+#: modules/nav/admin/components/Nav.jsx:226
 #: modules/pages/admin/components/DialogFolder.jsx:192
 #: modules/pages/admin/components/DialogFolderEdit.jsx:104
 #: modules/pages/admin/components/PagesEdit.jsx:295

@@ -40,7 +40,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const splitLocales = () => {
     console.log(`${colors.green(' * ')} Spliting locales...`);
-    ['admin', 'user'].map(t => {
+    ['admin'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {
@@ -89,7 +89,7 @@ const splitLocales = () => {
 const combineLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Combining locales...`);
-    ['admin', 'user'].map(t => {
+    ['admin'].map(t => {
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/admin`);
         let charset;
         let headers;
@@ -125,7 +125,7 @@ const combineLocales = () => {
 const cleanupLocales = () => {
     const modules = Object.keys(require('../build/modules.json'));
     console.log(`${colors.green(' * ')} Cleaning up combined locales...`);
-    ['admin', 'user'].map(t => {
+    ['admin'].map(t => {
         console.log(`${colors.green(' * ')} Processing area: ${t}`);
         const locales = fs.readdirSync(`${__dirname}/../shared/locales/${t}`);
         locales.filter(l => l !== '_build').map(locale => {

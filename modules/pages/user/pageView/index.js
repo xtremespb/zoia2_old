@@ -3,6 +3,7 @@ import template from './template.marko';
 import site from '../../../../shared/lib/site';
 import locale from '../../../../shared/lib/locale';
 import templates from '../../../../etc/templates.json';
+import i18n from '../../../../shared/utils/i18n-node';
 
 export default fastify => ({
     async handler(req, rep) {
@@ -37,13 +38,14 @@ export default fastify => ({
                     user
                 } = apiData.data;
                 const siteData = await site.getSiteData(req, fastify, page, folders, nav);
+                const t = i18n('pages')[siteData.language];
                 siteData.title = `${page.current.title} | ${siteData.title}`;
                 siteData.user = user || {};
                 const render = (await template.render({
                     content: page.current.contentCompiled || page.current.content,
                     $global: {
                         siteData,
-                        t: siteData.t,
+                        t,
                         template: page.template || templates.available[0],
                     }
                 }));

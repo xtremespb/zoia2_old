@@ -15,6 +15,7 @@ import error404 from '../error404/index.marko';
 import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 import templates from '../../../etc/templates.json';
+import i18n from '../../utils/i18n-node';
 
 (async () => {
     let secure;
@@ -78,12 +79,13 @@ import templates from '../../../etc/templates.json';
                 // Ignore
             }
             const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
+            const t = i18n()[siteData.language];
             siteData.user = siteMeta.user || {};
-            siteData.title = `${siteData.t['Not Found']} | ${siteData.title}`;
+            siteData.title = `${t['Not Found']} | ${siteData.title}`;
             const render = await error404.render({
                 $global: {
                     siteData,
-                    t: siteData.t,
+                    t,
                     template: templates.available[0]
                 }
             });
@@ -111,12 +113,13 @@ import templates from '../../../etc/templates.json';
                 // Ignore
             }
             const siteData = await site.getSiteData(req, fastify);
+            const t = i18n()[siteData.language];
             siteData.user = siteMeta.user;
-            siteData.title = `${siteData.t['Internal Server Error']} | ${siteData.title}`;
+            siteData.title = `${t['Internal Server Error']} | ${siteData.title}`;
             const render = await error500.render({
                 $global: {
                     siteData,
-                    t: siteData.t,
+                    t,
                     template: templates.available[0]
                 }
             });

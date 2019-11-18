@@ -1,3 +1,8 @@
 <templates>
-  <authForm t=out.global.t/>
+  <div class="uk-title-head">${out.global.t["Authorize"]}</div>
+  <authForm t={
+    username: out.global.t["Username"],
+    latin_chars: out.global.t["Latin characters and numbers"],
+    password: out.global.t["Password"]
+  }/>
 </templates>

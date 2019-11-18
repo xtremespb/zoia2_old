@@ -1,47 +1,79 @@
+import cookies from "zoia-cookies"
+import uuid from "uuid/v1"
+
 class {
+  onCreate(input, out) {
+    this.t = out.global.t;
+    this.redirectURL = out.global.redirectURL;
+    this.cookieOptions = out.global.cookieOptions;
+    this.siteId = out.global.siteData.siteId;
+  }
   onSaveError(res) {
-    this.getComponent("zf1").setErrorMessage("Could not authorize");
+    if (res && res.data && res.data.statusCode === 403) {
+      return this.getComponent("authForm").setErrorMessage(this.t["Invalid username or password"]);
+    }
+    this.getComponent("authForm").setErrorMessage(this.t["Could not authorize"]);
+  }
+  onSaveSuccess(res) {
+    const { token } = res.data;
+    cookies.set(`${this.siteId}_auth`, token, this.cookieOptions);
+    this.getComponent("authForm").setLoading(true);
+    location.href = `${this.redirectURL || "/"}?_=${uuid()}`;
+  }
+  onLogOutButtonClick() {
+    cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
+    location.href = `/?_=${uuid()}`;
   }
 }
 
 <div>
-  <zoiaForm key="zf1" data=[
-    [
+  ${input.redirectURL}<if(out.global.siteData.user && out.global.siteData.user.username)>
+    <div class="uk-margin-top">${out.global.t["You are already authorized on this website. Click on the button below if you wish to log out."]}</div>
+    <div class="uk-margin-top">
+      <button type="button" class="uk-button uk-button-primary" on-click("onLogOutButtonClick")>${out.global.t["Log out"]}</button>
+    </div>
+  </if>
+  <else>
+    <zoiaForm key="authForm" data=[
+      [
+        {
+          id: "username",
+          type: "text",
+          label: out.global.t["Username"],
+          css: "uk-input uk-form-width-medium",
+          helpText: out.global.t["Latin characters and numbers"],
+          mandatory: true,
+          pattern: "^[a-zA-Z0-9_-]{4,32}$",
+          autoFocus: true
+        },
+        {
+          id: "password",
+          type: "text",
+          label: out.global.t["Password"],
+          css: "uk-input uk-form-width-medium",
+          textType: "password",
+          pattern: "^(.){8,64}$",
+          mandatory: true
+        }
+      ],
       {
-        id: "username",
-        type: "text",
-        label: `${input.t["Username"]}:`,
-        css: "uk-input uk-form-width-medium",
-        helpText: input.t["Latin characters and numbers"],
-        mandatory: true,
-        pattern: "^[a-zA-Z0-9_-]{4,32}$",
-        autoFocus: true
+        id: "div1",
+        type: "divider"
       },
       {
-        id: "password",
-        type: "text",
-        label: input.t["Password"],
-        css: "uk-input uk-form-width-medium",
-        textType: "password",
-        pattern: "^(.){8,64}$",
-        mandatory: true
+        id: "btn1",
+        type: "button",
+        label: out.global.t["Sign in"],
+        buttonType: "submit",
+        css: "uk-button uk-button-primary"
       }
-    ],
-    {
-      id: "btn1",
-      type: "button",
-      label: "Button 1",
-      buttonType: "submit",
-      css: "uk-button uk-button-primary"
-    }
-  ] i18n={
-    ERR_MANDATORY: "Mandatory field",
-    ERR_FORMAT: "Invalid format",
-    ERR_SHOULD_MATCH: "Does not match"
-  } save={
-    url: "http://127.0.0.1:3000/api/users/login",
-    extras: {
-      hello: "World"
-    }
-  }/>
+    ] i18n={
+      ERR_MANDATORY: out.global.t["Mandatory field"],
+      ERR_FORMAT: out.global.t["Invalid format"],
+      ERR_SHOULD_MATCH: out.global.t["Does not match"]
+    } save={
+      url: "http://127.0.0.1:3000/api/users/login",
+      extras: {}
+    } on-save-error("onSaveError") on-save-success("onSaveSuccess")/>
+  </else>
 </div>

@@ -57,6 +57,7 @@
         "jsx-a11y/control-has-associated-label": "off",
         "no-async-promise-executor": "off",
         "react/state-in-constructor": "off",
-        "dot-notation": false
+        "dot-notation": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }
