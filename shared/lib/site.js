@@ -64,7 +64,8 @@ export default {
             breadcrumbsHTML,
             useUIkitOnFrontend: fastify.zoiaConfig.useUIkitOnFrontend || false,
             allowRegistration: fastify.zoiaConfig.allowRegistration,
-            siteId: fastify.zoiaConfig.id
+            siteId: fastify.zoiaConfig.id,
+            api: fastify.zoiaConfig.api.url
         };
     }
 };

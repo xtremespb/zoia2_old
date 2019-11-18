@@ -66,6 +66,14 @@ style {
                 </div>
               </li>
             </if>
+            <else>
+              <li>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/auth`>Sign in</a>
+              </li>
+              <li>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/register`>Register</a>
+              </li>
+            </else>
             <li>
               <a href="#">
                 <span uk-icon="icon: world;ratio:0.95"/>
