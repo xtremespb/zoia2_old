@@ -1,3 +1,5 @@
+import uuid from 'uuid/v1'
+
 style {
   @import "./zoia.scss";
 }
@@ -60,15 +62,20 @@ style {
                 <div class="uk-navbar-dropdown">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
                     <li>
-                      <a href="#">${out.global.t["Log Out"]}</a>
+                      <a href=`/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
                     </li>
+                    <if(out.global.siteData.user.admin === 1)>
+                      <li>
+                        <a href="/admin">${out.global.t["Admin Panel"]}</a>
+                      </li>
+                    </if>
                   </ul>
                 </div>
               </li>
             </if>
             <else>
               <li>
-                <a href=`${out.global.siteData.languagePrefixURL}/users/auth`>Sign in</a>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.redirect || "/"}`>Sign in</a>
               </li>
               <li>
                 <a href=`${out.global.siteData.languagePrefixURL}/users/register`>Register</a>

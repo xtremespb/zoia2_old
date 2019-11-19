@@ -135,6 +135,7 @@ class {
         this.emit("save-error", res);
       }
     } catch (e) {
+      console.error(e);
       this.enableAll();
       this.loading(false);
       this.emit(

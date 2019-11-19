@@ -6,6 +6,7 @@ import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
 import fastifyCookie from 'fastify-cookie';
+import fastifyCaching from 'fastify-caching';
 import Pino from 'pino';
 import Fastify from 'fastify';
 import axios from 'axios';
@@ -53,6 +54,14 @@ import i18n from '../../utils/i18n-node';
         fastify.register(fastifyJWT, {
             secret: secure.secret
         });
+        fastify.register(
+            fastifyCaching, {},
+            err => {
+                if (err) {
+                    throw err;
+                }
+            }
+        );
         await Promise.all(Object.keys(modules).map(async m => {
             const module = await import(`../../../modules/${m}/user/index.js`);
             module.default(fastify);

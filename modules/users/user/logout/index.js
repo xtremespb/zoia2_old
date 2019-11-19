@@ -33,7 +33,7 @@ export default fastify => ({
             }
             const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
             siteData.user = siteMeta.user || {};
-            siteData.title = `${t['Authorize']} | ${siteData.title}`;
+            siteData.title = `${t['Log Out']} | ${siteData.title}`;
             const render = (await template.render({
                 $global: {
                     redirectURL,
@@ -41,12 +41,9 @@ export default fastify => ({
                         siteData: true,
                         t: true,
                         cookieOptions: true,
-                        redirectURL: true,
-                        redirect: true,
                     },
                     siteData,
                     t,
-                    redirect: req.urlData().path,
                     cookieOptions: fastify.zoiaConfig.cookieOptions,
                     template: templates.available[0],
                 }
