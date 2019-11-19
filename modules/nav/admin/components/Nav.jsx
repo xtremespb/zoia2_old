@@ -229,7 +229,7 @@ class Nav extends Component {
         }}
         onSaveSuccess={res => this.onSaveSuccessHandler(res, i18n)}
         onLoadError={res => {
-            if (res && res.data && res.data.statusCode === 403) {
+            if (res && res.data && res.data.statusCode === 401) {
                 this.deauthorize();
             } else {
                 UIkit.notification({

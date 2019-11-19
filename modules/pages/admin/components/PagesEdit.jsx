@@ -45,7 +45,7 @@ class PagesEdit extends Component {
     }
 
     onPagesTableLoadError = data => {
-        if (data && data.statusCode === 403) {
+        if (data && data.statusCode === 401) {
             this.deauthorize();
         }
     }
@@ -90,7 +90,7 @@ class PagesEdit extends Component {
             }
             reject(res);
         }).catch(async err => {
-            if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
+            if (err && err.response && err.response.data && err.response.data.statusCode === 401) {
                 this.deauthorize();
             }
             reject(err);
@@ -132,7 +132,7 @@ class PagesEdit extends Component {
                 status: 'danger'
             });
         }).catch(async err => {
-            if (err && err.response && err.response.data && err.response.data.statusCode === 403) {
+            if (err && err.response && err.response.data && err.response.data.statusCode === 401) {
                 this.deauthorize();
                 return;
             }

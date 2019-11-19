@@ -82,7 +82,7 @@ class UserAuth extends Component {
             cookies.set(`${this.props.appDataRuntime.config.id}_auth`, response.data.token, this.props.appDataRuntime.config.cookieOptions);
             return history.push(this.query.redirect || '/');
         }
-        if (response.data.statusCode === 403) {
+        if (response.data.statusCode === 401) {
             return UIkit.notification(i18n._(t`Invalid username or password`), { status: 'danger' });
         }
         return UIkit.notification(i18n._(t`Could not authorize`), { status: 'danger' });

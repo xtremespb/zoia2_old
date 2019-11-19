@@ -4,34 +4,22 @@ import uuid from "uuid/v1"
 class {
   onCreate(input, out) {
     this.t = out.global.t;
-    this.redirectURL = out.global.redirectURL;
+    this.redirectURL = out.global.siteData.redirectURL;
     this.cookieOptions = out.global.cookieOptions;
     this.siteId = out.global.siteData.siteId;
+    this.languagePrefixURL = out.global.siteData.languagePrefixURL || "/";
   }
   onSaveError(res) {
-    if (res && res.data && res.data.statusCode === 403) {
+    if (res && res.data && res.data.statusCode === 401) {
       return this.getComponent("authForm").setErrorMessage(this.t["Invalid username or password"]);
     }
     this.getComponent("authForm").setErrorMessage(this.t["Could not authorize"]);
-  }
-  isValidURL(str) {
-    const pattern = new RegExp(
-      "^(https?:\\/\\/)?" +
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
-        "((\\d{1,3}\\.){3}\\d{1,3}))" +
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
-        "(\\?[;&a-z\\d%_.~+=-]*)?" +
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    );
-    return !!pattern.test(str);
   }
   onSaveSuccess(res) {
     const { token } = res.data;
     cookies.set(`${this.siteId}_auth`, token, this.cookieOptions);
     this.getComponent("authForm").setLoading(true);
-    const redirectURL = this.isValidURL(this.redirectURL) ? this.redirectURL : "/";
-    location.href = `${redirectURL || "/"}?_=${uuid()}`;
+    location.href = `${this.redirectURL ? this.redirectURL : this.languagePrefixURL}?_=${uuid()}`;
   }
   onLogOutButtonClick() {
     cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
@@ -40,7 +28,7 @@ class {
 }
 
 <div>
-  ${input.redirectURL}<if(out.global.siteData.user && out.global.siteData.user.username)>
+  <if(out.global.siteData.user && out.global.siteData.user.username)>
     <div class="uk-margin-top">${out.global.t["You are successfully authorized on this website. Click on the button below if you wish to log out."]}</div>
     <div class="uk-margin-top">
       <button type="button" class="uk-button uk-button-primary" on-click("onLogOutButtonClick")>${out.global.t["Log out"]}</button>

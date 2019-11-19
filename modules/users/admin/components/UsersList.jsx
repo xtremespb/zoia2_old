@@ -47,7 +47,7 @@ class UserList extends Component {
     }
 
     onUsersTableLoadError = res => {
-        if (res && res.status === 403) {
+        if (res && res.status === 401) {
             this.deauthorize();
             this.props.usersListTableSetStateAction({});
         }
@@ -55,7 +55,7 @@ class UserList extends Component {
 
     onUsersTableSaveError = (data, i18n) => {
         if (data) {
-            if (data.statusCode === 403) {
+            if (data.statusCode === 401) {
                 this.deauthorize();
             }
             switch (data.errorCode) {

@@ -43,7 +43,7 @@ export default fastify => ({
             if (!user || user.password !== passwordHash) {
                 return rep.code(200)
                     .send(JSON.stringify({
-                        statusCode: 403,
+                        statusCode: 401,
                         message: 'User not found or invalid password',
                         errors: {
                             default: {

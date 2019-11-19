@@ -43,8 +43,8 @@ export default fastify => ({
                 query: req.urlData().query,
                 error: 'Authentication failed'
             });
-            return rep.code(403).send(JSON.stringify({
-                statusCode: 403,
+            return rep.code(401).send(JSON.stringify({
+                statusCode: 401,
                 error: 'Authentication failed'
             }));
         }

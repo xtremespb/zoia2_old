@@ -75,7 +75,7 @@ style {
             </if>
             <else>
               <li>
-                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.redirect || "/"}`>Sign in</a>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.siteData.currentPath || "/"}`>Sign in</a>
               </li>
               <li>
                 <a href=`${out.global.siteData.languagePrefixURL}/users/register`>Register</a>

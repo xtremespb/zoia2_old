@@ -40,7 +40,7 @@ class UsersEdit extends Component {
     }
 
     onUsersTableLoadError = data => {
-        if (data && data.statusCode === 403) {
+        if (data && data.statusCode === 401) {
             this.deauthorize();
         }
     }

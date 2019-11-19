@@ -8,7 +8,6 @@ import i18n from '../../../../shared/utils/i18n-node';
 export default fastify => ({
     async handler(req, rep) {
         try {
-            const redirectURL = req.query.redirect;
             const language = locale.getLocaleFromURL(req);
             const t = i18n('users')[language] || {};
             const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
@@ -36,7 +35,6 @@ export default fastify => ({
             siteData.title = `${t['Log Out']} | ${siteData.title}`;
             const render = (await template.render({
                 $global: {
-                    redirectURL,
                     serializedGlobals: {
                         siteData: true,
                         t: true,

@@ -47,7 +47,7 @@ class PagesList extends Component {
     }
 
     onPagesTableLoadError = res => {
-        if (res && res.status === 403) {
+        if (res && res.status === 401) {
             this.deauthorize();
             this.props.pagesListTableSetStateAction({});
         }
@@ -55,7 +55,7 @@ class PagesList extends Component {
 
     onPagesTableSaveError = (data, i18n) => {
         if (data) {
-            if (data.statusCode === 403) {
+            if (data.statusCode === 401) {
                 this.deauthorize();
             }
             switch (data.errorCode) {

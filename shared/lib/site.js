@@ -26,6 +26,8 @@ export default {
         const language = locale.getLocaleFromURL(req);
         const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '' : `/${language}`;
         const title = locale.getSiteTitle(language, req);
+        const redirectURL = req.query.redirect;
+        const currentPath = req.urlData().path;
         const languagesURL = {};
         let breadcrumbsHTML = '';
         if (folders && folders.data && page) {
@@ -60,6 +62,8 @@ export default {
             languages,
             languagesArr,
             languagesURL,
+            redirectURL,
+            currentPath,
             title,
             breadcrumbsHTML,
             useUIkitOnFrontend: fastify.zoiaConfig.useUIkitOnFrontend || false,
