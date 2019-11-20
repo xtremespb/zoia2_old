@@ -62,7 +62,7 @@ style {
                 <div class="uk-navbar-dropdown">
                   <ul class="uk-nav uk-navbar-dropdown-nav">
                     <li>
-                      <a href=`/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
+                      <a href=`${out.global.siteData.languagePrefixURL}/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
                     </li>
                     <if(out.global.siteData.user.admin === 1)>
                       <li>
