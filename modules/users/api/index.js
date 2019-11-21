@@ -5,6 +5,7 @@ import apiUserFieldSave from './apiUserFieldSave';
 import apiUserLoad from './apiUserLoad';
 import apiUserSave from './apiUserSave';
 import apiUsersDelete from './apiUsersDelete';
+import apiUserRegister from './apiUserRegister';
 
 export default fastify => {
     fastify.post('/api/users/login', apiLogin(fastify));
@@ -14,4 +15,5 @@ export default fastify => {
     fastify.post('/api/users/load', apiUserLoad(fastify));
     fastify.post('/api/users/save', apiUserSave(fastify));
     fastify.post('/api/users/delete', apiUsersDelete(fastify));
+    fastify.post('/api/users/register', apiUserRegister(fastify));
 };

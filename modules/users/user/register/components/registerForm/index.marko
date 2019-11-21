@@ -10,16 +10,14 @@ class {
     this.languagePrefixURL = out.global.siteData.languagePrefixURL || "/";
   }
   onSaveError(res) {
+    this.getComponent("registerForm").captchaUpdate("captcha");
     if (res && res.data && res.data.statusCode === 401) {
-      return this.getComponent("authForm").setErrorMessage(this.t["Invalid username or password"]);
+      return this.getComponent("registerForm").setErrorMessage(this.t["Invalid username or password"]);
     }
-    this.getComponent("authForm").setErrorMessage(this.t["Could not authorize"]);
+    this.getComponent("registerForm").setErrorMessage(this.t["Could not authorize"]);
   }
   onSaveSuccess(res) {
-    const { token } = res.data;
-    cookies.set(`${this.siteId}_auth`, token, this.cookieOptions);
-    this.getComponent("authForm").setLoading(true);
-    location.href = `${this.redirectURL ? this.redirectURL : this.languagePrefixURL}?_=${uuid()}`;
+    console.log(res);
   }
   onLogOutButtonClick() {
     cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
@@ -31,11 +29,11 @@ class {
   <if(out.global.siteData.user && out.global.siteData.user.username)>
     <div class="uk-margin-top">${out.global.t["You are successfully authorized on this website. Click on the button below if you wish to log out."]}</div>
     <div class="uk-margin-top">
-      <button type="button" class="uk-button uk-button-primary" on-click("onLogOutButtonClick")>${out.global.t["Log out"]}</button>
+      <button type="button" class="uk-button uk-button-primary" on-click("onLogOutButtonClick")>${out.global.t["Log Out"]}</button>
     </div>
   </if>
   <else>
-    <zoiaForm key="authForm" data=[
+    <zoiaForm key="registerForm" data=[
       [
         {
           id: "username",
@@ -54,7 +52,9 @@ class {
           css: "uk-input uk-form-width-medium",
           helpText: out.global.t["Example: user@domain.com"],
           mandatory: true,
-          pattern: "^[a-zA-Z0-9_-]{4,32}$",
+          minLength: 5,
+          maxLength: 254,
+          pattern: "^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$",
           autoFocus: true
         },
         {
@@ -63,7 +63,8 @@ class {
           label: out.global.t["Password"],
           css: "uk-input uk-form-width-small",
           textType: "password",
-          pattern: "^(.){8,64}$",
+          minLength: 8,
+          maxLength: 64,
           mandatory: true,
           shouldMatch: "passwordRepeat",
           helpText: "At least 8 chars"
@@ -74,10 +75,21 @@ class {
           label: out.global.t["Repeat password"],
           css: "uk-input uk-form-width-small",
           textType: "password",
-          pattern: "^(.){8,64}$",
-          mandatory: true
+          minLength: 8,
+          maxLength: 64,
+          mandatory: true,
         }
       ],
+      {
+        id: "captcha",
+        type: "captcha",
+        label: out.global.t["Captcha"],
+        css: "uk-input uk-form-width-small",
+        helpText: out.global.t["Code on a picture, click to update"],
+        mandatory: true,
+        pattern: "^[0-9]{4,4}$",
+        imgSrc: `${out.global.siteData.api}/api/core/captcha`
+      },
       {
         id: "div1",
         type: "divider"
@@ -94,7 +106,7 @@ class {
       ERR_FORMAT: out.global.t["Invalid format"],
       ERR_SHOULD_MATCH: out.global.t["Does not match"]
     } save={
-      url: `${out.global.siteData.api}/api/users/login`,
+      url: `${out.global.siteData.api}/api/users/register`,
       extras: {}
     } on-save-error("onSaveError") on-save-success("onSaveSuccess")/>
   </else>

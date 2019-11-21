@@ -18,6 +18,7 @@
     "development": false,
     "loglevel": "info",
     "stackTrace": false,
+    "captchaValidityMs": 60000,
     "user": "zoia",
     "group": "zoia",
     "serverName": ""

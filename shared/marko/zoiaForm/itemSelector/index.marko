@@ -1,17 +1,47 @@
+import axios from "axios"
+import uuid from "uuid/v1"
+
 style {
   .za-zf-disabled {
     pointer-events: none;
   }
+  img.za-zf-captcha {
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    height: 40px;
+  }
+  input.za-zf-captcha {
+    width: 50px;
+  }
 }
 
 class {
-  onCreate() {
+  onCreate(input) {
     this.state = {
       enabled: true
     };
     this.setFocus = this.focus;
     this.setEnabled = this.enable;
     this.setDisabled = this.disable;
+    this.captchaUpdate = this.doCaptchaUpdate;
+    this.item = input.item;
+  }
+  async doCaptchaUpdate() {
+    try {
+      const captcha = await axios.get(`${this.item.imgSrc}?_=${uuid()}`, {});
+      if (captcha && captcha.data && captcha.data.statusCode === 200 && captcha.data.imageData && captcha.data.imageSecret) {
+        this.getEl(`${this.item.id}_image`).src = captcha.data.imageData;
+        this.emit("captcha-secret-update", { id: this.item.id, value: captcha.data.imageSecret });
+      }
+    } catch (e) {
+      // Do nothing
+    }
+  }
+  onMount() {
+    if (this.item.type === "captcha" && this.item.imgSrc) {
+      this.doCaptchaUpdate();
+    }
   }
   handleChangeText(e) {
     this.emit("field-value-change", { id: e.target.id, value: e.target.value });
@@ -77,5 +107,24 @@ class {
   <!-- Divider -->
   <if(input.item.type === "divider")>
     <div class="uk-margin-top"/>
+  </if>
+  <!-- Captcha -->
+  <if(input.item.type === "captcha")>
+    <label class="uk-form-label" for="">
+      ${input.item.label}<div class="uk-form-controls">
+        <div class="uk-flex uk-flex-middle">
+          <input type="text" id=input.item.id class=`za-zf-captcha uk-margin-small-right ${input.item.css}${input.error ? " uk-form-danger" : ""}${state.enabled ? "" : " za-zf-disabled"}` value=input.value key=input.item.id on-change("handleChangeText") disabled=input.isDisabled/>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="za-zf-captcha" id=`${input.item.id}_image` key=`${input.item.id}_image` on-click("doCaptchaUpdate")/>
+        </div>
+        <if(input.error && input.error !== "__error__")>
+          <div>
+            <div class="uk-label uk-label-danger">${input.error}</div>
+          </div>
+        </if>
+        <if(input.item.helpText)>
+          <div class="uk-text-small uk-text-muted">${input.item.helpText}</div>
+        </if>
+      </div>
+    </label>
   </if>
 </div>

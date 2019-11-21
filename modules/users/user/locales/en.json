@@ -17,5 +17,7 @@
     "Example: user@domain.com": "",
     "E-mail": "",
     "At least 8 chars": "",
-    "Continue": ""
+    "Continue": "",
+    "Captcha": "",
+    "Code on a picture, click to update": ""
 }

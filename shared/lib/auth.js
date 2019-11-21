@@ -1,3 +1,4 @@
+import Cryptr from 'cryptr';
 import {
     ObjectId
 } from 'mongodb';
@@ -45,6 +46,23 @@ export default {
             // Ignore
         }
         return {};
+    },
+    decodeEncryptedJSON: (data, fastify) => {
+        let dataJSON = {};
+        const cryptr = new Cryptr(fastify.zoiaConfigSecure.secret);
+        try {
+            const decrypted = cryptr.decrypt(data);
+            dataJSON = JSON.parse(decrypted) || {};
+        } catch (e) {
+            // Ignore
+        }
+        if (dataJSON.t) {
+            const captchaValitityMs = fastify.zoiaConfigSecure.captchaValidityMs || 60000;
+            dataJSON.tDiff = new Date().getTime() - parseInt(dataJSON.t, 10);
+            if (dataJSON.tDiff > captchaValitityMs) {
+                dataJSON.overdue = true;
+            }
+        }
+        return dataJSON;
     }
-
 };

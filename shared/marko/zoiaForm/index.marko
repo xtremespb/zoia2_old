@@ -29,22 +29,18 @@ class {
       });
     }
     this.state = state;
-    this.typesToSerialize = ["text", "select"];
+    this.typesToSerialize = ["text", "select", "captcha"];
     this.setErrorMessage = this.intSetErrorMessage;
     this.setLoading = this.loading;
     this.setEnabled = this.enable;
     this.setDisabled = this.disable;
+    this.captchaUpdate = this.doUpdateCaptcha;
   }
   onMount() {
     const autoFocusField = this.input.data.flat().find(i => i.autoFocus);
     if (autoFocusField) {
       this.getComponent(autoFocusField.id).focus();
     }
-  }
-  focus(id) {
-    this.getEls("fields")
-      .find(i => i.id === id)
-      .focus();
   }
   validate(data) {
     let error = false;
@@ -74,6 +70,16 @@ class {
         const value = this.state[i.id].trim();
         // Get "shoudMatch" value and trim it, too
         const valueSM = i.shouldMatch ? this.state[i.shouldMatch].trim() : null;
+        // Check min/max length
+        if ((i.minLength && value.length < i.minLength) || (i.maxLength && value.length > i.maxLength)) {
+          this.setState(`error__${i.id}`, this.input.i18n.ERR_FORMAT);
+          if (!focus) {
+            this.getComponent(i.id).setFocus();
+            focus = true;
+          }
+          error = true;
+          return;
+        }
         // Check Regex pattern
         if (i.pattern) {
           if (this.state[i.id] && typeof this.state[i.id] === "string") {
@@ -152,6 +158,10 @@ class {
     input.map(i => {
       if (this.typesToSerialize.indexOf(i.type) > -1) {
         data[i.id] = this.state[i.id];
+        // We also need to set a secret for captcha
+        if (i.type === "captcha" && this.state[`${i.id}Secret`]) {
+          data[`${i.id}Secret`] = this.state[`${i.id}Secret`];
+        }
       }
     });
     // No need to serialize fields where "shouldMatch" points to
@@ -199,6 +209,12 @@ class {
   onFieldValueChanged(data) {
     this.setState(data.id, data.value);
   }
+  onCaptchaSecretUpdate(data) {
+    this.setState(`${data.id}Secret`, data.value);
+  }
+  doUpdateCaptcha(id) {
+    this.getComponent(id).captchaUpdate();
+  }
 }
 
 <div class="za-zf-wrap">
@@ -211,13 +227,13 @@ class {
     <for|item, index| of=input.data>
       <if(typeof item === "object")>
         <div class="uk-margin-small-bottom">
-          <itemSelector key=item.id item=item value=state[item.id] error=state[`error__${item.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${item.id}`]/>
+          <itemSelector key=item.id item=item value=state[item.id] error=state[`error__${item.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${item.id}`] on-captcha-secret-update("onCaptchaSecretUpdate")/>
         </div>
       </if>
       <if(Array.isArray(item))>
         <div class="uk-flex uk-flex-wrap uk-margin-small-bottom">
           <for|sitem, sindex| of=item>
-            <itemSelector key=sitem.id item=sitem inlineFlag=true value=state[sitem.id] error=state[`error__${sitem.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${sitem.id}`]/>
+            <itemSelector key=sitem.id item=sitem inlineFlag=true value=state[sitem.id] error=state[`error__${sitem.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${sitem.id}`] on-captcha-secret-update("onCaptchaSecretUpdate")/>
           </for>
         </div>
       </if>

@@ -199,7 +199,8 @@ const install = async () => {
                             }
                             const {
                                 indexesAsc,
-                                indexesDesc
+                                indexesDesc,
+                                expires
                             } = moduleDatabaseConfig.collections[c];
                             const languages = fs.readdirSync(`${__dirname}/../shared/locales/admin`).filter(i => i !== '_build');
                             if (indexesAsc && indexesAsc.length) {
@@ -241,6 +242,22 @@ const install = async () => {
                                 try {
                                     await db.collection(c).createIndex(indexes, {
                                         name: `${m}_desc`
+                                    });
+                                } catch (e) {
+                                    console.log('');
+                                    console.log(colors.red(e));
+                                    process.exit(1);
+                                }
+                            }
+                            if (expires) {
+                                console.log(`${colors.green(' * ')} Creating expiration index for collection: ${c}...`);
+                                try {
+                                    await db.collection(c).createIndex({
+                                        createdAt: 1
+                                    }, {
+                                        expireAfterSeconds: parseInt(expires, 10)
+                                    }, {
+                                        name: `${m}_exp`
                                     });
                                 } catch (e) {
                                     console.log('');
