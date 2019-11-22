@@ -35,12 +35,16 @@ class {
     this.setEnabled = this.enable;
     this.setDisabled = this.disable;
     this.captchaUpdate = this.doUpdateCaptcha;
+    this.setValue = this.value;
   }
   onMount() {
     const autoFocusField = this.input.data.flat().find(i => i.autoFocus);
     if (autoFocusField) {
       this.getComponent(autoFocusField.id).focus();
     }
+  }
+  value(id, value) {
+    this.setState(id, value);
   }
   validate(data) {
     let error = false;

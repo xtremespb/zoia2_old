@@ -1,4 +1,5 @@
 import Cryptr from 'cryptr';
+import crypto from 'crypto';
 import {
     ObjectId
 } from 'mongodb';
@@ -57,12 +58,42 @@ export default {
             // Ignore
         }
         if (dataJSON.t) {
-            const captchaValitityMs = fastify.zoiaConfigSecure.captchaValidityMs || 60000;
+            const captchaValidityMs = fastify.zoiaConfigSecure.captchaValidity * 1000 || 3600000;
             dataJSON.tDiff = new Date().getTime() - parseInt(dataJSON.t, 10);
-            if (dataJSON.tDiff > captchaValitityMs) {
+            if (dataJSON.tDiff > captchaValidityMs) {
                 dataJSON.overdue = true;
             }
         }
         return dataJSON;
+    },
+    validateCaptcha: async (captchaSecret, code, fastify, db) => {
+        try {
+            // Generate hash of a secret string
+            const captchaSecretHash = crypto.createHmac('sha256', fastify.zoiaConfigSecure.secret).update(captchaSecret).digest('hex');
+            // Check if this captcha has been already used before
+            const invCaptcha = await db.collection('captcha').findOne({
+                _id: captchaSecretHash
+            });
+            if (invCaptcha) {
+                return false;
+            }
+            // Decrypt catcha secret and parse it to JSON
+            const cryptr = new Cryptr(fastify.zoiaConfigSecure.secret);
+            const decrypted = cryptr.decrypt(captchaSecret);
+            const dataJSON = JSON.parse(decrypted) || {};
+            // Check if captcha is valid and not outdated
+            if (!dataJSON.c || dataJSON.c !== code || (dataJSON.t && new Date().getTime() - parseInt(dataJSON.t, 10) > (fastify.zoiaConfigSecure.captchaValidity * 1000 || 3600000))) {
+                return false;
+            }
+            // All checks are passed
+            // Invalidate captcha
+            await db.collection('captcha').insertOne({
+                _id: captchaSecretHash,
+                createdAt: new Date()
+            });
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 };

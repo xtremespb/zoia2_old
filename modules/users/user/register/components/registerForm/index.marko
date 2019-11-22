@@ -11,10 +11,24 @@ class {
   }
   onSaveError(res) {
     this.getComponent("registerForm").captchaUpdate("captcha");
-    if (res && res.data && res.data.statusCode === 401) {
-      return this.getComponent("registerForm").setErrorMessage(this.t["Invalid username or password"]);
+    if (res && res.data && res.data.errorCode && res.data.statusCode === 400) {
+      let message;
+      switch (res.data.errorCode) {
+        case 1:          
+          message = this.t["Invalid captcha code entered"];
+          break;
+        case 2:
+          message = this.t["User with such username is already registred"];
+          break;
+        case 3:
+          message = this.t["User with such e-mail address is already registred"];
+          break;
+        default:
+          message = this.t["Could not complete the registration process"];
+      }
+      return this.getComponent("registerForm").setErrorMessage(message);
     }
-    this.getComponent("registerForm").setErrorMessage(this.t["Could not authorize"]);
+    this.getComponent("registerForm").setErrorMessage(this.t["Could not connect to the server"]);
   }
   onSaveSuccess(res) {
     console.log(res);
@@ -77,7 +91,7 @@ class {
           textType: "password",
           minLength: 8,
           maxLength: 64,
-          mandatory: true,
+          mandatory: true
         }
       ],
       {

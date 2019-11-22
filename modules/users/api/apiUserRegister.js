@@ -52,12 +52,12 @@ export default fastify => ({
         // End of Validation
         // Processing
         try {
-            const captchaData = auth.decodeEncryptedJSON(req.body.captchaSecret, fastify);
-            // Check if captcha is valid
-            if (!captchaData.c || captchaData.overdue || captchaData.c !== req.body.captcha) {
+            // Check captcha
+            if (!await auth.validateCaptcha(req.body.captchaSecret, req.body.captcha, fastify, this.mongo.db)) {
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 400,
+                        errorCode: 1,
                         message: 'Invalid Captcha',
                         errors: {
                             default: {
@@ -66,28 +66,61 @@ export default fastify => ({
                         }
                     }));
             }
-            // Check if captcha is invalidated
-            const captchaSecretHash = crypto.createHmac('sha256', fastify.zoiaConfigSecure.secret).update(req.body.captchaSecret).digest('hex');
-            const invCaptcha = await this.mongo.db.collection('captcha').findOne({
-                _id: captchaSecretHash
+            const username = req.body.username.toLowerCase();
+            const email = req.body.email.toLowerCase();
+            const usernameDB = await this.mongo.db.collection('users').findOne({
+                username
             });
-            if (invCaptcha) {
+            if (usernameDB) {
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 400,
-                        message: 'Invalid Captcha',
+                        errorCode: 2,
+                        message: 'User already registered',
                         errors: {
                             default: {
-                                captcha: ''
+                                username: ''
                             }
                         }
                     }));
             }
-            // Invalidate captcha
-            await this.mongo.db.collection('captcha').insertOne({
-                _id: captchaSecretHash,
-                createdAt: new Date()
+            const emailDB = await this.mongo.db.collection('users').findOne({
+                email
             });
+            if (emailDB) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        errorCode: 3,
+                        message: 'E-mail already registered',
+                        errors: {
+                            default: {
+                                email: ''
+                            }
+                        }
+                    }));
+            }
+            // Save new user to the database
+            const password = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(req.body.password).digest('hex');
+            const insResult = await this.mongo.db.collection('users').insertOne({
+                username,
+                active: 0,
+                admin: 0,
+                email,
+                password
+            });
+            if (!insResult || !insResult.result || !insResult.result.ok || !insResult.insertedId) {
+                return rep.code(200)
+                    .send(JSON.stringify({
+                        statusCode: 400,
+                        message: 'Could not insert a database record',
+                        errors: {
+                            default: {
+                                email: ''
+                            }
+                        }
+                    }));
+            }
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({

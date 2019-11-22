@@ -19,5 +19,10 @@
     "At least 8 chars": "",
     "Continue": "",
     "Captcha": "",
-    "Code on a picture, click to update": ""
+    "Code on a picture, click to update": "",
+    "Invalid captcha code entered": "",
+    "User with such username is already registred": "",
+    "User with such e-mail address is already registred": "",
+    "Could not complete the registration process": "",
+    "Could not connect to the server": ""
 }
