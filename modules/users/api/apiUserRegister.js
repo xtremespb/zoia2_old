@@ -1,5 +1,8 @@
 import crypto from 'crypto';
 import auth from '../../../shared/lib/auth';
+import mailer from '../../../shared/lib/email';
+import mailRegister from '../email/register/index.marko';
+import I18N from '../../../shared/utils/i18n-node';
 
 export default fastify => ({
     schema: {
@@ -33,6 +36,12 @@ export default fastify => ({
                     type: 'string',
                     maxLength: 2048
                 },
+                language: {
+                    type: 'string',
+                    maxLength: 2,
+                    minLength: 2,
+                    pattern: '^[a-z]+$'
+                }
             },
             required: ['username', 'password', 'email', 'captcha', 'captchaSecret']
         }
@@ -52,6 +61,8 @@ export default fastify => ({
         // End of Validation
         // Processing
         try {
+            // Load locale
+            const i18n = I18N('users')[req.body.language];
             // Check captcha
             if (!await auth.validateCaptcha(req.body.captchaSecret, req.body.captcha, fastify, this.mongo.db)) {
                 return rep.code(200)
@@ -121,6 +132,16 @@ export default fastify => ({
                         }
                     }));
             }
+            // Send e-mail message
+            const render = (await mailRegister.render({
+                $global: {
+                    title: 'Sample title'
+                }
+            }));
+            const htmlMail = render.out.stream.str;
+            // Send mail
+            const mailResult = await mailer.sendMail(email, 'Test Message', htmlMail, fastify);
+            console.log(mailResult);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({

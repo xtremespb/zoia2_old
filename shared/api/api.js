@@ -6,6 +6,7 @@ import fastifyCORS from 'fastify-cors';
 import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
+import nodemailer from 'nodemailer';
 import {
     MongoClient
 } from 'mongodb';
@@ -30,6 +31,7 @@ import logger from '../lib/logger';
         process.exit(1);
     }
     try {
+        const mailer = nodemailer.createTransport(secure.mailer);
         const fastify = Fastify({
             logger,
             trustProxy: secure.trustProxy
@@ -38,6 +40,8 @@ import logger from '../lib/logger';
         fastify.decorate('zoiaConfigSecure', secure);
         fastify.decorateRequest('zoiaConfig', config);
         fastify.decorateRequest('zoiaConfigSecure', secure);
+        fastify.decorate('zoiaMailer', mailer);
+        fastify.decorateRequest('zoiaMailer', mailer);
         const mongoClient = new MongoClient(secure.mongo.url, {
             useNewUrlParser: true,
             useUnifiedTopology: true

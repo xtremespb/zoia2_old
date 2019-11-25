@@ -121,7 +121,9 @@ class {
       ERR_SHOULD_MATCH: out.global.t["Does not match"]
     } save={
       url: `${out.global.siteData.api}/api/users/register`,
-      extras: {}
+      extras: {
+        language: out.global.siteData.language
+      }
     } on-save-error("onSaveError") on-save-success("onSaveSuccess")/>
   </else>
 </div>

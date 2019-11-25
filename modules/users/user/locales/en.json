@@ -24,5 +24,6 @@
     "User with such username is already registred": "",
     "User with such e-mail address is already registred": "",
     "Could not complete the registration process": "",
-    "Could not connect to the server": ""
+    "Could not connect to the server": "",
+    "New account registration": ""
 }

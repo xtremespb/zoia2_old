@@ -213,6 +213,9 @@ const configAPI = {
     },
     module: {
         rules: [{
+            test: /\.marko$/,
+            loader: '@marko/webpack/loader'
+        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader',

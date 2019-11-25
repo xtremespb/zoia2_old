@@ -15,6 +15,15 @@
         "ip": "127.0.0.1",
         "port": 3001
     },
+    "mailer": {
+        "service": "Yandex",
+        "auth": {
+            "user": "info@zoiajs.org",
+            "pass": ""
+        }
+    },
+    "serviceMailbox": "Zoia <info@zoiajs.org>",
+    "pathToLogo": "../static/zoia/logo_dark_small.png",
     "development": false,
     "loglevel": "info",
     "stackTrace": false,
