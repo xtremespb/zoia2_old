@@ -93,7 +93,7 @@ export default fastify => ({
                 // eslint-disable-next-line no-control-regex
                 formatValidationError = !value.match(/^(0|1)$/);
                 if (!formatValidationError) {
-                    value = parseInt(value, 10);
+                    value = value === '1';
                 }
                 break;
             default:
@@ -138,6 +138,10 @@ export default fastify => ({
                 }, {
                     $set: update
                 });
+            }
+            // Set 1/0 for true/false if columnId === 'active'
+            if (req.body.columnId === 'active') {
+                value = value ? '1' : '0';
             }
             // Send response
             return rep.code(200)

@@ -1,0 +1,14 @@
+import uuid from "uuid/v1"
+
+<templates>
+  <div class="uk-title-head">${out.global.t["Activate user account"]}</div>
+  <if(input.activationSuccess)>
+    <p>${out.global.t["Your account has been successfully actvated."]}</p>
+    <div>
+      <a href=`${out.global.siteData.languagePrefixURL}/users/auth?_=${uuid()}` class="uk-button uk-button-primary">${out.global.t["Sign in"]}</a>
+    </div>
+  </if>
+  <else>
+    <p>${out.global.t["Your account account could not be activated at this moment. It may be already activated, or you have specified wrong activation code."]}</p>
+  </else>
+</templates>

@@ -1,5 +1,7 @@
 import crypto from 'crypto';
+import uuid from 'uuid/v1';
 import auth from '../../../shared/lib/auth';
+import locale from '../../../shared/lib/locale';
 import mailer from '../../../shared/lib/email';
 import mailRegister from '../email/register/index.marko';
 import I18N from '../../../shared/utils/i18n-node';
@@ -112,13 +114,17 @@ export default fastify => ({
                     }));
             }
             // Save new user to the database
+            const activationCode = uuid();
+            const registrationDate = new Date().getTime() / 1000;
             const password = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(req.body.password).digest('hex');
             const insResult = await this.mongo.db.collection('users').insertOne({
                 username,
-                active: 0,
-                admin: 0,
+                active: false,
+                admin: false,
                 email,
-                password
+                password,
+                activationCode,
+                registrationDate
             });
             if (!insResult || !insResult.result || !insResult.result.ok || !insResult.insertedId) {
                 return rep.code(200)
@@ -133,15 +139,22 @@ export default fastify => ({
                     }));
             }
             // Send e-mail message
+            const prefix = locale.getPrefixForLanguage(req.body.language, fastify);
+            const registrationURL = `${fastify.zoiaConfig.siteURL}${prefix}users/activate?id=${insResult.insertedId}&code=${activationCode}`;
+            const subj = 'New account registration';
             const render = (await mailRegister.render({
                 $global: {
-                    title: 'Sample title'
-                }
+                    siteURL: fastify.zoiaConfig.siteURL || '',
+                    siteTitle: fastify.zoiaConfig.siteTitle[req.body.language] || '',
+                    title: i18n[subj],
+                    preheader: i18n[subj],
+                    t: i18n
+                },
+                registrationURL
             }));
             const htmlMail = render.out.stream.str;
             // Send mail
-            const mailResult = await mailer.sendMail(email, 'Test Message', htmlMail, fastify);
-            console.log(mailResult);
+            await mailer.sendMail(email, i18n[subj], htmlMail, fastify);
             // Send response
             return rep.code(200)
                 .send(JSON.stringify({

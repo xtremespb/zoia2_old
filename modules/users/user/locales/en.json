@@ -25,5 +25,11 @@
     "User with such e-mail address is already registred": "",
     "Could not complete the registration process": "",
     "Could not connect to the server": "",
-    "New account registration": ""
+    "New account registration": "",
+    "Thank you for creating a new account.": "",
+    "Your e-mail address needs to be verified to complete the registration process. To verify your e-mail address, please click on the button below:": "",
+    "Confirm E-mail": "",
+    "Activate user account": "",
+    "Your account account could not be activated at this moment. It may be already activated, or you have specified wrong activation code.": "",
+    "Your account has been successfully actvated.": ""
 }

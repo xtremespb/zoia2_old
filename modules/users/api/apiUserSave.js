@@ -219,8 +219,8 @@ export default fastify => ({
                 $set: {
                     username: formData.default.username,
                     email: formData.default.email,
-                    active: formData.default.active,
-                    admin: formData.default.admin,
+                    active: formData.default.active === 1,
+                    admin: formData.default.admin === 1,
                     ...passwordUpdate
                 }
             }, {

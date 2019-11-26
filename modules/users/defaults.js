@@ -15,8 +15,8 @@ const install = async db => {
             username: 'admin',
             password: passwordHash,
             email: 'example@zoiajs.org',
-            active: 1,
-            admin: 1
+            active: true,
+            admin: true
         }
     }, {
         upsert: true

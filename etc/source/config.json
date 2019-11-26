@@ -9,6 +9,7 @@
         "en": "Example Website",
         "ru": "Тестовый веб-сайт"
     },
+    "siteURL": "http://127.0.0.1",
     "commonItemsLimit": 12,
     "allowRegistration": true,
     "wysiwyg": true,

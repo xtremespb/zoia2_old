@@ -57,5 +57,9 @@ export default {
             }
         }
         return data;
+    },
+    getPrefixForLanguage: (lang, fastify) => {
+        const languages = Object.keys(fastify.zoiaConfig.languages);
+        return lang === languages[0] ? '/' : `/${lang}`;
     }
 };
