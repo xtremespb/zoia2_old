@@ -17,6 +17,7 @@ import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 import templates from '../../../etc/templates.json';
 import i18n from '../../utils/i18n-node';
+import response from '../../lib/response';
 
 (async () => {
     let secure;
@@ -42,6 +43,10 @@ import i18n from '../../utils/i18n-node';
         fastify.decorate('zoiaConfigSecure', secure);
         fastify.decorateRequest('zoiaConfig', config);
         fastify.decorateRequest('zoiaConfigSecure', secure);
+        fastify.decorateReply('sendSuccessHTML', response.sendSuccessHTML);
+        fastify.decorateReply('sendSuccessJSON', response.sendSuccessJSON);
+        fastify.decorateReply('sendRedirect', response.sendRedirect);
+        fastify.decorateReply('sendClearCookieRedirect', response.sendClearCookieRedirect);
         fastify.register(fastifyFormbody);
         fastify.register(fastifyMultipart, {
             addToBody: true

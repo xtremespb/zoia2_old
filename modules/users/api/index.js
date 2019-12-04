@@ -7,6 +7,8 @@ import apiUserSave from './apiUserSave';
 import apiUsersDelete from './apiUsersDelete';
 import apiUserRegister from './apiUserRegister';
 import apiUserActivate from './apiUserActivate';
+import apiUserReset from './apiUserReset';
+import apiUserResetConfirm from './apiUserResetConfirm';
 
 export default fastify => {
     fastify.post('/api/users/login', apiLogin(fastify));
@@ -18,4 +20,6 @@ export default fastify => {
     fastify.post('/api/users/delete', apiUsersDelete(fastify));
     fastify.post('/api/users/register', apiUserRegister(fastify));
     fastify.post('/api/users/activate', apiUserActivate(fastify));
+    fastify.post('/api/users/reset', apiUserReset(fastify));
+    fastify.post('/api/users/resetConfirm', apiUserResetConfirm(fastify));
 };

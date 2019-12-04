@@ -9,11 +9,11 @@ class {
     this.siteId = out.global.siteData.siteId;
     this.languagePrefixURL = out.global.siteData.languagePrefixURL || "/";
     this.state = {
-      registrationSuccessful: false
+      resetSuccessful: false
     };
   }
   onSaveError(res) {
-    this.getComponent("registerForm").captchaUpdate("captcha");
+    this.getComponent("resetForm").captchaUpdate("captcha");
     if (res && res.data && res.data.errorCode && res.data.statusCode === 400) {
       let message;
       switch (res.data.errorCode) {
@@ -21,20 +21,17 @@ class {
           message = this.t["Invalid captcha code entered"];
           break;
         case 2:
-          message = this.t["User with such username is already registered"];
-          break;
-        case 3:
-          message = this.t["User with such e-mail address is already registered"];
+          message = this.t["Unknown user"];
           break;
         default:
-          message = this.t["Could not complete the registration process"];
+          message = this.t["Could not complete the password reset process"];
       }
-      return this.getComponent("registerForm").setErrorMessage(message);
+      return this.getComponent("resetForm").setErrorMessage(message);
     }
-    this.getComponent("registerForm").setErrorMessage(this.t["Could not connect to the server"]);
+    this.getComponent("resetForm").setErrorMessage(this.t["Could not connect to the server"]);
   }
   onSaveSuccess() {
-    this.setState("registrationSuccessful", true);
+    this.setState("resetSuccessful", true);
   }
   onLogOutButtonClick() {
     cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
@@ -50,22 +47,13 @@ class {
     </div>
   </if>
   <else>
-    <if(state.registrationSuccessful)>
-      <div class="uk-margin-top">${out.global.t["Your registration is almost complete. Please check your mailbox and activate your account."]}</div>
+    <if(state.resetSuccessful)>
+      <div class="uk-margin-top">${out.global.t["Your password reset request is almost complete. Please check your mailbox to activate your new password."]}</div>
     </if>
     <else>
-      <zoiaForm key="registerForm" data=[
+      <div class="uk-margin-top">${out.global.t["You may reset your password in case you forgot it. Type in your e-mail address which you were using for an account registration and a new desired password for your account. You will receive a confirmation mail."]}</div>
+      <zoiaForm key="resetForm" data=[
         [
-          {
-            id: "username",
-            type: "text",
-            label: out.global.t["Username"],
-            css: "uk-input uk-form-width-medium",
-            helpText: out.global.t["Latin characters and numbers"],
-            mandatory: true,
-            pattern: "^[a-zA-Z0-9_-]{4,32}$",
-            autoFocus: true
-          },
           {
             id: "email",
             type: "text",
@@ -76,11 +64,12 @@ class {
             minLength: 5,
             maxLength: 254,
             pattern: "^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$",
+            autoFocus: true
           },
           {
             id: "password",
             type: "text",
-            label: out.global.t["Password"],
+            label: out.global.t["New password"],
             css: "uk-input uk-form-width-small",
             textType: "password",
             minLength: 8,
@@ -126,7 +115,7 @@ class {
         ERR_FORMAT: out.global.t["Invalid format"],
         ERR_SHOULD_MATCH: out.global.t["Does not match"]
       } save={
-        url: `${out.global.siteData.api}/api/users/register`,
+        url: `${out.global.siteData.api}/api/users/reset`,
         extras: {
           language: out.global.siteData.language
         }

@@ -1,5 +1,10 @@
 {
 	"Log Out": "Выйти",
 	"Not Found": "Не найдено",
-	"The server encountered an unexpected condition which prevented it from fulfilling the request.": "Во время выполнения запроса возникла непредвиденная ошибка. Пожалуйста, попробуйте обновить страницу через некоторое время."
+	"The server encountered an unexpected condition which prevented it from fulfilling the request.": "На сервере возникла непредвиденная ошибка, из-за которой запрос не может быть корректно обработан.",
+	"Resource could not be not found. Please check the URL and try again.": "Запрошенная страница не найдена на сервере. Пожалуйста, проверьте ссылку и повторите попытку.",
+	"Internal Server Error": "Внутренняя ошибка сервера",
+	"Admin Panel": "Панель администратора",
+	"Register": "Регистрация",
+	"Sign In": "Войти"
 }

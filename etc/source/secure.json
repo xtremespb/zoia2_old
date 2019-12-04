@@ -22,7 +22,7 @@
             "pass": ""
         }
     },
-    "serviceMailbox": "Zoia <info@zoiajs.org>",
+    "serviceMailbox": "info@zoiajs.org",
     "pathToLogo": "../static/zoia/logo_dark_small.png",
     "development": false,
     "loglevel": "info",

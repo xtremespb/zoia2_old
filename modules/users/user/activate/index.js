@@ -1,4 +1,5 @@
 import axios from 'axios';
+import uuid from 'uuid/v1';
 import site from '../../../../shared/lib/site';
 import locale from '../../../../shared/lib/locale';
 import template from './template.marko';
@@ -55,7 +56,9 @@ export default fastify => ({
             } catch (e) {
                 // Ignore
             }
-            let activationSuccess;
+            const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
+            siteData.user = siteMeta.user || {};
+            siteData.title = `${t['Activate user account']} | ${siteData.title}`;
             if (!validationError) {
                 try {
                     const apiValidationData = await axios.post(`${fastify.zoiaConfig.api.url}/api/users/activate`, {
@@ -66,14 +69,13 @@ export default fastify => ({
                             'content-type': 'application/json'
                         }
                     });
-                    activationSuccess = apiValidationData.data.statusCode === 200;
+                    if (apiValidationData.data.statusCode === 200) {
+                        return rep.code(302).redirect(`${siteData.languagePrefixURL}/users/auth?activationSuccess=true&_=${uuid()}`);
+                    }
                 } catch (e) {
                     // Ignore
                 }
             }
-            const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
-            siteData.user = siteMeta.user || {};
-            siteData.title = `${t['Activate user account']} | ${siteData.title}`;
             const render = (await template.render({
                 $global: {
                     serializedGlobals: {
@@ -85,12 +87,11 @@ export default fastify => ({
                     t,
                     cookieOptions: fastify.zoiaConfig.cookieOptions,
                     template: templates.available[0]
-                },
-                activationSuccess
+                }
             }));
             const html = render.out.stream.str;
             rep.expires(new Date());
-            return rep.code(200).type('text/html').send(html);
+            return rep.sendSuccessHTML(rep, html);
         } catch (e) {
             return Promise.reject(e);
         }

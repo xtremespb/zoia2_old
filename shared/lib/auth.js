@@ -1,8 +1,10 @@
+import uuid from 'uuid/v1';
 import Cryptr from 'cryptr';
 import crypto from 'crypto';
 import {
     ObjectId
 } from 'mongodb';
+import locale from './locale';
 
 export default {
     verifyToken: async (token, fastify, db) => {
@@ -95,5 +97,10 @@ export default {
         } catch (e) {
             return false;
         }
+    },
+    logout(req, rep, fastify) {
+        const language = locale.getLocaleFromURL(req);
+            const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '/' : `/${language}`;
+            return rep.sendClearCookieRedirect(rep, `${fastify.zoiaConfig.id}_auth`, fastify.zoiaConfig.cookieOptions, `${languagePrefixURL}?_=${uuid()}`);
     }
 };

@@ -60,6 +60,6 @@ export default {
     },
     getPrefixForLanguage: (lang, fastify) => {
         const languages = Object.keys(fastify.zoiaConfig.languages);
-        return lang === languages[0] ? '/' : `/${lang}`;
+        return lang === languages[0] ? '' : `/${lang}`;
     }
 };

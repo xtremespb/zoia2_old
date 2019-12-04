@@ -75,6 +75,7 @@ export default fastify => ({
                 .send(JSON.stringify({
                     statusCode: 200,
                     token,
+                    username: req.body.username,
                     user: {
                         username: user.username,
                         id: String(user._id)

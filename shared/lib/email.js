@@ -1,8 +1,8 @@
 export default {
-    sendMail: async (to, subject, html, fastify) => {
+    sendMail: async (to, subject, html, lang, fastify) => {
         try {
             const info = await fastify.zoiaMailer.sendMail({
-                from: fastify.zoiaConfigSecure.serviceMailbox,
+                from: `${fastify.zoiaConfig.siteTitleShort[lang]} <${fastify.zoiaConfigSecure.serviceMailbox}>`,
                 to,
                 subject,
                 text: '',

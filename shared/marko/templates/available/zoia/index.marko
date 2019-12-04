@@ -64,7 +64,7 @@ style {
                     <li>
                       <a href=`${out.global.siteData.languagePrefixURL}/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
                     </li>
-                    <if(out.global.siteData.user.admin === 1)>
+                    <if(out.global.siteData.user.admin)>
                       <li>
                         <a href="/admin">${out.global.t["Admin Panel"]}</a>
                       </li>
@@ -75,11 +75,13 @@ style {
             </if>
             <else>
               <li>
-                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.siteData.currentPath || "/"}`>Sign in</a>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.siteData.currentPath || "/"}`>${out.global.t["Sign In"]}</a>
               </li>
-              <li>
-                <a href=`${out.global.siteData.languagePrefixURL}/users/register`>Register</a>
-              </li>
+              <if(out.global.siteData.allowRegistration)>
+                <li>
+                  <a href=`${out.global.siteData.languagePrefixURL}/users/register`>${out.global.t["Register"]}</a>
+                </li>
+              </if>
             </else>
             <li>
               <a href="#">

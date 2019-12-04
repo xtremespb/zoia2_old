@@ -32,9 +32,7 @@ export default fastify => ({
             }
             const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
             siteData.user = siteMeta.user || {};
-            siteData.title = `${t['Authorize']} | ${siteData.title}`;
-            siteData.activationSuccess = req.query.activationSuccess ? true : null;
-            siteData.resetSuccess = req.query.resetSuccess ? true : null;
+            siteData.title = `${t['Register']} | ${siteData.title}`;
             const render = (await template.render({
                 $global: {
                     serializedGlobals: {

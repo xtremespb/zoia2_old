@@ -1,9 +1,12 @@
+import {
+    ObjectId
+} from 'mongodb';
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
 import auth from '../../../shared/lib/auth';
 import locale from '../../../shared/lib/locale';
 import mailer from '../../../shared/lib/email';
-import mailRegister from '../email/register/index.marko';
+import mailReset from '../email/reset/index.marko';
 import I18N from '../../../shared/utils/i18n-node';
 
 export default fastify => ({
@@ -11,12 +14,6 @@ export default fastify => ({
         body: {
             type: 'object',
             properties: {
-                username: {
-                    type: 'string',
-                    minLength: 4,
-                    maxLength: 32,
-                    pattern: '^[a-zA-Z0-9_-]+$'
-                },
                 password: {
                     type: 'string',
                     minLength: 8,
@@ -45,7 +42,7 @@ export default fastify => ({
                     pattern: '^[a-z]+$'
                 }
             },
-            required: ['username', 'password', 'email', 'captcha', 'captchaSecret']
+            required: ['password', 'email', 'captcha', 'captchaSecret']
         }
     },
     attachValidation: true,
@@ -68,15 +65,6 @@ export default fastify => ({
         // End of Validation
         // Processing
         try {
-            // If registration is not allowed, stop
-            if (!fastify.zoiaConfig.allowRegistration) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        message: 'Registration is not allowed',
-                        errors: {}
-                    }));
-            }
             // Load locale
             const i18n = I18N('users')[req.body.language];
             // Check captcha
@@ -93,33 +81,16 @@ export default fastify => ({
                         }
                     }));
             }
-            const username = req.body.username.toLowerCase();
             const email = req.body.email.toLowerCase();
-            const usernameDB = await this.mongo.db.collection('users').findOne({
-                username
+            const userDB = await this.mongo.db.collection('users').findOne({
+                email
             });
-            if (usernameDB) {
+            if (!userDB) {
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 400,
                         errorCode: 2,
-                        message: 'User already registered',
-                        errors: {
-                            default: {
-                                username: ''
-                            }
-                        }
-                    }));
-            }
-            const emailDB = await this.mongo.db.collection('users').findOne({
-                email
-            });
-            if (emailDB) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        errorCode: 3,
-                        message: 'E-mail already registered',
+                        message: 'Unknown user ',
                         errors: {
                             default: {
                                 email: ''
@@ -127,24 +98,24 @@ export default fastify => ({
                         }
                     }));
             }
-            // Save new user to the database
-            const activationCode = uuid();
-            const registrationDate = parseInt(new Date().getTime() / 1000, 10);
-            const password = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(req.body.password).digest('hex');
-            const insResult = await this.mongo.db.collection('users').insertOne({
-                username,
-                active: false,
-                admin: false,
-                email,
-                password,
-                activationCode,
-                registrationDate
+            // Save to the database
+            const resetCode = uuid();
+            const passwordReset = crypto.createHmac('sha512', fastify.zoiaConfigSecure.secret).update(req.body.password).digest('hex');
+            const update = await this.mongo.db.collection('users').updateOne({
+                _id: new ObjectId(userDB._id)
+            }, {
+                $set: {
+                    passwordReset,
+                    resetCode
+                }
+            }, {
+                upsert: false
             });
-            if (!insResult || !insResult.result || !insResult.result.ok || !insResult.insertedId) {
+            if (!update || !update.result || !update.result.ok) {
                 return rep.code(200)
                     .send(JSON.stringify({
                         statusCode: 400,
-                        message: 'Could not insert a database record',
+                        message: 'Could not update a database record',
                         errors: {
                             default: {
                                 email: ''
@@ -154,9 +125,9 @@ export default fastify => ({
             }
             // Send e-mail message
             const prefix = locale.getPrefixForLanguage(req.body.language, fastify);
-            const registrationURL = `${fastify.zoiaConfig.siteURL}${prefix}/users/activate?id=${insResult.insertedId}&code=${activationCode}`;
-            const subj = 'New account registration';
-            const render = (await mailRegister.render({
+            const resetURL = `${fastify.zoiaConfig.siteURL}${prefix}/users/resetConfirm?id=${userDB._id}&code=${resetCode}`;
+            const subj = 'Reset password';
+            const render = (await mailReset.render({
                 $global: {
                     siteURL: `${fastify.zoiaConfig.siteURL}${prefix}` || '',
                     siteTitle: fastify.zoiaConfig.siteTitle[req.body.language] || '',
@@ -164,7 +135,7 @@ export default fastify => ({
                     preheader: i18n[subj],
                     t: i18n
                 },
-                registrationURL
+                resetURL
             }));
             const htmlMail = render.out.stream.str;
             // Send mail

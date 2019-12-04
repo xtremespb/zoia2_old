@@ -7,6 +7,7 @@ class {
     this.redirectURL = out.global.siteData.redirectURL;
     this.cookieOptions = out.global.cookieOptions;
     this.siteId = out.global.siteData.siteId;
+    this.language = out.global.siteData.language;
     this.languagePrefixURL = out.global.siteData.languagePrefixURL || "/";
   }
   onSaveError(res) {
@@ -17,6 +18,24 @@ class {
   }
   onSaveSuccess(res) {
     const { token } = res.data;
+    const reduxData = cookies.get(`persist:${this.siteId}_root`, this.cookieOptions);
+    console.log(reduxData);
+    if (reduxData) {
+      try {
+        const reduxDataJSON = JSON.parse(reduxData);
+        const appData = JSON.parse(reduxDataJSON.appData);
+        appData.language = this.language;
+        appData.user = {
+          username: res.data.username
+        };
+        reduxDataJSON.appData = JSON.stringify(appData);
+        cookies.set(`persist:${this.siteId}_root`, JSON.stringify(reduxDataJSON), this.cookieOptions);
+      } catch (e) {
+        cookies.set(`persist:${this.siteId}_root`, `{"appData":"{\\"language\\":\\"${this.language}\\",\\"user\\":{\\"username\\":\\"${res.data.username}\\"}}","_persist":"{\\"version\\":-1,\\"rehydrated\\":true}"}`, this.cookieOptions);
+      }
+    } else {
+      cookies.set(`persist:${this.siteId}_root`, `{"appData":"{\\"language\\":\\"${this.language}\\",\\"user\\":{\\"username\\":\\"${res.data.username}\\"}}","_persist":"{\\"version\\":-1,\\"rehydrated\\":true}"}`, this.cookieOptions);
+    }
     cookies.set(`${this.siteId}_auth`, token, this.cookieOptions);
     this.getComponent("authForm").setLoading(true);
     location.href = `${this.redirectURL ? this.redirectURL : this.languagePrefixURL}?_=${uuid()}`;
@@ -35,6 +54,18 @@ class {
     </div>
   </if>
   <else>
+    <if(out.global.siteData.activationSuccess)>
+      <div class="uk-alert-success uk-alert uk-margin-remove" uk-alert>
+        <a class="uk-alert-close" uk-close/>
+        <p>${out.global.t["Your account has been successfully activated. You may use your username and password to sign in to the website."]}</p>
+      </div>
+    </if>
+    <if(out.global.siteData.resetSuccess)>
+      <div class="uk-alert-success uk-alert uk-margin-remove" uk-alert>
+        <a class="uk-alert-close" uk-close/>
+        <p>${out.global.t["Your password has been successfully reset. You may use your new password to sign in to the website."]}</p>
+      </div>
+    </if>
     <zoiaForm key="authForm" data=[
       [
         {
@@ -65,7 +96,7 @@ class {
       {
         id: "btn1",
         type: "button",
-        label: out.global.t["Sign in"],
+        label: out.global.t["Sign In"],
         buttonType: "submit",
         css: "uk-button uk-button-primary"
       }
