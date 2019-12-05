@@ -108,5 +108,15 @@ class {
       url: `${out.global.siteData.api}/api/users/login`,
       extras: {}
     } on-save-error("onSaveError") on-save-success("onSaveSuccess")/>
+    <ul class="uk-list uk-text-small uk-list-bullet">
+      <li>
+        ${out.global.t["Forgot your password?"]}&nbsp;<a href=`${out.global.siteData.languagePrefixURL}/users/reset`>${out.global.t["Click here"]}</a>&nbsp;${out.global.t["to set a new password for your account"]}
+      </li>
+      <if(out.global.siteData.allowRegistration)>
+        <li>
+          ${out.global.t["Don't have an account yet?"]}&nbsp;<a href=`${out.global.siteData.languagePrefixURL}/users/register`>${out.global.t["Click here"]}</a>&nbsp;${out.global.t["to register a new account on this website"]}
+        </li>
+      </if>
+    </ul>
   </else>
 </div>

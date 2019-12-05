@@ -47,5 +47,7 @@
     "You (or someone else) has requested to set a new password for your account. In case you need to set a new password, please click the following button:": "",
     "Change password": "",
     "Your account password could not be reset at this moment. Probably you have specified a wrong reset code.": "",
-    "Your password has been successfully reset. You may use your new password to sign in to the website.": ""
+    "Your password has been successfully reset. You may use your new password to sign in to the website.": "",
+    "to register a new account on this website": "",
+    "Don't have an account yet?": ""
 }

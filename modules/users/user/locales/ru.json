@@ -47,5 +47,7 @@
     "You (or someone else) has requested to set a new password for your account. In case you need to set a new password, please click the following button:": "Вы (или кто-то от вашего имени) начал процедуру установки нового пароля для аккаунта. В случае, если пароль на сайте действительно необходимо сменить, пожалуйста, нажмите на кнопку:",
     "Change password": "Сменить пароль",
     "Your account password could not be reset at this moment. Probably you have specified a wrong reset code.": "Пароль для аккаунта в настоящее время не может быть установлен. Пожалуйста, проверьте корректность ссылки для восстановления пароля, и повторите попытку позже.",
-    "Your password has been successfully reset. You may use your new password to sign in to the website.": "Новый пароль был успешно установлен для вашего аккаунта. Пожалуйста, используйте ваше имя пользователя и пароль для входа на сайт."
+    "Your password has been successfully reset. You may use your new password to sign in to the website.": "Новый пароль был успешно установлен для вашего аккаунта. Пожалуйста, используйте ваше имя пользователя и пароль для входа на сайт.",
+    "to register a new account on this website": "для регистрации нового аккаунта на этом сайте",
+    "Don't have an account yet?": "Еще не зарегистрированы?"
 }
