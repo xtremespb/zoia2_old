@@ -81,6 +81,22 @@ class {
       </div>
     </label>
   </if>
+  <!-- Textarea -->
+  <if(input.item.type === "textarea")>
+    <label class="uk-form-label" for="">
+      ${input.item.label}<div class="uk-form-controls">
+        <textarea id=input.item.id class=`${input.item.css}${input.error ? " uk-form-danger" : ""}${state.enabled ? "" : " za-zf-disabled"}` rows=input.item.rows value=input.value key=input.item.id on-change("handleChangeText") disabled=input.isDisabled/>
+        <if(input.error && input.error !== "__error__")>
+          <div>
+            <div class="uk-label uk-label-danger">${input.error}</div>
+          </div>
+        </if>
+        <if(input.item.helpText)>
+          <div class="uk-text-small uk-text-muted">${input.item.helpText}</div>
+        </if>
+      </div>
+    </label>
+  </if>
   <!-- Select -->
   <if(input.item.type === "select")>
     <label class="uk-form-label" for="">

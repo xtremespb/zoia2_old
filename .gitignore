@@ -42,3 +42,5 @@ node_modules/
 /etc/server
 /dist
 locale/_build/
+/shared/build/linguirc.admin.json
+/shared/build/modules.json
