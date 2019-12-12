@@ -1,7 +1,6 @@
 import {
     ObjectId
 } from 'mongodb';
-import auth from '../../../shared/lib/auth';
 
 const editableColumns = ['username', 'email', 'active'];
 const noDupes = ['username', 'email'];
@@ -37,29 +36,21 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         let value = req.body.value || '';
         // End of Validation
         // Check permissions
-        const user = await auth.verifyToken(req.body.token, fastify, this.mongo.db);
+        const user = await req.verifyToken(req.body.token, fastify, this.mongo.db);
         if (!user || !user.admin) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: 'Authentication failed'
+            rep.logError(req, 'Authentication failed');
+            return rep.sendUnauthorizedError(rep, {
+                default: {
+                    username: '',
+                    password: ''
+                }
             });
-            return rep.code(401).send(JSON.stringify({
-                statusCode: 401,
-                error: 'Authentication failed'
-            }));
         }
         // End of check permissions
         try {
@@ -68,10 +59,7 @@ export default fastify => ({
                 _id: new ObjectId(req.body.recordId)
             });
             if (!userRecord) {
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: 'Non-existent record'
-                }));
+                return rep.sendBadRequestError(rep, 'Non-existent record');
             }
             // Perform the format validation
             let formatValidationError;
@@ -101,12 +89,7 @@ export default fastify => ({
                 break;
             }
             if (formatValidationError) {
-                return rep.code(200).send(JSON.stringify({
-                    statusCode: 400,
-                    errorCode: 2,
-                    errorField: req.body.columnId,
-                    error: 'Invalid format'
-                }));
+                return rep.sendBadRequestError(rep, 'Invalid format', {}, 3);
             }
             // Check for dupes
             // eslint-disable-next-line consistent-return
@@ -115,19 +98,13 @@ export default fastify => ({
                 dupeQuery[req.body.columnId] = value;
                 const dupeRecord = await this.mongo.db.collection('users').findOne(dupeQuery);
                 if (dupeRecord) {
-                    return rep.code(200).send(JSON.stringify({
-                        statusCode: 400,
-                        errorCode: 1,
-                        error: 'Duplicate value'
-                    }));
+                    return rep.sendBadRequestError(rep, 'Duplicate value');
                 }
             }
             if (fastify.zoiaConfig.demo && userRecord[req.body.columnId].match(/admin/i)) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 200,
-                        value: 'admin'
-                    }));
+                return rep.sendSuccessJSON(rep, {
+                    value: 'admin'
+                });
             }
             // Update if value mismatches
             if (userRecord[req.body.columnId] !== value) {
@@ -144,24 +121,12 @@ export default fastify => ({
                 value = value ? '1' : '0';
             }
             // Send response
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200,
-                    value
-                }));
-        } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
+            return rep.sendSuccessJSON(rep, {
+                value
             });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+        } catch (e) {
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

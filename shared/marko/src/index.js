@@ -9,7 +9,6 @@ import fastifyCookie from 'fastify-cookie';
 import fastifyCaching from 'fastify-caching';
 import Pino from 'pino';
 import Fastify from 'fastify';
-import axios from 'axios';
 import logger from '../../lib/logger';
 import modules from '../../build/modules.json';
 import error404 from '../error404/index.marko';
@@ -17,16 +16,19 @@ import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 import templates from '../../../etc/templates.json';
 import i18n from '../../utils/i18n-node';
+import loggerHelpers from '../../lib/loggerHelpers';
 import response from '../../lib/response';
+import auth from '../../lib/auth';
+import locale from '../../lib/locale';
 
 (async () => {
     let secure;
     let config;
-    let log;
+    let pino;
     try {
         secure = await fs.readJSON(path.resolve(`${__dirname}/../etc/secure.json`));
         config = await fs.readJSON(path.resolve(`${__dirname}/../static/etc/config.json`));
-        log = Pino({
+        pino = Pino({
             level: secure.loglevel
         });
     } catch (e) {
@@ -37,16 +39,18 @@ import response from '../../lib/response';
     try {
         const fastify = Fastify({
             logger,
-            trustProxy: secure.trustProxy
+            trustProxy: secure.trustProxy,
+            ignoreTrailingSlash: true
         });
         fastify.decorate('zoiaConfig', config);
         fastify.decorate('zoiaConfigSecure', secure);
         fastify.decorateRequest('zoiaConfig', config);
         fastify.decorateRequest('zoiaConfigSecure', secure);
-        fastify.decorateReply('sendSuccessHTML', response.sendSuccessHTML);
-        fastify.decorateReply('sendSuccessJSON', response.sendSuccessJSON);
-        fastify.decorateReply('sendRedirect', response.sendRedirect);
-        fastify.decorateReply('sendClearCookieRedirect', response.sendClearCookieRedirect);
+        Object.keys(response).map(i => fastify.decorateReply(i, response[i]));
+        Object.keys(loggerHelpers).map(i => fastify.decorateReply(i, loggerHelpers[i]));
+        Object.keys(auth).map(i => fastify.decorateRequest(i, auth[i]));
+        Object.keys(locale).map(i => fastify.decorateRequest(i, locale[i]));
+        Object.keys(site).map(i => fastify.decorateRequest(i, site[i]));
         fastify.register(fastifyFormbody);
         fastify.register(fastifyMultipart, {
             addToBody: true
@@ -72,29 +76,8 @@ import response from '../../lib/response';
             module.default(fastify);
         }));
         fastify.setNotFoundHandler(async (req, rep) => {
-            const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
-            const siteMeta = {
-                nav: null,
-                user: {}
-            };
-            try {
-                const apiSiteData = await axios.post(`${fastify.zoiaConfig.api.url}/api/core/site/data`, {
-                    token,
-                    nav: true,
-                    user: true
-                }, {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                });
-                siteMeta.nav = apiSiteData.data.nav;
-                siteMeta.user = apiSiteData.data.user || {};
-            } catch (e) {
-                // Ignore
-            }
-            const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
+            const siteData = await site.getSiteData(req);
             const t = i18n()[siteData.language];
-            siteData.user = siteMeta.user || {};
             siteData.title = `${t['Not Found']} | ${siteData.title}`;
             const render = await error404.render({
                 $global: {
@@ -106,30 +89,14 @@ import response from '../../lib/response';
             rep.code(404).type('text/html').send(render.out.stream.str);
         });
         fastify.setErrorHandler(async (err, req, rep) => {
-            const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
-            const siteMeta = {
-                nav: null,
-                user: {}
-            };
+            let siteData = {};
             try {
-                const apiSiteData = await axios.post(`${fastify.zoiaConfig.api.url}/api/core/site/data`, {
-                    token,
-                    nav: true,
-                    user: true
-                }, {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                });
-                siteMeta.nav = apiSiteData.data.nav;
-                siteMeta.user = apiSiteData.data.user || {};
+                siteData = await site.getSiteData(req);
             } catch (e) {
                 // Ignore
             }
-            const siteData = await site.getSiteData(req, fastify);
-            const t = i18n()[siteData.language];
-            siteData.user = siteMeta.user;
-            siteData.title = `${t['Internal Server Error']} | ${siteData.title}`;
+            const t = i18n()[siteData.language || Object.keys(req.zoiaConfig.languages)[0]];
+            siteData.title = `${t['Internal Server Error']}${siteData.title ? ` | ${siteData.title}` : ''}`;
             const render = await error500.render({
                 $global: {
                     siteData,
@@ -148,7 +115,7 @@ import response from '../../lib/response';
         });
         await fastify.listen(secure.webServer.port, secure.webServer.ip);
     } catch (e) {
-        log.error(e);
+        pino.error(e);
         process.exit(1);
     }
 })();

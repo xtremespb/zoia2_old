@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import axios from 'axios';
 import locale from './locale';
 
 const loopPath = (data, keyPath, language, callback, path = [], pathData = []) => data.forEach(item => {
@@ -17,28 +18,52 @@ const loopPath = (data, keyPath, language, callback, path = [], pathData = []) =
 });
 
 export default {
-    getSiteData: async (req, fastify, page, folders, nav) => {
-        // const user = await auth.getUserData(req, fastify, db);
-        const languagesArr = Object.keys(fastify.zoiaConfig.languages);
+    getSiteData: async (req, pageData, preloadedData) => {
+        const siteData = {
+            nav: null,
+            user: {}
+        };
+        const token = req.cookies[`${req.zoiaConfig.id}_auth`];
+        if (!preloadedData || !preloadedData.nav || !preloadedData.user) {
+            try {
+                const apiSiteData = await axios.post(`${req.zoiaConfig.api.url}/api/core/site/data`, {
+                    token,
+                    nav: true,
+                    user: true
+                }, {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                });
+                siteData.nav = apiSiteData.data.nav;
+                siteData.user = apiSiteData.data.user || {};
+            } catch (e) {
+                throw new Error(e);
+            }
+        } else {
+            siteData.nav = preloadedData.nav;
+            siteData.user = preloadedData.user;
+        }
+        const languagesArr = Object.keys(req.zoiaConfig.languages);
         const {
             languages
-        } = fastify.zoiaConfig;
+        } = req.zoiaConfig;
         const language = locale.getLocaleFromURL(req);
-        const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '' : `/${language}`;
+        const languagePrefixURL = language === Object.keys(req.zoiaConfig.languages)[0] ? '' : `/${language}`;
         const title = locale.getSiteTitle(language, req);
         const redirectURL = req.query.redirect;
         const currentPath = req.urlData().path;
         const languagesURL = {};
         let breadcrumbsHTML = '';
-        if (folders && folders.data && page) {
+        if (pageData && pageData.folders && pageData.folders.data && pageData.filename) {
             const {
                 url
             } = locale.getNonLocalizedURL(req);
             const urlParts = url.split(/\//).filter(i => i.length > 0);
-            if (page.filename && urlParts.length && urlParts[urlParts.length - 1] === page.filename) {
+            if (pageData.filename && urlParts.length && urlParts[urlParts.length - 1] === pageData.filename) {
                 urlParts.pop();
             }
-            loopPath(folders.data, urlParts.join('/'), language, breadcrumbsData => {
+            loopPath(pageData.folders.data, urlParts.join('/'), language, breadcrumbsData => {
                 let breadcrumbsCurrentPath = '';
                 breadcrumbsHTML = breadcrumbsData.map(b => {
                     const bu = b;
@@ -49,13 +74,14 @@ export default {
             });
         }
         breadcrumbsHTML = `<li><a href="${languagePrefixURL || '/'}">${title}</a></li>${breadcrumbsHTML}`;
-        const navTree = (nav ? nav.data || [] : []).map(i => {
+        const navTree = (siteData.nav ? siteData.nav.data || [] : []).map(i => {
             const item = i;
             item.url = item.url.match(/^http/) ? item : `${languagePrefixURL}${item.url}`;
             return item;
         });
         languagesArr.map(lang => languagesURL[lang] = locale.getLocaleURL(lang, req));
         return {
+            ...siteData,
             navTree,
             language,
             languagePrefixURL,
@@ -66,10 +92,11 @@ export default {
             currentPath,
             title,
             breadcrumbsHTML,
-            useUIkitOnFrontend: fastify.zoiaConfig.useUIkitOnFrontend || false,
-            allowRegistration: fastify.zoiaConfig.allowRegistration,
-            siteId: fastify.zoiaConfig.id,
-            api: fastify.zoiaConfig.api.url
+            useUIkitOnFrontend: req.zoiaConfig.useUIkitOnFrontend || false,
+            allowRegistration: req.zoiaConfig.allowRegistration,
+            allowSignIn: req.zoiaConfig.allowSignIn,
+            siteId: req.zoiaConfig.id,
+            api: req.zoiaConfig.api.url
         };
     }
 };

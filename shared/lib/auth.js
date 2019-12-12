@@ -98,9 +98,9 @@ export default {
             return false;
         }
     },
-    logout(req, rep, fastify) {
+    logout(req, rep) {
         const language = locale.getLocaleFromURL(req);
-            const languagePrefixURL = language === Object.keys(fastify.zoiaConfig.languages)[0] ? '/' : `/${language}`;
-            return rep.sendClearCookieRedirect(rep, `${fastify.zoiaConfig.id}_auth`, fastify.zoiaConfig.cookieOptions, `${languagePrefixURL}?_=${uuid()}`);
+        const languagePrefixURL = language === Object.keys(req.zoiaConfig.languages)[0] ? '/' : `/${language}`;
+        return rep.sendClearCookieRedirect(rep, `${req.zoiaConfig.id}_auth`, req.zoiaConfig.cookieOptions, `${languagePrefixURL}?_=${uuid()}`);
     }
 };

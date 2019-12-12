@@ -29,24 +29,31 @@ class {
       });
     }
     this.state = state;
-    this.typesToSerialize = ["text", "select", "captcha"];
+    this.typesToSerialize = ["text", "textarea", "select", "captcha"];
     this.setErrorMessage = this.intSetErrorMessage;
     this.setLoading = this.loading;
     this.setEnabled = this.enable;
     this.setDisabled = this.disable;
     this.captchaUpdate = this.doUpdateCaptcha;
     this.setValue = this.value;
+    this.validate = this.doValidation;
+    this.serialize = this.doSerialization;
+    this.submitForm = this.save;
+    this.dataFlat = input.data.flat();
   }
   onMount() {
-    const autoFocusField = this.input.data.flat().find(i => i.autoFocus);
+    const autoFocusField = this.dataFlat.find(i => i.autoFocus);
     if (autoFocusField) {
       this.getComponent(autoFocusField.id).focus();
     }
   }
+  getFlatData() {
+    return this.input.data.flat();
+  }
   value(id, value) {
     this.setState(id, value);
   }
-  validate(data) {
+  doValidation(data = this.dataFlat) {
     let error = false;
     let focus;
     // Clean up errors
@@ -156,7 +163,7 @@ class {
       );
     }
   }
-  serialize(input) {
+  doSerialization(input = this.dataFlat) {
     const data = {};
     // Serialize data from input to a key-value pairs object
     input.map(i => {
@@ -168,8 +175,8 @@ class {
         }
       }
     });
-    // No need to serialize fields where "shouldMatch" points to
-    this.input.data.flat().map(i => {
+    // No need to doSerialization fields where "shouldMatch" points to
+    this.dataFlat.map(i => {
       if (i.shouldMatch) {
         delete data[i.shouldMatch];
       }
@@ -178,7 +185,7 @@ class {
     return data;
   }
   enableAll() {
-    this.input.data.flat().map(i => {
+    this.dataFlat.map(i => {
       const item = this.getComponent(i.id);
       if (item && item.enable) {
         item.enable();
@@ -187,7 +194,7 @@ class {
   }
   disableAll() {
     document.activeElement.blur();
-    this.input.data.flat().map(i => {
+    this.dataFlat.map(i => {
       const item = this.getComponent(i.id);
       if (item && item.disable) {
         item.disable();
@@ -202,12 +209,11 @@ class {
   }
   async onFormSubmit(e) {
     e.preventDefault();
-    const data = this.input.data.flat();
-    const errors = this.validate(data);
+    const errors = this.doValidation(this.dataFlat);
     if (errors) {
       return;
     }
-    const dataSerialized = this.serialize(data);
+    const dataSerialized = this.doSerialization(this.dataFlat);
     await this.save(dataSerialized);
   }
   onFieldValueChanged(data) {
@@ -215,6 +221,9 @@ class {
   }
   onCaptchaSecretUpdate(data) {
     this.setState(`${data.id}Secret`, data.value);
+  }
+  onButtonClick(data) {
+    this.emit("button-click", data);
   }
   doUpdateCaptcha(id) {
     this.getComponent(id).captchaUpdate();
@@ -231,13 +240,13 @@ class {
     <for|item, index| of=input.data>
       <if(typeof item === "object")>
         <div class="uk-margin-small-bottom">
-          <itemSelector key=item.id item=item value=state[item.id] error=state[`error__${item.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${item.id}`] on-captcha-secret-update("onCaptchaSecretUpdate")/>
+          <itemSelector key=item.id item=item value=state[item.id] error=state[`error__${item.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${item.id}`] on-captcha-secret-update("onCaptchaSecretUpdate") on-button-click("onButtonClick")/>
         </div>
       </if>
       <if(Array.isArray(item))>
         <div class="uk-flex uk-flex-wrap uk-margin-small-bottom">
           <for|sitem, sindex| of=item>
-            <itemSelector key=sitem.id item=sitem inlineFlag=true value=state[sitem.id] error=state[`error__${sitem.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${sitem.id}`] on-captcha-secret-update("onCaptchaSecretUpdate")/>
+            <itemSelector key=sitem.id item=sitem inlineFlag=true value=state[sitem.id] error=state[`error__${sitem.id}`] on-field-value-change("onFieldValueChanged") isDisabled=state[`disabled__${sitem.id}`] on-captcha-secret-update("onCaptchaSecretUpdate") on-button-click("onButtonClick")/>
           </for>
         </div>
       </if>

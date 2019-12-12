@@ -37,10 +37,15 @@ export default fastify => ({
                     folders,
                     user
                 } = apiData.data;
-                const siteData = await site.getSiteData(req, fastify, page, folders, nav);
+                const siteData = await site.getSiteData(req, {
+                    folders,
+                    filename: page.filename
+                }, {
+                    nav,
+                    user
+                });
                 const t = i18n('pages')[siteData.language];
                 siteData.title = `${page.current.title} | ${siteData.title}`;
-                siteData.user = user || {};
                 const render = (await template.render({
                     content: page.current.contentCompiled || page.current.content,
                     $global: {
@@ -50,7 +55,7 @@ export default fastify => ({
                     }
                 }));
                 const html = render.out.stream.str.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);
-                return rep.code(200).type('text/html').send(html);
+                return rep.sendSuccessHTML(rep, html);
             }
             rep.callNotFound();
             return rep.code(204);

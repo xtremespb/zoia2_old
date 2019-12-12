@@ -6,7 +6,6 @@ import {
     minify
 } from 'html-minifier';
 import Typograf from 'typograf';
-import auth from '../../../shared/lib/auth';
 
 const ajv = new Ajv();
 
@@ -45,13 +44,8 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Pre-Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Pre-Validation
         try {
@@ -64,32 +58,21 @@ export default fastify => ({
                         error: 'General validation error'
                     })
                 };
-                req.log.error({
-                    ip: req.ip,
-                    path: req.urlData().path,
-                    query: req.urlData().query,
-                    error: errorData
-                });
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: errorData
-                }));
+                rep.logError(req, errorData);
+                return rep.sendBadRequestException(rep, 'Request validation error', errorData);
             }
             const id = formData.id || null;
             // End of Form Validation
             // Check permissions
-            const user = await auth.verifyToken(formData.token, fastify, this.mongo.db);
+            const user = await req.verifyToken(formData.token, fastify, this.mongo.db);
             if (!user || !user.admin) {
-                req.log.error({
-                    ip: req.ip,
-                    path: req.urlData().path,
-                    query: req.urlData().query,
-                    error: 'Authentication failed'
+                rep.logError(req, 'Authentication failed');
+                return rep.sendUnauthorizedError(rep, {
+                    default: {
+                        username: '',
+                        password: ''
+                    }
                 });
-                return rep.code(401).send(JSON.stringify({
-                    statusCode: 401,
-                    error: 'Authentication failed'
-                }));
             }
             // End of check permissions
             // Check if such page exists
@@ -98,11 +81,7 @@ export default fastify => ({
                     _id: new ObjectId(id)
                 });
                 if (!page) {
-                    return rep.code(200)
-                        .send(JSON.stringify({
-                            statusCode: 400,
-                            error: 'Page not found'
-                        }));
+                    return rep.sendNotFoundError(rep, 'Page not found');
                 }
             }
             // Build JSON
@@ -140,12 +119,7 @@ export default fastify => ({
             }
             const duplicatePage = await this.mongo.db.collection('pages').findOne(duplicatePageQuery);
             if (duplicatePage) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        errorCode: 1,
-                        error: 'Page with such path or filename already exists'
-                    }));
+                return rep.sendBadRequestError(rep, 'Page with such path or filename already exists', null, 1);
             }
             Object.keys(req.zoiaConfig.languages).map(language => {
                 if (formData[language]) {
@@ -180,10 +154,7 @@ export default fastify => ({
             pageData.fullPath = `${pageData.path.length > 1 ? pageData.path : ''}/${pageData.filename}`;
             pageData.fullPath = pageData.fullPath.length > 1 ? pageData.fullPath.replace(/\/$/, '') : pageData.fullPath;
             if (fastify.zoiaConfig.demo && pageData.fullPath === '/') {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 200
-                    }));
+                return rep.sendSuccessJSON(rep);
             }
             // Update page
             const update = await this.mongo.db.collection('pages').updateOne(id ? {
@@ -198,29 +169,12 @@ export default fastify => ({
             });
             // Check result
             if (!update || !update.result || !update.result.ok) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        error: 'Cannot update page record'
-                    }));
+                return rep.sendBadRequestError(rep, 'Cannot update page record');
             }
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200
-                }));
+            return rep.sendSuccessJSON(rep);
         } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
-            });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

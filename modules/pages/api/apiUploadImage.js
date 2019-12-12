@@ -2,70 +2,44 @@
 import fs from 'fs-extra';
 import uuid from 'uuid/v1';
 import Jimp from 'jimp';
-import auth from '../../../shared/lib/auth';
 
 export default fastify => ({
     async handler(req, rep) {
         // Start of Validation
         if (!req.body.token || !req.body.upload || !Array.isArray(req.body.upload) || typeof req.body.token !== 'string') {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: 'Missing token or file upload'
-            });
-            return rep.code(400).send(JSON.stringify({
-                statusCode: 400,
-                error: 'Missing token or file upload'
-            }));
+            rep.logError(req, 'Missing token or file upload');
+            return rep.sendBadRequestException(rep, 'Missing token or file upload');
         }
         // End of Validation
         // Check permissions
-        const user = await auth.verifyToken(req.body.token, fastify, this.mongo.db);
+        const user = await req.verifyToken(req.body.token, fastify, this.mongo.db);
         if (!user || !user.admin) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: 'Authentication failed'
+            rep.logError(req, 'Authentication failed');
+            return rep.sendUnauthorizedError(rep, {
+                default: {
+                    username: '',
+                    password: ''
+                }
             });
-            return rep.code(401).send(JSON.stringify({
-                statusCode: 401,
-                error: 'Authentication failed'
-            }));
         }
         // End of check permissions
         try {
             if (fastify.zoiaConfig.demo) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 200,
-                        url: `/zoia/logo_dark.png`
-                    }));
+                return rep.sendSuccessJSON(rep, {
+                    url: `/zoia/logo_dark.png`
+                });
             }
             await fs.ensureDir(`${__dirname}/../static/uploads`);
             const filename = uuid();
             const img = await Jimp.read(req.body.upload[0].data);
             const thumbBuffer = await img.getBufferAsync(Jimp.MIME_JPEG);
             await fs.writeFile(`${__dirname}/../static/uploads/${filename}.jpg`, thumbBuffer);
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200,
-                    url: `/uploads/${filename}.jpg`
-                }));
-        } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
+            return rep.sendSuccessJSON(rep, {
+                url: `/uploads/${filename}.jpg`
             });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+        } catch (e) {
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

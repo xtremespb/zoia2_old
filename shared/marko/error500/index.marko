@@ -1,7 +1,7 @@
 style {
-  html,
-  body {
-    height: 100%;
+  .za-e500-html,
+  .za-e500-body {
+    height: unset !important;
     font-family: "Source Sans Pro";
     padding: 15px;
   }
@@ -44,7 +44,7 @@ style {
 }
 
 <!DOCTYPE html>
-<html>
+<html class="za-e500-html">
   <head>
     <title>${out.global.siteData.title}</title>
     <meta charset="utf-8"/>
@@ -52,7 +52,7 @@ style {
     <link rel="shortcut icon" type="image/ico" href="/zoia/favicon.ico"/>
     <link rel="icon" href="/zoia/favicon.ico" type="image/x-icon"/>
   </head>
-  <body>
+  <body class="za-e500-body">
     <div>
       <div class="za-head">${out.global.t["Internal Server Error"]}</div>
       <p>${out.global.t["The server encountered an unexpected condition which prevented it from fulfilling the request."]}</p>

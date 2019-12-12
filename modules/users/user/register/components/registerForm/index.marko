@@ -38,7 +38,7 @@ class {
   }
   onLogOutButtonClick() {
     cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
-    location.href = `/?_=${uuid()}`;
+    location.href = `${this.languagePrefixURL || '/'}?_=${uuid()}`;
   }
 }
 

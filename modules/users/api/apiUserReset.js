@@ -3,9 +3,6 @@ import {
 } from 'mongodb';
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
-import auth from '../../../shared/lib/auth';
-import locale from '../../../shared/lib/locale';
-import mailer from '../../../shared/lib/email';
 import mailReset from '../email/reset/index.marko';
 import I18N from '../../../shared/utils/i18n-node';
 
@@ -54,13 +51,8 @@ export default fastify => ({
             };
         }
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Validation
         // Processing
@@ -68,35 +60,24 @@ export default fastify => ({
             // Load locale
             const i18n = I18N('users')[req.body.language];
             // Check captcha
-            if (!await auth.validateCaptcha(req.body.captchaSecret, req.body.captcha, fastify, this.mongo.db)) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        errorCode: 1,
-                        message: 'Invalid Captcha',
-                        errors: {
-                            default: {
-                                captcha: ''
-                            }
-                        }
-                    }));
+            if (!await req.validateCaptcha(req.body.captchaSecret, req.body.captcha, fastify, this.mongo.db)) {
+                return rep.sendBadRequestError(rep, 'Invalid Captcha', {
+                    default: {
+                        captcha: ''
+                    }
+                }, 1);
             }
+            // Find user by e-mail
             const email = req.body.email.toLowerCase();
             const userDB = await this.mongo.db.collection('users').findOne({
                 email
             });
             if (!userDB) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        errorCode: 2,
-                        message: 'Unknown user ',
-                        errors: {
-                            default: {
-                                email: ''
-                            }
-                        }
-                    }));
+                return rep.sendBadRequestError(rep, 'Unknown user', {
+                    default: {
+                        email: ''
+                    }
+                }, 3);
             }
             // Save to the database
             const resetCode = uuid();
@@ -112,19 +93,10 @@ export default fastify => ({
                 upsert: false
             });
             if (!update || !update.result || !update.result.ok) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        message: 'Could not update a database record',
-                        errors: {
-                            default: {
-                                email: ''
-                            }
-                        }
-                    }));
+                return rep.sendBadRequestError(rep, 'Could not update a database record');
             }
             // Send e-mail message
-            const prefix = locale.getPrefixForLanguage(req.body.language, fastify);
+            const prefix = req.getPrefixForLanguage(req.body.language, fastify);
             const resetURL = `${fastify.zoiaConfig.siteURL}${prefix}/users/resetConfirm?id=${userDB._id}&code=${resetCode}`;
             const subj = 'Reset password';
             const render = (await mailReset.render({
@@ -139,25 +111,12 @@ export default fastify => ({
             }));
             const htmlMail = render.out.stream.str;
             // Send mail
-            await mailer.sendMail(email, i18n[subj], htmlMail, req.body.language, fastify);
+            await rep.sendMail(fastify, email, i18n[subj], htmlMail, '', req.body.language);
             // Send response
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200
-                }));
+            return rep.sendSuccessJSON(rep);
         } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
-            });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

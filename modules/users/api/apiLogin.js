@@ -25,13 +25,8 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Validation
         // Processing
@@ -41,17 +36,13 @@ export default fastify => ({
                 username: req.body.username
             });
             if (!user || user.password !== passwordHash) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 401,
-                        message: 'User not found or invalid password',
-                        errors: {
-                            default: {
-                                username: '',
-                                password: ''
-                            }
-                        }
-                    }));
+                rep.logError(req, 'Authentication failed');
+                return rep.sendUnauthorizedError(rep, {
+                    default: {
+                        username: '',
+                        password: ''
+                    }
+                });
             }
             // Prepare token
             const sessionId = user.sessionId || uuid();
@@ -71,29 +62,17 @@ export default fastify => ({
                 }
             });
             // Send response
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200,
-                    token,
-                    username: req.body.username,
-                    user: {
-                        username: user.username,
-                        id: String(user._id)
-                    }
-                }));
-        } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
+            return rep.sendSuccessJSON(rep, {
+                token,
+                username: req.body.username,
+                user: {
+                    username: user.username,
+                    id: String(user._id)
+                }
             });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+        } catch (e) {
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

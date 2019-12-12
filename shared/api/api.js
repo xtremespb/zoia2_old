@@ -14,6 +14,11 @@ import Pino from 'pino';
 import Fastify from 'fastify';
 import modules from '../build/modules.json';
 import logger from '../lib/logger';
+import loggerHelpers from '../lib/loggerHelpers';
+import response from '../lib/response';
+import auth from '../lib/auth';
+import locale from '../lib/locale';
+import email from '../lib/email';
 
 (async () => {
     let secure;
@@ -42,6 +47,11 @@ import logger from '../lib/logger';
         fastify.decorateRequest('zoiaConfigSecure', secure);
         fastify.decorate('zoiaMailer', mailer);
         fastify.decorateRequest('zoiaMailer', mailer);
+        Object.keys(response).map(i => fastify.decorateReply(i, response[i]));
+        Object.keys(loggerHelpers).map(i => fastify.decorateReply(i, loggerHelpers[i]));
+        Object.keys(auth).map(i => fastify.decorateRequest(i, auth[i]));
+        Object.keys(locale).map(i => fastify.decorateRequest(i, locale[i]));
+        Object.keys(email).map(i => fastify.decorateReply(i, email[i]));
         const mongoClient = new MongoClient(secure.mongo.url, {
             useNewUrlParser: true,
             useUnifiedTopology: true

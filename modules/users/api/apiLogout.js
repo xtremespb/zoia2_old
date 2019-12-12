@@ -1,5 +1,3 @@
-import auth from '../../../shared/lib/auth';
-
 export default fastify => ({
     schema: {
         body: {
@@ -16,28 +14,20 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Validation
         // Check permissions
-        const user = await auth.verifyToken(req.body.token, fastify, this.mongo.db);
+        const user = await req.verifyToken(req.body.token, fastify, this.mongo.db);
         if (!user) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: 'Authentication failed'
+            rep.logError(req, 'Authentication failed');
+            return rep.sendUnauthorizedError(rep, {
+                default: {
+                    username: '',
+                    password: ''
+                }
             });
-            return rep.code(401).send(JSON.stringify({
-                statusCode: 401,
-                error: 'Authentication failed'
-            }));
         }
         // End of Checking permissions
         // Processing
@@ -51,23 +41,10 @@ export default fastify => ({
                 }
             });
             // Send response
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200
-                }));
+            return rep.sendSuccessJSON(rep);
         } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
-            });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

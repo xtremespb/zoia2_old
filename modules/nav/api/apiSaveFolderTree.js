@@ -1,5 +1,4 @@
 import Ajv from 'ajv';
-import auth from '../../../shared/lib/auth';
 
 const ajv = new Ajv();
 
@@ -44,13 +43,8 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Pre-Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Pre-Validation
         try {
@@ -63,31 +57,20 @@ export default fastify => ({
                         error: 'General validation error'
                     })
                 };
-                req.log.error({
-                    ip: req.ip,
-                    path: req.urlData().path,
-                    query: req.urlData().query,
-                    error: errorData
-                });
-                return rep.code(400).send(JSON.stringify({
-                    statusCode: 400,
-                    error: errorData
-                }));
+                rep.logError(req, errorData);
+                return rep.sendBadRequestException(rep, 'Request validation error', errorData);
             }
             // End of Form Validation
             // Check permissions
-            const user = await auth.verifyToken(formData.token, fastify, this.mongo.db);
+            const user = await req.verifyToken(formData.token, fastify, this.mongo.db);
             if (!user || !user.admin) {
-                req.log.error({
-                    ip: req.ip,
-                    path: req.urlData().path,
-                    query: req.urlData().query,
-                    error: 'Authentication failed'
+                rep.logError(req, 'Authentication failed');
+                return rep.sendUnauthorizedError(rep, {
+                    default: {
+                        username: '',
+                        password: ''
+                    }
                 });
-                return rep.code(401).send(JSON.stringify({
-                    statusCode: 401,
-                    error: 'Authentication failed'
-                }));
             }
             // End of check permissions
             // Update
@@ -97,10 +80,7 @@ export default fastify => ({
             // eslint-disable-next-line no-param-reassign
             loop(tree, item => delete item.title);
             if (fastify.zoiaConfig.demo) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 200
-                    }));
+                return rep.sendSuccessJSON(rep);
             }
             const update = await this.mongo.db.collection('registry').updateOne({
                 _id: 'nav_folder_tree'
@@ -113,29 +93,12 @@ export default fastify => ({
             });
             // Check result
             if (!update || !update.result || !update.result.ok) {
-                return rep.code(200)
-                    .send(JSON.stringify({
-                        statusCode: 400,
-                        error: 'Cannot update database record'
-                    }));
+                return rep.sendBadRequestError(rep, 'Cannot update database record');
             }
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200
-                }));
+            return rep.sendSuccessJSON(rep);
         } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
-            });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

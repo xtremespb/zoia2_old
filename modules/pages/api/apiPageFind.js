@@ -38,13 +38,8 @@ export default fastify => ({
     async handler(req, rep) {
         // Start of Validation
         if (req.validationError) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: req.validationError.message
-            });
-            return rep.code(400).send(JSON.stringify(req.validationError));
+            rep.logError(req, req.validationError.message);
+            return rep.sendBadRequestException(rep, 'Request validation error', req.validationError);
         }
         // End of Validation
         try {
@@ -53,10 +48,7 @@ export default fastify => ({
                 fullPath: req.body.url
             });
             if (!pageData || !pageData.data || !pageData.data[req.body.language]) {
-                return rep.code(200).send(JSON.stringify({
-                    statusCode: 404,
-                    error: 'Non-existent record or missing locale'
-                }));
+                return rep.sendNotFoundError(rep, 'Non-existent record or missing locale');
             }
             pageData.current = pageData.data[req.body.language];
             delete pageData.data;
@@ -84,27 +76,15 @@ export default fastify => ({
                 }
             }
             // Send response
-            return rep.code(200)
-                .send(JSON.stringify({
-                    statusCode: 200,
-                    page: pageData,
-                    nav,
-                    folders,
-                    user
-                }));
-        } catch (e) {
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: e && e.message ? e.message : 'Internal Server Error',
-                stack: fastify.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
+            return rep.sendSuccessJSON(rep, {
+                page: pageData,
+                nav,
+                folders,
+                user
             });
-            return rep.code(500).send(JSON.stringify({
-                statusCode: 500,
-                error: 'Internal server error',
-                message: e && e.message ? e.message : null
-            }));
+        } catch (e) {
+            rep.logError(req, null, e);
+            return rep.sendInternalServerError(rep, e.message);
         }
     }
 });

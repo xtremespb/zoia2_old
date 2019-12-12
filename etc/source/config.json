@@ -16,6 +16,7 @@
     "siteURL": "http://127.0.0.1",
     "commonItemsLimit": 12,
     "allowRegistration": true,
+    "allowSignIn": true,
     "wysiwyg": true,
     "api": {
         "url": "http://127.0.0.1:3000"

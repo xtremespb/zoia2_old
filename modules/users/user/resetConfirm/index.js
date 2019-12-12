@@ -1,7 +1,5 @@
 import axios from 'axios';
 import uuid from 'uuid/v1';
-import site from '../../../../shared/lib/site';
-import locale from '../../../../shared/lib/locale';
 import template from './template.marko';
 import templates from '../../../../etc/templates.json';
 import i18n from '../../../../shared/utils/i18n-node';
@@ -34,30 +32,8 @@ export default fastify => ({
         } = req;
         // End of Validation
         try {
-            const language = locale.getLocaleFromURL(req);
-            const t = i18n('users')[language] || {};
-            const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
-            const siteMeta = {
-                nav: null,
-                user: {}
-            };
-            try {
-                const apiSiteData = await axios.post(`${fastify.zoiaConfig.api.url}/api/core/site/data`, {
-                    token,
-                    nav: true,
-                    user: true
-                }, {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                });
-                siteMeta.nav = apiSiteData.data.nav;
-                siteMeta.user = apiSiteData.data.user || {};
-            } catch (e) {
-                // Ignore
-            }
-            const siteData = await site.getSiteData(req, fastify, null, null, siteMeta.nav);
-            siteData.user = siteMeta.user || {};
+            const siteData = await req.getSiteData(req);
+            const t = i18n('users')[siteData.language] || {};
             siteData.title = `${t['Reset password']} | ${siteData.title}`;
             if (!validationError) {
                 try {
