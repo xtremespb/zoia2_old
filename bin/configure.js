@@ -94,6 +94,7 @@ const install = async () => {
         secure.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
         secure.user = data.user;
         secure.group = data.group;
+        secure.serverName = data.serverName;
         console.log(`${colors.green(' * ')} Saving configuration to static/etc/config.json file...`);
         fs.writeJSONSync(path.resolve(`${__dirname}/../static/etc/config.json`), config, {
             spaces: 2

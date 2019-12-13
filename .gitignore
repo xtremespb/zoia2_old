@@ -44,3 +44,4 @@ node_modules/
 locale/_build/
 /shared/build/linguirc.admin.json
 /shared/build/modules.json
+/modules/conf

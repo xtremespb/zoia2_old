@@ -18,11 +18,12 @@ Zoia can be configured using different configuration files:
 * *languages[]*: an array of Zoia languages available
 * *cookieOptions*: cookie options
 * *useUIkitOnFrontend*: set to *true* if your frontend template uses UIkit CSS framework
-* *templates[]*: an array of templates available
-* *url*: URL where the API Server can be reached
+* *api.url*: URL where the API Server can be reached
 * *siteTitle*: a title of your website which is used to display in a browser window
+* * *siteTitleShort*: a shorter title of your website which is used to display in mails etc.
 * *commonItemsLimit*: how many items to display in all generic dynamic tables (admin area)
 * *allowRegistration*: allow new user sign ups
+* *allowSignIn*: allow user sign ins in a user space
 * *wysiwyg*: use WYSIWYG editor (where applicable)
 
 ## secure.json
