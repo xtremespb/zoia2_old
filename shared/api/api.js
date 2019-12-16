@@ -6,6 +6,7 @@ import fastifyCORS from 'fastify-cors';
 import fastifyJWT from 'fastify-jwt';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
+import fastifyRateLimit from 'fastify-rate-limit';
 import nodemailer from 'nodemailer';
 import {
     MongoClient
@@ -78,6 +79,17 @@ import email from '../lib/email';
         fastify.register(fastifyJWT, {
             secret: secure.secret
         });
+        let redis;
+        if (secure.redis) {
+            const Redis = require('ioredis');
+            redis = new Redis(secure.redis);
+            redis.on('error', e => {
+                log.error(`Redis: ${e}`);
+                process.exit(0);
+            });
+            secure.rateLimitOptions.redis = redis;
+        }
+        fastify.register(fastifyRateLimit, secure.rateLimitOptions);
         await Promise.all(Object.keys(modules).map(async m => {
             const module = await import(`../../modules/${m}/api/index.js`);
             module.default(fastify);

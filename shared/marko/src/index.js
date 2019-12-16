@@ -77,7 +77,7 @@ import locale from '../../lib/locale';
         }));
         fastify.setNotFoundHandler(async (req, rep) => {
             const siteData = await site.getSiteData(req);
-            const t = i18n()[siteData.language];
+            const t = i18n()[siteData.language || Object.keys(req.zoiaConfig.languages)[0]];
             siteData.title = `${t['Not Found']} | ${siteData.title}`;
             const render = await error404.render({
                 $global: {
@@ -96,12 +96,19 @@ import locale from '../../lib/locale';
                 // Ignore
             }
             const t = i18n()[siteData.language || Object.keys(req.zoiaConfig.languages)[0]];
-            siteData.title = `${t['Internal Server Error']}${siteData.title ? ` | ${siteData.title}` : ''}`;
+            let statusCode = 500;
+            if (err && err.response && err.response.data && err.response.data.statusCode === 429) {
+                statusCode = 429;
+                siteData.title = `${t['Too Many Requests']}${siteData.title ? ` | ${siteData.title}` : ''}`;
+            } else {
+                siteData.title = `${t['Internal Server Error']}${siteData.title ? ` | ${siteData.title}` : ''}`;
+            }
             const render = await error500.render({
                 $global: {
                     siteData,
                     t,
-                    template: templates.available[0]
+                    template: templates.available[0],
+                    statusCode
                 }
             });
             req.log.error({

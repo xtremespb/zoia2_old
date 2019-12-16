@@ -54,8 +54,14 @@ style {
   </head>
   <body class="za-e500-body">
     <div>
-      <div class="za-head">${out.global.t["Internal Server Error"]}</div>
-      <p>${out.global.t["The server encountered an unexpected condition which prevented it from fulfilling the request."]}</p>
+      <if(out.global.statusCode === 500)>
+        <div class="za-head">${out.global.t["Internal Server Error"]}</div>
+        <p>${out.global.t["The server encountered an unexpected condition which prevented it from fulfilling the request."]}</p>
+      </if>
+      <if(out.global.statusCode === 429)>
+        <div class="za-head">${out.global.t["Too Many Requests"]}</div>
+        <p>${out.global.t["Rate limit exceeded, retry in several minutes."]}</p>
+      </if>
     </div>
   </body>
 </html>
