@@ -7,12 +7,11 @@ import fastifyFormbody from 'fastify-formbody';
 import fastifyMultipart from 'fastify-multipart';
 import fastifyCookie from 'fastify-cookie';
 import fastifyCaching from 'fastify-caching';
+import fastifyRateLimit from 'fastify-rate-limit';
 import Pino from 'pino';
 import Fastify from 'fastify';
 import logger from '../../lib/logger';
 import modules from '../../build/modules.json';
-import error404 from '../error404/index.marko';
-import error500 from '../error500/index.marko';
 import site from '../../lib/site';
 import templates from '../../../etc/templates.json';
 import i18n from '../../utils/i18n-node';
@@ -20,6 +19,9 @@ import loggerHelpers from '../../lib/loggerHelpers';
 import response from '../../lib/response';
 import auth from '../../lib/auth';
 import locale from '../../lib/locale';
+import internalServerErrorHandler from './internalServerErrorHandler';
+import notFoundErrorHandler from './notFoundErrorHandler';
+import xxhash from '../../lib/xxhash';
 
 (async () => {
     let secure;
@@ -31,38 +33,48 @@ import locale from '../../lib/locale';
         pino = Pino({
             level: secure.loglevel
         });
+        pino.info(`Starting`);
     } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
         process.exit(1);
     }
     try {
+        // Create Fastify instance
         const fastify = Fastify({
             logger,
             trustProxy: secure.trustProxy,
             ignoreTrailingSlash: true
         });
+        // Decorate Fastify with configuration and helpers
         fastify.decorate('zoiaConfig', config);
         fastify.decorate('zoiaConfigSecure', secure);
         fastify.decorateRequest('zoiaConfig', config);
         fastify.decorateRequest('zoiaConfigSecure', secure);
+        fastify.decorate('xxhash', data => xxhash(data, secure.randomInt));
         Object.keys(response).map(i => fastify.decorateReply(i, response[i]));
         Object.keys(loggerHelpers).map(i => fastify.decorateReply(i, loggerHelpers[i]));
         Object.keys(auth).map(i => fastify.decorateRequest(i, auth[i]));
         Object.keys(locale).map(i => fastify.decorateRequest(i, locale[i]));
         Object.keys(site).map(i => fastify.decorateRequest(i, site[i]));
+        // Register FormBody and Multipart
         fastify.register(fastifyFormbody);
         fastify.register(fastifyMultipart, {
             addToBody: true
         });
+        // Register URL Data Processor
         fastify.register(fastifyURLData);
+        // Register Cookie Processor
         fastify.register(fastifyCookie);
+        // Register CORS
         fastify.register(fastifyCORS, {
             origin: secure.originCORS
         });
+        // Register JWT
         fastify.register(fastifyJWT, {
             secret: secure.secret
         });
+        // Register Fastify Caching
         fastify.register(
             fastifyCaching, {},
             err => {
@@ -71,55 +83,51 @@ import locale from '../../lib/locale';
                 }
             }
         );
+        // Register Redis instance (if defined in config)
+        if (secure.redisEnabled && secure.redisConfig) {
+            pino.info(`Loading Redis (ioredis) support`);
+            const Redis = require('ioredis');
+            const redis = new Redis(secure.redisConfig);
+            redis.on('error', e => {
+                pino.error(`Redis: ${e}`);
+                process.exit(1);
+            });
+            if (secure.rateLimitOptionsWeb) {
+                secure.rateLimitOptionsWeb.redis = redis;
+            }
+            fastify.decorate('redis', redis);
+        }
+        // Do we need to set rate limiting?
+        if (secure.rateLimitOptionsWeb) {
+            pino.info(`Applying Rate Limit configuration`);
+            secure.rateLimitOptionsWeb.whitelistIP = secure.rateLimitOptionsWeb.whitelistIP || [];
+            const error = new Error('Rate limit exceed');
+            error.response = {
+                data: {
+                    statusCode: 429
+                }
+            };
+            secure.rateLimitOptionsWeb.errorResponseBuilder = () => error;
+            secure.rateLimitOptionsWeb.keyGenerator = req => fastify.xxhash(`${req.ip}${req.urlData().path}`);
+            const whitelist = [...secure.rateLimitOptionsWeb.whitelist];
+            secure.rateLimitOptionsWeb.whitelist = req => whitelist.indexOf(req.ip) > -1;
+            fastify.register(fastifyRateLimit, secure.rateLimitOptionsWeb);
+        }
+        // Load all User Space modules
         await Promise.all(Object.keys(modules).map(async m => {
-            const module = await import(`../../../modules/${m}/user/index.js`);
-            module.default(fastify);
-        }));
-        fastify.setNotFoundHandler(async (req, rep) => {
-            const siteData = await site.getSiteData(req);
-            const t = i18n()[siteData.language || Object.keys(req.zoiaConfig.languages)[0]];
-            siteData.title = `${t['Not Found']} | ${siteData.title}`;
-            const render = await error404.render({
-                $global: {
-                    siteData,
-                    t,
-                    template: templates.available[0]
-                }
-            });
-            rep.code(404).type('text/html').send(render.out.stream.str);
-        });
-        fastify.setErrorHandler(async (err, req, rep) => {
-            let siteData = {};
             try {
-                siteData = await site.getSiteData(req);
+                const module = await import(`../../../modules/${m}/user/index.js`);
+                module.default(fastify);
+                pino.info(`Module loaded: ${m}`);
             } catch (e) {
-                // Ignore
+                pino.info(`Cannot load module: ${m} (${e.message})`);
             }
-            const t = i18n()[siteData.language || Object.keys(req.zoiaConfig.languages)[0]];
-            let statusCode = 500;
-            if (err && err.response && err.response.data && err.response.data.statusCode === 429) {
-                statusCode = 429;
-                siteData.title = `${t['Too Many Requests']}${siteData.title ? ` | ${siteData.title}` : ''}`;
-            } else {
-                siteData.title = `${t['Internal Server Error']}${siteData.title ? ` | ${siteData.title}` : ''}`;
-            }
-            const render = await error500.render({
-                $global: {
-                    siteData,
-                    t,
-                    template: templates.available[0],
-                    statusCode
-                }
-            });
-            req.log.error({
-                ip: req.ip,
-                path: req.urlData().path,
-                query: req.urlData().query,
-                error: err && err.message ? err.message : 'Internal Server Error',
-                stack: secure.stackTrace && err.stack ? err.stack : null
-            });
-            rep.code(500).type('text/html').send(render.out.stream.str);
-        });
+        }));
+        // Set handler for error 404
+        fastify.setNotFoundHandler((req, rep) => notFoundErrorHandler(req, rep, i18n, templates));
+        // Set handler for error 500
+        fastify.setErrorHandler((err, req, rep) => internalServerErrorHandler(err, req, rep, i18n, templates, secure));
+        // Listen on specified IP and port
         await fastify.listen(secure.webServer.port, secure.webServer.ip);
     } catch (e) {
         pino.error(e);

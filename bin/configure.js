@@ -92,6 +92,8 @@ const install = async () => {
         secure.mongo.dbName = data.mongodb;
         secure.loglevel = data.loglevel;
         secure.secret = crypto.createHmac('sha256', uuid()).update(uuid()).digest('hex');
+        // eslint-disable-next-line no-bitwise
+        secure.randomInt = ~~(Math.random() * 9007199254740000) + 1;
         secure.user = data.user;
         secure.group = data.group;
         secure.serverName = data.serverName;

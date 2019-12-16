@@ -1,10 +1,22 @@
 import axios from 'axios';
 import uuid from 'uuid/v1';
+import fs from 'fs-extra';
+import path from 'path';
 import template from './template.marko';
 import templates from '../../../../etc/templates.json';
 import i18n from '../../../../shared/utils/i18n-node';
 
+let config = {};
+try {
+    config = fs.readJSONSync(path.resolve(`${__dirname}/../etc/user.json`));
+} catch {
+    // Ignore
+}
+
 export default fastify => ({
+    config: {
+        rateLimit: config.activateRateConfig
+    },
     schema: {
         query: {
             type: 'object',
