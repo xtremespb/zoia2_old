@@ -33,6 +33,7 @@ To run Zoia, you will need to execute the following scripts:
 
 After a successful start, check your server configuration, e.g. you may need to following configuration for NGINX server (replace "example.com" with your domain name, "/path/to/zoia" with a path to Zoia root direcotry, "your_api_server_ip" with your Zoia API Server IP address, "your_api_server_port" with your Zoia API Server port):
 
+```
 listen 80;
 server_name example.com;
 root /path/to/zoia/static;
@@ -49,10 +50,11 @@ location @node {
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_pass http://your_api_server_ip:your_api_server_port;
 }
+```
 
 After a successful configuration of your web server, you may access your Zoia instance under the following URLs:
 
-http://example.com/
-http://example.com/admin (use admin/password to access the administration area)
+* http://example.com/
+* http://example.com/admin (use admin/password to access the administration area)
 
 Read more on how to [deploy](deploy.md) your server.
