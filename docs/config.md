@@ -14,7 +14,7 @@ Zoia can be configured using different configuration files:
 
 ## config.json
 
-* *id*: uniquie Zoia instance ID
+* *id*: unique Zoia instance ID
 * *languages[]*: an array of Zoia languages available
 * *cookieOptions*: cookie options
 * *useUIkitOnFrontend*: set to *true* if your frontend template uses UIkit CSS framework
@@ -32,6 +32,11 @@ Zoia can be configured using different configuration files:
 * *authTokenExpiresIn*: authentication token expiration time
 * *mongo.url*: an URL which can be used to connect to the MongoDB server
 * *mongo.dbName*: MongoDB database
+* *redisEnabled*: set *true* if Zoia is allowed to use Redis (where applicable)
+* *redisConfig.port*: Redis port to use
+* *redisConfig.host*: Redis host to use
+* *rateLimitOptionsAPI*: an object which describes a configuration of *fastify-rate-limit* module for the API Server, see [module page](https://github.com/fastify/fastify-rate-limit) for more info
+* *rateLimitOptionsWeb*: an object which describes a configuration of *fastify-rate-limit* module for the Web Server, see [module page](https://github.com/fastify/fastify-rate-limit) for more info
 * *originCORS*: CORS origin (if API server is located on a different server)
 * *trustProxy*: should a proxy be trusted (useful if you are running API or Web servers behind proxy)
 * *apiServer.ip*: API Server IP address

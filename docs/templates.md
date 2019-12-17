@@ -13,7 +13,7 @@ The default template ("zoia") is a good example on how to build your own templat
 }
 ```
 
-The `"tags-dir": ["../.."]` value is required because your template won't find any Zoia system components like `uikit`.
+The `"tags-dir": ["../.."]` value is required because your template won't find any Zoia system components like `uikit` otherwise.
 
 ## Global Variables
 
