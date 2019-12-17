@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { history } from '../../../../shared/store/configureStore';
+import { history } from '../../../../shared/redux/store/configureStore';
 import modules from '../../../../shared/build/modules.json';
 
 class AdminStub extends Component {

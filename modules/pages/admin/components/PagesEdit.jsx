@@ -8,11 +8,11 @@ import axios from 'axios';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Trans, t } from '@lingui/macro';
-import { history } from '../../../../shared/store/configureStore';
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
-import UIkit from '../../../../shared/utils/uikit';
+import { history } from '../../../../shared/redux/store/configureStore';
+import appDataRuntimeSetToken from '../../../../shared/redux/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../shared/redux/actions/appDataSetUser';
+import appDataRuntimeSetDocumentTitle from '../../../../shared/redux/actions/appDataRuntimeSetDocumentTitle';
+import UIkit from '../../../../shared/lib/uikit';
 import DialogFolder from './DialogFolder.jsx';
 import templates from '../../../../etc/templates.json';
 

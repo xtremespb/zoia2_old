@@ -72,7 +72,7 @@ export default fastify => ({
             });
         } catch (e) {
             rep.logError(req, null, e);
-            return rep.sendInternalServerError(rep, e.message);
+            return rep.sendInternalServerError(rep, e ? e.message : 'Internal Server Error');
         }
     }
 });

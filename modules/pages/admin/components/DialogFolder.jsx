@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { t } from '@lingui/macro';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
-import UIkit from '../../../../shared/utils/uikit';
+import UIkit from '../../../../shared/lib/uikit';
 import DialogFolderEdit from './DialogFolderEdit.jsx';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));

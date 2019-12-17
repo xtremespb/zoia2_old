@@ -5,13 +5,13 @@ import {
 import appData from './appData';
 import appDataRuntime from './appDataRuntime';
 import appLingui from './appLingui';
-import modules from '../build/modules.json';
+import modules from '../../build/modules.json';
 
 export default (history, config) => {
     let moduleReducers = {};
     // eslint-disable-next-line global-require
     Object.keys(modules).map(m => {
-        const reducers = require(`../../modules/${m}/admin/reducers/index.js`).default();
+        const reducers = require(`../../../modules/${m}/admin/reducers/index.js`).default();
         moduleReducers = {
             ...moduleReducers,
             ...reducers

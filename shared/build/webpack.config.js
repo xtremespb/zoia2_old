@@ -172,7 +172,7 @@ const configAdmin = {
         new HtmlWebpackPlugin({
             chunksSortMode: 'none',
             filename: path.resolve(__dirname, '..', '..', 'static', 'data_admin', 'admin.html'),
-            template: path.resolve(__dirname, '..', 'templates', 'admin.html'),
+            template: path.resolve(__dirname, '..', 'react', 'templates', 'admin.html'),
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -437,7 +437,7 @@ modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', '
 console.log('Writing modules.json...');
 fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
 const linguiAdmin = {
-    localeDir: 'shared/locales/admin',
+    localeDir: 'shared/react/locales/admin',
     srcPathDirs: [],
     format: 'po'
 };

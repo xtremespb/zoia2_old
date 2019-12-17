@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import cookies from 'zoia-cookies';
 import axios from 'axios';
 import { Trans, t } from '@lingui/macro';
-import { history } from '../../../../shared/store/configureStore';
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
-import UIkit from '../../../../shared/utils/uikit';
+import { history } from '../../../../shared/redux/store/configureStore';
+import appDataRuntimeSetToken from '../../../../shared/redux/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../shared/redux/actions/appDataSetUser';
+import appDataRuntimeSetDocumentTitle from '../../../../shared/redux/actions/appDataRuntimeSetDocumentTitle';
+import UIkit from '../../../../shared/lib/uikit';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));

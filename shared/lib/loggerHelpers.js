@@ -3,7 +3,7 @@ export default {
         ip: req.ip,
         path: req.urlData().path,
         query: req.urlData().query,
-        error: message || e ? e.message : null || 'Internal Server Error',
+        error: (message || (e && e.message ? e.message : null)) || 'Internal Server Error',
         stack: e && req.zoiaConfigSecure.stackTrace && e.stack ? e.stack : null
     })
 };

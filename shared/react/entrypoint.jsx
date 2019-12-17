@@ -6,10 +6,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import Icons from 'uikit/dist/js/uikit-icons';
 import axios from 'axios';
-import UIkit from '../utils/uikit';
+import UIkit from '../lib/uikit';
 import '../styles/uikit.scss';
 import modules from '../build/modules.json';
-import configureStore, { history } from '../store/configureStore';
+import configureStore, { history } from '../redux/store/configureStore';
 import Error from './Error/Error.jsx';
 import ErrorBoundary from './Error/ErrorBoundary.jsx';
 

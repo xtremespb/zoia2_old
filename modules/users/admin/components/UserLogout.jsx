@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import appDataRuntimeLogout from '../../../../shared/actions/appDataRuntimeLogout';
+import appDataRuntimeLogout from '../../../../shared/redux/actions/appDataRuntimeLogout';
 
 class UserLogout extends Component {
     componentDidMount = () => {

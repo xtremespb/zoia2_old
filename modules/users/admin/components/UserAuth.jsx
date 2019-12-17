@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import queryString from 'query-string';
 import cookies from 'zoia-cookies';
-import UIkit from '../../../../shared/utils/uikit';
+import UIkit from '../../../../shared/lib/uikit';
 
-import { history } from '../../../../shared/store/configureStore';
-import appDataSetLanguage from '../../../../shared/actions/appDataSetLanguage';
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
-import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
-import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import { history } from '../../../../shared/redux/store/configureStore';
+import appDataSetLanguage from '../../../../shared/redux/actions/appDataSetLanguage';
+import appDataRuntimeSetToken from '../../../../shared/redux/actions/appDataRuntimeSetToken';
+import appDataSetUser from '../../../../shared/redux/actions/appDataSetUser';
+import appLinguiSetCatalog from '../../../../shared/redux/actions/appLinguiSetCatalog';
+import appDataRuntimeSetDocumentTitle from '../../../../shared/redux/actions/appDataRuntimeSetDocumentTitle';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
@@ -48,7 +48,7 @@ class UserAuth extends Component {
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_admin_[index]" */`../../../../shared/locales/admin/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_admin_[index]" */`../../../../shared/react/locales/admin/${language}/messages.js`);
         if (this.mounted) {
             this.setState(state => {
                 const catalogs = {

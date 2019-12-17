@@ -8,14 +8,14 @@ import axios from 'axios';
 import cookies from 'zoia-cookies';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { history } from '../../../../shared/store/configureStore';
-import UIkit from '../../../../shared/utils/uikit';
+import { history } from '../../../../shared/redux/store/configureStore';
+import UIkit from '../../../../shared/lib/uikit';
 
-import appDataRuntimeSetToken from '../../../../shared/actions/appDataRuntimeSetToken';
-import appLinguiSetCatalog from '../../../../shared/actions/appLinguiSetCatalog';
-import appDataSetUser from '../../../../shared/actions/appDataSetUser';
+import appDataRuntimeSetToken from '../../../../shared/redux/actions/appDataRuntimeSetToken';
+import appLinguiSetCatalog from '../../../../shared/redux/actions/appLinguiSetCatalog';
+import appDataSetUser from '../../../../shared/redux/actions/appDataSetUser';
 import pagesListTableSetState from '../actions/pagesListTableSetState';
-import appDataRuntimeSetDocumentTitle from '../../../../shared/actions/appDataRuntimeSetDocumentTitle';
+import appDataRuntimeSetDocumentTitle from '../../../../shared/redux/actions/appDataRuntimeSetDocumentTitle';
 
 const AdminPanel = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "AdminPanel" */'../../../../shared/react/AdminPanel/AdminPanel.jsx'));
 const Table = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "Table" */ '../../../../shared/react/Table/index.jsx'));

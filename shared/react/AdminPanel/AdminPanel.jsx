@@ -5,9 +5,9 @@ import { I18nProvider, I18n } from '@lingui/react';
 import { Trans } from '@lingui/macro';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import appDataSetLanguage from '../../actions/appDataSetLanguage';
-import appLinguiSetCatalog from '../../actions/appLinguiSetCatalog';
-import UIkit from '../../utils/uikit';
+import appDataSetLanguage from '../../redux/actions/appDataSetLanguage';
+import appLinguiSetCatalog from '../../redux/actions/appLinguiSetCatalog';
+import UIkit from '../../lib/uikit';
 import modulesData from '../../build/modules.json';
 
 import './AdminPanel.css';
@@ -25,7 +25,7 @@ class AdminPanel extends Component {
     }
 
     loadCatalog = async (language) => {
-        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_admin_[index]" */`../../locales/admin/${language}/messages.js`);
+        const catalog = await import(/* webpackMode: "lazy", webpackChunkName: "i18n_admin_[index]" */`../../react/locales/admin/${language}/messages.js`);
         this.setState(state => {
             const catalogs = {
                 ...state.catalogs,

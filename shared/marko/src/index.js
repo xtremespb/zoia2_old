@@ -14,7 +14,7 @@ import logger from '../../lib/logger';
 import modules from '../../build/modules.json';
 import site from '../../lib/site';
 import templates from '../../../etc/templates.json';
-import i18n from '../../utils/i18n-node';
+import i18n from '../utils/i18n-node';
 import loggerHelpers from '../../lib/loggerHelpers';
 import response from '../../lib/response';
 import auth from '../../lib/auth';

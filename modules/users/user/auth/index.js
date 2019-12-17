@@ -1,6 +1,6 @@
 import template from './template.marko';
 import templates from '../../../../etc/templates.json';
-import i18n from '../../../../shared/utils/i18n-node';
+import i18n from '../../../../shared/marko/utils/i18n-node';
 
 export default fastify => ({
     async handler(req, rep) {

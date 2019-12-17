@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import uuid from 'uuid/v1';
 import mailRegister from '../email/register/index.marko';
-import I18N from '../../../shared/utils/i18n-node';
+import I18N from '../../../shared/marko/utils/i18n-node';
 
 export default fastify => ({
     schema: {

@@ -5,7 +5,7 @@ import uuid from 'uuid/v1';
 import { t } from '@lingui/macro';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
-import UIkit from '../../../../shared/utils/uikit';
+import UIkit from '../../../../shared/lib/uikit';
 
 const FormBuilder = lazy(() => import(/* webpackMode: "lazy", webpackChunkName: "FormBuilder" */'../../../../shared/react/FormBuilder/index.jsx'));
 
