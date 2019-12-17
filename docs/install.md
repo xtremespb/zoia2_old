@@ -40,7 +40,7 @@ root /path/to/zoia/static;
 access_log /path/to/zoia/logs/nginx_siteid_access.log;
 error_log /path/to/zoia/logs/nginx_siteid_error.log;
 location /admin {
-    try_files $uri /data_admin/admin.html;
+    try_files $uri /_admin/admin.html;
 }
 location / {
     try_files $uri @node;

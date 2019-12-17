@@ -67,7 +67,7 @@ const packAdmin = () => {
     }));
     archive.directory(`${__dirname}/../logs`, 'logs');
     archive.directory(`${__dirname}/../etc/source`, 'etc/source');
-    archive.directory(`${__dirname}/../static/data_admin`, 'static/data_admin');
+    archive.directory(`${__dirname}/../static/_admin`, 'static/_admin');
     archive.directory(`${__dirname}/../static/etc`, 'static/etc');
     archive.directory(`${__dirname}/../static/zoia`, 'static/zoia');
     archive.finalize();
@@ -95,7 +95,7 @@ const packWeb = () => {
     }));
     archive.directory(`${__dirname}/../logs`, 'logs');
     archive.directory(`${__dirname}/../etc/source`, 'etc/source');
-    archive.directory(`${__dirname}/../static/data_user`, 'static/data_user');
+    archive.directory(`${__dirname}/../static/_user`, 'static/_user');
     archive.directory(`${__dirname}/../static/etc`, 'static/etc');
     archive.directory(`${__dirname}/../static/zoia`, 'static/zoia');
     archive.directory(`${__dirname}/../static/uploads`, 'static/uploads');

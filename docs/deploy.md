@@ -22,7 +22,7 @@ The file which can be uploaded to a server is located in a *dist/zoia* directory
 
 ## Static files
 
-The static files which need to be exposed to the Web are located in a *static* directory. The */admin/** server location need to point to the *static/data_admin/admin.html* file.
+The static files which need to be exposed to the Web are located in a *static* directory. The */admin/** server location need to point to the *static/_admin/admin.html* file.
 
 All other routes need to be checked by the server in the *static* directory first; if none are found, the server (e.g. NGINX) needs to check the corresponding route on the Web server running by Zoia. 
 

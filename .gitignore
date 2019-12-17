@@ -31,8 +31,8 @@ node_modules/
 /dist/*.zip
 /etc/*.json
 /static/uploads
-/static/data_admin
-/static/data_user
+/static/_admin
+/static/_user
 /dist/zoia/*.zip
 /shared/marko/templates/index.marko
 /static/etc/config.json

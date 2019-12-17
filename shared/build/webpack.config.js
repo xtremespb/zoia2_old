@@ -78,8 +78,8 @@ const configAdmin = {
     },
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, '..', '..', 'static', 'data_admin'),
-        publicPath: '/data_admin/',
+        path: path.resolve(__dirname, '..', '..', 'static', '_admin'),
+        publicPath: '/_admin/',
         filename: '[name]_[contenthash:8].js'
     },
     optimization: {
@@ -171,7 +171,7 @@ const configAdmin = {
         }),
         new HtmlWebpackPlugin({
             chunksSortMode: 'none',
-            filename: path.resolve(__dirname, '..', '..', 'static', 'data_admin', 'admin.html'),
+            filename: path.resolve(__dirname, '..', '..', 'static', '_admin', 'admin.html'),
             template: path.resolve(__dirname, '..', 'react', 'templates', 'admin.html'),
             minify: {
                 collapseWhitespace: true,
@@ -301,8 +301,8 @@ const configWebClient = {
     },
     output: {
         filename: '[name].[contenthash:8].js',
-        path: path.join(__dirname, '../../static/data_user'),
-        publicPath: '/data_user/',
+        path: path.join(__dirname, '../../static/_user'),
+        publicPath: '/_user/',
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -357,7 +357,7 @@ const configWebServer = {
         libraryTarget: 'commonjs2',
         path: path.join(__dirname, '../../bin'),
         filename: 'web.js',
-        publicPath: '/data_user/',
+        publicPath: '/_user/',
     },
     node: {
         __dirname: false
@@ -377,15 +377,15 @@ const configWebServer = {
 const webpackConfig = [];
 
 const cleanUpAdmin = () => {
-    console.log('Cleaning up static/data_admin...');
-    fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
-    fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_admin'));
+    console.log('Cleaning up static/_admin...');
+    fs.removeSync(path.join(__dirname, '..', '..', 'static', '_admin'));
+    fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', '_admin'));
 };
 
 const cleanUpWeb = () => {
-    console.log('Cleaning up static/data_user...');
-    fs.removeSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
-    fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', 'data_user'));
+    console.log('Cleaning up static/_user...');
+    fs.removeSync(path.join(__dirname, '..', '..', 'static', '_user'));
+    fs.ensureDirSync(path.join(__dirname, '..', '..', 'static', '_user'));
 };
 
 const rebuildMarkoTemplates = () => {
