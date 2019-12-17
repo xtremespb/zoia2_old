@@ -117,6 +117,37 @@ style {
     <div id="za_mobile_nav" uk-offcanvas="overlay: true">
       <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
+          <if(out.global.siteData.allowRegistration && out.global.siteData.user.username)>
+            <li>
+              <a href="#">${out.global.siteData.user.username}&nbsp;&#x25BE;</a>
+              <div class="uk-navbar-dropdown">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <li>
+                    <a href=`${out.global.siteData.languagePrefixURL}/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
+                  </li>
+                  <if(out.global.siteData.user.admin)>
+                    <li>
+                      <a href="/admin">${out.global.t["Admin Panel"]}</a>
+                    </li>
+                  </if>
+                </ul>
+              </div>
+            </li>
+            <li class="uk-nav-divider"/>
+          </if>
+          <else>
+            <if(out.global.siteData.allowSignIn)>
+              <li>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/auth?redirect=${out.global.siteData.currentPath || "/"}`>${out.global.t["Sign In"]}</a>
+              </li>
+            </if>
+            <if(out.global.siteData.allowRegistration)>
+              <li>
+                <a href=`${out.global.siteData.languagePrefixURL}/users/register`>${out.global.t["Register"]}</a>
+              </li>
+            </if>
+            <li class="uk-nav-divider"/>
+          </else>
           <if(out.global.siteData.languagesArr)>
             <for|language, index| of=out.global.siteData.languagesArr>
               <li>
