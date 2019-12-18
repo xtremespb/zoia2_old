@@ -396,7 +396,7 @@ const rebuildMarkoTemplates = () => {
 
 console.log(`This tool will build Zoia for you.`);
 
-console.log('Ensuring directories and copying statics...')
+console.log('Ensuring directories and copying statics...');
 fs.ensureDirSync(`${__dirname}/../../../dist/bin`);
 fs.ensureDirSync(`${__dirname}/../../../dist/etc`);
 fs.ensureDirSync(`${__dirname}/../../../dist/static/etc`);
