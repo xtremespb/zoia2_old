@@ -7,9 +7,9 @@ const uuid = require('uuid/v1');
 const path = require('path');
 
 const install = async () => {
-    const config = require('../etc/source/config.json');
-    const secure = require('../etc/source/secure.json');
-    const templates = require('../etc/source/templates.json');
+    const config = require('./config-source/config.json');
+    const secure = require('./config-source/secure.json');
+    const templates = require('./config-source/templates.json');
     const questions = [{
             type: 'input',
             name: 'ipAPI',
@@ -97,16 +97,20 @@ const install = async () => {
         secure.user = data.user;
         secure.group = data.group;
         secure.serverName = data.serverName;
-        console.log(`${colors.green(' * ')} Saving configuration to static/etc/config.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../static/etc/config.json`), config, {
+        console.log(`${colors.green(' * ')} Ensuring 'dist/etc' directory...`);
+        fs.ensureDirSync(`${__dirname}/../dist/etc`);
+        console.log(`${colors.green(' * ')} Ensuring 'dist/static/etc' directory...`);
+        fs.ensureDirSync(`${__dirname}/../dist/static/etc`);
+        console.log(`${colors.green(' * ')} Saving configuration to dist/static/etc/config.json file...`);
+        fs.writeJSONSync(path.resolve(`${__dirname}/../dist/static/etc/config.json`), config, {
             spaces: 2
         });
-        console.log(`${colors.green(' * ')} Saving configuration to etc/secure.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/secure.json`), secure, {
+        console.log(`${colors.green(' * ')} Saving configuration to dist/etc/secure.json file...`);
+        fs.writeJSONSync(path.resolve(`${__dirname}/../dist/etc/secure.json`), secure, {
             spaces: 2
         });
-        console.log(`${colors.green(' * ')} Saving configuration to etc/templates.json file...`);
-        fs.writeJSONSync(path.resolve(`${__dirname}/../etc/templates.json`), templates, {
+        console.log(`${colors.green(' * ')} Saving configuration to dist/etc/templates.json file...`);
+        fs.writeJSONSync(path.resolve(`${__dirname}/../dist/etc/templates.json`), templates, {
             spaces: 2
         });
         console.log(`${colors.green(' * ')} Done\n`);
