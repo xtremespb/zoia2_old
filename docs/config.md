@@ -4,7 +4,7 @@ To generate configuration files, you may run the following command:
 
 * `npm run configure`
 
-The files are saved to the *etc* and to the *static/etc directories.
+The files are saved to the *dist/etc* and to the *dist/static/etc directories.
 
 Zoia can be configured using different configuration files:
 

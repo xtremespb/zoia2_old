@@ -8,22 +8,22 @@ const systemdAPI = fs.readFileSync(`${__dirname}/config-source/systemd-api.servi
     .replace(/{siteid}/igm, config.id)
     .replace(/{user}/igm, secure.user)
     .replace(/{group}/igm, secure.group)
-    .replace(/{path}/igm, path.resolve(`${__dirname}/../bin/api.js`).replace(/\\/gm, '/'));
+    .replace(/{path}/igm, path.resolve(`${__dirname}/../dist/bin/api.js`).replace(/\\/gm, '/'));
 const systemdWeb = fs.readFileSync(`${__dirname}/config-source/systemd-web.service`, 'utf8')
     .replace(/{siteid}/igm, config.id)
     .replace(/{user}/igm, secure.user)
     .replace(/{group}/igm, secure.group)
-    .replace(/{path}/igm, path.resolve(`${__dirname}/../bin/web.js`).replace(/\\/gm, '/'));
+    .replace(/{path}/igm, path.resolve(`${__dirname}/../dist/bin/web.js`).replace(/\\/gm, '/'));
 const rsyslogAPI = fs.readFileSync(`${__dirname}/config-source/rsyslog.conf`, 'utf8')
     .replace(/{siteid}/igm, config.id)
     .replace(/{prefix}/igm, 'api')
     .replace(/{filename}/igm, `${config.id}_api.log`)
-    .replace(/{path}/igm, path.resolve(`${__dirname}/../logs`).replace(/\\/gm, '/'));
+    .replace(/{path}/igm, path.resolve(`${__dirname}/../dist/logs`).replace(/\\/gm, '/'));
 const rsyslogWeb = fs.readFileSync(`${__dirname}/config-source/rsyslog.conf`, 'utf8')
     .replace(/{siteid}/igm, config.id)
     .replace(/{prefix}/igm, 'web')
     .replace(/{filename}/igm, `${config.id}_web.log`)
-    .replace(/{path}/igm, path.resolve(`${__dirname}/../logs`).replace(/\\/gm, '/'));
+    .replace(/{path}/igm, path.resolve(`${__dirname}/../dist/logs`).replace(/\\/gm, '/'));
 const nginx = fs.readFileSync(`${__dirname}/config-source/nginx.conf`, 'utf8')
     .replace(/{siteid}/igm, config.id)
     .replace(/{webIP}/igm, secure.webServer.ip)
@@ -31,8 +31,8 @@ const nginx = fs.readFileSync(`${__dirname}/config-source/nginx.conf`, 'utf8')
     .replace(/{apiIP}/igm, secure.apiServer.ip)
     .replace(/{apiPort}/igm, secure.apiServer.port)
     .replace(/{serverName}/igm, secure.serverName)
-    .replace(/{logPath}/igm, path.resolve(`${__dirname}/../logs`).replace(/\\/gm, '/'))
-    .replace(/{staticPath}/igm, path.resolve(`${__dirname}/../static`).replace(/\\/gm, '/'));
+    .replace(/{logPath}/igm, path.resolve(`${__dirname}/../dist/logs`).replace(/\\/gm, '/'))
+    .replace(/{staticPath}/igm, path.resolve(`${__dirname}/../dist/static`).replace(/\\/gm, '/'));
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/systemd`);
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/rsyslog.d`);
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/nginx`);
