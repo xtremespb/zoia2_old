@@ -444,11 +444,11 @@ modules.map(module => modulesInfo[module] = require(path.join(__dirname, '..', '
 console.log('Writing modules.json...');
 fs.writeJSONSync(path.join(__dirname, 'modules.json'), modulesInfo);
 const linguiAdmin = {
-    localeDir: 'shared/react/locales/admin',
+    localeDir: 'src/shared/react/locales/admin',
     srcPathDirs: [],
     format: 'po'
 };
-const linguiPathsArrAdmin = modules.map(module => `modules/${module}/admin/components/`);
+const linguiPathsArrAdmin = modules.map(module => `src/modules/${module}/admin/components/`);
 linguiAdmin.srcPathDirs = ['shared/react/', ...linguiPathsArrAdmin];
 console.log('Writing linguirc.admin.json...');
 fs.writeJSONSync(`${__dirname}/linguirc.admin.json`, linguiAdmin, {
