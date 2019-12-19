@@ -3,7 +3,7 @@
     "randomInt": 0,
     "authTokenExpiresIn": "7 days",
     "mongo": {
-        "url": "mongodb://localhost:27017",
+        "url": "mongodb://127.0.0.1:27017",
         "dbName": "zoia"
     },
     "redisEnabled": false,

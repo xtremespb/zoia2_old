@@ -16,7 +16,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const dropDb = async () => {
     try {
-        const secure = await fs.readJSON(path.resolve(`${__dirname}/../etc/secure.json`));
+        const secure = await fs.readJSON(path.resolve(`${__dirname}/../dist/etc/secure.json`));
         console.log('\nThis script will drop all collections from Zoia database.\n');
         if (!options.force) {
             const res = await inquirer.prompt([{

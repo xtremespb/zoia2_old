@@ -1,12 +1,12 @@
 {
-  "localeDir": "shared/react/locales/admin",
+  "localeDir": "src/shared/react/locales/admin",
   "srcPathDirs": [
     "shared/react/",
-    "modules/admin/admin/components/",
-    "modules/core/admin/components/",
-    "modules/nav/admin/components/",
-    "modules/pages/admin/components/",
-    "modules/users/admin/components/"
+    "src/modules/admin/admin/components/",
+    "src/modules/core/admin/components/",
+    "src/modules/nav/admin/components/",
+    "src/modules/pages/admin/components/",
+    "src/modules/users/admin/components/"
   ],
   "format": "po"
 }
