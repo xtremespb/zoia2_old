@@ -1,5 +1,5 @@
 const modules = require('../../build/modules.json');
-const config = require('../../../static/etc/config.json');
+const config = require('../../../../dist/static/etc/config.json');
 
 const catalogs = {};
 const generic = {};

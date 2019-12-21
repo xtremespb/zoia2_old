@@ -107,7 +107,7 @@ style {
       <div class="za-content">
         <${input.renderBody}/>
       </div>
-      <div class="uk-text-muted uk-text-small uk-margin-top uk-margin-bottom za-footer">
+      <div class="uk-text-muted uk-text-small za-footer">
         <a href="https://github.com/xtremespb/zoia2" class="uk-link-text" target="_blank">Zoia CMS</a>
         &copy; 2019 Michael A. Matveev,
         <a href="https://opensource.org/licenses/MIT" class="uk-link-text" target="_blank">MIT license</a>.
@@ -118,21 +118,17 @@ style {
       <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
           <if(out.global.siteData.allowRegistration && out.global.siteData.user.username)>
-            <li>
-              <a href="#">${out.global.siteData.user.username}&nbsp;&#x25BE;</a>
-              <div class="uk-navbar-dropdown">
-                <ul class="uk-nav uk-navbar-dropdown-nav">
-                  <li>
-                    <a href=`${out.global.siteData.languagePrefixURL}/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
-                  </li>
-                  <if(out.global.siteData.user.admin)>
-                    <li>
-                      <a href="/admin">${out.global.t["Admin Panel"]}</a>
-                    </li>
-                  </if>
-                </ul>
-              </div>
+            <li class="uk-nav-header">
+              <a href="#">${out.global.siteData.user.username}</a>
             </li>
+            <li>
+              <a href=`${out.global.siteData.languagePrefixURL}/users/logout?_=${uuid()}`>${out.global.t["Log Out"]}</a>
+            </li>
+            <if(out.global.siteData.user.admin)>
+              <li>
+                <a href="/admin">${out.global.t["Admin Panel"]}</a>
+              </li>
+            </if>
             <li class="uk-nav-divider"/>
           </if>
           <else>
