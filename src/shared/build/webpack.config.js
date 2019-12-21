@@ -422,10 +422,10 @@ if (process.argv.indexOf('--build:admin') > -1) {
     console.log('Building everything.');
     if (process.argv.indexOf('--do:release') > -1) {
         console.log('Incrementing build version as we are building a release.');
-        const packageJSON = require(`${__dirname}/../../package.json`);
+        const packageJSON = require(`${__dirname}/../../../package.json`);
         const [v1, v2, v3] = packageJSON.version.split(/\./);
         packageJSON.version = `${parseInt(v1, 10) || 0}.${parseInt(v2, 10) || 0}.${(parseInt(v3, 10) || 0) + 1}`;
-        fs.writeJSONSync(`${__dirname}/../../package.json`, packageJSON, {
+        fs.writeJSONSync(`${__dirname}/../../../package.json`, packageJSON, {
             spaces: 2
         });
         console.log(`New version number for a release is: ${packageJSON.version}`);
