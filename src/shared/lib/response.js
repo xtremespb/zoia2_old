@@ -28,7 +28,13 @@ export default {
         }),
     sendUnauthorizedError: (rep, errors = {}) => rep.code(200).type('application/json')
         .send({
-            statusCode: 400,
+            statusCode: 401,
+            message: 'Unauthorized',
+            errors
+        }),
+    sendUnauthorizedException: (rep, errors = {}) => rep.code(401).type('application/json')
+        .send({
+            statusCode: 401,
             message: 'Unauthorized',
             errors
         }),

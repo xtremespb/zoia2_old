@@ -32,7 +32,7 @@ export default fastify => ({
         const user = await req.verifyToken(req.body.token, fastify, this.mongo.db);
         if (!user || !user.admin) {
             rep.logError(req, 'Authentication failed');
-            return rep.sendUnauthorizedError(rep, {
+            return rep.sendUnauthorizedException(rep, {
                 default: {
                     username: '',
                     password: ''

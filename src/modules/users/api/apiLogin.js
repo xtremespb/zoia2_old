@@ -37,7 +37,7 @@ export default fastify => ({
             });
             if (!user || user.password !== passwordHash) {
                 rep.logError(req, 'Authentication failed');
-                return rep.sendUnauthorizedError(rep, {
+                return rep.sendUnauthorizedException(rep, {
                     default: {
                         username: '',
                         password: ''
