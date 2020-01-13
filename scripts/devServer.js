@@ -8,6 +8,11 @@ const fastifyProxy = require('fastify-http-proxy');
 const fastifyStatic = require('fastify-static');
 const path = require('path');
 const fs = require('fs-extra');
+const pino = require('pino');
+// Load Pino logger
+const log = pino({
+    level: 'info'
+});
 // Load configuration file for ports
 const configSecure = require(path.resolve(`${__dirname}/../dist/etc/secure.json`));
 // Load HTML file to serve as /admin route
@@ -16,12 +21,12 @@ const adminHTML = fs.readFileSync(path.resolve(__dirname, '../dist/static/_admin
 const fastify = Fastify();
 // Register proxy route for Web Server
 fastify.register(fastifyProxy, {
-    upstream: `http://${configSecure.webServer.ip}:${configSecure.webServer.port}`,
+    upstream: `http://${configSecure.apiServer.ip}:${configSecure.apiServer.port}`,
     prefix: '/api'
 });
 // Register proxy route for API Server
 fastify.register(fastifyProxy, {
-    upstream: `http://${configSecure.apiServer.ip}:${configSecure.apiServer.port}`,
+    upstream: `http://${configSecure.webServer.ip}:${configSecure.webServer.port}`,
     prefix: '/'
 });
 // Register static routes for every directory in dist/static
@@ -31,6 +36,7 @@ fs.readdirSync(path.resolve(__dirname, '../dist/static')).filter(f => fs.lstatSy
     decorateReply: false
 }));
 // Serve /admin route with pre-loaded admin.html file
-fastify.get('/admin', (req, rep) => rep.code(200).type('text/html').send(adminHTML));
+fastify.get('/admin*', (req, rep) => rep.code(200).type('text/html').send(adminHTML));
 // Listen on port 80
-fastify.listen(80);
+fastify.listen(configSecure.httpDevServer.port, configSecure.httpDevServer.ip);
+log.info(`HTTP Server is listening on http://${configSecure.httpDevServer.ip}:${configSecure.httpDevServer.port}`);

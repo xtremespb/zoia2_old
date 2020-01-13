@@ -43,6 +43,8 @@ Zoia can be configured using different configuration files:
 * *apiServer.port*: API Server port
 * *webServer.ip*: Web Server IP
 * *webServer.port*: Web Server port
+* *httpDevServer.ip*: Development HTTP Server IP
+* *httpDevServer.port*: Development HTTP Server port
 * *development*: use development mode for your Zoia instance (useful only if you are a developer)
 * *loglevel*: either "info", "warn" or "error"
 * *stackTrace*: display stack traces in Log files

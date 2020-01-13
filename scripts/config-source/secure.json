@@ -49,6 +49,10 @@
         "ip": "127.0.0.1",
         "port": 3001
     },
+    "httpDevServer": {
+        "ip": "127.0.0.1",
+        "port": 8080
+    },
     "mailer": {
         "service": "Yandex",
         "auth": {

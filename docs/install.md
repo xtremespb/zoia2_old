@@ -26,12 +26,18 @@ You will also need to run the script to install all required defaults (e.g. defa
 
 `npm run install-defaults`
 
-To run Zoia, you will need to execute the following scripts:
+To run Zoia, you will need to execute the following command. This will start API Server, Web Server and a corresponding routing configuration:
 
-`node bin/api`
-`node bin/web`
+`npm run start-dev`
 
-After a successful start, check your server configuration, e.g. you may need to following configuration for NGINX server (replace "example.com" with your domain name, "/path/to/zoia" with a path to Zoia root direcotry, "your_api_server_ip" with your Zoia API Server IP address, "your_api_server_port" with your Zoia API Server port):
+After that, you may access Zoia at http://127.0.0.1:8080.
+
+If you wish to run Zoia under a "production-like" environment, you will need to run the following commands:
+
+* `node bin/api`
+* `node bin/web`
+
+After a successful start, check your server configuration, e.g. you may need to following configuration for NGINX server (replace "example.com" with your domain name, "/path/to/zoia" with a path to Zoia root directory, "your_api_server_ip" with your Zoia API Server IP address, "your_api_server_port" with your Zoia API Server port):
 
 ```
 listen 80;

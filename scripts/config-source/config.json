@@ -17,7 +17,7 @@
     "commonItemsLimit": 12,
     "allowRegistration": true,
     "allowSignIn": true,
-    "wysiwyg": true,
+    "wysiwyg": false,
     "api": {
         "url": "http://127.0.0.1:3000"
     },
