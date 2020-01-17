@@ -1,0 +1,12 @@
+<templates>
+  <ul class="uk-breadcrumb uk-margin-remove-bottom">
+    <li>
+      <a href="/edu/modules">&larr;&nbsp;${out.global.t["Modules"]}</a>
+    </li>
+  </ul>
+  <div class="uk-title-head">${out.global.moduleMeta.title}</div>
+  <div class="uk-margin-top">$!{out.global.moduleData.descFull}</div>
+  <div class="uk-margin-top">
+    <a href=`/edu/modules/${out.global.moduleMeta.id}/test` class="uk-button uk-button-large uk-button-default">${out.global.t["Pass the Test"]}</a>
+  </div>
+</templates>
