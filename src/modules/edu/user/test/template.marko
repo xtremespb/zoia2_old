@@ -9,6 +9,7 @@
   </ul>
   <div class="uk-title-head">${out.global.t["Test Exam"]}</div>
   <div class="uk-margin-top">
-    <testEngine questions=out.global.testData t=out.global.t/>
+    <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small" style="z-index: 980;" uk-sticky="bottom: #offset">Stick to the top</div>
+    <testEngine questions=out.global.testData t=out.global.t moduleID=out.global.moduleMeta.id apiURL=out.global.apiURL siteId=out.global.siteData.siteId cookieOptions=out.global.cookieOptions/>
   </div>
 </templates>

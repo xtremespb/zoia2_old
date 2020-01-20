@@ -33,6 +33,7 @@ export default fastify => ({
                         cookieOptions: true,
                         moduleMeta: true,
                         moduleData: true,
+                        apiURL: true
                     },
                     siteData,
                     t,
@@ -40,6 +41,7 @@ export default fastify => ({
                     template: templates.available[0],
                     moduleMeta,
                     testData,
+                    apiURL: fastify.zoiaConfig.api.url
                 }
             }));
             const html = render.out.stream.str;

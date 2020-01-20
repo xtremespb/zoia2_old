@@ -1,3 +1,6 @@
+import axios from "axios"
+import cookies from "zoia-cookies"
+
 style {
   .za-ed-no-select {
     cursor: default;
@@ -21,6 +24,10 @@ class {
     };
     input.questions.map((q, i) => (state.questions[`edu_test_q${q.id}`] = q.answersCount === 1 ? null : []));
     this.state = state;
+    this.apiURL = input.apiURL;
+    this.moduleID = input.moduleID;
+    this.cookieOptions = input.cookieOptions;
+    this.siteId = input.siteId;
   }
   onRadioValueChanged(e) {
     const id = e.target.name;
@@ -44,20 +51,42 @@ class {
     questions[id] = data;
     this.setState("questions", questions);
   }
-  onFinishButtonClick(e) {
-    console.log(this.state.questions);
+  async onFinishButtonClick(e) {
     const errors = Object.keys(this.state.questions)
       .map(item => (!this.state.questions[item] || (Array.isArray(this.state.questions[item]) && !this.state.questions[item].length) ? item : null))
       .filter(i => i);
+    this.setState("errors", errors.length ? errors : []);
     if (errors.length) {
-      return this.setState("errors", errors);
+      document.getElementById(`q${errors[0].replace(/^edu_test_q/, "")}`).scrollIntoView();
+      return;
+    }
+    const answers = {};
+    Object.keys(this.state.questions).map(q => {
+      const id = parseInt(q.replace(/^edu_test_q/, ""), 10);
+      answers[id] = this.state.questions[q];
+    });
+    try {
+      const token = cookies.get(`${this.siteId}_auth`, this.cookieOptions);
+      const res = await axios.post(`${this.apiURL}/api/edu/test`, {
+        answers,
+        token,
+        module: this.moduleID
+      });
+    } catch (e) {
+      console.log(e);
+      // Do something with that
     }
   }
 }
 
 <div class="uk-margin" uk-margin>
   <for|question, indexQuestion| of=input.questions>
-    <div class=`za-ed-no-select`>${indexQuestion + 1}. ${question.title}</div>
+    <div class=`za-ed-no-select`>
+      <a id=`q${question.id}`/>${indexQuestion + 1}. ${question.title}<if(state.errors.indexOf(`edu_test_q${question.id}`) > -1)>
+        &nbsp;
+        <span class="uk-label uk-label-danger">${input.t["Required"]}</span>
+      </if>
+    </div>
     <fieldset class="uk-fieldset uk-flex uk-flex-column">
       <for|answer, indexAnswer| of=question.answers>
         <label class="uk-text-small za-ed-no-select">
