@@ -51,6 +51,7 @@ export default {
             } = req.zoiaConfig;
             const language = locale.getLocaleFromURL(req);
             const languagePrefixURL = language === Object.keys(req.zoiaConfig.languages)[0] ? '' : `/${language}`;
+            const languagePrefix = language === Object.keys(req.zoiaConfig.languages)[0] ? '' : `${language}`;
             const title = locale.getSiteTitle(language, req);
             const redirectURL = req.query.redirect;
             const currentPath = req.urlData().path;
@@ -86,6 +87,7 @@ export default {
                 navTree,
                 language,
                 languagePrefixURL,
+                languagePrefix,
                 languages,
                 languagesArr,
                 languagesURL,

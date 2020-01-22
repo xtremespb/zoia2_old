@@ -5,8 +5,15 @@
     </li>
   </ul>
   <div class="uk-title-head">${out.global.moduleMeta.title}</div>
-  <div class="uk-margin-top">$!{out.global.moduleData.descFull}</div>
-  <div class="uk-margin-top">
-    <a href=`/edu/modules/${out.global.moduleMeta.id}/test` class="uk-button uk-button-large uk-button-default">${out.global.t["Pass the Test"]}</a>
-  </div>
+  <if(out.global.statusData && out.global.statusData.avail[out.global.moduleMeta.id])>
+    <div class="uk-margin-top">$!{out.global.moduleData.descFull}</div>
+    <div class="uk-margin-top">
+      <a href=`/edu/modules/${out.global.moduleMeta.id}/test` class="uk-button uk-button-large uk-button-default">${out.global.t["Pass the Test"]}</a>
+    </div>
+  </if>
+  <else>
+    <div class="uk-alert-danger" uk-alert>
+      <p>${out.global.t["The module you've requested is not available."]}</p>
+    </div>
+  </else>
 </templates>

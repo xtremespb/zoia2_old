@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
+import uuid from 'uuid/v1';
+import axios from 'axios';
 import template from './template.marko';
 import templates from '../../../../../dist/etc/templates.json';
 import i18n from '../../../../shared/marko/utils/i18n-node';
@@ -23,6 +25,41 @@ export default fastify => ({
                 answersCount: testItem.correct.length
             })).sort(() => Math.random() - 0.5);
             const siteData = await req.getSiteData(req);
+            const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
+            if (!token) {
+                return rep.sendRedirect(rep, `${siteData.languagePrefixURL}users/auth?redirect=${siteData.languagePrefixURL}/edu/modules&&_=${uuid()}`);
+            }
+            let statusData;
+            try {
+                const statusReply = await axios.post(`${fastify.zoiaConfig.api.url}/api/edu/status`, {
+                    token
+                }, {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                });
+                if (statusReply && statusReply.data && statusReply.data.statusCode === 200 && statusReply.data.status) {
+                    statusData = statusReply.data.status;
+                }
+            } catch (e) {
+                // Ignore
+            }
+            let slotData;
+            try {
+                const testRequestReply = await axios.post(`${fastify.zoiaConfig.api.url}/api/edu/test/request`, {
+                    token,
+                    module: req.params.id
+                }, {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                });
+                if (testRequestReply && testRequestReply.data && testRequestReply.data.statusCode === 200 && testRequestReply.data.slot) {
+                    slotData = testRequestReply.data.slot;
+                }
+            } catch (e) {
+                // Ignore
+            }
             const t = i18n('edu')[siteData.language] || {};
             siteData.title = `${moduleMeta.title} | ${siteData.title}`;
             const render = (await template.render({
@@ -33,7 +70,9 @@ export default fastify => ({
                         cookieOptions: true,
                         moduleMeta: true,
                         moduleData: true,
-                        apiURL: true
+                        apiURL: true,
+                        statusData: true,
+                        slotData: true
                     },
                     siteData,
                     t,
@@ -41,7 +80,9 @@ export default fastify => ({
                     template: templates.available[0],
                     moduleMeta,
                     testData,
-                    apiURL: fastify.zoiaConfig.api.url
+                    apiURL: fastify.zoiaConfig.api.url,
+                    statusData,
+                    slotData
                 }
             }));
             const html = render.out.stream.str;

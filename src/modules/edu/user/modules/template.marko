@@ -1,17 +1,29 @@
 <templates>
-  <div class="uk-flex uk-flex-wrap uk-child-width-1-3@m uk-grid-small uk-grid uk-grid-match" uk-grid>
-    <for|module, moduleIndex| of=out.global.modules.avail>
-      <div>
-        <div class="uk-card uk-card-small uk-card-default">
-          <div class="uk-card-header">
-            <a class="uk-button uk-button-primary uk-button-small" href=`/edu/modules/${module.id}`>Open</a>
-          </div>
-          <div class="uk-card-body">
-            <h3 class="uk-card-title">${module.title}</h3>
-            <p>${module.desc}</p>
+  <if(out.global.statusData)>
+    <div class="uk-flex uk-flex-wrap uk-child-width-1-3@m uk-grid-small uk-grid uk-grid-match" uk-grid>
+      <for|module, moduleIndex| of=out.global.modules.avail>
+        <div>
+          <div class="uk-card uk-card-small uk-card-default">
+            <div class="uk-card-header">
+              <if(out.global.statusData.avail[module.id])>
+                <a class=`uk-button uk-button-primary uk-button-small` href=`/edu/modules/${module.id}`>Open</a>
+              </if>
+              <else>
+                <button class=`uk-button uk-button-default uk-button-small` disabled>${out.global.t["Pending"]}</button>
+              </else>
+            </div>
+            <div class="uk-card-body">
+              <h3 class="uk-card-title">${module.title}</h3>
+              <p>${module.desc}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </for>
-  </div>
+      </for>
+    </div>
+  </if>
+  <else>
+    <div class="uk-alert-danger" uk-alert>
+      <p>${out.global.t["Currently you don't have any modules assigned to you."]}</p>
+    </div>
+  </else>
 </templates>

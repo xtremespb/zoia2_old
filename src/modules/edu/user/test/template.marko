@@ -8,8 +8,24 @@
     </li>
   </ul>
   <div class="uk-title-head">${out.global.t["Test Exam"]}</div>
-  <div class="uk-margin-top">
-    <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small" style="z-index: 980;" uk-sticky="bottom: #offset">Stick to the top</div>
-    <testEngine questions=out.global.testData t=out.global.t moduleID=out.global.moduleMeta.id apiURL=out.global.apiURL siteId=out.global.siteData.siteId cookieOptions=out.global.cookieOptions/>
-  </div>
+  <if(out.global.statusData && out.global.statusData.avail[out.global.moduleMeta.id])>
+    <div class="uk-margin-top">
+      <if(!out.global.slotData.unlimited)>
+        <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small" style="z-index: 980;" uk-sticky>
+          <timeCounter endTime=out.global.slotData.endTime nextAttemptRemaining=out.global.slotData.nextAttemptRemaining t=out.global.t/>
+        </div>
+      </if>
+      <if(out.global.slotData.nextAttemptRemaining)>
+        <p>${out.global.t["It takes time to make another attempt to pass the test. Please use it for additional training."]}</p>
+      </if>
+      <else>
+        <testEngine questions=out.global.testData t=out.global.t moduleID=out.global.moduleMeta.id apiURL=out.global.apiURL siteId=out.global.siteData.siteId cookieOptions=out.global.cookieOptions/>
+      </else>
+    </div>
+  </if>
+  <else>
+    <div class="uk-alert-danger" uk-alert>
+      <p>${out.global.t["The module you've requested is not available."]}</p>
+    </div>
+  </else>
 </templates>

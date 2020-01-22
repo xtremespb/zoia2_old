@@ -67,7 +67,7 @@ class {
     });
     try {
       const token = cookies.get(`${this.siteId}_auth`, this.cookieOptions);
-      const res = await axios.post(`${this.apiURL}/api/edu/test`, {
+      const res = await axios.post(`${this.apiURL}/api/edu/test/execute`, {
         answers,
         token,
         module: this.moduleID

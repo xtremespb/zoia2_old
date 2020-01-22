@@ -1,4 +1,5 @@
 import fs from 'fs-extra';
+import axios from 'axios';
 import path from 'path';
 import template from './template.marko';
 import templates from '../../../../../dist/etc/templates.json';
@@ -15,6 +16,25 @@ export default fastify => ({
             }
             const moduleData = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${moduleMeta.id}.json`));
             const siteData = await req.getSiteData(req);
+            const token = req.cookies[`${fastify.zoiaConfig.id}_auth`];
+            if (!token) {
+                return rep.sendRedirect(rep, `${siteData.languagePrefixURL}users/auth?redirect=${siteData.languagePrefixURL}/edu/modules&&_=${uuid()}`);
+            }
+            let statusData;
+            try {
+                const statusReply = await axios.post(`${fastify.zoiaConfig.api.url}/api/edu/status`, {
+                    token
+                }, {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                });
+                if (statusReply && statusReply.data && statusReply.data.statusCode === 200 && statusReply.data.status) {
+                    statusData = statusReply.data.status;
+                }
+            } catch (e) {
+                // Ignore
+            }
             const t = i18n('edu')[siteData.language] || {};
             siteData.title = `${moduleMeta.title} | ${siteData.title}`;
             const render = (await template.render({
@@ -25,6 +45,7 @@ export default fastify => ({
                         cookieOptions: true,
                         moduleMeta: true,
                         moduleData: true,
+                        statusData: true
                     },
                     siteData,
                     t,
@@ -32,6 +53,7 @@ export default fastify => ({
                     template: templates.available[0],
                     moduleMeta,
                     moduleData,
+                    statusData
                 }
             }));
             const html = render.out.stream.str;
