@@ -42,7 +42,7 @@ export default fastify => ({
             const defaultAvail = {};
             modulesMetadata.avail.map((m, i) => defaultAvail[m.id] = i === 0);
             const status = await this.mongo.db.collection('edu_status').findOne({
-                _id: new ObjectId(req.body.id)
+                _id: new ObjectId(user._id)
             }) || {
                 avail: defaultAvail
             };

@@ -12,5 +12,9 @@
     "The module you've requested is not available.": "",
     "It takes time to make another attempt to pass the test. Please use it for additional training.": "",
     "less than a minute": "",
-    "Time is over": ""
+    "Time is over": "",
+    "Could not load data from server. Please refresh the current page and try again.": "",
+    "The test was successfully completed": "",
+    "Percentage of correct answers": "",
+    "The following answers were not correct": ""
 }

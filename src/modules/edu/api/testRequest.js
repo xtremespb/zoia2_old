@@ -70,6 +70,7 @@ export default fastify => ({
                 });
             }
             const nowTimestamp = parseInt(Date.now() / 1000, 10);
+            status[req.body.module].startedAt = nowTimestamp;
             if (testData.timeLimit) {
                 const endTimeCurrent = nowTimestamp + testData.timeLimit;
                 const nextAttemptCurrent = endTimeCurrent + testData.nextAttempt;

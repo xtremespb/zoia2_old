@@ -19,8 +19,11 @@ style {
 class {
   onCreate(input) {
     const state = {
+      view: 1,
       questions: {},
-      errors: []
+      errors: [],
+      errorMessage: "",
+      statusData: {}
     };
     input.questions.map((q, i) => (state.questions[`edu_test_q${q.id}`] = q.answersCount === 1 ? null : []));
     this.state = state;
@@ -28,6 +31,7 @@ class {
     this.moduleID = input.moduleID;
     this.cookieOptions = input.cookieOptions;
     this.siteId = input.siteId;
+    this.t = input.t;
   }
   onRadioValueChanged(e) {
     const id = e.target.name;
@@ -51,6 +55,10 @@ class {
     questions[id] = data;
     this.setState("questions", questions);
   }
+  serverError() {
+    this.setState("view", 2);
+    this.setState("errorMessage", this.t["Could not load data from server. Please refresh the current page and try again."]);
+  }
   async onFinishButtonClick(e) {
     const errors = Object.keys(this.state.questions)
       .map(item => (!this.state.questions[item] || (Array.isArray(this.state.questions[item]) && !this.state.questions[item].length) ? item : null))
@@ -72,36 +80,57 @@ class {
         token,
         module: this.moduleID
       });
+      if (res && res.data && res.data.statusCode === 200 && res.data.status) {
+        this.setState("statusData", res.data.status);
+        this.setState("view", 3);
+        return;
+      }
+      this.serverError();
     } catch (e) {
-      console.log(e);
-      // Do something with that
+      console.error(e);
+      this.serverError();
     }
   }
 }
 
 <div class="uk-margin" uk-margin>
-  <for|question, indexQuestion| of=input.questions>
-    <div class=`za-ed-no-select`>
-      <a id=`q${question.id}`/>${indexQuestion + 1}. ${question.title}<if(state.errors.indexOf(`edu_test_q${question.id}`) > -1)>
-        &nbsp;
-        <span class="uk-label uk-label-danger">${input.t["Required"]}</span>
-      </if>
+  <if(state.view === 1)>
+    <if(!input.slotData.unlimited)>
+      <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small" style="z-index: 980;" uk-sticky>
+        <timeCounter endTime=input.slotData.endTime nextAttemptRemaining=input.slotData.nextAttemptRemaining t=out.global.t/>
+      </div>
+    </if>
+    <for|question, indexQuestion| of=input.questions>
+      <div class=`za-ed-no-select`>
+        <a id=`q${question.id}`/>${indexQuestion + 1}. ${question.title}<if(state.errors.indexOf(`edu_test_q${question.id}`) > -1)>
+          &nbsp;
+          <span class="uk-label uk-label-danger">${input.t["Required"]}</span>
+        </if>
+      </div>
+      <fieldset class="uk-fieldset uk-flex uk-flex-column">
+        <for|answer, indexAnswer| of=question.answers>
+          <label class="uk-text-small za-ed-no-select">
+            <if(question.answersCount === 1)>
+              <input name=`edu_test_q${question.id}` class="uk-radio" type="radio" on-change("onRadioValueChanged") value=answer.id checked=(state.questions[`edu_test_q${question.id}`] === String(answer.id))/>
+            </if>
+            <else>
+              <input name=`edu_test_q${question.id}` class="uk-checkbox" type="checkbox" on-change("onCheckboxValueChanged") value=answer.id checked=(state.questions[`edu_test_q${question.id}`].indexOf(String(answer.id)) > -1)/>
+            </else>
+            &nbsp;<span class="za-ed-answer">${String.fromCharCode(97 + parseInt(indexAnswer, 10)).toUpperCase()}.&nbsp;${answer.title}</span>
+          </label>
+        </for>
+      </fieldset>
+    </for>
+    <div class="uk-margin-top">
+      <button class="uk-button uk-button-primary uk-margin-top" on-click("onFinishButtonClick")>${input.t["Finish"]}</button>
     </div>
-    <fieldset class="uk-fieldset uk-flex uk-flex-column">
-      <for|answer, indexAnswer| of=question.answers>
-        <label class="uk-text-small za-ed-no-select">
-          <if(question.answersCount === 1)>
-            <input name=`edu_test_q${question.id}` class="uk-radio" type="radio" on-change("onRadioValueChanged") value=answer.id checked=(state.questions[`edu_test_q${question.id}`] === String(answer.id))/>
-          </if>
-          <else>
-            <input name=`edu_test_q${question.id}` class="uk-checkbox" type="checkbox" on-change("onCheckboxValueChanged") value=answer.id checked=(state.questions[`edu_test_q${question.id}`].indexOf(String(answer.id)) > -1)/>
-          </else>
-          &nbsp;<span class="za-ed-answer">${String.fromCharCode(97 + parseInt(indexAnswer, 10)).toUpperCase()}.&nbsp;${answer.title}</span>
-        </label>
-      </for>
-    </fieldset>
-  </for>
-  <div class="uk-margin-top">
-    <button class="uk-button uk-button-primary uk-margin-top" on-click("onFinishButtonClick")>${input.t["Finish"]}</button>
-  </div>
+  </if>
+  <if(state.view === 2)>
+    <div class="uk-alert-danger" uk-alert>
+      <p>${state.errorMessage}</p>
+    </div>
+  </if>
+  <if(state.view === 3)>
+    <status t=input.t statusData=state.statusData moduleMeta=input.moduleMeta testData=input.questions/>
+  </if>
 </div>

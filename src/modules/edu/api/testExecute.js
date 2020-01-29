@@ -50,14 +50,14 @@ export default fastify => ({
             if (!modulesMetadata.avail.find(m => m.id === req.body.module)) {
                 return rep.sendNotFoundError(rep, 'Module not found');
             }
-            const defaultAvail = {};
-            modulesMetadata.avail.map((m, i) => defaultAvail[m.id] = i === 0);
             const eduStatusData = await this.mongo.db.collection('edu_status').findOne({
                 _id: new ObjectId(user._id)
             });
             if (!eduStatusData || !eduStatusData.avail[req.body.module] || !eduStatusData[req.body.module]) {
                 return rep.sendUnauthorizedError(rep);
             }
+            const modulesAvail = Object.keys(eduStatusData.avail);
+            const currentModuleIndex = modulesAvail.findIndex(i => i === req.body.module);
             const nowTimestamp = parseInt(Date.now() / 1000, 10);
             const executionData = eduStatusData[req.body.module];
             // Check if already finished
@@ -72,19 +72,28 @@ export default fastify => ({
             }
             // Verify answers
             let correctAnswers = 0;
+            const correct = {};
+            const wrong = {};
             testData.test.map((q, qIdx) => {
                 const a = req.body.answers[qIdx];
                 if (!a) {
                     return;
                 }
                 if (Array.isArray(a)) {
-                    const as = a.map(i => parseInt(i, 10)).sort();
-                    const ac = q.correct.map(i => i - 1).sort();
+                    const as = a.map(i => parseInt(i, 10) + 1).sort();
+                    const ac = q.correct.sort();
                     if (as.length === ac.length && as.every((value, index) => value === ac[index])) {
                         correctAnswers += 1;
+                    } else {
+                        correct[qIdx] = ac;
+                        wrong[qIdx] = as;
                     }
                 } else if (parseInt(a, 10) === q.correct[0] - 1) {
                     correctAnswers += 1;
+                } else {
+                    // eslint-disable-next-line prefer-destructuring
+                    correct[qIdx] = q.correct;
+                    wrong[qIdx] = [parseInt(a, 10) + 1];
                 }
             });
             // Check results
@@ -113,11 +122,17 @@ export default fastify => ({
                 }, 3);
             }
             // Write results to DB
+            const nextModule = modulesAvail.length >= currentModuleIndex + 1 ? modulesAvail[currentModuleIndex + 1] : null;
+            if (nextModule) {
+                eduStatusData.avail[nextModule] = true;
+            }
             eduStatusData[req.body.module].finished = true;
             eduStatusData[req.body.module].testAttempts = eduStatusData[req.body.module].testAttempts ? eduStatusData[req.body.module].testAttempts + 1 : 1;
             eduStatusData[req.body.module].finishedAt = new Date();
             eduStatusData[req.body.module].percentage = correctAnswersPercentage;
             eduStatusData[req.body.module].endTime = null;
+            eduStatusData[req.body.module].correct = correct;
+            eduStatusData[req.body.module].wrong = wrong;
             const update = await this.mongo.db.collection('edu_status').updateOne({
                 _id: new ObjectId(user._id)
             }, {
@@ -130,7 +145,9 @@ export default fastify => ({
                 return rep.sendBadRequestError(rep, 'Cannot update database record');
             }
             // Send response
-            return rep.sendSuccessJSON(rep, {});
+            return rep.sendSuccessJSON(rep, {
+                status: eduStatusData
+            });
         } catch (e) {
             rep.logError(req, null, e);
             return rep.sendInternalServerError(rep, e.message);
