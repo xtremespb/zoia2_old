@@ -1,6 +1,6 @@
 # Frontend Templates
 
-Zoia uses Marko as a templating system. All frontend pages are rendered on a server-side so your website will be fully parseable by search engines.
+Zoia uses Marko as a templating system. All frontend pages are rendered on the server so your website will be fully parseable by search engines.
 
 The default template ("zoia") is a good example on how to build your own templates. To add a new template, create a directory under *shared/marko/templates/available* and put at least the following files there:
 
@@ -23,9 +23,9 @@ There are several global variables sent to each Zoia template which can be acces
 ${out.global.siteData.title}
 ```
 
-The following variables are accessible in a global scope:
+The following variables are accessible in the global scope:
 
-* *t*: language strings for a current language which can be accessed like
+* *t*: language strings for the current language which can be accessed like
 
 ```javascript
 ${out.global.t["Log Out"]}
@@ -36,13 +36,11 @@ ${out.global.t["Log Out"]}
 * *siteData.user*: current username
 * *siteData.language*: current language detected by Zoia
 * *siteData.languagePrefixURL*: current URL prefix which needs to be added to an URL if internationalization is required
-* *siteData.languages{}*: an object of languages available (e.g. { english: "English", russian: "Русский"})
-* *siteData.languagesArr*: an array of languages available
-* *siteData.languagesURL*: an object of languages and corresponding URLs pointing at the current page
+* *siteData.languages{}*: object representing available languages (e.g. { english: "English", russian: "Русский"})
 * *siteData.title*: site title
-* *siteData.breadcrumbsHTML*: a HTML code for current page's breadcrumbs
-* *siteData.useUIkitOnFrontend*: a boolean value which indicates if the UIkit shall be used on frontend (or not)
-* *siteData.allowRegistration*: a boolean value which indicates if a sign up of a new user is allowed in the userspace
+* *siteData.breadcrumbsHTML*: HTML code for current page's breadcrumbs
+* *siteData.useUIkitOnFrontend*: boolean value which indicates if the UIkit shall be used on frontend (or not)
+* *siteData.allowRegistration*: boolean value which indicates if a sign up of a new user is allowed in the userspace
 
 ## Marko Syntax
 
@@ -50,4 +48,4 @@ Read more on [Marko syntax](https://markojs.com/docs/getting-started/) to build 
 
 ## Webpack
 
-Because all templates are need to be processed before they are served by the Zoia Web Server, you will need to rebuild using `npm run build-web` each time you make any changes to any of your templates or add a new one.
+Because all templates need to be processed before they are served by Zoia's Web Server, you will need to rebuild using `npm run build-web` each time you make any changes to any of your templates or add a new one.

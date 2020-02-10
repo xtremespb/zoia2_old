@@ -26,7 +26,7 @@ You will also need to run the script to install all required defaults (e.g. defa
 
 `npm run install-defaults`
 
-To run Zoia, you will need to execute the following command. This will start API Server, Web Server and a corresponding routing configuration:
+To run Zoia, you will need to execute the following command. This will start API Server, Web Server and the corresponding routing configuration:
 
 `npm run start-dev`
 
