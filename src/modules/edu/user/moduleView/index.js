@@ -1,5 +1,5 @@
-import { v4 as uuid } from 'uuid';
 import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 import template from './template.marko';
 import templates from '../../../../../dist/etc/templates.json';
 import i18n from '../../../../shared/marko/utils/i18n-node';
@@ -33,8 +33,8 @@ export default fastify => ({
                 rep.callNotFound();
                 return rep.code(204);
             }
-            let statusData;
             const currentProgram = data.programs.avail.find(p => p.id === req.params.program);
+            let statusData;
             try {
                 const statusReply = await axios.post(`${fastify.zoiaConfig.api.url}/api/edu/status`, {
                     token,
@@ -50,48 +50,29 @@ export default fastify => ({
             } catch (e) {
                 // Ignore
             }
-            let slotData;
-            try {
-                const testRequestReply = await axios.post(`${fastify.zoiaConfig.api.url}/api/edu/test/request`, {
-                    token,
-                    program: req.params.program,
-                    module: req.params.module
-                }, {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                });
-                if (testRequestReply && testRequestReply.data && testRequestReply.data.statusCode === 200 && testRequestReply.data.slot) {
-                    slotData = testRequestReply.data.slot;
-                }
-            } catch (e) {
-                // Ignore
-            }
             const t = i18n('edu')[siteData.language] || {};
-            siteData.title = `${data.module.title} | ${siteData.title}`;
+            siteData.title = `${data.module.title} | ${currentProgram.title} | ${siteData.title}`;
             const render = (await template.render({
                 $global: {
                     serializedGlobals: {
                         siteData: true,
                         t: true,
                         cookieOptions: true,
+                        moduleMeta: true,
+                        moduleData: true,
                         data: true,
-                        apiURL: true,
-                        statusData: true,
-                        slotData: true,
                         program: true,
-                        programTitle: true
+                        module: true
                     },
                     siteData,
                     t,
                     cookieOptions: fastify.zoiaConfig.cookieOptions,
                     template: templates.available[0],
                     data,
-                    apiURL: fastify.zoiaConfig.api.url,
                     statusData,
-                    slotData,
                     program: req.params.program,
-                    programTitle: currentProgram.title
+                    programTitle: currentProgram.title,
+                    module: req.params.module,
                 }
             }));
             const html = render.out.stream._content;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import uuid from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 import fs from 'fs-extra';
 import path from 'path';
 import template from './template.marko';
@@ -77,7 +77,7 @@ export default fastify => ({
                     template: templates.available[0]
                 }
             }));
-            const html = render.out.stream.str;
+            const html = render.out.stream._content;
             rep.expires(new Date());
             return rep.sendSuccessHTML(rep, html);
         } catch (e) {

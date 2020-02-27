@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs-extra';
-import axios from 'axios';
 import {
     ObjectId
 } from 'mongodb';
@@ -10,11 +9,17 @@ export default fastify => ({
         body: {
             type: 'object',
             properties: {
+                program: {
+                    type: 'string',
+                    minLength: 1,
+                    maxLength: 64,
+                    pattern: '^[a-z0-9]+$'
+                },
                 token: {
                     type: 'string'
                 },
             },
-            required: ['token']
+            required: ['token', 'program']
         }
     },
     attachValidation: true,
@@ -38,9 +43,13 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            const modulesMetadata = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/modules.json`));
+            const programsMetadata = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/programs.json`));
+            if (!programsMetadata.avail.find(m => m.id === req.body.program)) {
+                return rep.sendNotFoundError(rep, 'Program not found');
+            }
+            const programMetadata = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${req.body.program}.json`));
             const defaultAvail = {};
-            modulesMetadata.avail.map((m, i) => defaultAvail[m.id] = i === 0);
+            programMetadata.modules.map((m, i) => defaultAvail[m.id] = i === 0);
             const status = await this.mongo.db.collection('edu_status').findOne({
                 _id: new ObjectId(user._id)
             }) || {

@@ -2,7 +2,7 @@ import {
     ObjectId
 } from 'mongodb';
 import crypto from 'crypto';
-import uuid from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 import mailReset from '../email/reset/index.marko';
 import I18N from '../../../shared/marko/utils/i18n-node';
 
@@ -109,7 +109,7 @@ export default fastify => ({
                 },
                 resetURL
             }));
-            const htmlMail = render.out.stream.str;
+            const htmlMail = render.out.stream._content;
             // Send mail
             await rep.sendMail(fastify, email, i18n[subj], htmlMail, '', req.body.language);
             // Send response

@@ -1,5 +1,6 @@
 import axios from "axios"
 import cookies from "zoia-cookies"
+import { v4 as uuid } from "uuid";
 
 style {
   .za-ed-no-select {
@@ -17,18 +18,22 @@ style {
 }
 
 class {
-  onCreate(input) {
+  onCreate(input, out) {
     const state = {
       view: 1,
       questions: {},
       errors: [],
       errorMessage: "",
-      statusData: {}
+      statusData: {},
+      scoreCurrent: 0,
+      scoreRequired: 0,
+      nextAttemptRemaining: 0
     };
     input.questions.map((q, i) => (state.questions[`edu_test_q${q.id}`] = q.answersCount === 1 ? null : []));
     this.state = state;
     this.apiURL = input.apiURL;
     this.moduleID = input.moduleID;
+    this.programID = input.programID;
     this.cookieOptions = input.cookieOptions;
     this.siteId = input.siteId;
     this.t = input.t;
@@ -78,12 +83,22 @@ class {
       const res = await axios.post(`${this.apiURL}/api/edu/test/execute`, {
         answers,
         token,
+        program: this.programID,
         module: this.moduleID
       });
-      if (res && res.data && res.data.statusCode === 200 && res.data.status) {
-        this.setState("statusData", res.data.status);
-        this.setState("view", 3);
-        return;
+      if (res && res.data) {
+        if (res.data.statusCode === 200 && res.data.status) {
+          this.setState("statusData", res.data.status);
+          this.setState("view", 3);
+          return;
+        }
+        if (res.data.statusCode === 400 && res.data.errorCode === 3 && res.data.errors) {
+          this.setState("scoreCurrent", res.data.errors.current);
+          this.setState("scoreRequired", res.data.errors.required);
+          this.setState("nextAttemptRemaining", res.data.errors.nextAttemptRemaining);
+          this.setState("view", 4);
+          return;
+        }
       }
       this.serverError();
     } catch (e) {
@@ -96,7 +111,7 @@ class {
 <div class="uk-margin" uk-margin>
   <if(state.view === 1)>
     <if(!input.slotData.unlimited)>
-      <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small" style="z-index: 980;" uk-sticky>
+      <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small uk-margin-bottom" style="z-index: 980;" uk-sticky>
         <timeCounter endTime=input.slotData.endTime nextAttemptRemaining=input.slotData.nextAttemptRemaining t=out.global.t/>
       </div>
     </if>
@@ -132,5 +147,15 @@ class {
   </if>
   <if(state.view === 3)>
     <status t=input.t statusData=state.statusData moduleMeta=input.moduleMeta testData=input.questions/>
+    <a href=`${out.global.siteData.languagePrefixURL || '/'}edu/modules/${input.moduleID}` class="uk-button uk-button-default">${input.t["Return to module"]}</a>
+  </if>
+  <if(state.view === 4)>
+    <if(!input.slotData.unlimited)>
+      <div class="uk-card uk-card-default uk-card-small uk-box-shadow-small uk-padding-small uk-margin-bottom" style="z-index: 980;" uk-sticky>
+        <timeCounter endTime=null nextAttemptRemaining=state.nextAttemptRemaining t=out.global.t/>
+      </div>
+    </if>
+    <p>${input.t["Unfortunately, you didn't pass the test."]} ${input.t["Your score"]}: ${state.scoreCurrent}%, ${input.t["score required"]}: ${state.scoreRequired}%</p>
+    <a href=`${out.global.siteData.languagePrefixURL || '/'}edu/modules/${input.moduleID}` class="uk-button uk-button-default">${input.t["Return to module"]}</a>
   </if>
 </div>

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { lazy, Component } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 import { t } from '@lingui/macro';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';

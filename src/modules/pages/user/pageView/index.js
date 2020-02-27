@@ -54,8 +54,8 @@ export default fastify => ({
                         template: page.template || templates.available[0],
                     }
                 }));
-                const html = render.out.stream.str.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);
-                return rep.sendSuccessHTML(rep, html);
+                const htmlProcessed = render.out.stream._content.replace(/\[breadcrumbs\]/gm, siteData.breadcrumbsHTML);
+                return rep.sendSuccessHTML(rep, htmlProcessed);
             }
             rep.callNotFound();
             return rep.code(204);

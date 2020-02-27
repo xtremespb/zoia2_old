@@ -23,7 +23,7 @@ export default fastify => ({
                     template: templates.available[0],
                 }
             }));
-            const html = render.out.stream.str;
+            const html = render.out.stream._content;
             rep.expires(new Date());
             return rep.sendSuccessHTML(rep, html);
         } catch (e) {

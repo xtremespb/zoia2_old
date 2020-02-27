@@ -9,6 +9,12 @@ export default fastify => ({
         body: {
             type: 'object',
             properties: {
+                program: {
+                    type: 'string',
+                    minLength: 1,
+                    maxLength: 64,
+                    pattern: '^[a-z0-9]+$'
+                },
                 module: {
                     type: 'string',
                     minLength: 1,
@@ -22,7 +28,7 @@ export default fastify => ({
                     type: 'string'
                 },
             },
-            required: ['module', 'answers', 'token']
+            required: ['program', 'module', 'answers', 'token']
         }
     },
     attachValidation: true,
@@ -46,8 +52,13 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            const modulesMetadata = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/modules.json`));
-            if (!modulesMetadata.avail.find(m => m.id === req.body.module)) {
+            const programs = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/programs.json`));
+            if (!programs.avail.find(m => m.id === req.body.program)) {
+                return rep.sendNotFoundError(rep, 'Program not found');
+            }
+            const program = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${req.body.program}.json`));
+            const moduleData = program.modules.find(m => m.id === req.body.module);
+            if (!module) {
                 return rep.sendNotFoundError(rep, 'Module not found');
             }
             const eduStatusData = await this.mongo.db.collection('edu_status').findOne({
@@ -64,17 +75,15 @@ export default fastify => ({
             if (executionData.finished) {
                 return rep.sendBadRequestError(rep, 'Already finished', {}, 1);
             }
-            // Load test data
-            const testData = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${req.body.module}_test.json`));
             // Check if time is over
-            if (testData.timeLimit && (!executionData.endTime || nowTimestamp > executionData.endTime || executionData.nextAttempt)) {
+            if (moduleData.test.timeLimit && (!executionData.endTime || nowTimestamp > executionData.endTime || executionData.nextAttempt)) {
                 return rep.sendBadRequestError(rep, 'Time is over', {}, 2);
             }
             // Verify answers
             let correctAnswers = 0;
             const correct = {};
             const wrong = {};
-            testData.test.map((q, qIdx) => {
+            moduleData.test.test.map((q, qIdx) => {
                 const a = req.body.answers[qIdx];
                 if (!a) {
                     return;
@@ -97,12 +106,12 @@ export default fastify => ({
                 }
             });
             // Check results
-            const questionsTotal = testData.test.length;
+            const questionsTotal = moduleData.test.test.length;
             const correctAnswersPercentage = parseInt((100 / questionsTotal) * correctAnswers, 10);
-            if (testData.minPercentage && correctAnswersPercentage < testData.minPercentage) {
-                if (testData.timeLimit) {
+            if (moduleData.test.minPercentage && correctAnswersPercentage < moduleData.test.minPercentage) {
+                if (moduleData.test.timeLimit) {
                     eduStatusData[req.body.module].endTime = null;
-                    eduStatusData[req.body.module].nextAttempt = nowTimestamp + testData.nextAttempt;
+                    eduStatusData[req.body.module].nextAttempt = nowTimestamp + moduleData.test.nextAttempt;
                     eduStatusData[req.body.module].testAttempts = eduStatusData[req.body.module].testAttempts ? eduStatusData[req.body.module].testAttempts + 1 : 1;
                     const update = await this.mongo.db.collection('edu_status').updateOne({
                         _id: new ObjectId(user._id)
@@ -118,7 +127,8 @@ export default fastify => ({
                 }
                 return rep.sendBadRequestError(rep, 'Test is not passed', {
                     current: correctAnswersPercentage,
-                    required: testData.minPercentage
+                    required: moduleData.test.minPercentage,
+                    nextAttemptRemaining: moduleData.test.nextAttempt
                 }, 3);
             }
             // Write results to DB

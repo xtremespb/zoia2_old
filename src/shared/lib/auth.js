@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 import Cryptr from 'cryptr';
 import crypto from 'crypto';
 import {

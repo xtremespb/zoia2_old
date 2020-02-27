@@ -32,7 +32,7 @@ export default async (err, req, rep, i18n, templates, secure) => {
         stack: secure.stackTrace && err.stack ? err.stack : null
     });
     if (rep) {
-        return rep.code(500).type('text/html').send(render.out.stream.str);
+        return rep.code(500).type('text/html').send(render.out.stream._content);
     }
-    return render.out.stream.str;
+    return render.out.stream._content;
 };

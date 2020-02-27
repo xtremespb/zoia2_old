@@ -1,5 +1,5 @@
 <p>
-  <div class="uk-alert-primary" uk-alert>
+  <div class="uk-alert-primary uk-alert" uk-alert>
     ${input.t["The test was successfully completed"]}.&nbsp;${input.t["Percentage of correct answers"]}:&nbsp;<span class="uk-badge">${input.statusData[input.moduleMeta.id].percentage}%</span>
   </div>
   <if(input.statusData[input.moduleMeta.id].wrong && Object.keys(input.statusData[input.moduleMeta.id].wrong).length)>

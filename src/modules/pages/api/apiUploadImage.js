@@ -1,6 +1,6 @@
 /* eslint no-param-reassign:0 */
 import fs from 'fs-extra';
-import uuid from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 import Jimp from 'jimp';
 
 export default fastify => ({

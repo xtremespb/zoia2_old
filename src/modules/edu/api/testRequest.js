@@ -9,6 +9,12 @@ export default fastify => ({
         body: {
             type: 'object',
             properties: {
+                program: {
+                    type: 'string',
+                    minLength: 1,
+                    maxLength: 64,
+                    pattern: '^[a-z0-9]+$'
+                },
                 module: {
                     type: 'string',
                     minLength: 1,
@@ -43,13 +49,17 @@ export default fastify => ({
         }
         // End of check permissions
         try {
-            const modulesMetadata = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/modules.json`));
-            if (!modulesMetadata.avail.find(m => m.id === req.body.module)) {
+            const programs = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/programs.json`));
+            if (!programs.avail.find(m => m.id === req.body.program)) {
+                return rep.sendNotFoundError(rep, 'Program not found');
+            }
+            const program = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${req.body.program}.json`));
+            const moduleData = program.modules.find(m => m.id === req.body.module);
+            if (!module) {
                 return rep.sendNotFoundError(rep, 'Module not found');
             }
-            const testData = await fs.readJSON(path.resolve(`${__dirname}/../data/edu/${req.body.module}_test.json`));
             const defaultAvail = {};
-            modulesMetadata.avail.map((m, i) => defaultAvail[m.id] = i === 0);
+            program.modules.map((m, i) => defaultAvail[m.id] = i === 0);
             const status = await this.mongo.db.collection('edu_status').findOne({
                 _id: new ObjectId(user._id)
             }) || {
@@ -71,9 +81,9 @@ export default fastify => ({
             }
             const nowTimestamp = parseInt(Date.now() / 1000, 10);
             status[req.body.module].startedAt = nowTimestamp;
-            if (testData.timeLimit) {
-                const endTimeCurrent = nowTimestamp + testData.timeLimit;
-                const nextAttemptCurrent = endTimeCurrent + testData.nextAttempt;
+            if (moduleData.test.timeLimit) {
+                const endTimeCurrent = nowTimestamp + moduleData.test.timeLimit;
+                const nextAttemptCurrent = endTimeCurrent + moduleData.test.nextAttempt;
                 if (!status[req.body.module].endTime) {
                     status[req.body.module].endTime = endTimeCurrent;
                 }

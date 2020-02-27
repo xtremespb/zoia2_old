@@ -1,17 +1,20 @@
 <templates>
   <ul class="uk-breadcrumb uk-margin-remove-bottom">
     <li>
-      <a href="/edu/modules">&larr;&nbsp;${out.global.t["Modules"]}</a>
+      <a href=`${out.global.siteData.languagePrefixURL || ""}/edu`>&larr;&nbsp;${out.global.t["Programs"]}</a>
     </li>
     <li>
-      <a href=`/edu/modules/${out.global.moduleMeta.id}`>${out.global.moduleMeta.title}</a>
+      <a href=`${out.global.siteData.languagePrefixURL || ""}/edu/${out.global.program}`>${out.global.programTitle}</a>
+    </li>
+    <li>
+      <a href=`${out.global.siteData.languagePrefixURL || ""}/edu/${out.global.program}/module/${out.global.data.module.id}`>${out.global.data.module.title}</a>
     </li>
   </ul>
   <div class="uk-title-head">${out.global.t["Test Exam"]}</div>
-  <if(out.global.statusData && out.global.statusData[out.global.moduleMeta.id] && out.global.statusData[out.global.moduleMeta.id].finished)>
-    <status t=out.global.t statusData=out.global.statusData moduleMeta=out.global.moduleMeta testData=out.global.testData/>
+  <if(out.global.statusData && out.global.statusData[out.global.data.module.id] && out.global.statusData[out.global.data.module.id].finished)>
+    <status t=out.global.t statusData=out.global.statusData moduleMeta=out.global.data.module testData=out.global.data.module.test.test/>
   </if>
-  <else-if(out.global.statusData && out.global.statusData.avail[out.global.moduleMeta.id])>
+  <else-if(out.global.statusData && out.global.statusData.avail[out.global.data.module.id])>
     <div class="uk-margin-top">
       <if(out.global.slotData.nextAttemptRemaining)>
         <if(!out.global.slotData.unlimited)>
@@ -20,9 +23,10 @@
           </div>
         </if>
         <p>${out.global.t["It takes time to make another attempt to pass the test. Please use it for additional training."]}</p>
+        <a href=`${out.global.siteData.languagePrefixURL || ""}/edu/${out.global.program}/module/${out.global.data.module.id}` class="uk-button uk-button-default">${out.global.t["Return to module"]}</a>
       </if>
       <else>
-        <testEngine questions=out.global.testData t=out.global.t moduleMeta=out.global.moduleMeta moduleID=out.global.moduleMeta.id apiURL=out.global.apiURL siteId=out.global.siteData.siteId cookieOptions=out.global.cookieOptions slotData=out.global.slotData/>
+        <testEngine questions=out.global.data.module.test.test t=out.global.t moduleMeta=out.global.data.module moduleID=out.global.data.module.id programID=out.global.program apiURL=out.global.apiURL siteId=out.global.siteData.siteId cookieOptions=out.global.cookieOptions slotData=out.global.slotData/>
       </else>
     </div>
   </else-if>

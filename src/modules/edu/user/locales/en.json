@@ -1,7 +1,6 @@
 {
     "Test": "",
     "Modules": "",
-    "Pass the Test": "",
     "Test Exam": "",
     "Finish": "",
     "Required": "",
@@ -16,5 +15,12 @@
     "Could not load data from server. Please refresh the current page and try again.": "",
     "The test was successfully completed": "",
     "Percentage of correct answers": "",
-    "The following answers were not correct": ""
+    "The following answers were not correct": "",
+    "Unfortunately, you didn't pass the test.": "",
+    "Your score": "",
+    "score required": "",
+    "Return to module": "",
+    "Currently you don't have any programs assigned to you.": "",
+    "Programs": "",
+    "Open": ""
 }

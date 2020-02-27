@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const colors = require('colors/safe');
 const crypto = require('crypto');
-const uuid = require('uuid/v1');
+const { v4: uuid } = require('uuid');
 const path = require('path');
 
 const install = async () => {

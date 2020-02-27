@@ -1,5 +1,5 @@
 import cookies from "zoia-cookies"
-import uuid from "uuid/v1"
+import { v4 as uuid } from "uuid"
 
 class {
   onCreate(input, out) {
@@ -38,7 +38,7 @@ class {
   }
   onLogOutButtonClick() {
     cookies.expire(`${this.siteId}_auth`, undefined, this.cookieOptions);
-    location.href = `${this.languagePrefixURL || '/'}?_=${uuid()}`;
+    location.href = `${this.languagePrefixURL || "/"}?_=${uuid()}`;
   }
 }
 
@@ -75,7 +75,7 @@ class {
             mandatory: true,
             minLength: 5,
             maxLength: 254,
-            pattern: "^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$",
+            pattern: "^(?:[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-])+@(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?(?:\\.(?:[a-zA-Z0-9]|[^\\u0000-\\u007F])(?:(?:[a-zA-Z0-9-]|[^\\u0000-\\u007F]){0,61}(?:[a-zA-Z0-9]|[^\\u0000-\\u007F]))?)*$"
           },
           {
             id: "password",

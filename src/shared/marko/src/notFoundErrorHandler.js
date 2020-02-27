@@ -12,5 +12,5 @@ export default async (req, rep, i18n, templates) => {
             template: templates.available[0]
         }
     });
-    rep.code(404).type('text/html').send(render.out.stream.str);
+    rep.code(404).type('text/html').send(render.out.stream._content);
 };
