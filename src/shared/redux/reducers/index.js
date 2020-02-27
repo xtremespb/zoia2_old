@@ -11,11 +11,15 @@ export default (history, config) => {
     let moduleReducers = {};
     // eslint-disable-next-line global-require
     Object.keys(modules).map(m => {
-        const reducers = require(`../../../modules/${m}/admin/reducers/index.js`).default();
-        moduleReducers = {
-            ...moduleReducers,
-            ...reducers
-        };
+        try {
+            const reducers = require(`../../../modules/${m}/admin/reducers/index.js`).default();
+            moduleReducers = {
+                ...moduleReducers,
+                ...reducers
+            };
+        } catch (e) {
+            // Ignore
+        }
     });
     // Set defaults in reducers
     appData(null, null, config);
