@@ -469,6 +469,16 @@ msgstr "Навигация"
 msgid "pages"
 msgstr "Контент"
 
+#: src/modules/update/admin/components/Translations.jsx:9
+msgid "test"
+msgstr ""
+
+#: src/modules/update/admin/components/Translations.jsx:8
+#: src/modules/update/admin/components/Update.jsx:26
+#: src/modules/update/admin/components/Update.jsx:28
+msgid "update"
+msgstr ""
+
 #: src/modules/users/admin/components/Translations.jsx:8
 msgid "users"
 msgstr "Пользователи"

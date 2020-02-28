@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2019-07-09 12:39+0300\n"
+"POT-Creation-Date: 2020-02-28 16:07+0300\n"
 "Mime-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -239,10 +239,6 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: shared/react/Error/Error.jsx:54
-#~ msgid "Internal Error"
-#~ msgstr ""
-
 #: src/modules/nav/admin/components/DialogNavEdit.jsx:97
 #: src/modules/nav/admin/components/Nav.jsx:222
 #: src/modules/pages/admin/components/DialogFolder.jsx:188
@@ -273,10 +269,6 @@ msgstr ""
 #: src/modules/users/admin/components/UsersList.jsx:194
 msgid "Loading data, please wait…"
 msgstr ""
-
-#: shared/react/AdminPanel/AdminPanel.jsx:106
-#~ msgid "Log Out"
-#~ msgstr ""
 
 #: src/modules/pages/admin/components/PagesEdit.jsx:245
 msgid "Minifiy the HTML code displayed to the user"
@@ -317,10 +309,6 @@ msgstr ""
 #: src/modules/pages/admin/components/PagesList.jsx:148
 msgid "Page"
 msgstr ""
-
-#: shared/react/Error/Error.jsx:54
-#~ msgid "Page not Found"
-#~ msgstr ""
 
 #: src/modules/pages/admin/components/Translations.jsx:11
 msgid "Page not found"
@@ -468,6 +456,12 @@ msgstr "Navigation"
 #: src/modules/pages/admin/components/Translations.jsx:8
 msgid "pages"
 msgstr "Pages"
+
+#: src/modules/update/admin/components/Translations.jsx:8
+#: src/modules/update/admin/components/Update.jsx:26
+#: src/modules/update/admin/components/Update.jsx:28
+msgid "update"
+msgstr "System Update"
 
 #: src/modules/users/admin/components/Translations.jsx:8
 msgid "users"

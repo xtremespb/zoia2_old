@@ -16,7 +16,7 @@ const log = pino({
 // Load configuration file for ports
 const configSecure = require(path.resolve(`${__dirname}/../dist/etc/secure.json`));
 // Load HTML file to serve as /admin route
-const adminHTML = fs.readFileSync(path.resolve(__dirname, '../dist/static/_admin/admin.html'), 'utf8');
+// const adminHTML = fs.readFileSync(path.resolve(__dirname, '../dist/static/_admin/admin.html'), 'utf8');
 // Init Fastify
 const fastify = Fastify();
 // Register proxy route for Web Server
@@ -35,8 +35,14 @@ fs.readdirSync(path.resolve(__dirname, '../dist/static')).filter(f => fs.lstatSy
     prefix: `/${dir}`,
     decorateReply: false
 }));
+// Register custom static directory
+fastify.register(fastifyStatic, {
+    root: path.resolve(__dirname, `../static`),
+    prefix: `/static`,
+    decorateReply: false
+});
 // Serve /admin route with pre-loaded admin.html file
-fastify.get('/admin*', (req, rep) => rep.code(200).type('text/html').send(adminHTML));
+fastify.get('/admin*', (req, rep) => rep.code(200).type('text/html').send(fs.readFileSync(path.resolve(__dirname, '../dist/static/_admin/admin.html'), 'utf8')));
 // Listen on port 80
 fastify.listen(configSecure.httpDevServer.port, configSecure.httpDevServer.ip);
 log.info(`HTTP Server is listening on http://${configSecure.httpDevServer.ip}:${configSecure.httpDevServer.port}`);

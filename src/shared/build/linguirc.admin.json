@@ -7,6 +7,7 @@
     "src/modules/edu/admin/components/",
     "src/modules/nav/admin/components/",
     "src/modules/pages/admin/components/",
+    "src/modules/update/admin/components/",
     "src/modules/users/admin/components/"
   ],
   "format": "po"

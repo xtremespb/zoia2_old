@@ -29,3 +29,5 @@ locale/_build/
 /src/shared/marko/templates/index.marko
 /src/shared/react/locales/admin/_build
 /src/static/etc
+/update/
+/build/

@@ -32,7 +32,8 @@ const nginx = fs.readFileSync(`${__dirname}/config-source/nginx.conf`, 'utf8')
     .replace(/{apiPort}/igm, secure.apiServer.port)
     .replace(/{serverName}/igm, secure.serverName)
     .replace(/{logPath}/igm, path.resolve(`${__dirname}/../dist/logs`).replace(/\\/gm, '/'))
-    .replace(/{staticPath}/igm, path.resolve(`${__dirname}/../dist/static`).replace(/\\/gm, '/'));
+    .replace(/{staticPath}/igm, path.resolve(`${__dirname}/../dist/static`).replace(/\\/gm, '/'))
+    .replace(/{staticCustomPath}/igm, path.resolve(`${__dirname}/..`).replace(/\\/gm, '/'));
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/systemd`);
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/rsyslog.d`);
 fs.ensureDirSync(`${__dirname}/../dist/server-configs/nginx`);

@@ -1,0 +1,6 @@
+{
+	"id": "update",
+	"icon": "refresh",
+	"admin": true,
+	"adminRoute": "/admin/update"
+}

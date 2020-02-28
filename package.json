@@ -20,6 +20,7 @@
         "build-api-dev": "webpack --display minimal --progress --mode development --config ./src/shared/build/webpack.config.js --build:api",
         "build-tools": "webpack --display minimal --progress --mode production --config ./src/shared/build/webpack.config.js --build:tools",
         "build-tools-dev": "webpack --display minimal --progress --mode development --config ./src/shared/build/webpack.config.js --build:tools",
+        "update": "webpack --display minimal --progress --mode production --config ./src/shared/build/webpack.config.js --build:update",
         "add-locale": "lingui add-locale --config ./src/shared/build/linguirc.admin.json",
         "extract": "lingui extract --config ./src/shared/build/linguirc.admin.json",
         "compile": "lingui compile --config ./src/shared/build/linguirc.admin.json",

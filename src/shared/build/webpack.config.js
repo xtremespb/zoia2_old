@@ -16,13 +16,15 @@ const markoPlugin = new MarkoPlugin();
 
 const config = require('../../../dist/static/etc/config.json');
 
+const distDirectory = process.argv.indexOf('--build:update') > -1 ? 'update' : 'dist';
+
 const configTools = {
     name: 'Tools',
     entry: {
         app: `${__dirname}/../api/tools.js`
     },
     output: {
-        path: `${__dirname}/../../../dist/bin`,
+        path: `${__dirname}/../../../${distDirectory}/bin`,
         filename: 'tools.js'
     },
     target: 'node',
@@ -78,7 +80,7 @@ const configAdmin = {
     },
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, '..', '..', '..', 'dist', 'static', '_admin'),
+        path: path.resolve(__dirname, '..', '..', '..', distDirectory, 'static', '_admin'),
         publicPath: '/_admin/',
         filename: '[name]_[contenthash:8].js'
     },
@@ -171,7 +173,7 @@ const configAdmin = {
         }),
         new HtmlWebpackPlugin({
             chunksSortMode: 'none',
-            filename: path.resolve(__dirname, '..', '..', '..', 'dist', 'static', '_admin', 'admin.html'),
+            filename: path.resolve(__dirname, '..', '..', '..', distDirectory, 'static', '_admin', 'admin.html'),
             template: path.resolve(__dirname, '..', 'react', 'templates', 'admin.html'),
             minify: {
                 collapseWhitespace: true,
@@ -191,7 +193,7 @@ const configAPI = {
         app: `${__dirname}/../api/api.js`
     },
     output: {
-        path: `${__dirname}/../../../dist/bin`,
+        path: `${__dirname}/../../../${distDirectory}/bin`,
         filename: 'api.js'
     },
     target: 'node',
@@ -301,7 +303,7 @@ const configWebClient = {
     },
     output: {
         filename: '[name].[contenthash:8].js',
-        path: path.join(__dirname, '../../../dist/static/_user'),
+        path: path.join(__dirname, `../../../${distDirectory}/static/_user`),
         publicPath: '/_user/',
     },
     plugins: [
@@ -355,7 +357,7 @@ const configWebServer = {
     },
     output: {
         libraryTarget: 'commonjs2',
-        path: path.join(__dirname, '../../../dist/bin'),
+        path: path.join(__dirname, `../../../${distDirectory}/bin`),
         filename: 'web.js',
         publicPath: '/_user/',
     },
@@ -397,11 +399,12 @@ const rebuildMarkoTemplates = () => {
 console.log(`This tool will build Zoia for you.`);
 
 console.log('Ensuring directories and copying statics...');
-fs.ensureDirSync(`${__dirname}/../../../dist/bin`);
-fs.ensureDirSync(`${__dirname}/../../../dist/etc`);
-fs.ensureDirSync(`${__dirname}/../../../dist/static/etc`);
-fs.ensureDirSync(`${__dirname}/../../../dist/logs`);
-fs.copySync(`${__dirname}/../../static/zoia`, `${__dirname}/../../../dist/static/zoia`);
+fs.ensureDirSync(`${__dirname}/../../../${distDirectory}/bin`);
+fs.ensureDirSync(`${__dirname}/../../../${distDirectory}/etc`);
+fs.ensureDirSync(`${__dirname}/../../../${distDirectory}/static/etc`);
+fs.ensureDirSync(`${__dirname}/../../../${distDirectory}/logs`);
+fs.ensureDirSync(`${__dirname}/../../../static`);
+fs.copySync(`${__dirname}/../../static/zoia`, `${__dirname}/../../../${distDirectory}/static/zoia`);
 
 if (process.argv.indexOf('--build:admin') > -1) {
     console.log('Building Admin Panel (React) only.');
@@ -418,6 +421,13 @@ if (process.argv.indexOf('--build:admin') > -1) {
 } else if (process.argv.indexOf('--build:tools') > -1) {
     console.log('Building Tools only.');
     webpackConfig.push(configTools);
+} else if (process.argv.indexOf('--build:update') > -1) {
+    console.log('Building Update package (production mode).');
+    fs.removeSync(path.join(__dirname, '..', '..', '..', distDirectory));
+    fs.copySync(path.join(__dirname, '..', '..', '..', 'dist', 'etc'), path.join(__dirname, '..', '..', '..', distDirectory, 'etc'));
+    fs.copySync(path.join(__dirname, '..', '..', '..', 'dist', 'static', 'etc'), path.join(__dirname, '..', '..', '..', distDirectory, 'static', 'etc'));
+    rebuildMarkoTemplates();
+    webpackConfig.push(configAPI, configAdmin, configTools, configWebClient, configWebServer);
 } else {
     console.log('Building everything.');
     if (process.argv.indexOf('--do:release') > -1) {
