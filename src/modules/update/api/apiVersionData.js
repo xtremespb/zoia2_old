@@ -1,3 +1,7 @@
+import axios from 'axios';
+import fs from 'fs-extra';
+import path from 'path';
+
 export default fastify => ({
     schema: {
         body: {
@@ -31,8 +35,24 @@ export default fastify => ({
         }
         // End of check permissions
         try {
+            let data;
+            const packageJson = await fs.readJSON(path.resolve(`${__dirname}/../../package.json`));
+            try {
+                const dataVersion = await axios.get(`https://xtremespb.github.io/zoia2/version.json`);
+                if (dataVersion && dataVersion.data) {
+                    data = dataVersion.data;
+                }
+            } catch (e) {
+                // Ignore
+            }
+            if (!data || !data.code) {
+                return rep.sendNotFoundError(rep, 'Version data could not be loaded');
+            }
             // Send response
-            return rep.sendSuccessJSON(rep, {});
+            return rep.sendSuccessJSON(rep, {
+                remote: data.code,
+                local: packageJson.version
+            });
         } catch (e) {
             rep.logError(req, null, e);
             return rep.sendInternalServerError(rep, e.message);
