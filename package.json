@@ -1,6 +1,6 @@
 {
     "name": "zoia2",
-    "version": "2.0.6",
+    "version": "2.0.6x",
     "description": "Zoia CMS",
     "main": "dist/bin/api.js",
     "repository": {
