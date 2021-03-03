@@ -60,7 +60,7 @@
         "fastify-cookie": "^3.6.0",
         "fastify-cors": "^3.0.2",
         "fastify-formbody": "^3.1.0",
-        "fastify-http-proxy": "^3.0.0",
+        "fastify-http-proxy": "^4.3.1",
         "fastify-jwt": "^1.2.1",
         "fastify-mongodb": "^2.0.0",
         "fastify-multipart": "^1.0.5",
