@@ -76,7 +76,7 @@
         "inquirer": "^7.0.5",
         "ioredis": "^4.16.0",
         "jimp": "^0.9.3",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "marko": "^4.19.1",
         "moment": "^2.24.0",
         "moment-range": "^4.0.2",
