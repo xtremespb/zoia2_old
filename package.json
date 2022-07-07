@@ -78,7 +78,7 @@
         "jimp": "^0.9.3",
         "lodash": "^4.17.15",
         "marko": "^4.19.1",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "moment-range": "^4.0.2",
         "mongodb": "^3.5.4",
         "nodemailer": "^6.4.4",
