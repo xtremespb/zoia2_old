@@ -71,7 +71,7 @@
         "gettext-parser": "^4.0.2",
         "history": "^4.10.1",
         "html-minifier": "^4.0.0",
-        "html-webpack-plugin": "^3.2.0",
+        "html-webpack-plugin": "^5.5.0",
         "immutable": "^3.8.2",
         "inquirer": "^7.0.5",
         "ioredis": "^4.16.0",
